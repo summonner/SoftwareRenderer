@@ -13,3 +13,7 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+
+#define SAFE_DELETE( p )\
+	delete( (p) );\
+	(p) = nullptr;
