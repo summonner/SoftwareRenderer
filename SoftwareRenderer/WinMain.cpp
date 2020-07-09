@@ -56,6 +56,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			time.Tick();
 			renderer->Clear();
+			renderer->Present();
 			Sleep( 0 );
 			continue;
 		}
@@ -171,7 +172,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				PAINTSTRUCT ps;
 				HDC hdc = BeginPaint( hWnd, &ps );
-				renderer->Present( hdc );
+				auto gdi = dynamic_cast<GdiRenderer*>( renderer );
+				if ( gdi != nullptr )
+				{
+					gdi->Present( hdc );
+				}
 				EndPaint( hWnd, &ps );
 			}
 			break;
