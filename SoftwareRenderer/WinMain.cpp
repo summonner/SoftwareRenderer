@@ -146,7 +146,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
 		case WM_CREATE:
-			renderer = new GdiRenderer( hWnd );
+			renderer = GdiRenderer::Create( hWnd );
 			break;
 
 		case WM_COMMAND:

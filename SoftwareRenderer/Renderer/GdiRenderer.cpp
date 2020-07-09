@@ -2,9 +2,19 @@
 #include "GdiRenderer.h"
 #include "FrameBuffer.h"
 
-GdiRenderer::GdiRenderer( const HWND& hWnd )
+
+GdiRenderer::GdiRenderer( const HWND hWnd, const int width, const int height )
 	: hWnd( hWnd )
+	, width( width )
+	, height( height )
 {
+}
+
+GdiRenderer* GdiRenderer::Create( const HWND hWnd )
+{
+	RECT rect;
+	GetClientRect( hWnd, &rect );
+	return new GdiRenderer( hWnd, rect.right, rect.bottom );
 }
 
 GdiRenderer::~GdiRenderer()
@@ -16,9 +26,9 @@ void GdiRenderer::Clear()
 	InvalidateRect( hWnd, nullptr, false );
 }
 
-void GdiRenderer::Present( const HDC& dc )
+void GdiRenderer::Present( const HDC dc )
 {
-	FrameBuffer backBuffer( dc, 400, 300 );
+	FrameBuffer backBuffer( dc, width, height);
 
 	PatBlt( backBuffer.dc, 0, 0, backBuffer.width, backBuffer.height, BLACKNESS );
 	for ( auto i = 0; i < 50; ++i )

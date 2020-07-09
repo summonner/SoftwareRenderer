@@ -2,7 +2,7 @@
 #include "FrameBuffer.h"
 
 
-FrameBuffer::FrameBuffer( const HDC& dc, const int width, const int height )
+FrameBuffer::FrameBuffer( const HDC dc, const int width, const int height )
 	: dc( CreateCompatibleDC( dc ) )
 	, buffer( CreateCompatibleBitmap( dc, width, height ) )
 	, width( width )
