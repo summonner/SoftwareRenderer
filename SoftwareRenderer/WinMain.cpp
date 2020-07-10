@@ -154,7 +154,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
 		case WM_CREATE:
-			renderer.reset( GdiRenderer::Create( hWnd ) );
+			renderer.reset( Renderer::GdiRenderer::Create( hWnd ) );
 			break;
 
 		case WM_COMMAND:
@@ -179,7 +179,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				PAINTSTRUCT ps;
 				HDC hdc = BeginPaint( hWnd, &ps );
-				auto gdi = dynamic_cast<GdiRenderer*>( renderer.get() );
+				auto gdi = dynamic_cast<Renderer::GdiRenderer*>( renderer.get() );
 				if ( gdi != nullptr )
 				{
 					gdi->Present( hdc );

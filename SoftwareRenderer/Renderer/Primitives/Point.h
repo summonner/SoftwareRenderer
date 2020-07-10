@@ -1,15 +1,17 @@
 #pragma once
 #include "IPrimitive.h"
 
-class Point final : public IPrimitive
+namespace Renderer
 {
-public:
-	Point( float x, float y, float z );
+	class Point final : public IPrimitive
+	{
+	public:
+		Point( float x, float y, float z );
 
-	bool Contains( const Vector2Int& coordinate ) const;
+		bool Contains( const Vector2Int& coordinate ) const;
 
-private:
-	float x, y, z;
-	float radius;
-};
-
+	private:
+		float x, y, z;
+		float radius;
+	};
+}

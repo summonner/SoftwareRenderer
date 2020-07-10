@@ -1,28 +1,31 @@
 #pragma once
 #include "PixelIterator.h"
 
-class FrameBuffer final
+namespace Renderer
 {
-public:
-	FrameBuffer( const HDC dc, const int width, const int height );
-	~FrameBuffer();
-
-	void Clear();
-	void BitBlt( const HDC dc );
-
-	inline PixelIterator begin() const
+	class FrameBuffer final
 	{
-		return PixelIterator( width, height, 0, 0 );
-	}
+	public:
+		FrameBuffer( const HDC dc, const int width, const int height );
+		~FrameBuffer();
 
-	inline const PixelIterator end() const
-	{
-		return PixelIterator( width, height, width, height );
-	}
+		void Clear();
+		void BitBlt( const HDC dc );
 
-public:
-	const HDC dc;
-	const HBITMAP buffer;
-	const int width;
-	const int height;
-};
+		inline PixelIterator begin() const
+		{
+			return PixelIterator( width, height, 0, 0 );
+		}
+
+		inline const PixelIterator end() const
+		{
+			return PixelIterator( width, height, width, height );
+		}
+
+	public:
+		const HDC dc;
+		const HBITMAP buffer;
+		const int width;
+		const int height;
+	};
+}

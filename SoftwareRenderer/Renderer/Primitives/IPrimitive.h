@@ -2,9 +2,11 @@
 
 class Vector2Int;
 
-class IPrimitive abstract
+namespace Renderer
 {
-public:
-	virtual bool Contains( const Vector2Int& coordinate ) const abstract;
-};
-
+	class IPrimitive abstract
+	{
+	public:
+		virtual bool Contains( const Vector2Int& coordinate ) const abstract;
+	};
+}
