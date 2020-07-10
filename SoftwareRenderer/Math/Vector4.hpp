@@ -1,12 +1,11 @@
 #pragma once
 #include "Vector.h"
-#include "framework.h"
 
 template<typename T>
-class TVector4
+class TVector4 final
 {
 public:
-	TVector4( const TVector3& v, T z )
+	TVector4( const TVector3<T>& v, T z )
 		: x( v.x )
 		, y( v.y )
 		, z( v.z )
@@ -62,23 +61,34 @@ public:
 
 	inline T SquaredDistance( const TVector4& other ) const
 	{
-		return ((*this) - other).Dot();
+		TVector4 diff = ((*this) - other);
+		return diff.Dot( diff );
 	}
 
-	inline T Dot() const
+	inline T Dot( const TVector4& other ) const
 	{
-		return x * x
-			 + y * y
-			 + z * z
-			 + w * w;
+		return x * other.x
+			 + y * other.y
+			 + z * other.z
+			 + w * other.w;
 	}
 
 	inline float Length() const
 	{
-		return sqrt( Dot() );
+		return sqrt( this->Dot( *this ) );
+	}
+
+	inline float Normalize() const
+	{
+		return *this / Length();
 	}
 
 public:
 	T x, y, z, w;
 };
 
+template<typename T>
+static inline TVector4<T> operator *( const float scalar, const TVector4<T>& vector )
+{
+	return vector * scalar;
+}

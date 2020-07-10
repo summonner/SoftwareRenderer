@@ -2,6 +2,8 @@
 #include "GdiRenderer.h"
 #include "FrameBuffer.h"
 #include "Primitives/Point.h"
+#include "Math/Vector3.hpp"
+#include "Math/Matrix4x4.h"
 
 namespace Renderer
 {
@@ -68,8 +70,11 @@ namespace Renderer
 
 	void GdiRenderer::Vertex( float x, float y, float z )
 	{
-		x = x * 100 + width * 0.5f;
-		y = y * -100 + height * 0.5f;
-		primitives.push_back( std::make_unique<Point>( x, y, z ) );
+		Vector4 v( x, y, z, 1.f );
+		auto scale = Matrix4x4::Scale( Vector3( 100, -100, 1 ) );
+		auto translate = Matrix4x4::Translate( Vector3( (float)width, (float)height, 0.f ) * 0.5f );
+		auto rotate = Matrix4x4::Rotate( PI * 0.3f, Vector3( 0, 0, 1 ) );
+		auto t = translate * scale * rotate * v;
+		primitives.push_back( std::make_unique<Point>( t.x, t.y, t.z ) );
 	}
 }

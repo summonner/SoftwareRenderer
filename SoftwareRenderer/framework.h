@@ -18,3 +18,5 @@
 #include <algorithm>
 #include <vector>
 #include <cmath>
+
+#define PI       3.141592f

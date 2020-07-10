@@ -2,7 +2,7 @@
 #include "Vector.h"
 
 template<typename T>
-class TVector2
+class TVector2 final
 {
 public:
 	TVector2( T x, T y )

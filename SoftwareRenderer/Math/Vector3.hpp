@@ -3,10 +3,10 @@
 #include "framework.h"
 
 template<typename T>
-class TVector3
+class TVector3 final
 {
 public:
-	TVector3( const TVector2& v, T z )
+	TVector3( const TVector2<T>& v, T z )
 		: x( v.x )
 		, y( v.y )
 		, z( z )
@@ -59,20 +59,33 @@ public:
 
 	inline T SquaredDistance( const TVector3& other ) const
 	{
-		return ((*this) - other).Dot();
+		auto diff = (*this) - other;
+		return diff.Dot( diff );
 	}
 
-	inline T Dot() const
+	inline T Dot( const TVector3& other ) const
 	{
-		return x * x
-			 + y * y
-			 + z * z;
+		return x * other.x
+			 + y * other.y
+			 + z * other.z;
 	}
 
 	inline float Length() const
 	{
-		return sqrt( Dot() );
+		return sqrt( this->Dot( *this ) );
 	}
+
+	inline TVector3 Normalize() const
+	{
+		return *this / Length();
+	}
+
+	//inline static const TVector3 left =  TVector3( T( 1), T( 0), T( 0) );
+	//inline static const TVector3 right = TVector3( T(-1), T( 0), T( 0) );
+	//inline static const TVector3 up =	  TVector3( T( 0), T( 1), T( 0) );
+	//inline static const TVector3 down =  TVector3( T( 0), T(-1), T( 0) );
+	//inline static const TVector3 front = TVector3( T( 0), T( 0), T( 1) );
+	//inline static const TVector3 back =  TVector3( T( 0), T( 0), T(-1) );
 
 public:
 	T x;
@@ -80,3 +93,8 @@ public:
 	T z;
 };
 
+template<typename T>
+inline TVector3<T> operator *( T scalar, const TVector3<T>& vector )
+{
+	return vector * scalar;
+}

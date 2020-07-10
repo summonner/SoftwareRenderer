@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Math\Matrix4x4.h" />
     <ClInclude Include="Math\RangeInt.h" />
     <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="Math\Vector2.hpp" />
@@ -170,6 +171,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Math\Matrix4x4.cpp" />
     <ClCompile Include="Math\RangeInt.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />
     <ClCompile Include="Renderer\GdiRenderer.cpp" />

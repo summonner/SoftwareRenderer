@@ -1,6 +1,6 @@
 #pragma once
 
-class RangeInt
+class RangeInt final
 {
 public:
 	RangeInt( int min, int max );
