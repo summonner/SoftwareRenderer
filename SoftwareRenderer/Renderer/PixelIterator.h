@@ -1,5 +1,5 @@
 #pragma once
-#include "Math/Vector2Int.h"
+#include "Math/Vector2.hpp"
 #include "Util/IBaseIterator.h"
 
 namespace Renderer

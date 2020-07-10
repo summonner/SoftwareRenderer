@@ -148,7 +148,10 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="Math\RangeInt.h" />
-    <ClInclude Include="Math\Vector2Int.h" />
+    <ClInclude Include="Math\Vector.h" />
+    <ClInclude Include="Math\Vector2.hpp" />
+    <ClInclude Include="Math\Vector3.hpp" />
+    <ClInclude Include="Math\Vector4.hpp" />
     <ClInclude Include="Renderer\FrameBuffer.h" />
     <ClInclude Include="Renderer\GdiRenderer.h" />
     <ClInclude Include="Renderer\IRenderer.h" />

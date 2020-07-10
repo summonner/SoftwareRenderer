@@ -1,6 +1,5 @@
 #pragma once
-
-class Vector2Int;
+#include "Math/Vector.h"
 
 namespace Renderer
 {
