@@ -23,14 +23,14 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{82d04ace-522a-409c-8dfd-8f36dd249acb}</ProjectGuid>
     <RootNamespace>SoftwareRenderer</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -91,6 +91,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>framework.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,23 +147,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Math\RangeInt.h" />
+    <ClInclude Include="Math\Vector2Int.h" />
     <ClInclude Include="Renderer\FrameBuffer.h" />
     <ClInclude Include="Renderer\GdiRenderer.h" />
     <ClInclude Include="Renderer\IRenderer.h" />
+    <ClInclude Include="Renderer\Primitives\IPrimitive.h" />
+    <ClInclude Include="Renderer\Primitives\Point.h" />
+    <ClInclude Include="Renderer\PixelIterator.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SoftwareRenderer.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Util\IBaseIterator.h" />
+    <ClInclude Include="Util\RangeIterator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Math\RangeInt.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />
     <ClCompile Include="Renderer\GdiRenderer.cpp" />
-    <ClCompile Include="Renderer\IRenderer.cpp" />
+    <ClCompile Include="Renderer\Primitives\Point.cpp" />
+    <ClCompile Include="Renderer\PixelIterator.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Util\RangeIterator.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,6 @@
 #pragma once
+#include "PixelIterator.h"
+
 class FrameBuffer final
 {
 public:
@@ -7,6 +9,16 @@ public:
 
 	void Clear();
 	void BitBlt( const HDC dc );
+
+	inline PixelIterator begin() const
+	{
+		return PixelIterator( width, height, 0, 0 );
+	}
+
+	inline const PixelIterator end() const
+	{
+		return PixelIterator( width, height, width, height );
+	}
 
 public:
 	const HDC dc;

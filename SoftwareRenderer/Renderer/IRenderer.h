@@ -1,10 +1,21 @@
 #pragma once
-class IRenderer
+class IRenderer abstract
 {
 public:
-	virtual ~IRenderer();
+	enum class DrawMode
+	{
+		Points,
+		Triangles,
+	};
 
-	virtual void Clear() = 0;
-	virtual void Present() = 0;
+public:
+	virtual ~IRenderer() {}
+
+	virtual void Clear() abstract;
+	virtual void Present() abstract;
+
+	virtual void Begin( DrawMode mode ) abstract;
+	virtual void End() abstract;
+	virtual void Vertex( float x, float y, float z ) abstract;
 };
 

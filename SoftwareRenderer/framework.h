@@ -14,6 +14,6 @@
 #include <memory.h>
 #include <tchar.h>
 
-#define SAFE_DELETE( p )\
-	delete( (p) );\
-	(p) = nullptr;
+#include <memory>
+#include <algorithm>
+#include <vector>

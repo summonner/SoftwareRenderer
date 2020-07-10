@@ -16,6 +16,15 @@
     <Filter Include="Renderer">
       <UniqueIdentifier>{1f4ec524-e2a2-4c62-855e-f6e60d96f341}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{81ac523c-d3ef-4e3f-a022-57962ef0b5bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{7e78fbb2-2ff2-4568-ae8f-54e3922c350d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Primitives">
+      <UniqueIdentifier>{a1a4675b-61df-4521-a203-b95292cd6fc4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -42,6 +51,27 @@
     <ClInclude Include="Renderer\FrameBuffer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Util\IBaseIterator.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector2Int.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\RangeInt.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\RangeIterator.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Primitives\Point.h">
+      <Filter>Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Primitives\IPrimitive.h">
+      <Filter>Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\PixelIterator.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -63,9 +93,6 @@
     <ClCompile Include="Renderer\GdiRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\IRenderer.cpp">
-      <Filter>Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="framework.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -73,6 +100,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\FrameBuffer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\RangeIterator.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\RangeInt.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Primitives\Point.cpp">
+      <Filter>Renderer\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\PixelIterator.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
