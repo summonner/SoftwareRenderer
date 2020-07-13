@@ -5,6 +5,7 @@
 #include "SoftwareRenderer.h"
 #include "Renderer/GdiRenderer.h"
 #include "Time.h"
+#include "SampleScene.h"
 
 #define MAX_LOADSTRING 100
 #define WIDTH 800
@@ -15,7 +16,8 @@ HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
-std::unique_ptr<IRenderer> renderer = nullptr;
+std::shared_ptr<IRenderer> renderer = nullptr;
+std::unique_ptr<SampleScene> scene = nullptr;
 Time time;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
@@ -55,15 +57,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		if ( PeekMessage( &msg, nullptr, 0, 0, PM_REMOVE ) == false )
 		{
 			time.Tick();
-			renderer->Clear();
-
-            renderer->Begin( IRenderer::DrawMode::LineLoop );
-            renderer->AddVertex(  0.f,  1.f,  0.f );
-            renderer->AddVertex( -1.f, -1.f,  0.f );
-            renderer->AddVertex(  1.f, -1.f,  0.f );
-            renderer->End();
-
-			renderer->Present();
+			scene->Update( time );
+			scene->Render( renderer );
 			Sleep( 0 );
 			continue;
 		}
@@ -155,6 +150,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
 		case WM_CREATE:
 			renderer.reset( Renderer::GdiRenderer::Create( hWnd ) );
+			scene = std::make_unique<SampleScene>();
 			break;
 
 		case WM_COMMAND:

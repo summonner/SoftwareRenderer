@@ -105,6 +105,9 @@
     <ClInclude Include="Renderer\Vertex.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="SampleScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -164,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\Vertex.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleScene.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
