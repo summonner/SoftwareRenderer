@@ -2,6 +2,8 @@
 #include "GdiRenderer.h"
 #include "FrameBuffer.h"
 #include "Primitives/Point.h"
+#include "PrimitiveGenerators/PrimitiveGeneratorFactory.h"
+#include "PrimitiveGenerators/IPrimitiveGenerator.h"
 #include "Math/Vector3.hpp"
 #include "Math/Matrix4x4.h"
 
@@ -12,6 +14,8 @@ namespace Renderer
 		, width( width )
 		, height( height )
 		, primitives()
+		, generator( nullptr )
+		, factory( std::make_unique<PrimitiveGeneratorFactory>() )
 	{
 		auto dc = GetDC( hWnd );
 		backBuffer = std::make_unique<FrameBuffer>( dc, width, height );
@@ -60,21 +64,37 @@ namespace Renderer
 
 	void GdiRenderer::Begin( DrawMode mode )
 	{
-
+		generator = factory->Create( mode );
 	}
 
 	void GdiRenderer::End()
 	{
+		if ( generator == nullptr )
+		{
+			return;
+		}
 
+		for ( auto& primitive : generator->Flush() )
+		{
+			primitives.push_back( std::move( primitive ) );
+		}
+
+		generator = nullptr;
 	}
 
 	void GdiRenderer::Vertex( float x, float y, float z )
 	{
+		if ( generator == nullptr )
+		{
+			return;
+		}
+
 		Vector4 v( x, y, z, 1.f );
 		auto scale = Matrix4x4::Scale( Vector3( 100, -100, 1 ) );
 		auto translate = Matrix4x4::Translate( Vector3( (float)width, (float)height, 0.f ) * 0.5f );
 		auto rotate = Matrix4x4::Rotate( PI * 0.3f, Vector3( 0, 0, 1 ) );
 		auto t = translate * scale * rotate * v;
-		primitives.push_back( std::make_unique<Point>( t.x, t.y, t.z ) );
+
+		generator->AddVertex( t );
 	}
 }

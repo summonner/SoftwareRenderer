@@ -5,6 +5,8 @@ namespace Renderer
 {
 	class FrameBuffer;
 	class IPrimitive;
+	class IPrimitiveGenerator;
+	class PrimitiveGeneratorFactory;
 
 	class GdiRenderer final : public IRenderer
 	{
@@ -30,6 +32,9 @@ namespace Renderer
 
 		std::unique_ptr<FrameBuffer> backBuffer;
 		std::vector<std::unique_ptr<IPrimitive>> primitives;
+
+		std::shared_ptr<IPrimitiveGenerator> generator;
+		const std::unique_ptr<PrimitiveGeneratorFactory> factory;
 	};
 
 }

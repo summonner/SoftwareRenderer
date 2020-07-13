@@ -156,6 +156,9 @@
     <ClInclude Include="Renderer\FrameBuffer.h" />
     <ClInclude Include="Renderer\GdiRenderer.h" />
     <ClInclude Include="Renderer\IRenderer.h" />
+    <ClInclude Include="Renderer\PrimitiveGenerators\IPrimitiveGenerator.h" />
+    <ClInclude Include="Renderer\PrimitiveGenerators\PointGenerator.h" />
+    <ClInclude Include="Renderer\PrimitiveGenerators\PrimitiveGeneratorFactory.h" />
     <ClInclude Include="Renderer\Primitives\IPrimitive.h" />
     <ClInclude Include="Renderer\Primitives\Point.h" />
     <ClInclude Include="Renderer\PixelIterator.h" />
@@ -175,6 +178,8 @@
     <ClCompile Include="Math\RangeInt.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />
     <ClCompile Include="Renderer\GdiRenderer.cpp" />
+    <ClCompile Include="Renderer\PrimitiveGenerators\PointGenerator.cpp" />
+    <ClCompile Include="Renderer\PrimitiveGenerators\PrimitiveGeneratorFactory.cpp" />
     <ClCompile Include="Renderer\Primitives\Point.cpp" />
     <ClCompile Include="Renderer\PixelIterator.cpp" />
     <ClCompile Include="Time.cpp" />

@@ -25,6 +25,9 @@
     <Filter Include="Renderer\Primitives">
       <UniqueIdentifier>{a1a4675b-61df-4521-a203-b95292cd6fc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\PrimitiveGenerators">
+      <UniqueIdentifier>{8b7dbe1e-614d-4740-a91c-5e55dacdf028}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -84,6 +87,16 @@
     <ClInclude Include="Math\Matrix4x4.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\PrimitiveGenerators\IPrimitiveGenerator.h">
+      <Filter>Renderer\PrimitiveGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\PrimitiveGenerators\PointGenerator.h">
+      <Filter>Renderer\PrimitiveGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\PrimitiveGenerators\PrimitiveGeneratorFactory.h">
+      <Filter>Renderer\PrimitiveGenerators</Filter>
+    </ClInclude>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -128,6 +141,12 @@
     </ClCompile>
     <ClCompile Include="Math\Matrix4x4.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\PrimitiveGenerators\PointGenerator.cpp">
+      <Filter>Renderer\PrimitiveGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\PrimitiveGenerators\PrimitiveGeneratorFactory.cpp">
+      <Filter>Renderer\PrimitiveGenerators</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

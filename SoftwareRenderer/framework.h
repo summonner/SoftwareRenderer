@@ -14,9 +14,14 @@
 #include <memory.h>
 #include <tchar.h>
 
+#include <vector>
+#include <map>
+
 #include <memory>
 #include <algorithm>
-#include <vector>
 #include <cmath>
+#include <functional>
 
 #define PI       3.141592f
+
+#include "Util/TSingleton.hpp"
