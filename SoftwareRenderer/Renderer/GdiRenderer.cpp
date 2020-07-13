@@ -9,12 +9,13 @@
 
 namespace Renderer
 {
+	std::function<IPrimitiveList( const std::vector<Vertex>& )> generator = nullptr;
+
 	GdiRenderer::GdiRenderer( const HWND hWnd, const int width, const int height )
 		: hWnd( hWnd )
 		, width( width )
 		, height( height )
 		, primitives()
-		, generator( nullptr )
 		, factory( std::make_unique<PrimitiveGeneratorFactory>() )
 	{
 		auto dc = GetDC( hWnd );
@@ -37,6 +38,7 @@ namespace Renderer
 	{
 		backBuffer->Clear();
 		primitives.clear();
+		vertices.clear();
 	}
 
 	void GdiRenderer::Present()
@@ -74,7 +76,7 @@ namespace Renderer
 			return;
 		}
 
-		for ( auto& primitive : generator->Flush() )
+		for ( auto& primitive : generator( vertices ) )
 		{
 			primitives.push_back( std::move( primitive ) );
 		}
@@ -82,7 +84,7 @@ namespace Renderer
 		generator = nullptr;
 	}
 
-	void GdiRenderer::Vertex( float x, float y, float z )
+	void GdiRenderer::AddVertex( float x, float y, float z )
 	{
 		if ( generator == nullptr )
 		{
@@ -95,6 +97,6 @@ namespace Renderer
 		auto rotate = Matrix4x4::Rotate( PI * 0.3f, Vector3( 0, 0, 1 ) );
 		auto t = translate * scale * rotate * v;
 
-		generator->AddVertex( t );
+		vertices.emplace_back<Vertex>( t );
 	}
 }

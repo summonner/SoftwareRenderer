@@ -5,6 +5,11 @@ template<typename T>
 class TVector4 final
 {
 public:
+	TVector4()
+		: TVector4( T( 0 ), T( 0 ), T( 0 ), T( 0 ) )
+	{
+	}
+
 	TVector4( const TVector3<T>& v, T z )
 		: x( v.x )
 		, y( v.y )
@@ -59,18 +64,18 @@ public:
 		return (*this) * (1.f / scalar);
 	}
 
-	inline T SquaredDistance( const TVector4& other ) const
+	inline float SquaredDistance( const TVector4& other ) const
 	{
 		TVector4 diff = ((*this) - other);
 		return diff.Dot( diff );
 	}
 
-	inline T Dot( const TVector4& other ) const
+	inline float Dot( const TVector4& other ) const
 	{
-		return x * other.x
-			 + y * other.y
-			 + z * other.z
-			 + w * other.w;
+		return float( x * other.x
+					+ y * other.y
+					+ z * other.z
+					+ w * other.w );
 	}
 
 	inline float Length() const

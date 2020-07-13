@@ -9,10 +9,8 @@ namespace Renderer
 		PointGenerator();
 		~PointGenerator();
 
-		void AddVertex( const Vector4& vertex );
-		IPrimitiveList Flush();
+		IPrimitiveList Generate( VertexBuffer vertices ) const override;
 
-	private:
-		IPrimitiveList primitives;
+		static IPrimitiveList Default( VertexBuffer vertices );
 	};
 }

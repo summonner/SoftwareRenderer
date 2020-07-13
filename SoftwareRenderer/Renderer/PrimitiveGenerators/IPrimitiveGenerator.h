@@ -1,17 +1,17 @@
 #pragma once
-#include "Math/Vector.h"
 
 namespace Renderer
 {
+	class Vertex;
 	class IPrimitive;
 	using IPrimitiveList = std::vector<std::unique_ptr<IPrimitive>>;
+	using VertexBuffer = const std::vector<Vertex>&;
 
 	class IPrimitiveGenerator abstract
 	{
 	public:
 		virtual ~IPrimitiveGenerator() {}
 
-		virtual void AddVertex( const Vector4& vertex ) abstract;
-		virtual IPrimitiveList Flush() abstract;
+		virtual IPrimitiveList Generate( VertexBuffer vertices ) const abstract;
 	};
 }

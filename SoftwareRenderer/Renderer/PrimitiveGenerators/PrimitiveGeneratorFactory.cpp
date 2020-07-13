@@ -1,12 +1,17 @@
 #include "framework.h"
 #include "PrimitiveGeneratorFactory.h"
 #include "PointGenerator.h"
+#include "LineGenerator.h"
+#include "Renderer/Primitives/IPrimitive.h"
 
 namespace Renderer
 {
-	std::map<IRenderer::DrawMode, const std::shared_ptr<IPrimitiveGenerator>> PrimitiveGeneratorFactory::table
+	std::map<IRenderer::DrawMode, PrimitiveGeneratorFactory::GeneratorFunction> PrimitiveGeneratorFactory::table
 	{
-		{ IRenderer::DrawMode::Points, std::make_shared<PointGenerator>() },
+		{ IRenderer::DrawMode::Points,		PointGenerator::Default },
+		{ IRenderer::DrawMode::Lines,		LineGenerator::Default },
+		{ IRenderer::DrawMode::LineStrip,	LineGenerator::Strip },
+		{ IRenderer::DrawMode::LineLoop,	LineGenerator::Loop },
 	};
 
 	PrimitiveGeneratorFactory::PrimitiveGeneratorFactory()
@@ -17,7 +22,7 @@ namespace Renderer
 	{
 	}
 
-	std::shared_ptr<IPrimitiveGenerator> PrimitiveGeneratorFactory::Create( IRenderer::DrawMode mode ) const
+	PrimitiveGeneratorFactory::GeneratorFunction PrimitiveGeneratorFactory::Create( IRenderer::DrawMode mode ) const
 	{
 		if ( const auto& found { table.find( mode ) }; found != table.end() )
 		{

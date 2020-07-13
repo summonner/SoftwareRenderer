@@ -57,10 +57,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			time.Tick();
 			renderer->Clear();
 
-            renderer->Begin( IRenderer::DrawMode::Points );
-            renderer->Vertex(  0.f,  1.f,  0.f );
-            renderer->Vertex( -1.f, -1.f,  0.f );
-            renderer->Vertex(  1.f, -1.f,  0.f );
+            renderer->Begin( IRenderer::DrawMode::LineLoop );
+            renderer->AddVertex(  0.f,  1.f,  0.f );
+            renderer->AddVertex( -1.f, -1.f,  0.f );
+            renderer->AddVertex(  1.f, -1.f,  0.f );
             renderer->End();
 
 			renderer->Present();

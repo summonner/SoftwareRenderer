@@ -1,11 +1,11 @@
 #pragma once
 #include "IRenderer.h"
+#include "Vertex.h"
 
 namespace Renderer
 {
 	class FrameBuffer;
 	class IPrimitive;
-	class IPrimitiveGenerator;
 	class PrimitiveGeneratorFactory;
 
 	class GdiRenderer final : public IRenderer
@@ -23,7 +23,7 @@ namespace Renderer
 
 		void Begin( DrawMode mode );
 		void End();
-		void Vertex( float x, float y, float z );
+		void AddVertex( float x, float y, float z );
 
 	private:
 		const HWND hWnd;
@@ -32,8 +32,8 @@ namespace Renderer
 
 		std::unique_ptr<FrameBuffer> backBuffer;
 		std::vector<std::unique_ptr<IPrimitive>> primitives;
+		std::vector<Vertex> vertices;
 
-		std::shared_ptr<IPrimitiveGenerator> generator;
 		const std::unique_ptr<PrimitiveGeneratorFactory> factory;
 	};
 

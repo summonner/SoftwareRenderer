@@ -5,6 +5,9 @@ public:
 	enum class DrawMode
 	{
 		Points,
+		Lines,
+		LineStrip,
+		LineLoop,
 		Triangles,
 	};
 
@@ -16,6 +19,6 @@ public:
 
 	virtual void Begin( DrawMode mode ) abstract;
 	virtual void End() abstract;
-	virtual void Vertex( float x, float y, float z ) abstract;
+	virtual void AddVertex( float x, float y, float z ) abstract;
 };
 

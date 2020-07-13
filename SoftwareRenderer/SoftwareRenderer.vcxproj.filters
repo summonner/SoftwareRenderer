@@ -96,6 +96,14 @@
     <ClInclude Include="Renderer\PrimitiveGenerators\PrimitiveGeneratorFactory.h">
       <Filter>Renderer\PrimitiveGenerators</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Primitives\Line.h">
+      <Filter>Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\PrimitiveGenerators\LineGenerator.h">
+      <Filter>Renderer\PrimitiveGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Vertex.h">
+      <Filter>Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +155,15 @@
     </ClCompile>
     <ClCompile Include="Renderer\PrimitiveGenerators\PrimitiveGeneratorFactory.cpp">
       <Filter>Renderer\PrimitiveGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Primitives\Line.cpp">
+      <Filter>Renderer\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\PrimitiveGenerators\LineGenerator.cpp">
+      <Filter>Renderer\PrimitiveGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Vertex.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

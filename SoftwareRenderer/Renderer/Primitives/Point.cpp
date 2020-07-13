@@ -1,20 +1,19 @@
 #include "framework.h"
 #include "Point.h"
 #include "Math/Vector2.hpp"
+#include "Renderer/Vertex.h"
 
 namespace Renderer
 {
-	Point::Point( float x, float y, float z )
-		: x( x )
-		, y( y )
-		, z( z )
-		, radius( 20 )
+	Point::Point( const Vertex& v )
+		: v( v )
+		, radius( 10 )
 	{
 	}
 
 	bool Point::Contains( const Vector2Int& coordinate ) const
 	{
-		auto p = Vector2Int( (int)x, (int)y );
-		return p.SquaredDistance( coordinate ) < radius;
+		auto p = v.GetScreenCoordinate();
+		return p.SquaredDistance( coordinate ) <= radius * radius;
 	}
 }

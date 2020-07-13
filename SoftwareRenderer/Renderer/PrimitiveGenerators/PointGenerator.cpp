@@ -2,6 +2,7 @@
 #include "PointGenerator.h"
 #include "Math/Vector4.hpp"
 #include "Renderer/Primitives/Point.h"
+#include "Renderer/Vertex.h"
 
 namespace Renderer
 {
@@ -12,16 +13,23 @@ namespace Renderer
 
 	PointGenerator::~PointGenerator()
 	{
-		primitives.clear();
 	}
 
-	void PointGenerator::AddVertex( const Vector4& vertex )
+	IPrimitiveList PointGenerator::Generate( VertexBuffer vertices ) const
 	{
-		primitives.push_back( std::make_unique<Point>( vertex.x, vertex.y, vertex.z ) );
+		return Default( vertices );
 	}
 
-	IPrimitiveList PointGenerator::Flush()
+	IPrimitiveList PointGenerator::Default( VertexBuffer vertices )
 	{
-		return std::move( primitives );
+		IPrimitiveList primitives;
+		for ( const auto& vertex : vertices )
+		{
+			primitives.push_back( std::make_unique<Point>( vertex ) );
+		}
+
+		return primitives;
 	}
+
+
 }

@@ -3,15 +3,16 @@
 
 namespace Renderer
 {
+	class Vertex;
 	class Point final : public IPrimitive
 	{
 	public:
-		Point( float x, float y, float z );
+		Point( const Vertex& v );
 
 		bool Contains( const Vector2Int& coordinate ) const;
 
 	private:
-		float x, y, z;
+		const Vertex& v;
 		float radius;
 	};
 }
