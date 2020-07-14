@@ -5,60 +5,35 @@
 
 namespace Renderer
 {
-	LineGenerator::LineGenerator()
+	void LineGenerator::Default( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives )
 	{
-	}
-
-	LineGenerator::~LineGenerator()
-	{
-	}
-
-	IPrimitiveList LineGenerator::Generate( VertexBuffer vertices ) const
-	{
-		return Default( vertices );
-	}
-
-	IPrimitiveList LineGenerator::Default( VertexBuffer vertices )
-	{
-		IPrimitiveList primitives;
-
 		auto numVertices = vertices.size() - 1;
-		for ( auto i = 0; i < numVertices; i += 2 )
+		for ( auto i = startIndex; i < numVertices; i += 2 )
 		{
-			primitives.push_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
+			outPrimitives.push_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
-
-		return primitives;
 	}
 
-	IPrimitiveList LineGenerator::Strip( VertexBuffer vertices )
+	void LineGenerator::Strip( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives )
 	{
-		IPrimitiveList primitives;
-
 		auto numVertices = vertices.size() - 1;
-		for ( auto i = 0; i < numVertices; ++i )
+		for ( auto i = startIndex; i < numVertices; ++i )
 		{
-			primitives.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
+			outPrimitives.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
-
-		return primitives;
 	}
 	
-	IPrimitiveList LineGenerator::Loop( VertexBuffer vertices )
+	void LineGenerator::Loop( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives )
 	{
-		IPrimitiveList primitives;
-
 		auto numVertices = vertices.size() - 1;
-		for ( auto i = 0; i < numVertices; ++i )
+		for ( auto i = startIndex; i < numVertices; ++i )
 		{
-			primitives.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
+			outPrimitives.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
 
 		if ( numVertices > 1 )
 		{
-			primitives.emplace_back( std::make_unique<Line>( vertices[numVertices], vertices[0] ) );
+			outPrimitives.emplace_back( std::make_unique<Line>( vertices[numVertices], vertices[startIndex] ) );
 		}
-
-		return primitives;
 	}
 }

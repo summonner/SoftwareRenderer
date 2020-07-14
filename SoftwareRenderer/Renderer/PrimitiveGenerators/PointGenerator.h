@@ -1,16 +1,11 @@
 #pragma once
-#include "IPrimitiveGenerator.h"
+#include "Types.h"
 
 namespace Renderer 
 {
-	class PointGenerator final : public IPrimitiveGenerator
+	class PointGenerator final
 	{
 	public:
-		PointGenerator();
-		~PointGenerator();
-
-		IPrimitiveList Generate( VertexBuffer vertices ) const override;
-
-		static IPrimitiveList Default( VertexBuffer vertices );
+		static void Default( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives );
 	};
 }

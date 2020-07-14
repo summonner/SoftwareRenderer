@@ -2,21 +2,18 @@
 #include "GdiRenderer.h"
 #include "FrameBuffer.h"
 #include "Primitives/Point.h"
-#include "PrimitiveGenerators/PrimitiveGeneratorFactory.h"
-#include "PrimitiveGenerators/IPrimitiveGenerator.h"
+#include "PrimitiveGenerators/PrimitiveGenerator.h"
 #include "Math/Vector3.hpp"
 #include "Math/Matrix4x4.h"
 
 namespace Renderer
 {
-	std::function<IPrimitiveList( const std::vector<Vertex>& )> generator = nullptr;
-
 	GdiRenderer::GdiRenderer( const HWND hWnd, const int width, const int height )
 		: hWnd( hWnd )
 		, width( width )
 		, height( height )
 		, primitives()
-		, factory( std::make_unique<PrimitiveGeneratorFactory>() )
+		, factory( std::make_unique<PrimitiveGenerator>() )
 		, transform()
 	{
 		auto dc = GetDC( hWnd );
@@ -71,31 +68,16 @@ namespace Renderer
 
 	void GdiRenderer::Begin( DrawMode mode )
 	{
-		generator = factory->Create( mode );
+		factory->SetMode( mode, (int)vertices.size() );
 	}
 
 	void GdiRenderer::End()
 	{
-		if ( generator == nullptr )
-		{
-			return;
-		}
-
-		for ( auto& primitive : generator( vertices ) )
-		{
-			primitives.push_back( std::move( primitive ) );
-		}
-
-		generator = nullptr;
+		factory->Generate( vertices, primitives );
 	}
 
 	void GdiRenderer::AddVertex( float x, float y, float z )
 	{
-		if ( generator == nullptr )
-		{
-			return;
-		}
-
 		Vector4 v( x, y, z, 1.f );
 		auto t = view * transform * v;
 

@@ -7,7 +7,7 @@ namespace Renderer
 {
 	class FrameBuffer;
 	class IPrimitive;
-	class PrimitiveGeneratorFactory;
+	class PrimitiveGenerator;
 
 	class GdiRenderer final : public IRenderer
 	{
@@ -43,7 +43,7 @@ namespace Renderer
 		Matrix4x4 transform;
 		Matrix4x4 view;
 
-		const std::unique_ptr<PrimitiveGeneratorFactory> factory;
+		const std::unique_ptr<PrimitiveGenerator> factory;
 	};
 
 }

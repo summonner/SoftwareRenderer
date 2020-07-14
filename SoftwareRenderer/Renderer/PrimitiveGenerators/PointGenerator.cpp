@@ -6,30 +6,12 @@
 
 namespace Renderer
 {
-	PointGenerator::PointGenerator()
+	void PointGenerator::Default( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives )
 	{
-	}
-
-
-	PointGenerator::~PointGenerator()
-	{
-	}
-
-	IPrimitiveList PointGenerator::Generate( VertexBuffer vertices ) const
-	{
-		return Default( vertices );
-	}
-
-	IPrimitiveList PointGenerator::Default( VertexBuffer vertices )
-	{
-		IPrimitiveList primitives;
-		for ( const auto& vertex : vertices )
+		auto numVertices = vertices.size();
+		for ( auto i = startIndex; i < numVertices; ++i )
 		{
-			primitives.push_back( std::make_unique<Point>( vertex ) );
+			outPrimitives.push_back( std::make_unique<Point>( vertices[i] ) );
 		}
-
-		return primitives;
 	}
-
-
 }

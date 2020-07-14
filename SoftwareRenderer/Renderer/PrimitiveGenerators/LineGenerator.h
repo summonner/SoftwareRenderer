@@ -1,18 +1,13 @@
 #pragma once
-#include "IPrimitiveGenerator.h"
+#include "Types.h"
 
 namespace Renderer
 {
-	class LineGenerator final : public IPrimitiveGenerator
+	class LineGenerator final
 	{
 	public:
-		LineGenerator();
-		~LineGenerator();
-
-		IPrimitiveList Generate( VertexBuffer vertices ) const override;
-
-		static IPrimitiveList Default( VertexBuffer vertices );
-		static IPrimitiveList Strip( VertexBuffer vertices );
-		static IPrimitiveList Loop( VertexBuffer vertices );
+		static void Default( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives );
+		static void Strip( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives );
+		static void Loop( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives );
 	};
 }
