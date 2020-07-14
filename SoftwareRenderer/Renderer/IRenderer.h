@@ -13,6 +13,8 @@ public:
 		TriangleFan,
 	};
 
+	using Degree = float;
+
 public:
 	virtual ~IRenderer() {}
 
@@ -22,5 +24,10 @@ public:
 	virtual void Begin( DrawMode mode ) abstract;
 	virtual void End() abstract;
 	virtual void AddVertex( float x, float y, float z ) abstract;
+
+	virtual void LoadIdentity() abstract;
+	virtual void Translate( float x, float y, float z ) abstract;
+	virtual void Rotate( Degree angle, float x, float y, float z ) abstract;
+	virtual void Scale( float x, float y, float z ) abstract;
 };
 

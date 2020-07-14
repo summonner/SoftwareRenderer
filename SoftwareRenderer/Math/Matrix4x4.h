@@ -8,6 +8,10 @@ using Radian = float;
 class Matrix4x4 final
 {
 public:
+	Matrix4x4()
+		: Matrix4x4( identity )
+	{
+	}
 
 	Matrix4x4(  const float m00, const float m01, const float m02, const float m03,
 				const float m10, const float m11, const float m12, const float m13,
