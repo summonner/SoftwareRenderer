@@ -11,21 +11,22 @@ namespace Renderer
 
 		void Clear();
 		void BitBlt( const HDC dc );
+		void SetPixel( const Vector2Int& p, const Vector3& color );
 
 		inline PixelIterator begin() const
 		{
-			return PixelIterator( width, height, 0, 0 );
+			return PixelIterator( info.biWidth, info.biHeight, 0, 0 );
 		}
 
 		inline const PixelIterator end() const
 		{
-			return PixelIterator( width, height, width, height );
+			return PixelIterator( info.biWidth, info.biHeight, info.biWidth, info.biHeight );
 		}
 
-	public:
+	private:
 		const HDC dc;
 		const HBITMAP buffer;
-		const int width;
-		const int height;
+		const BITMAPINFOHEADER info;
+		std::unique_ptr<BYTE[]> pixels;
 	};
 }

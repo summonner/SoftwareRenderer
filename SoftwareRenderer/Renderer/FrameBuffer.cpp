@@ -1,15 +1,19 @@
 #include "framework.h"
 #include "FrameBuffer.h"
+#include "Math/Vector3.hpp"
 
 namespace Renderer
 {
+	const int colorBytes = 3;
+
 	FrameBuffer::FrameBuffer( const HDC source, const int width, const int height )
 		: dc( CreateCompatibleDC( source ) )
 		, buffer( CreateCompatibleBitmap( source, width, height ) )
-		, width( width )
-		, height( height )
+		, info { sizeof( info ), width, height, 1, colorBytes * 8, BI_RGB, (DWORD)width * height * colorBytes, 0, 0, 0, 0 }
+		, pixels( new BYTE[ info.biSizeImage ] )
 	{
-		SelectObject( this->dc, buffer );
+		SelectObject( dc, buffer );
+		GetDIBits( dc, buffer, 0, info.biHeight, (LPVOID)pixels.get(), (LPBITMAPINFO)&info, DIB_RGB_COLORS );
 	}
 
 
@@ -21,11 +25,20 @@ namespace Renderer
 
 	void FrameBuffer::Clear()
 	{
-		PatBlt( dc, 0, 0, width, height, BLACKNESS );
+		memset( pixels.get(), 0, sizeof( BYTE ) * info.biSizeImage );
 	}
 
 	void FrameBuffer::BitBlt( const HDC source )
 	{
-		::BitBlt( source, 0, 0, width, height, dc, 0, 0, SRCCOPY );
+		SetDIBits( dc, buffer, 0, info.biWidth, pixels.get(), (const LPBITMAPINFO)&info, DIB_RGB_COLORS );
+		::BitBlt( source, 0, 0, info.biWidth, info.biHeight, dc, 0, 0, SRCCOPY );
+	}
+
+	void FrameBuffer::SetPixel( const Vector2Int& p, const Vector3& color )
+	{
+		auto i = (p.x + p.y * info.biWidth) * colorBytes;
+		pixels[i + 0] = (int)(color.z * 255);	// B
+		pixels[i + 1] = (int)(color.y * 255);	// G
+		pixels[i + 2] = (int)(color.x * 255);	// R
 	}
 }

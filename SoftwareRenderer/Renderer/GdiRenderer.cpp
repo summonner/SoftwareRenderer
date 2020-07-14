@@ -57,7 +57,7 @@ namespace Renderer
 					continue;
 				}
 
-				SetPixel( backBuffer->dc, pixel.x, pixel.y, RGB( 255, 255, 255 ) );
+				backBuffer->SetPixel( pixel, Vector3( 1, 1, 0 ) );
 			}
 		}
 
