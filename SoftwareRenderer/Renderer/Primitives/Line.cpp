@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "Line.h"
+#include "Renderer/Vertex.h"
 #include "Math/Vector4.hpp"
 #include "Math/Vector2.hpp"
 

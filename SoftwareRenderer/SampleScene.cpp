@@ -23,7 +23,7 @@ void SampleScene::Render( std::shared_ptr<IRenderer> renderer ) const
 {
 	renderer->Clear();
 
-	renderer->Begin( IRenderer::DrawMode::LineLoop );
+	renderer->Begin( IRenderer::DrawMode::Triangles );
 	renderer->AddVertex( x + 0.f, 1.f, 0.f );
 	renderer->AddVertex( x + -1.f, -1.f, 0.f );
 	renderer->AddVertex( x + 1.f, -1.f, 0.f );

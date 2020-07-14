@@ -59,6 +59,12 @@ public:
 					+ y * other.y );
 	}
 
+	inline float Area( const TVector2& other ) const
+	{
+		return float( x * other.y
+					- y * other.x );
+	}
+
 public:
 	T x;
 	T y;

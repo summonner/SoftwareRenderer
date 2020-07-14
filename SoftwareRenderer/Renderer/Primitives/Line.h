@@ -1,9 +1,9 @@
 #pragma once
 #include "IPrimitive.h"
-#include "Renderer/Vertex.h"
 
 namespace Renderer
 {
+	class Vertex;
 	class Line final : public IPrimitive
 	{
 	public:
@@ -13,8 +13,8 @@ namespace Renderer
 		bool Contains( const Vector2Int& coordinate ) const;
 
 	private:
-		Vertex a;
-		Vertex b;
+		const Vertex& a;
+		const Vertex& b;
 		float thickness;
 	};
 

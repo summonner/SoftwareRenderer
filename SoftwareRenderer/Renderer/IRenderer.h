@@ -9,6 +9,8 @@ public:
 		LineStrip,
 		LineLoop,
 		Triangles,
+		TriangleStrip,
+		TriangleFan,
 	};
 
 public:

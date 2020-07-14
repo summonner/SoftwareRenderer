@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "LineGenerator.h"
 #include "Renderer/Primitives/Line.h"
+#include "Renderer/Vertex.h"
 
 namespace Renderer
 {
@@ -24,7 +25,7 @@ namespace Renderer
 		auto numVertices = vertices.size() - 1;
 		for ( auto i = 0; i < numVertices; i += 2 )
 		{
-			primitives.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
+			primitives.push_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
 
 		return primitives;

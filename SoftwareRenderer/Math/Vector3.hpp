@@ -85,6 +85,15 @@ public:
 		return *this / Length();
 	}
 
+	inline TVector3 Cross( const TVector3& other ) const
+	{
+		return TVector3(
+			y * other.z - z * other.y,
+			z * other.x - x * other.z,
+			x * other.y - y * other.x
+		);
+	}
+
 	//inline static const TVector3 left =  TVector3( T( 1), T( 0), T( 0) );
 	//inline static const TVector3 right = TVector3( T(-1), T( 0), T( 0) );
 	//inline static const TVector3 up =	  TVector3( T( 0), T( 1), T( 0) );

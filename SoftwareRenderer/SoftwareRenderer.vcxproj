@@ -173,6 +173,7 @@
     <ClInclude Include="Renderer\Primitives\Line.h" />
     <ClInclude Include="Renderer\Primitives\Point.h" />
     <ClInclude Include="Renderer\PixelIterator.h" />
+    <ClInclude Include="Renderer\Primitives\Triangle.h" />
     <ClInclude Include="Renderer\Vertex.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SampleScene.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="Renderer\Primitives\Line.cpp" />
     <ClCompile Include="Renderer\Primitives\Point.cpp" />
     <ClCompile Include="Renderer\PixelIterator.cpp" />
+    <ClCompile Include="Renderer\Primitives\Triangle.cpp" />
     <ClCompile Include="Renderer\Vertex.cpp" />
     <ClCompile Include="SampleScene.cpp" />
     <ClCompile Include="Time.cpp" />
