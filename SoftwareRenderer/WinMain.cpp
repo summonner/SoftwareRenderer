@@ -5,7 +5,7 @@
 #include "SoftwareRenderer.h"
 #include "Renderer/GdiRenderer.h"
 #include "Time.h"
-#include "SampleScene.h"
+#include "Scene/SceneFactory.h"
 
 #define MAX_LOADSTRING 100
 #define WIDTH 800
@@ -17,7 +17,7 @@ WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
 std::shared_ptr<IRenderer> renderer = nullptr;
-std::unique_ptr<SampleScene> scene = nullptr;
+std::unique_ptr<IScene> scene = nullptr;
 Time time;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
@@ -150,7 +150,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
 		case WM_CREATE:
 			renderer.reset( Renderer::GdiRenderer::Create( hWnd ) );
-			scene = std::make_unique<SampleScene>();
+			scene = SceneFactory::Create();
 			break;
 
 		case WM_COMMAND:

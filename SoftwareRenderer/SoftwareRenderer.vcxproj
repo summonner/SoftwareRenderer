@@ -177,7 +177,11 @@
     <ClInclude Include="Renderer\Primitives\Triangle.h" />
     <ClInclude Include="Renderer\Vertex.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="SampleScene.h" />
+    <ClInclude Include="Scene\IScene.h" />
+    <ClInclude Include="Scene\NeHeSamples\Adapter.h" />
+    <ClInclude Include="Scene\NeHeSamples\NeHeSample.h" />
+    <ClInclude Include="Scene\SampleScene.h" />
+    <ClInclude Include="Scene\SceneFactory.h" />
     <ClInclude Include="SoftwareRenderer.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Time.h" />
@@ -204,7 +208,11 @@
     <ClCompile Include="Renderer\PixelIterator.cpp" />
     <ClCompile Include="Renderer\Primitives\Triangle.cpp" />
     <ClCompile Include="Renderer\Vertex.cpp" />
-    <ClCompile Include="SampleScene.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Adapter.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson3.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp" />
+    <ClCompile Include="Scene\SampleScene.cpp" />
+    <ClCompile Include="Scene\SceneFactory.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Util\RangeIterator.cpp" />
     <ClCompile Include="WinMain.cpp" />

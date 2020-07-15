@@ -28,6 +28,12 @@
     <Filter Include="Renderer\PrimitiveGenerators">
       <UniqueIdentifier>{8b7dbe1e-614d-4740-a91c-5e55dacdf028}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{8a71d56f-4997-4dec-88ef-f07528a749c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\NeHeSamples">
+      <UniqueIdentifier>{1ab52c48-a0b1-4212-bab7-50b7dec43ade}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -99,9 +105,6 @@
     <ClInclude Include="Renderer\Vertex.h">
       <Filter>Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="SampleScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Primitives\Triangle.h">
       <Filter>Renderer\Primitives</Filter>
     </ClInclude>
@@ -113,6 +116,21 @@
     </ClInclude>
     <ClInclude Include="Renderer\PrimitiveGenerators\PrimitiveGenerator.h">
       <Filter>Renderer\PrimitiveGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SampleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\IScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneFactory.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\NeHeSample.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Adapter.h">
+      <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -171,9 +189,6 @@
     <ClCompile Include="Renderer\Vertex.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="SampleScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\Primitives\Triangle.cpp">
       <Filter>Renderer\Primitives</Filter>
     </ClCompile>
@@ -182,6 +197,21 @@
     </ClCompile>
     <ClCompile Include="Renderer\PrimitiveGenerators\PrimitiveGenerator.cpp">
       <Filter>Renderer\PrimitiveGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SampleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneFactory.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson3.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Adapter.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
