@@ -20,7 +20,7 @@ namespace Renderer
 
 		inline const PixelIterator end() const
 		{
-			return PixelIterator( info.biWidth, info.biHeight, info.biWidth, info.biHeight );
+			return PixelIterator( info.biWidth, info.biHeight, info.biWidth - 1, info.biHeight - 1 );
 		}
 
 	private:

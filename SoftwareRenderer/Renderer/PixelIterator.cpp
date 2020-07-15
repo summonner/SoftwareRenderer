@@ -17,11 +17,11 @@ namespace Renderer
 
 	const PixelIterator& PixelIterator::operator ++()
 	{
-		if ( current.x < width )
+		if ( current.x < width - 1 )
 		{
 			current.x += 1;
 		}
-		else if ( current.y < height )
+		else if ( current.y < height - 1 )
 		{
 			current.x = 0;
 			current.y += 1;
