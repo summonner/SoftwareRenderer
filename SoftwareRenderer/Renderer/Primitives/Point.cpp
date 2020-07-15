@@ -2,6 +2,7 @@
 #include "Point.h"
 #include "Math/Vector2.hpp"
 #include "Renderer/Vertex.h"
+#include "Renderer/RasterizedPixel.h"
 
 namespace Renderer
 {
@@ -11,9 +12,23 @@ namespace Renderer
 	{
 	}
 
-	bool Point::Contains( const Vector2Int& coordinate ) const
+	Point::~Point()
 	{
-		auto p = v.GetScreenCoordinate();
+	}
+
+	bool Point::Contains( const Vector2& coordinate ) const
+	{
+		auto p = v.screenCoordinate;
 		return p.SquaredDistance( coordinate ) <= radius * radius;
+	}
+
+	RasterizedPixel Point::Rasterize( const Vector2& coordinate ) const
+	{
+		if ( Contains( coordinate ) == false )
+		{
+			return RasterizedPixel::discard;
+		}
+
+		return RasterizedPixel( v.color, v.position.z );
 	}
 }

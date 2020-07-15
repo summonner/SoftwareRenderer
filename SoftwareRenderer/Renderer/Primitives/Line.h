@@ -8,14 +8,24 @@ namespace Renderer
 	{
 	public:
 		Line( const Vertex& a, const Vertex& b );
-		~Line();
+		~Line() override;
 
-		bool Contains( const Vector2Int& coordinate ) const;
+		RasterizedPixel Rasterize( const Vector2& coordinate ) const override;
+
+	private:
+		struct Result
+		{
+			float t;
+			float squaredDistance;
+		};
+
+		Result RasterizeInternal( const Vector2& coordinate ) const;
+		RasterizedPixel Lerp( const Vector2& barycentric ) const;
 
 	private:
 		const Vertex& a;
 		const Vertex& b;
-		float thickness;
+		float squaredThickness;
 	};
 
 }

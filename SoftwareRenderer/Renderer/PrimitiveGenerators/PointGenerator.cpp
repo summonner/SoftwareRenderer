@@ -6,9 +6,9 @@
 
 namespace Renderer
 {
-	void PointGenerator::Default( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives )
+	void PointGenerator::Default( VertexBuffer vertices, int startIndex, int endIndex, IPrimitiveList& outPrimitives )
 	{
-		auto numVertices = vertices.size();
+		auto numVertices = endIndex;
 		for ( auto i = startIndex; i < numVertices; ++i )
 		{
 			outPrimitives.push_back( std::make_unique<Point>( vertices[i] ) );

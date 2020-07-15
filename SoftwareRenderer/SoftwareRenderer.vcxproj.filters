@@ -132,6 +132,9 @@
     <ClInclude Include="Scene\NeHeSamples\Adapter.h">
       <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\RasterizedPixel.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -212,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Adapter.cpp">
       <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RasterizedPixel.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

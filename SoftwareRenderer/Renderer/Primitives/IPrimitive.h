@@ -3,11 +3,12 @@
 
 namespace Renderer
 {
+	class RasterizedPixel;
 	class IPrimitive abstract
 	{
 	public:
 		virtual ~IPrimitive() {}
 
-		virtual bool Contains( const Vector2Int& coordinate ) const abstract;
+		virtual RasterizedPixel Rasterize( const Vector2& coordinate ) const abstract;
 	};
 }

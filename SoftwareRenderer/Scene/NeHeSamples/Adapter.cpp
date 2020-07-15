@@ -24,6 +24,12 @@ IRenderer::DrawMode Convert( GLenum mode )
 {
 	switch ( mode )
 	{
+	case GL_LINES:
+		return IRenderer::DrawMode::Lines;
+	case GL_LINE_STRIP:
+		return IRenderer::DrawMode::LineStrip;
+	case GL_LINE_LOOP:
+		return IRenderer::DrawMode::LineLoop;
 	case GL_TRIANGLES:
 		return IRenderer::DrawMode::Triangles;
 	case GL_QUADS:
@@ -42,7 +48,7 @@ WINGDIAPI void APIENTRY glBegin( GLenum mode )
 
 WINGDIAPI void APIENTRY glColor3f( GLfloat red, GLfloat green, GLfloat blue )
 {
-
+	renderer->SetColor( red, green, blue );
 }
 
 WINGDIAPI void APIENTRY glVertex3f( GLfloat x, GLfloat y, GLfloat z )

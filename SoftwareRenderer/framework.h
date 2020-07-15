@@ -16,6 +16,7 @@
 
 #include <vector>
 #include <map>
+#include <queue>
 
 #include <memory>
 #include <algorithm>

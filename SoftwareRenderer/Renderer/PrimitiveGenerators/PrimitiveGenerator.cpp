@@ -26,10 +26,16 @@ namespace Renderer
 	{
 	}
 
-	void PrimitiveGenerator::SetMode( IRenderer::DrawMode mode, int startIndex )
+	void PrimitiveGenerator::Begin( IRenderer::DrawMode mode, int startIndex )
 	{
-		this->startIndex = startIndex;
-		generator = FindGenerator( mode );
+		temp.start = startIndex;
+		temp.generator = FindGenerator( mode );
+	}
+
+	void PrimitiveGenerator::End( int endIndex )
+	{
+		temp.end = endIndex;
+		generators.push( temp );
 	}
 
 	const PrimitiveGenerator::GeneratorFunction PrimitiveGenerator::FindGenerator( IRenderer::DrawMode mode )
@@ -46,12 +52,16 @@ namespace Renderer
 
 	void PrimitiveGenerator::Generate( const VertexBuffer& vertices, IPrimitiveList& outPrimitives )
 	{
-		if ( generator == nullptr )
+		while ( generators.size() > 0 )
 		{
-			return;
+			auto generator = generators.front();
+			generator.Generate( vertices, outPrimitives );
+			generators.pop();
 		}
+	}
 
-		generator( vertices, startIndex, outPrimitives );
-		generator = nullptr;
+	void PrimitiveGenerator::Generator::Generate( const VertexBuffer& vertices, IPrimitiveList& outPrimitives )
+	{
+		generator( vertices, start, end, outPrimitives );
 	}
 }

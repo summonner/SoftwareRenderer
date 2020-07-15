@@ -10,8 +10,8 @@ public:
 	{
 	}
 
-	TVector2( float x, float y )
-		: TVector2( T( x ), T( y ) )
+	TVector2( const TVector3<T>& v )
+		: TVector2( T( v.x ), T( v.y ) )
 	{
 	}
 
@@ -65,7 +65,12 @@ public:
 					- y * other.x );
 	}
 
+	static const TVector2<T> zero;
+
 public:
 	T x;
 	T y;
 };
+
+template<typename T>
+const TVector2<T> TVector2<T>::zero = TVector2( T( 0 ), T( 0 ) );

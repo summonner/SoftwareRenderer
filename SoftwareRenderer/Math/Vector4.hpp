@@ -10,11 +10,8 @@ public:
 	{
 	}
 
-	TVector4( const TVector3<T>& v, T z )
-		: x( v.x )
-		, y( v.y )
-		, z( v.z )
-		, w( w )
+	TVector4( const TVector3<T>& v, T w )
+		: TVector4( T( v.x ), T( v.y ), T( v.z ), w )
 	{
 	}
 
@@ -88,6 +85,8 @@ public:
 		return *this / Length();
 	}
 
+	static const TVector4<T> zero;
+
 public:
 	T x, y, z, w;
 };
@@ -97,3 +96,6 @@ static inline TVector4<T> operator *( const float scalar, const TVector4<T>& vec
 {
 	return vector * scalar;
 }
+
+template<typename T>
+const TVector4<T> TVector4<T>::zero = TVector4<T>( T( 0 ), T( 0 ), T( 0 ), T( 0 ) );

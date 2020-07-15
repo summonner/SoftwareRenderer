@@ -8,8 +8,12 @@ namespace Renderer
 	{
 	public:
 		Point( const Vertex& v );
+		~Point() override;
 
-		bool Contains( const Vector2Int& coordinate ) const;
+		RasterizedPixel Rasterize( const Vector2& coordinate ) const override;
+
+	private:
+		bool Contains( const Vector2& coordinate ) const;
 
 	private:
 		const Vertex& v;

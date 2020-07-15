@@ -175,6 +175,7 @@
     <ClInclude Include="Renderer\Primitives\Point.h" />
     <ClInclude Include="Renderer\PixelIterator.h" />
     <ClInclude Include="Renderer\Primitives\Triangle.h" />
+    <ClInclude Include="Renderer\RasterizedPixel.h" />
     <ClInclude Include="Renderer\Vertex.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene\IScene.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="Renderer\Primitives\Point.cpp" />
     <ClCompile Include="Renderer\PixelIterator.cpp" />
     <ClCompile Include="Renderer\Primitives\Triangle.cpp" />
+    <ClCompile Include="Renderer\RasterizedPixel.cpp" />
     <ClCompile Include="Renderer\Vertex.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Adapter.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson3.cpp" />

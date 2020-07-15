@@ -5,6 +5,7 @@
 #include "PrimitiveGenerators/PrimitiveGenerator.h"
 #include "Math/Vector3.hpp"
 #include "Math/Matrix4x4.h"
+#include "Renderer/RasterizedPixel.h"
 
 namespace Renderer
 {
@@ -13,7 +14,7 @@ namespace Renderer
 		, width( width )
 		, height( height )
 		, primitives()
-		, factory( std::make_unique<PrimitiveGenerator>() )
+		, generator( std::make_unique<PrimitiveGenerator>() )
 		, transform()
 	{
 		auto dc = GetDC( hWnd );
@@ -50,16 +51,25 @@ namespace Renderer
 
 	void GdiRenderer::Present( const HDC dc )
 	{
+		for ( auto& vertex : vertices )
+		{
+			vertex.Rasterize( view );
+		}
+
+		generator->Generate( vertices, primitives );
+
 		for ( const auto& pixel : *backBuffer )
 		{
+			const Vector2 pixelf( (float)pixel.x, (float)pixel.y );
 			for ( const auto& primitive : primitives )
 			{
-				if ( primitive->Contains( pixel ) == false )
+				auto rasterized = primitive->Rasterize( pixelf );
+				if ( rasterized.isValid == false )
 				{
 					continue;
 				}
 
-				backBuffer->SetPixel( pixel, Vector3( 1, 1, 0 ) );
+				backBuffer->SetPixel( pixel, (Vector3)rasterized.color );
 			}
 		}
 
@@ -68,20 +78,26 @@ namespace Renderer
 
 	void GdiRenderer::Begin( DrawMode mode )
 	{
-		factory->SetMode( mode, (int)vertices.size() );
+		generator->Begin( mode, (int)vertices.size() );
 	}
 
 	void GdiRenderer::End()
 	{
-		factory->Generate( vertices, primitives );
+		generator->End( (int)vertices.size() );
+	}
+
+	void GdiRenderer::SetColor( float r, float g, float b )
+	{
+		temp.color = Vector4( r, g, b, 1 );
 	}
 
 	void GdiRenderer::AddVertex( float x, float y, float z )
 	{
 		Vector4 v( x, y, z, 1.f );
-		auto t = view * transform * v;
+		auto t = transform * v;
 
-		vertices.emplace_back<Vertex>( t );
+		temp.position = t;
+		vertices.push_back( temp );
 	}
 
 	void GdiRenderer::LoadIdentity()

@@ -11,10 +11,13 @@ public:
 	{
 	}
 
+	TVector3( const TVector4<T>& v )
+		: TVector3( T( v.x ), T( v.y ), T( v.z ) )
+	{
+	}
+
 	TVector3( const TVector2<T>& v, T z )
-		: x( v.x )
-		, y( v.y )
-		, z( z )
+		: TVector3( T( v.x ), T( v.y ), z )
 	{
 	}
 
@@ -94,6 +97,7 @@ public:
 		);
 	}
 
+	static const TVector3<T> zero;
 	//inline static const TVector3 left =  TVector3( T( 1), T( 0), T( 0) );
 	//inline static const TVector3 right = TVector3( T(-1), T( 0), T( 0) );
 	//inline static const TVector3 up =	  TVector3( T( 0), T( 1), T( 0) );
@@ -108,7 +112,10 @@ public:
 };
 
 template<typename T>
-inline TVector3<T> operator *( T scalar, const TVector3<T>& vector )
+inline TVector3<T> operator *( float scalar, const TVector3<T>& vector )
 {
 	return vector * scalar;
 }
+
+template<typename T>
+const TVector3<T> TVector3<T>::zero = TVector3<T>( T( 0 ), T( 0 ), T( 0 ) );

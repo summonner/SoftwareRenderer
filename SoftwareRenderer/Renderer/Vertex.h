@@ -1,19 +1,23 @@
 #pragma once
-#include "Math/Vector3.hpp"
+#include "Math/Vector2.hpp"
+#include "Math/Vector4.hpp"
 
+class Matrix4x4;
 namespace Renderer
 {
 	class Vertex final
 	{
 	public:
-		Vertex( const Vector3& position );
-		Vertex( const Vector4& position );
+		Vertex();
 		~Vertex();
 
-		Vector2Int GetScreenCoordinate() const;
+		void Rasterize( const Matrix4x4& view );
 
-	private:
-		Vector3 position;
+	public:
+		Vector4 position;
+		Vector4 color;
+		Vector2 screenCoordinate;
+		float depth;
 	};
 
 }

@@ -5,18 +5,18 @@
 
 namespace Renderer
 {
-	void TriangleGenerator::Triangles( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives )
+	void TriangleGenerator::Triangles( VertexBuffer vertices, int startIndex, int endIndex, IPrimitiveList& outPrimitives )
 	{
-		auto lastIndex = vertices.size() - 2;
+		auto lastIndex = endIndex - 2;
 		for ( auto i = startIndex; i < lastIndex; i += 3 )
 		{
 			outPrimitives.push_back( std::make_unique<Triangle>( vertices[i], vertices[i + 1], vertices[i + 2] ) );
 		}
 	}
 
-	void TriangleGenerator::TriangleStrip( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives )
+	void TriangleGenerator::TriangleStrip( VertexBuffer vertices, int startIndex, int endIndex, IPrimitiveList& outPrimitives )
 	{
-		auto lastIndex = vertices.size() - 3;
+		auto lastIndex = endIndex - 3;
 		for ( auto i = startIndex; i < lastIndex; i += 2 )
 		{
 			outPrimitives.push_back( std::make_unique<Triangle>( vertices[i], vertices[i + 1], vertices[i + 2] ) );
@@ -24,9 +24,9 @@ namespace Renderer
 		}
 	}
 
-	void TriangleGenerator::TriangleFan( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives )
+	void TriangleGenerator::TriangleFan( VertexBuffer vertices, int startIndex, int endIndex, IPrimitiveList& outPrimitives )
 	{
-		auto lastIndex = vertices.size() - 1;
+		auto lastIndex = endIndex - 1;
 		for ( auto i = startIndex + 1; i < lastIndex; i += 1 )
 		{
 			outPrimitives.push_back( std::make_unique<Triangle>( vertices[startIndex], vertices[i], vertices[i + 1] ) );

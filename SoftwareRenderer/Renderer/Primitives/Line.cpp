@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "Line.h"
 #include "Renderer/Vertex.h"
+#include "Renderer/RasterizedPixel.h"
 #include "Math/Vector4.hpp"
 #include "Math/Vector2.hpp"
 
@@ -9,7 +10,7 @@ namespace Renderer
 	Line::Line( const Vertex& a, const Vertex& b )
 		: a( a )
 		, b( b )
-		, thickness( 5.f )
+		, squaredThickness( 5.f * 5.f )
 	{
 	}
 
@@ -19,29 +20,52 @@ namespace Renderer
 
 	// realtime collision detection
 	// http://www.r-5.org/files/books/computers/algo-list/realtime-3d/Christer_Ericson-Real-Time_Collision_Detection-EN.pdf
-	bool Line::Contains( const Vector2Int& c ) const
+	Line::Result Line::RasterizeInternal( const Vector2& c ) const
 	{
-		auto a = this->a.GetScreenCoordinate();
-		auto b = this->b.GetScreenCoordinate();
+		auto a = this->a.screenCoordinate;
+		auto b = this->b.screenCoordinate;
 
 		auto ab = b - a;
 		auto ac = c - a;
 		auto t = ac.Dot( ab );
 		if ( t < 0 )
 		{
-			return false;
-		//	return ac.Dot( ac ) <= (thickness * thickness);
+			return Result { 0, -1 };
 		}
 
 		auto denom = ab.Dot( ab );
+		if ( denom == 0 )
+		{
+			return Result { 0, ac.Dot( ac ) };
+		}
+
 		if ( t > denom )
 		{
-			return false;
-		//	auto bc = c - b;
-		//	return bc.Dot( bc ) <= (thickness * thickness);
+			return Result { 1, -1 };
 		}
 
 		auto squaredDistance = ac.Dot( ac ) - t * t / (float)denom;
-		return squaredDistance <= (thickness * thickness);
+		return Result { t / (float)denom, squaredDistance };
+	}
+
+	RasterizedPixel Line::Rasterize( const Vector2& coordinate ) const
+	{
+		auto r = RasterizeInternal( coordinate );
+		auto isDiscard = r.squaredDistance < 0
+					  || r.squaredDistance > squaredThickness;
+		if ( isDiscard == true )
+		{
+			return RasterizedPixel::discard;
+		}
+	
+		return Lerp( Vector2( 1 - r.t, r.t ) );
+	}
+
+	RasterizedPixel Line::Lerp( const Vector2& barycentric ) const
+	{
+		auto color = a.color * barycentric.x + b.color * barycentric.y;
+		Vector2 z( a.position.z, b.position.z );
+		auto depth = barycentric.Dot( z );
+		return RasterizedPixel( color, depth );
 	}
 }

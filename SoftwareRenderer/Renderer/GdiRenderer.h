@@ -24,6 +24,7 @@ namespace Renderer
 
 		void Begin( DrawMode mode ) override;
 		void End() override;
+		void SetColor( float r, float g, float b ) override;
 		void AddVertex( float x, float y, float z ) override;
 
 		void LoadIdentity() override;
@@ -40,10 +41,11 @@ namespace Renderer
 		std::vector<std::unique_ptr<IPrimitive>> primitives;
 		std::vector<Vertex> vertices;
 
+		Vertex temp;
 		Matrix4x4 transform;
 		Matrix4x4 view;
 
-		const std::unique_ptr<PrimitiveGenerator> factory;
+		const std::unique_ptr<PrimitiveGenerator> generator;
 	};
 
 }

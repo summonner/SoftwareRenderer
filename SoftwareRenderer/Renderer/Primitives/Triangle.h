@@ -8,12 +8,13 @@ namespace Renderer
 	{
 	public:
 		Triangle( const Vertex& a, const Vertex& b, const Vertex& c );
-		~Triangle();
+		~Triangle() override;
 
-		bool Contains( const Vector2Int& coordinate ) const override;
+		RasterizedPixel Rasterize( const Vector2& coordinate ) const override;
 
 	private:
-		Vector3 Barycentric( const Vector2Int& coordinate ) const;
+		Vector3 Barycentric( const Vector2& coordinate ) const;
+		RasterizedPixel Lerp( const Vector3& barycentric ) const;
 
 	private:
 		const Vertex& a;

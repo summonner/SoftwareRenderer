@@ -110,7 +110,7 @@ private:
 	DECL_ROW( 2 );
 	DECL_ROW( 3 );
 
-#define DECL_COL(i) inline Vector4 Col##i() const { return Vector4( m0##i, m1##i, m2##i, m3##i ); }
+#define DECL_COL(i) inline const Vector4 Col##i() const { return Vector4( m0##i, m1##i, m2##i, m3##i ); }
 	DECL_COL( 0 );
 	DECL_COL( 1 );
 	DECL_COL( 2 );

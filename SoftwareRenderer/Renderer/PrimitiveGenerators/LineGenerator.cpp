@@ -5,27 +5,27 @@
 
 namespace Renderer
 {
-	void LineGenerator::Default( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives )
+	void LineGenerator::Default( VertexBuffer vertices, int startIndex, int endIndex, IPrimitiveList& outPrimitives )
 	{
-		auto numVertices = vertices.size() - 1;
+		auto numVertices = endIndex - 1;
 		for ( auto i = startIndex; i < numVertices; i += 2 )
 		{
 			outPrimitives.push_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
 	}
 
-	void LineGenerator::Strip( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives )
+	void LineGenerator::Strip( VertexBuffer vertices, int startIndex, int endIndex, IPrimitiveList& outPrimitives )
 	{
-		auto numVertices = vertices.size() - 1;
+		auto numVertices = endIndex - 1;
 		for ( auto i = startIndex; i < numVertices; ++i )
 		{
 			outPrimitives.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
 	}
 	
-	void LineGenerator::Loop( VertexBuffer vertices, int startIndex, IPrimitiveList& outPrimitives )
+	void LineGenerator::Loop( VertexBuffer vertices, int startIndex, int endIndex, IPrimitiveList& outPrimitives )
 	{
-		auto numVertices = vertices.size() - 1;
+		auto numVertices = endIndex - 1;
 		for ( auto i = startIndex; i < numVertices; ++i )
 		{
 			outPrimitives.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );

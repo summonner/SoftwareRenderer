@@ -23,6 +23,7 @@ public:
 
 	virtual void Begin( DrawMode mode ) abstract;
 	virtual void End() abstract;
+	virtual void SetColor( float r, float g, float b ) abstract;
 	virtual void AddVertex( float x, float y, float z ) abstract;
 
 	virtual void LoadIdentity() abstract;
