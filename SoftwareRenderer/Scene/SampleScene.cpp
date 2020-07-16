@@ -24,17 +24,21 @@ void SampleScene::Render( std::shared_ptr<IRenderer> renderer ) const
 	renderer->Clear();
 	renderer->LoadIdentity();
 
-	renderer->Scale( x, x, x );
-	renderer->Rotate( x * 180.f, 0.f, 0.f, 1.f );
-	renderer->Translate( -1.5f, 0.0f, -6.0f );
+//	renderer->Scale( x, x, x );
+//	renderer->Rotate( x * 180.f, 0.f, 0.f, 1.f );
+	renderer->Translate( -1.5f, 0.0f, -6.0f + 3 * x );
 	renderer->Begin( IRenderer::DrawMode::Triangles );
+	renderer->SetColor( 1.f, 0.f, 0.f );
 	renderer->AddVertex( 0.f, 1.f, 0.f );
+	renderer->SetColor( 0.f, 1.f, 0.f );
 	renderer->AddVertex( -1.f, -1.f, 0.f );
+	renderer->SetColor( 0.f, 0.f, 1.f );
 	renderer->AddVertex( 1.f, -1.f, 0.f );
 	renderer->End();
 
 	renderer->Translate( 3.0f, 0.0f, 0.0f );
 	renderer->Begin( IRenderer::DrawMode::TriangleFan );
+	renderer->SetColor( 0.5f, 0.5f, 1.0f );
 	renderer->AddVertex( -1.0f, 1.0f, 0.0f );
 	renderer->AddVertex( 1.0f, 1.0f, 0.0f );
 	renderer->AddVertex( 1.0f, -1.0f, 0.0f );

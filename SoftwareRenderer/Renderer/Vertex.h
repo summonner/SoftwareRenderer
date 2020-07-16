@@ -11,13 +11,14 @@ namespace Renderer
 		Vertex();
 		~Vertex();
 
-		void Rasterize( const Matrix4x4& view );
+		void Process( const Matrix4x4& projection, const Matrix4x4& viewport );
 
 	public:
 		Vector4 position;
 		Vector4 color;
+		Vector4 clipCoordinate;
 		Vector2 screenCoordinate;
-		float depth;
+		int depth;
 	};
 
 }

@@ -7,32 +7,20 @@
 #include "Math/Matrix4x4.h"
 #include "Renderer/RasterizedPixel.h"
 
+
 namespace Renderer
 {
 	GdiRenderer::GdiRenderer( const HWND hWnd, const int width, const int height )
 		: hWnd( hWnd )
 		, width( width )
 		, height( height )
-		, primitives()
 		, generator( std::make_unique<PrimitiveGenerator>() )
-		, transform()
 	{
 		auto dc = GetDC( hWnd );
 		backBuffer = std::make_unique<FrameBuffer>( dc, width, height );
 		ReleaseDC( hWnd, dc );
-
-		auto scale = Matrix4x4::Scale( Vector3( 100, 100, 1 ) );
-		auto translate = Matrix4x4::Translate( Vector3( (float)width, (float)height, 0.f ) * 0.5f );
-		view = translate * scale;
 	}
-
-	GdiRenderer* GdiRenderer::Create( const HWND hWnd )
-	{
-		RECT rect;
-		GetClientRect( hWnd, &rect );
-		return new GdiRenderer( hWnd, rect.right, rect.bottom );
-	}
-
+	
 	GdiRenderer::~GdiRenderer()
 	{
 	}
@@ -53,7 +41,7 @@ namespace Renderer
 	{
 		for ( auto& vertex : vertices )
 		{
-			vertex.Rasterize( view );
+			vertex.Process( projection, viewport );
 		}
 
 		generator->Generate( vertices, primitives );
@@ -118,5 +106,49 @@ namespace Renderer
 	void GdiRenderer::Scale( float x, float y, float z )
 	{
 		transform = Matrix4x4::Scale( Vector3( x, y, z ) ) * transform;
+	}
+
+	void GdiRenderer::Viewport( float left, float bottom, float width, float height )
+	{
+		auto halfWidth = width * 0.5f;
+		auto halfHeight = height * 0.5f;
+		viewport = Matrix4x4(
+			halfWidth, 0, 0, halfWidth + left,
+			0, halfHeight, 0, halfHeight + bottom,
+			0, 0, 0, 1,
+			0, 0, 0, 1
+		);
+	}
+
+	void GdiRenderer::Frustum( float l, float r, float t, float b, float n, float f )
+	{
+		projection = Matrix4x4(
+			2 * n / (r - l), 0, (r + l) / (r - l), 0,
+			0, 2 * n / (t - b), (t + b) / (t - b), 0,
+			0, 0, -(f + n) / (f - n), -2 * f * n / (f - n ),
+			0, 0, -1, 0
+		);
+	}
+
+	void GdiRenderer::Perspective( Degree fovY, float aspect, float near, float far )
+	{
+		auto halfHeight = near * tanf( fovY * PI / 180 / 2 );
+		auto halfWidth = halfHeight * aspect;
+		projection = Matrix4x4(
+			near / halfWidth, 0, 0, 0,
+			0, near / halfHeight, 0, 0,
+			0, 0, -(far + near) / (far - near), -2 * far * near / (far - near),
+			0, 0, -1, 0
+		);
+	}
+
+	void GdiRenderer::Ortho( float l, float r, float t, float b, float n, float f )
+	{
+		projection = Matrix4x4(
+			2 / (r - l), 0, 0, -(r + l) / (r - l),
+			0, 2 / (t - b), 0, -(t + b) / (t - b),
+			0, 0, 2 / (f - n), -(f + n) / (f - n),
+			0, 0, 0, 1
+		);
 	}
 }

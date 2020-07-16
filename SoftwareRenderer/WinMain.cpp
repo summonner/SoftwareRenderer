@@ -149,7 +149,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
 		case WM_CREATE:
-			renderer.reset( Renderer::GdiRenderer::Create( hWnd ) );
+			RECT rect;
+			GetClientRect( hWnd, &rect );
+			renderer.reset( new Renderer::GdiRenderer( hWnd, rect.right, rect.bottom ) );
+			renderer->Viewport( 0, 0, (float)rect.right, (float)rect.bottom );
+			renderer->Perspective( 45.f, (float)rect.right / (float)rect.bottom, 0.1f, 100.f );
 			scene = SceneFactory::Create();
 			break;
 

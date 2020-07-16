@@ -7,6 +7,6 @@
 
 std::unique_ptr<IScene> SceneFactory::Create()
 {
-//	return std::make_unique<SampleScene>();
-	return std::make_unique<NeHeSample>();
+	return std::make_unique<SampleScene>();
+//	return std::make_unique<NeHeSample>();
 }

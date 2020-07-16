@@ -11,11 +11,9 @@ namespace Renderer
 
 	class GdiRenderer final : public IRenderer
 	{
-	private:
+	public:
 		GdiRenderer( const HWND hWnd, const int width, const int height );
 		GdiRenderer( const GdiRenderer& source ) = delete;
-	public:
-		static GdiRenderer* Create( const HWND hWnd );
 		~GdiRenderer() override;
 
 		void Clear() override;
@@ -32,6 +30,11 @@ namespace Renderer
 		void Rotate( Degree angle, float x, float y, float z ) override;
 		void Scale( float x, float y, float z ) override;
 
+		void Viewport( float left, float bottom, float width, float height ) override;
+		void Frustum( float left, float right, float top, float bottom, float near, float far ) override;
+		void Perspective( float fovY, float aspect, float near, float far ) override;
+		void Ortho( float left, float right, float top, float bottom, float near, float far ) override;
+
 	private:
 		const HWND hWnd;
 		const int width;
@@ -43,7 +46,8 @@ namespace Renderer
 
 		Vertex temp;
 		Matrix4x4 transform;
-		Matrix4x4 view;
+		Matrix4x4 projection;
+		Matrix4x4 viewport;
 
 		const std::unique_ptr<PrimitiveGenerator> generator;
 	};
