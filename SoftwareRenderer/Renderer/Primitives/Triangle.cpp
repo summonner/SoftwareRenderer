@@ -4,6 +4,7 @@
 #include "Renderer/RasterizedPixel.h"
 #include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
+#include "Bresenham.h"
 
 namespace Renderer
 {
@@ -12,6 +13,49 @@ namespace Renderer
 		, b( b )
 		, c( c )
 	{
+		Vector2Int v0, v1, v2;
+		if ( a.screenCoordinate.y < b.screenCoordinate.y )
+		{
+			v0 = a.screenCoordinate;
+			v1 = b.screenCoordinate;
+		}
+		else
+		{
+			v0 = b.screenCoordinate;
+			v1 = a.screenCoordinate;
+		}
+
+		if ( c.screenCoordinate.y < v0.y )
+		{
+			v2 = v1;
+			v1 = v0;
+			v0 = c.screenCoordinate;
+		}
+		else if ( v1.y < c.screenCoordinate.y )
+		{
+			v2 = c.screenCoordinate;
+		}
+		else
+		{
+			v2 = v1;
+			v1 = c.screenCoordinate;
+		}
+
+		auto ab = Bresenham( v0, v1 );
+		auto ac = Bresenham( v0, v2 );
+		auto bc = Bresenham( v1, v2 );
+
+		do {
+			pixels.push_back( ab.p );
+		} while ( ab.Next() );
+
+		do {
+			pixels.push_back( ac.p );
+		} while ( ac.Next() );
+
+		do {
+			pixels.push_back( bc.p );
+		} while ( bc.Next() );
 	}
 
 

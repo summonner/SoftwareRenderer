@@ -46,18 +46,11 @@ namespace Renderer
 
 		generator->Generate( vertices, primitives );
 
-		for ( const auto& pixel : *backBuffer )
+		for ( const auto& primitive : primitives )
 		{
-			const Vector2 pixelf( (float)pixel.x, (float)pixel.y );
-			for ( const auto& primitive : primitives )
+			for ( const auto& p : primitive->pixels )
 			{
-				auto rasterized = primitive->Rasterize( pixelf );
-				if ( rasterized.isValid == false )
-				{
-					continue;
-				}
-
-				backBuffer->SetPixel( pixel, (Vector3)rasterized.color );
+				backBuffer->SetPixel( p, Vector3( 1, 1, 1 ) );
 			}
 		}
 

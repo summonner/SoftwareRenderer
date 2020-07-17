@@ -1,6 +1,7 @@
 #pragma once
 #include "IPrimitive.h"
 
+#include "Math/Vector2.hpp"
 namespace Renderer
 {
 	class Vertex;
@@ -21,5 +22,4 @@ namespace Renderer
 		const Vertex& b;
 		const Vertex& c;
 	};
-
 }

@@ -135,6 +135,9 @@
     <ClInclude Include="Renderer\RasterizedPixel.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Primitives\Bresenham.h">
+      <Filter>Renderer\Primitives</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -218,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\RasterizedPixel.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Primitives\Bresenham.cpp">
+      <Filter>Renderer\Primitives</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

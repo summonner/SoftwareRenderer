@@ -36,14 +36,14 @@ void SampleScene::Render( std::shared_ptr<IRenderer> renderer ) const
 	renderer->AddVertex( 1.f, -1.f, 0.f );
 	renderer->End();
 
-	renderer->Translate( 3.0f, 0.0f, 0.0f );
-	renderer->Begin( IRenderer::DrawMode::TriangleFan );
-	renderer->SetColor( 0.5f, 0.5f, 1.0f );
-	renderer->AddVertex( -1.0f, 1.0f, 0.0f );
-	renderer->AddVertex( 1.0f, 1.0f, 0.0f );
-	renderer->AddVertex( 1.0f, -1.0f, 0.0f );
-	renderer->AddVertex( -1.0f, -1.0f, 0.0f );
-	renderer->End();
+	//renderer->Translate( 3.0f, 0.0f, 0.0f );
+	//renderer->Begin( IRenderer::DrawMode::TriangleFan );
+	//renderer->SetColor( 0.5f, 0.5f, 1.0f );
+	//renderer->AddVertex( -1.0f, 1.0f, 0.0f );
+	//renderer->AddVertex( 1.0f, 1.0f, 0.0f );
+	//renderer->AddVertex( 1.0f, -1.0f, 0.0f );
+	//renderer->AddVertex( -1.0f, -1.0f, 0.0f );
+	//renderer->End();
 
 	renderer->Present();
 }

@@ -16,9 +16,10 @@ namespace Renderer
 	void Vertex::Process( const Matrix4x4& projection, const Matrix4x4& viewport )
 	{
 		auto ndc = projection * position;
-		clipCoordinate = ndc / ndc.w;
+		ndc = ndc / ndc.w;
+		clipCoordinate = ndc;
 
-		auto screen = viewport * clipCoordinate;
+		auto screen = viewport * ndc;
 		screenCoordinate = Vector2( screen.x, screen.y );
 		depth = (int)(screen.z * INT_MAX);
 	}

@@ -170,6 +170,7 @@
     <ClInclude Include="Renderer\PrimitiveGenerators\PrimitiveGenerator.h" />
     <ClInclude Include="Renderer\PrimitiveGenerators\TriangleGenerator.h" />
     <ClInclude Include="Renderer\PrimitiveGenerators\Types.h" />
+    <ClInclude Include="Renderer\Primitives\Bresenham.h" />
     <ClInclude Include="Renderer\Primitives\IPrimitive.h" />
     <ClInclude Include="Renderer\Primitives\Line.h" />
     <ClInclude Include="Renderer\Primitives\Point.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="Renderer\PrimitiveGenerators\PointGenerator.cpp" />
     <ClCompile Include="Renderer\PrimitiveGenerators\PrimitiveGenerator.cpp" />
     <ClCompile Include="Renderer\PrimitiveGenerators\TriangleGenerator.cpp" />
+    <ClCompile Include="Renderer\Primitives\Brensenham.cpp" />
     <ClCompile Include="Renderer\Primitives\Line.cpp" />
     <ClCompile Include="Renderer\Primitives\Point.cpp" />
     <ClCompile Include="Renderer\PixelIterator.cpp" />

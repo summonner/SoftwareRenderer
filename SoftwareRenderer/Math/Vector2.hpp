@@ -10,6 +10,16 @@ public:
 	{
 	}
 
+	TVector2( const TVector2<int>& v )
+		: TVector2( T( v.x ), T( v.y ) )
+	{
+	}
+
+	TVector2( const TVector2<float>& v )
+		: TVector2( T( v.x ), T( v.y ) )
+	{
+	}
+
 	TVector2( const TVector3<T>& v )
 		: TVector2( T( v.x ), T( v.y ) )
 	{
@@ -27,6 +37,11 @@ public:
 			|| y != other.y;
 	}
 
+	inline TVector2 operator -() const
+	{
+		return (*this) * -1;
+	}
+
 	inline TVector2 operator +( const TVector2& other ) const
 	{
 		return TVector2( x + other.x, y + other.y );
@@ -34,7 +49,7 @@ public:
 
 	inline TVector2 operator -( const TVector2& other ) const
 	{
-		return (*this) + other * -1;
+		return (*this) + (-other);
 	}
 
 	inline TVector2 operator *( const int scalar ) const
@@ -45,6 +60,34 @@ public:
 	inline TVector2 operator *( const float scalar ) const
 	{
 		return TVector2( x * scalar, y * scalar );
+	}
+
+	inline TVector2 operator *( const TVector2& other ) const
+	{
+		return TVector2( x * other.x, y * other.y );
+	}
+
+	inline void operator +=( const TVector2& other )
+	{
+		x += other.x;
+		y += other.y;
+	}
+
+	inline void operator -=( const TVector2& other )
+	{
+		(*this) += -other;
+	}
+
+	inline void operator *=( const float scalar )
+	{
+		x *= scalar;
+		y *= scalar;
+	}
+
+	inline bool operator ==( const TVector2& other ) const
+	{
+		return x == other.x
+			&& y == other.y;
 	}
 
 	inline float SquaredDistance( const TVector2& other ) const
@@ -74,3 +117,9 @@ public:
 
 template<typename T>
 const TVector2<T> TVector2<T>::zero = TVector2( T( 0 ), T( 0 ) );
+
+template<typename T>
+inline const TVector2<T> operator *( const int scalar, const TVector2<T>& vector )
+{
+	return vector * scalar;
+}

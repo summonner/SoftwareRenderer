@@ -36,6 +36,13 @@ namespace Renderer
 
 	void FrameBuffer::SetPixel( const Vector2Int& p, const Vector3& color )
 	{
+		auto isVisible = p.x >= 0 && p.x < info.biWidth
+					  && p.y >= 0 && p.y < info.biHeight;
+		if ( isVisible == false )
+		{
+			return;
+		}
+
 		auto i = (p.x + p.y * info.biWidth) * colorBytes;
 		pixels[i + 0] = (int)(color.z * 255);	// B
 		pixels[i + 1] = (int)(color.y * 255);	// G

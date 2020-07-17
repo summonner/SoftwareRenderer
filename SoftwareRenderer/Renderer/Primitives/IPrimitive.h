@@ -10,5 +10,8 @@ namespace Renderer
 		virtual ~IPrimitive() {}
 
 		virtual RasterizedPixel Rasterize( const Vector2& coordinate ) const abstract;
+
+	public:
+		std::vector<Vector2Int> pixels;
 	};
 }
