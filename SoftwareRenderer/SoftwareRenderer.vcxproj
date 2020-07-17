@@ -205,7 +205,7 @@
     <ClCompile Include="Renderer\PrimitiveGenerators\PointGenerator.cpp" />
     <ClCompile Include="Renderer\PrimitiveGenerators\PrimitiveGenerator.cpp" />
     <ClCompile Include="Renderer\PrimitiveGenerators\TriangleGenerator.cpp" />
-    <ClCompile Include="Renderer\Primitives\Brensenham.cpp" />
+    <ClCompile Include="Renderer\Primitives\Bresenham.cpp" />
     <ClCompile Include="Renderer\Primitives\Line.cpp" />
     <ClCompile Include="Renderer\Primitives\Point.cpp" />
     <ClCompile Include="Renderer\PixelIterator.cpp" />
