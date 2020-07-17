@@ -108,6 +108,7 @@ public:
 					- y * other.x );
 	}
 
+	static TVector2 Lerp( const TVector2& left, const TVector2& right, const float t );
 	static const TVector2<T> zero;
 
 public:
@@ -122,4 +123,10 @@ template<typename T>
 inline const TVector2<T> operator *( const int scalar, const TVector2<T>& vector )
 {
 	return vector * scalar;
+}
+
+template<typename T>
+TVector2<T> TVector2<T>::Lerp( const TVector2<T>& start, const TVector2<T>& end, const float t )
+{
+	return start * (1.f - t) + end * t;
 }

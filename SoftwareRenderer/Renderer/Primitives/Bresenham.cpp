@@ -9,6 +9,8 @@ namespace Renderer
 		, sign( diff.x >= 0 ? 1 : -1, diff.y >= 0 ? 1 : -1 )
 		, d( 2 * diff.y - diff.x )
 		, p( a )
+		, CalculateT( diff.x > diff.y ? &Bresenham::CalculateTx : &Bresenham::CalculateTy )
+		, t( 1 )
 	{
 	}
 
@@ -18,8 +20,7 @@ namespace Renderer
 
 	bool Bresenham::Next()
 	{
-		auto t = (b - p) * sign;
-		if ( t.x <= 0 && t.y <= 0 )
+		if ( t <= 0.f )
 		{
 			return false;
 		}
@@ -36,6 +37,17 @@ namespace Renderer
 			d += 2 * diff.y * sign.y;
 		}
 
-		return true;
+		t = 1 - CalculateT( *this );
+		return t < 1.f;
+	}
+
+	float Bresenham::CalculateTx() const
+	{
+		return (b.x - p.x) / (float)diff.x;
+	}
+
+	float Bresenham::CalculateTy() const
+	{
+		return (b.y - p.y) / (float)diff.y;
 	}
 }

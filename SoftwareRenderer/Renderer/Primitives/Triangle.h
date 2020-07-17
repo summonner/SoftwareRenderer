@@ -14,6 +14,7 @@ namespace Renderer
 		RasterizedPixel Rasterize( const Vector2& coordinate ) const override;
 
 	private:
+		static std::vector<const Vertex*> Sort( const Vertex& a, const Vertex& b, const Vertex& c );
 		Vector3 Barycentric( const Vector2& coordinate ) const;
 		RasterizedPixel Lerp( const Vector3& barycentric ) const;
 

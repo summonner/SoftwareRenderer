@@ -50,7 +50,7 @@ namespace Renderer
 		{
 			for ( const auto& p : primitive->pixels )
 			{
-				backBuffer->SetPixel( p, Vector3( 1, 1, 1 ) );
+				backBuffer->SetPixel( p.coordinate, p.color );
 			}
 		}
 

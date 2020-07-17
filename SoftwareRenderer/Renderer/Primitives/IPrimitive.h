@@ -1,9 +1,9 @@
 #pragma once
 #include "Math/Vector.h"
+#include "../RasterizedPixel.h"
 
 namespace Renderer
 {
-	class RasterizedPixel;
 	class IPrimitive abstract
 	{
 	public:
@@ -12,6 +12,6 @@ namespace Renderer
 		virtual RasterizedPixel Rasterize( const Vector2& coordinate ) const abstract;
 
 	public:
-		std::vector<Vector2Int> pixels;
+		std::vector<RasterizedPixel> pixels;
 	};
 }

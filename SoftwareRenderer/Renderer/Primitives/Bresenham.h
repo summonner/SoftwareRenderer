@@ -12,12 +12,19 @@ namespace Renderer
 		bool Next();
 
 	private:
+		float CalculateTx() const;
+		float CalculateTy() const;
+
+	private:
 		const Vector2Int b;
 		const Vector2Int diff;
 		const Vector2Int sign;
 		int d;
 
+		const std::function<float(const Bresenham&)> CalculateT;
+
 	public:
 		Vector2Int p;
+		float t;
 	};
 }

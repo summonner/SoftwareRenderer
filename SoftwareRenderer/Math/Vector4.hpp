@@ -85,6 +85,7 @@ public:
 		return *this / Length();
 	}
 
+	static TVector4 Lerp( const TVector4& left, const TVector4& right, const float t );
 	static const TVector4<T> zero;
 
 public:
@@ -95,6 +96,12 @@ template<typename T>
 static inline TVector4<T> operator *( const float scalar, const TVector4<T>& vector )
 {
 	return vector * scalar;
+}
+
+template<typename T>
+TVector4<T> TVector4<T>::Lerp( const TVector4<T>& start, const TVector4<T>& end, const float t )
+{
+	return start * (1.f - t) + end * t;
 }
 
 template<typename T>

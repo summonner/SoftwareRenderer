@@ -1,4 +1,5 @@
 #pragma once
+#include "Math/Vector2.hpp"
 #include "Math/Vector4.hpp"
 
 namespace Renderer
@@ -7,6 +8,7 @@ namespace Renderer
 	{
 	public:
 		RasterizedPixel( const Vector4& color, float depth );
+		RasterizedPixel( const Vector2Int& coordinate, const Vector4& color, float depth );
 		~RasterizedPixel();
 
 		const static RasterizedPixel discard;
@@ -14,6 +16,7 @@ namespace Renderer
 		RasterizedPixel();
 
 	public:
+		const Vector2Int coordinate;
 		const bool isValid;
 		const Vector4 color;
 		const float depth;

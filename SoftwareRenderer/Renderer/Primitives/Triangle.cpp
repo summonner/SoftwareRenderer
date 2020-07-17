@@ -13,51 +13,35 @@ namespace Renderer
 		, b( b )
 		, c( c )
 	{
-		Vector2Int v0, v1, v2;
-		if ( a.screenCoordinate.y < b.screenCoordinate.y )
-		{
-			v0 = a.screenCoordinate;
-			v1 = b.screenCoordinate;
-		}
-		else
-		{
-			v0 = b.screenCoordinate;
-			v1 = a.screenCoordinate;
-		}
+		auto sorted = Sort( a, b, c );
 
-		if ( c.screenCoordinate.y < v0.y )
-		{
-			v2 = v1;
-			v1 = v0;
-			v0 = c.screenCoordinate;
-		}
-		else if ( v1.y < c.screenCoordinate.y )
-		{
-			v2 = c.screenCoordinate;
-		}
-		else
-		{
-			v2 = v1;
-			v1 = c.screenCoordinate;
-		}
-
-		auto ab = Bresenham( v0, v1 );
-		auto ac = Bresenham( v0, v2 );
-		auto bc = Bresenham( v1, v2 );
+		auto ab = Bresenham( sorted[0]->screenCoordinate, sorted[1]->screenCoordinate );
+		auto ac = Bresenham( sorted[0]->screenCoordinate, sorted[2]->screenCoordinate );
+		auto bc = Bresenham( sorted[1]->screenCoordinate, sorted[2]->screenCoordinate );
 
 		do {
-			pixels.push_back( ab.p );
+			pixels.push_back( RasterizedPixel( ab.p, Vector4::Lerp( sorted[0]->color, sorted[1]->color, ab.t), 1 ) );
 		} while ( ab.Next() );
 
 		do {
-			pixels.push_back( ac.p );
+			pixels.push_back( RasterizedPixel( ac.p, Vector4::Lerp( sorted[0]->color, sorted[2]->color, ac.t ), 1 ) );
 		} while ( ac.Next() );
 
 		do {
-			pixels.push_back( bc.p );
+			pixels.push_back( RasterizedPixel( bc.p, Vector4::Lerp( sorted[1]->color, sorted[2]->color, bc.t ), 1 ) );
 		} while ( bc.Next() );
 	}
 
+	std::vector<const Vertex*> Triangle::Sort( const Vertex& a, const Vertex& b, const Vertex& c )
+	{
+		std::vector<const Vertex*> sorted( 3 );
+		sorted[0] = &a;
+		sorted[1] = &b;
+		sorted[2] = &c;
+
+		sort( sorted.begin(), sorted.end(), []( const Vertex* l, const Vertex* r ) { return l->screenCoordinate.y < r->screenCoordinate.y; } );
+		return sorted;
+	}
 
 	Triangle::~Triangle()
 	{

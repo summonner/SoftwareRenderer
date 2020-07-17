@@ -25,7 +25,7 @@ void SampleScene::Render( std::shared_ptr<IRenderer> renderer ) const
 	renderer->LoadIdentity();
 
 //	renderer->Scale( x, x, x );
-//	renderer->Rotate( x * 180.f, 0.f, 0.f, 1.f );
+	renderer->Rotate( x * 180.f, 0.f, 0.f, 1.f );
 	renderer->Translate( -1.5f, 0.0f, -6.0f + 3 * x );
 	renderer->Begin( IRenderer::DrawMode::Triangles );
 	renderer->SetColor( 1.f, 0.f, 0.f );
