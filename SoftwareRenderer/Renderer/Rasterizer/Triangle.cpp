@@ -1,19 +1,16 @@
 #include "framework.h"
 #include "Triangle.h"
 #include "Renderer/Vertex.h"
-#include "Renderer/RasterizedPixel.h"
 #include "Math/RangeInt.h"
 #include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
 #include "Bresenham.h"
+#include "RasterizedPixel.h"
 
 // ref : http://www.sunshine2k.de/coding/java/TriangleRasterization/TriangleRasterization.html
 namespace Renderer
 {
 	Triangle::Triangle( const Vertex& a, const Vertex& b, const Vertex& c )
-		: a( a )
-		, b( b )
-		, c( c )
 	{
 		auto sorted = Sort( a, b, c );
 
@@ -34,6 +31,10 @@ namespace Renderer
 		{
 			Rasterize( range, &e01, &e02, &e12 );
 		}
+	}
+
+	Triangle::~Triangle()
+	{
 	}
 
 	void Triangle::Rasterize( const RangeInt& range, Bresenham* e01, Bresenham* e02, Bresenham* e12 )
@@ -71,16 +72,9 @@ namespace Renderer
 		}
 	}
 
-	bool Compare( const Vertex* l, const Vertex* r )
+	bool AscendingY( const Vertex* l, const Vertex* r )
 	{
-		if ( l->screen.y != r->screen.y )
-		{
-			return l->screen.y < r->screen.y;
-		}
-		else
-		{
-			return l->screen.x < r->screen.x;
-		}
+		return l->screen.y < r->screen.y;
 	}
 
 	std::vector<const Vertex*> Triangle::Sort( const Vertex& a, const Vertex& b, const Vertex& c )
@@ -90,48 +84,7 @@ namespace Renderer
 		sorted[1] = &b;
 		sorted[2] = &c;
 
-		sort( sorted.begin(), sorted.end(), Compare );
+		sort( sorted.begin(), sorted.end(), AscendingY );
 		return sorted;
-	}
-
-	Triangle::~Triangle()
-	{
-	}
-
-	Vector3 Triangle::Barycentric( const Vector2& p ) const
-	{
-		auto a = this->a.screen;
-		auto b = this->b.screen;
-		auto c = this->c.screen;
-
-		auto ab = b - a;
-		auto ac = c - a;
-		auto m = ab.Area( ac );
-
-		auto cb = b - c;
-		auto u = (p - b).Area( cb ) / m;
-		auto v = (p - c).Area( ac ) / m;
-		return Vector3( u, v, 1.f - u - v );
-	}
-
-	RasterizedPixel Triangle::Rasterize( const Vector2& coordinate ) const
-	{
-		auto bary = Barycentric( coordinate );
-		auto isDiscard = (bary.y >= 0.f)
-					  && (bary.z >= 0.f)
-					  && ((bary.y + bary.z) <= 1.f);
-		if ( isDiscard == false )
-		{
-			return RasterizedPixel::discard;
-		}
-
-		return Lerp( bary );
-	}
-
-	RasterizedPixel Triangle::Lerp( const Vector3& barycentric ) const
-	{
-		auto color = a.color * barycentric.x + b.color * barycentric.y + c.color * barycentric.z;
-		auto depth = barycentric.Dot( Vector3( a.position.z, b.position.z, c.position.z ) );
-		return RasterizedPixel( color, depth );
 	}
 }

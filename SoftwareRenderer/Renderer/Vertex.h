@@ -19,7 +19,7 @@ namespace Renderer
 		Vector4 color;
 		Vector3 clip;
 		Vector2Int screen;
-		int depth;
+		float depth;
 	};
 
 }

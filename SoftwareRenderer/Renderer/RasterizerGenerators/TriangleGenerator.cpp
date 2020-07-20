@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "TriangleGenerator.h"
-#include "Renderer/Primitives/Triangle.h"
+#include "Renderer/Rasterizer/Triangle.h"
 #include "Renderer/Vertex.h"
 #include "Math/Vector3.hpp"
 
@@ -11,48 +11,48 @@
 
 namespace Renderer
 {
-	void TriangleGenerator::Triangles( VertexBuffer vertices, int startIndex, int endIndex, IPrimitiveList& outPrimitives )
+	void TriangleGenerator::Triangles( VertexBuffer vertices, int startIndex, int endIndex, IRasterizerList& outRasterizers )
 	{
 		auto lastIndex = endIndex - 2;
 		for ( auto i = startIndex; i < lastIndex; i += 3 )
 		{
-			outPrimitives.push_back( std::make_unique<Triangle>( vertices[i], vertices[i + 1], vertices[i + 2] ) );
+			outRasterizers.push_back( std::make_unique<Triangle>( vertices[i], vertices[i + 1], vertices[i + 2] ) );
 		}
 	}
 
-	void TriangleGenerator::TriangleStrip( VertexBuffer vertices, int startIndex, int endIndex, IPrimitiveList& outPrimitives )
+	void TriangleGenerator::TriangleStrip( VertexBuffer vertices, int startIndex, int endIndex, IRasterizerList& outRasterizers )
 	{
 		auto lastIndex = endIndex - 3;
 		auto i = startIndex;
 		for ( ; i < lastIndex; i += 2 )
 		{
-			Build( vertices[i], vertices[i + 1], vertices[i + 2], outPrimitives );
-			Build( vertices[i + 2], vertices[i + 1], vertices[i + 3], outPrimitives );
+			Build( vertices[i], vertices[i + 1], vertices[i + 2], outRasterizers );
+			Build( vertices[i + 2], vertices[i + 1], vertices[i + 3], outRasterizers );
 		}
 
 		if ( i == lastIndex )
 		{
-			Build( vertices[i], vertices[i + 1], vertices[i + 2], outPrimitives );
+			Build( vertices[i], vertices[i + 1], vertices[i + 2], outRasterizers );
 		}
 	}
 
-	void TriangleGenerator::TriangleFan( VertexBuffer vertices, int startIndex, int endIndex, IPrimitiveList& outPrimitives )
+	void TriangleGenerator::TriangleFan( VertexBuffer vertices, int startIndex, int endIndex, IRasterizerList& outRasterizers )
 	{
 		auto lastIndex = endIndex - 1;
 		for ( auto i = startIndex + 1; i < lastIndex; i += 1 )
 		{
-			Build( vertices[startIndex], vertices[i], vertices[i + 1], outPrimitives );
+			Build( vertices[startIndex], vertices[i], vertices[i + 1], outRasterizers );
 		}
 	}
 
-	void TriangleGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, IPrimitiveList& outPrimitives )
+	void TriangleGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, IRasterizerList& outRasterizers )
 	{
 		if ( CheckClipped( a.clip, b.clip, c.clip ) == false )
 		{
 			return;
 		}
 
-		outPrimitives.push_back( std::make_unique<Triangle>( a, b, c ) );
+		outRasterizers.emplace_back( std::make_unique<Triangle>( a, b, c ) );
 	}
 
 	bool TriangleGenerator::CheckClipped( const Vector3& v0, const Vector3& v1, const Vector3& v2 )

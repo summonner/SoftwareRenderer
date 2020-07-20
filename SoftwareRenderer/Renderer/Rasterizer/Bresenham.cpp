@@ -9,9 +9,9 @@ namespace Renderer
 		, b( b )
 		, diff( b.screen - a.screen )
 		, sign( diff.x >= 0 ? 1 : -1, diff.y >= 0 ? 1 : -1 )
-		, d( 2 * diff.y - diff.x )
+		, d( 2 * diff.y * sign.y - diff.x * sign.x )
 		, p( a.screen )
-		, CalculateT( diff.x > diff.y ? &Bresenham::CalculateTx : &Bresenham::CalculateTy )
+		, CalculateT( (diff.x * sign.x) > (diff.y * sign.y) ? &Bresenham::CalculateTx : &Bresenham::CalculateTy )
 		, t( 0 )
 	{
 	}

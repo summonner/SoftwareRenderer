@@ -1,11 +1,11 @@
 #include "framework.h"
 #include "GdiRenderer.h"
 #include "FrameBuffer.h"
-#include "Primitives/Point.h"
-#include "PrimitiveGenerators/PrimitiveGenerator.h"
+#include "Rasterizer/IRasterizer.h"
+#include "RasterizerGenerators/RasterizerGenerator.h"
 #include "Math/Vector3.hpp"
 #include "Math/Matrix4x4.h"
-#include "Renderer/RasterizedPixel.h"
+#include "Renderer/Rasterizer/RasterizedPixel.h"
 
 
 namespace Renderer
@@ -14,7 +14,7 @@ namespace Renderer
 		: hWnd( hWnd )
 		, width( width )
 		, height( height )
-		, generator( std::make_unique<PrimitiveGenerator>() )
+		, generator( std::make_unique<RasterizerGenerator>() )
 	{
 		auto dc = GetDC( hWnd );
 		backBuffer = std::make_unique<FrameBuffer>( dc, width, height );
@@ -28,7 +28,7 @@ namespace Renderer
 	void GdiRenderer::Clear()
 	{
 		backBuffer->Clear();
-		primitives.clear();
+		rasterizers.clear();
 		vertices.clear();
 	}
 
@@ -44,11 +44,11 @@ namespace Renderer
 			vertex.Process( projection, viewport );
 		}
 
-		generator->Generate( vertices, primitives );
+		generator->Generate( vertices, rasterizers );
 
-		for ( const auto& primitive : primitives )
+		for ( const auto& rasterizer : rasterizers )
 		{
-			for ( const auto& p : primitive->pixels )
+			for ( const auto& p : rasterizer->pixels )
 			{
 				backBuffer->SetPixel( p.coordinate, p.color );
 			}

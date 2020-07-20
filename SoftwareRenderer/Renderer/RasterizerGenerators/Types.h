@@ -2,9 +2,9 @@
 
 namespace Renderer
 {
-	class IPrimitive;
+	class IRasterizer;
 	class Vertex;
 
-	using IPrimitiveList = std::vector<std::unique_ptr<IPrimitive>>;
+	using IRasterizerList = std::vector<std::unique_ptr<IRasterizer>>;
 	using VertexBuffer = const std::vector<Vertex>&;
 }

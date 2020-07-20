@@ -4,18 +4,18 @@
 
 namespace Renderer
 {
-	class PrimitiveGenerator final
+	class RasterizerGenerator final
 	{
 	public:
-		PrimitiveGenerator();
-		~PrimitiveGenerator();
+		RasterizerGenerator();
+		~RasterizerGenerator();
 
 		void Begin( IRenderer::DrawMode mode, int startIndex );
 		void End( int endIndex );
-		void Generate( const VertexBuffer& vertices, IPrimitiveList& primitives );
+		void Generate( const VertexBuffer& vertices, IRasterizerList& primitives );
 
 	private:
-		using GeneratorFunction = std::function<void( const std::vector<Vertex>&, int, int, IPrimitiveList& )>;
+		using GeneratorFunction = std::function<void( const std::vector<Vertex>&, int, int, IRasterizerList& )>;
 		static std::map<IRenderer::DrawMode, const GeneratorFunction> table;
 		static const GeneratorFunction FindGenerator( IRenderer::DrawMode mode );
 
@@ -25,7 +25,7 @@ namespace Renderer
 			int start;
 			int end;
 
-			void Generate( const VertexBuffer& vertices, IPrimitiveList& primitives );
+			void Generate( const VertexBuffer& vertices, IRasterizerList& primitives );
 		};
 
 		Generator temp;

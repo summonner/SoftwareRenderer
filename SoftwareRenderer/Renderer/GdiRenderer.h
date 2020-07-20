@@ -6,8 +6,8 @@
 namespace Renderer
 {
 	class FrameBuffer;
-	class IPrimitive;
-	class PrimitiveGenerator;
+	class IRasterizer;
+	class RasterizerGenerator;
 
 	class GdiRenderer final : public IRenderer
 	{
@@ -41,7 +41,7 @@ namespace Renderer
 		const int height;
 
 		std::unique_ptr<FrameBuffer> backBuffer;
-		std::vector<std::unique_ptr<IPrimitive>> primitives;
+		std::vector<std::unique_ptr<IRasterizer>> rasterizers;
 		std::vector<Vertex> vertices;
 
 		Vertex temp;
@@ -49,7 +49,7 @@ namespace Renderer
 		Matrix4x4 projection;
 		Matrix4x4 viewport;
 
-		const std::unique_ptr<PrimitiveGenerator> generator;
+		const std::unique_ptr<RasterizerGenerator> generator;
 	};
 
 }
