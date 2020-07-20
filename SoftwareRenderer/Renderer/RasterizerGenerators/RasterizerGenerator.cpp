@@ -3,6 +3,7 @@
 #include "PointGenerator.h"
 #include "LineGenerator.h"
 #include "TriangleGenerator.h"
+#include "QuadGenerator.h"
 
 namespace Renderer
 {
@@ -16,6 +17,7 @@ namespace Renderer
 		{ IRenderer::DrawMode::Triangles,	TriangleGenerator::Triangles },
 		{ IRenderer::DrawMode::TriangleStrip, TriangleGenerator::TriangleStrip },
 		{ IRenderer::DrawMode::TriangleFan, TriangleGenerator::TriangleFan },
+		{ IRenderer::DrawMode::Quads,		QuadGenerator::Quads },
 	};
 
 	RasterizerGenerator::RasterizerGenerator()

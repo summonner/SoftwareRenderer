@@ -20,6 +20,11 @@ WINGDIAPI void APIENTRY glTranslatef( GLfloat x, GLfloat y, GLfloat z )
 	renderer->Translate( x, y, z );
 }
 
+WINGDIAPI void APIENTRY glRotatef( GLfloat angle, GLfloat x, GLfloat y, GLfloat z )
+{
+	renderer->Rotate( angle, x, y, z );
+}
+
 IRenderer::DrawMode Convert( GLenum mode )
 {
 	switch ( mode )
@@ -33,7 +38,7 @@ IRenderer::DrawMode Convert( GLenum mode )
 	case GL_TRIANGLES:
 		return IRenderer::DrawMode::Triangles;
 	case GL_QUADS:
-		return IRenderer::DrawMode::TriangleFan;
+		return IRenderer::DrawMode::Quads;
 	case GL_POINTS:
 	default:
 		return IRenderer::DrawMode::Points;

@@ -1,6 +1,5 @@
 #include "framework.h"
 #include "PointGenerator.h"
-#include "Math/Vector4.hpp"
 #include "Renderer/Rasterizer/Point.h"
 #include "Renderer/Vertex.h"
 

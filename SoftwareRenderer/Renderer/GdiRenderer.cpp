@@ -88,17 +88,17 @@ namespace Renderer
 
 	void GdiRenderer::Translate( float x, float y, float z )
 	{
-		transform = Matrix4x4::Translate( Vector3( x, y, z ) ) * transform;
+		transform = transform * Matrix4x4::Translate( Vector3( x, y, z ) );
 	}
 
 	void GdiRenderer::Rotate( Degree angle, float x, float y, float z )
 	{
-		transform = Matrix4x4::Rotate( angle * PI / 180, Vector3( x, y, z ) ) * transform;
+		transform = transform * Matrix4x4::Rotate( angle * PI / 180, Vector3( x, y, z ) );
 	}
 
 	void GdiRenderer::Scale( float x, float y, float z )
 	{
-		transform = Matrix4x4::Scale( Vector3( x, y, z ) ) * transform;
+		transform = transform * Matrix4x4::Scale( Vector3( x, y, z ) );
 	}
 
 	void GdiRenderer::Viewport( float left, float bottom, float width, float height )

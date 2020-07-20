@@ -141,6 +141,9 @@
     <ClInclude Include="Renderer\RasterizerGenerators\PointGenerator.h">
       <Filter>Renderer\RasterizerGenerators</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\RasterizerGenerators\QuadGenerator.h">
+      <Filter>Renderer\RasterizerGenerators</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -189,9 +192,6 @@
     <ClCompile Include="Scene\SceneFactory.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\NeHeSamples\Lesson3.cpp">
-      <Filter>Scene\NeHeSamples</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp">
       <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
@@ -226,6 +226,12 @@
       <Filter>Renderer\RasterizerGenerators</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\RasterizerGenerators\RasterizerGenerator.cpp">
+      <Filter>Renderer\RasterizerGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson5.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RasterizerGenerators\QuadGenerator.cpp">
       <Filter>Renderer\RasterizerGenerators</Filter>
     </ClCompile>
   </ItemGroup>

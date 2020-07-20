@@ -14,6 +14,7 @@ public:
 		Triangles,
 		TriangleStrip,
 		TriangleFan,
+		Quads,
 	};
 
 	using Degree = float;

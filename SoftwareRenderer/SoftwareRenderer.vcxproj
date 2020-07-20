@@ -170,6 +170,7 @@
     <ClInclude Include="Renderer\PixelIterator.h" />
     <ClInclude Include="Renderer\RasterizerGenerators\LineGenerator.h" />
     <ClInclude Include="Renderer\RasterizerGenerators\PointGenerator.h" />
+    <ClInclude Include="Renderer\RasterizerGenerators\QuadGenerator.h" />
     <ClInclude Include="Renderer\RasterizerGenerators\RasterizerGenerator.h" />
     <ClInclude Include="Renderer\RasterizerGenerators\TriangleGenerator.h" />
     <ClInclude Include="Renderer\RasterizerGenerators\Types.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="Renderer\PixelIterator.cpp" />
     <ClCompile Include="Renderer\RasterizerGenerators\LineGenerator.cpp" />
     <ClCompile Include="Renderer\RasterizerGenerators\PointGenerator.cpp" />
+    <ClCompile Include="Renderer\RasterizerGenerators\QuadGenerator.cpp" />
     <ClCompile Include="Renderer\RasterizerGenerators\RasterizerGenerator.cpp" />
     <ClCompile Include="Renderer\RasterizerGenerators\TriangleGenerator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp" />
@@ -215,7 +217,7 @@
     <ClCompile Include="Renderer\Rasterizer\Triangle.cpp" />
     <ClCompile Include="Renderer\Vertex.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Adapter.cpp" />
-    <ClCompile Include="Scene\NeHeSamples\Lesson3.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson5.cpp" />
     <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp" />
     <ClCompile Include="Scene\SampleScene.cpp" />
     <ClCompile Include="Scene\SceneFactory.cpp" />
