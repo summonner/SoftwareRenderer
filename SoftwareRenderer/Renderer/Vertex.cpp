@@ -21,6 +21,6 @@ namespace Renderer
 
 		auto p = viewport * ndc;
 		screen = Vector2( p.x, p.y );
-		depth = p.z;
+		depth = -clip.z + 1.f;
 	}
 }

@@ -164,6 +164,7 @@
     <ClInclude Include="Math\Vector2.hpp" />
     <ClInclude Include="Math\Vector3.hpp" />
     <ClInclude Include="Math\Vector4.hpp" />
+    <ClInclude Include="Renderer\DepthBuffer.h" />
     <ClInclude Include="Renderer\FrameBuffer.h" />
     <ClInclude Include="Renderer\GdiRenderer.h" />
     <ClInclude Include="Renderer\IRenderer.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="Math\Matrix4x4.cpp" />
     <ClCompile Include="Math\RangeInt.cpp" />
     <ClCompile Include="Math\RangeIterator.cpp" />
+    <ClCompile Include="Renderer\DepthBuffer.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />
     <ClCompile Include="Renderer\GdiRenderer.cpp" />
     <ClCompile Include="Renderer\PixelIterator.cpp" />

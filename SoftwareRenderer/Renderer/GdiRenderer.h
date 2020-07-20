@@ -6,6 +6,7 @@
 namespace Renderer
 {
 	class FrameBuffer;
+	class DepthBuffer;
 	class IRasterizer;
 	class RasterizerGenerator;
 
@@ -32,7 +33,7 @@ namespace Renderer
 
 		void Viewport( float left, float bottom, float width, float height ) override;
 		void Frustum( float left, float right, float top, float bottom, float near, float far ) override;
-		void Perspective( float fovY, float aspect, float near, float far ) override;
+		void Perspective( Degree fovY, float aspect, float near, float far ) override;
 		void Ortho( float left, float right, float top, float bottom, float near, float far ) override;
 
 	private:
@@ -41,6 +42,7 @@ namespace Renderer
 		const int height;
 
 		std::unique_ptr<FrameBuffer> backBuffer;
+		std::unique_ptr<DepthBuffer> depthBuffer;
 		std::vector<std::unique_ptr<IRasterizer>> rasterizers;
 		std::vector<Vertex> vertices;
 

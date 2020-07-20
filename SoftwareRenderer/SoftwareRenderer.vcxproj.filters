@@ -144,6 +144,9 @@
     <ClInclude Include="Renderer\RasterizerGenerators\QuadGenerator.h">
       <Filter>Renderer\RasterizerGenerators</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\DepthBuffer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -233,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\RasterizerGenerators\QuadGenerator.cpp">
       <Filter>Renderer\RasterizerGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\DepthBuffer.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

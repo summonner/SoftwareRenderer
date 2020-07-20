@@ -1,11 +1,12 @@
 #include "framework.h"
 #include "GdiRenderer.h"
 #include "FrameBuffer.h"
+#include "DepthBuffer.h"
 #include "Rasterizer/IRasterizer.h"
+#include "Rasterizer/RasterizedPixel.h"
 #include "RasterizerGenerators/RasterizerGenerator.h"
 #include "Math/Vector3.hpp"
 #include "Math/Matrix4x4.h"
-#include "Renderer/Rasterizer/RasterizedPixel.h"
 
 
 namespace Renderer
@@ -15,6 +16,7 @@ namespace Renderer
 		, width( width )
 		, height( height )
 		, generator( std::make_unique<RasterizerGenerator>() )
+		, depthBuffer( std::make_unique<DepthBuffer>( width, height ) )
 	{
 		auto dc = GetDC( hWnd );
 		backBuffer = std::make_unique<FrameBuffer>( dc, width, height );
@@ -28,6 +30,7 @@ namespace Renderer
 	void GdiRenderer::Clear()
 	{
 		backBuffer->Clear();
+		depthBuffer->Clear();
 		rasterizers.clear();
 		vertices.clear();
 	}
@@ -50,6 +53,18 @@ namespace Renderer
 		{
 			for ( const auto& p : rasterizer->pixels )
 			{
+				auto isVisible = p.coordinate.x >= 0 && p.coordinate.x < width
+							  && p.coordinate.y >= 0 && p.coordinate.y < height;
+				if ( isVisible == false )
+				{
+					continue;
+				}
+
+				if ( depthBuffer->Test( p.coordinate, p.depth ) == false )
+				{
+					continue;
+				}
+
 				backBuffer->SetPixel( p.coordinate, p.color );
 			}
 		}
@@ -118,7 +133,7 @@ namespace Renderer
 		projection = Matrix4x4(
 			2 * n / (r - l), 0, (r + l) / (r - l), 0,
 			0, 2 * n / (t - b), (t + b) / (t - b), 0,
-			0, 0, -(f + n) / (f - n), -2 * f * n / (f - n ),
+			0, 0, -(f + n) / (f - n), -2 * f * n / (f - n),
 			0, 0, -1, 0
 		);
 	}
