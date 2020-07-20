@@ -23,6 +23,8 @@
 #include <cmath>
 #include <functional>
 
-#define PI       3.141592f
+#include "Math/MathExt.h"
+//#include "Util/TSingleton.hpp"
 
-#include "Util/TSingleton.hpp"
+#undef max
+#undef min

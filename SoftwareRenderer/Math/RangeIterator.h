@@ -1,10 +1,10 @@
 #pragma once
-#include "IBaseIterator.h"
-#include "Math/RangeInt.h"
-#include <algorithm>
+#include "Util/IBaseIterator.h"
 
+class RangeInt;
 class RangeIterator : public IBaseIterator<RangeIterator, int>
 {
+public:
 	RangeIterator( const RangeInt& range, int current );
 
 	bool operator !=( const RangeIterator& other ) const;

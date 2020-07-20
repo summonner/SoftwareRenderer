@@ -17,10 +17,10 @@ namespace Renderer
 	{
 		auto ndc = projection * position;
 		ndc = ndc / ndc.w;
-		clipCoordinate = ndc;
+		clip = ndc;
 
-		auto screen = viewport * ndc;
-		screenCoordinate = Vector2( screen.x, screen.y );
-		depth = (int)(screen.z * INT_MAX);
+		auto p = viewport * ndc;
+		screen = Vector2( p.x, p.y );
+		depth = (int)(p.z * INT_MAX);
 	}
 }

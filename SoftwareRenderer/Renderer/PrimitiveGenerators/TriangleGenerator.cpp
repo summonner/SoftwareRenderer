@@ -47,7 +47,7 @@ namespace Renderer
 
 	void TriangleGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, IPrimitiveList& outPrimitives )
 	{
-		if ( CheckClipped( a.clipCoordinate, b.clipCoordinate, c.clipCoordinate ) == false )
+		if ( CheckClipped( a.clip, b.clip, c.clip ) == false )
 		{
 			return;
 		}

@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "RangeIterator.h"
-
+#include "RangeInt.h"
 
 RangeIterator::RangeIterator( const RangeInt& range, int current )
 	: range( range )

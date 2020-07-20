@@ -66,9 +66,6 @@
     <ClInclude Include="Math\RangeInt.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Util\RangeIterator.h">
-      <Filter>Util</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Primitives\Point.h">
       <Filter>Renderer\Primitives</Filter>
     </ClInclude>
@@ -138,6 +135,12 @@
     <ClInclude Include="Renderer\Primitives\Bresenham.h">
       <Filter>Renderer\Primitives</Filter>
     </ClInclude>
+    <ClInclude Include="Math\RangeIterator.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\MathExt.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -167,9 +170,6 @@
     </ClCompile>
     <ClCompile Include="Renderer\FrameBuffer.cpp">
       <Filter>Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\RangeIterator.cpp">
-      <Filter>Util</Filter>
     </ClCompile>
     <ClCompile Include="Math\RangeInt.cpp">
       <Filter>Math</Filter>
@@ -224,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\Primitives\Bresenham.cpp">
       <Filter>Renderer\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\RangeIterator.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

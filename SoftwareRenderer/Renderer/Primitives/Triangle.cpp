@@ -2,10 +2,12 @@
 #include "Triangle.h"
 #include "Renderer/Vertex.h"
 #include "Renderer/RasterizedPixel.h"
+#include "Math/RangeInt.h"
 #include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
 #include "Bresenham.h"
 
+// ref : http://www.sunshine2k.de/coding/java/TriangleRasterization/TriangleRasterization.html
 namespace Renderer
 {
 	Triangle::Triangle( const Vertex& a, const Vertex& b, const Vertex& c )
@@ -15,21 +17,70 @@ namespace Renderer
 	{
 		auto sorted = Sort( a, b, c );
 
-		auto ab = Bresenham( sorted[0]->screenCoordinate, sorted[1]->screenCoordinate );
-		auto ac = Bresenham( sorted[0]->screenCoordinate, sorted[2]->screenCoordinate );
-		auto bc = Bresenham( sorted[1]->screenCoordinate, sorted[2]->screenCoordinate );
+		auto e01 = Bresenham( sorted[0], sorted[1] );
+		auto e02 = Bresenham( sorted[0], sorted[2] );
+		auto e12 = Bresenham( sorted[1], sorted[2] );
+		auto range = RangeInt( std::max( sorted[0]->screen.y, 0 ), sorted[2]->screen.y );
 
-		do {
-			pixels.push_back( RasterizedPixel( ab.p, Vector4::Lerp( sorted[0]->color, sorted[1]->color, ab.t), 1 ) );
-		} while ( ab.Next() );
+		if ( sorted[0]->screen.y == sorted[1]->screen.y )
+		{
+			Rasterize( range, &e02, &e12, &e02 );
+		}
+		else if ( sorted[1]->screen.y == sorted[2]->screen.y )
+		{
+			Rasterize( range, &e01, &e02, &e01 );
+		}
+		else
+		{
+			Rasterize( range, &e01, &e02, &e12 );
+		}
+	}
 
-		do {
-			pixels.push_back( RasterizedPixel( ac.p, Vector4::Lerp( sorted[0]->color, sorted[2]->color, ac.t ), 1 ) );
-		} while ( ac.Next() );
+	void Triangle::Rasterize( const RangeInt& range, Bresenham* e01, Bresenham* e02, Bresenham* e12 )
+	{
+		auto* e1 = e01;
+		auto* e2 = e02;
 
-		do {
-			pixels.push_back( RasterizedPixel( bc.p, Vector4::Lerp( sorted[1]->color, sorted[2]->color, bc.t ), 1 ) );
-		} while ( bc.Next() );
+		for ( auto y : range )
+		{
+			while ( e1->p.y < y )
+			{
+				pixels.push_back( RasterizedPixel( e1->p, e1->GetColor(), e1->GetDepth() ) );
+				if ( e1->Next() == false )
+				{
+					e1 = e12;
+				}
+			}
+
+			while ( e2->p.y < y )
+			{
+				pixels.push_back( RasterizedPixel( e2->p, e2->GetColor(), e2->GetDepth() ) );
+				e2->Next();
+			}
+
+			auto c1 = e1->GetColor();
+			auto c2 = e2->GetColor();
+			auto d1 = e1->GetDepth();
+			auto d2 = e2->GetDepth();
+			auto minmax = std::minmax( e1->p.x, e2->p.x );
+			for ( auto x = std::max( minmax.first, 0 ); x <= minmax.second; ++x )
+			{
+				auto t = (float)(x - e1->p.x) / (float)(e2->p.x - e1->p.x);
+				pixels.push_back( RasterizedPixel( Vector2Int( x, y ), Vector4::Lerp( c1, c2, t ), ::Lerp( d1, d2, t ) ) );
+			}
+		}
+	}
+
+	bool Compare( const Vertex* l, const Vertex* r )
+	{
+		if ( l->screen.y != r->screen.y )
+		{
+			return l->screen.y < r->screen.y;
+		}
+		else
+		{
+			return l->screen.x < r->screen.x;
+		}
 	}
 
 	std::vector<const Vertex*> Triangle::Sort( const Vertex& a, const Vertex& b, const Vertex& c )
@@ -39,7 +90,7 @@ namespace Renderer
 		sorted[1] = &b;
 		sorted[2] = &c;
 
-		sort( sorted.begin(), sorted.end(), []( const Vertex* l, const Vertex* r ) { return l->screenCoordinate.y < r->screenCoordinate.y; } );
+		sort( sorted.begin(), sorted.end(), Compare );
 		return sorted;
 	}
 
@@ -49,9 +100,9 @@ namespace Renderer
 
 	Vector3 Triangle::Barycentric( const Vector2& p ) const
 	{
-		auto a = this->a.screenCoordinate;
-		auto b = this->b.screenCoordinate;
-		auto c = this->c.screenCoordinate;
+		auto a = this->a.screen;
+		auto b = this->b.screen;
+		auto c = this->c.screen;
 
 		auto ab = b - a;
 		auto ac = c - a;

@@ -17,8 +17,8 @@ namespace Renderer
 	public:
 		Vector4 position;
 		Vector4 color;
-		Vector3 clipCoordinate;
-		Vector2Int screenCoordinate;
+		Vector3 clip;
+		Vector2Int screen;
 		int depth;
 	};
 

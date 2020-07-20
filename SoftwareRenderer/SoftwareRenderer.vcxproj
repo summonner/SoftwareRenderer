@@ -156,8 +156,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Math\MathExt.h" />
     <ClInclude Include="Math\Matrix4x4.h" />
     <ClInclude Include="Math\RangeInt.h" />
+    <ClInclude Include="Math\RangeIterator.h" />
     <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="Math\Vector2.hpp" />
     <ClInclude Include="Math\Vector3.hpp" />
@@ -188,7 +190,6 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Util\IBaseIterator.h" />
-    <ClInclude Include="Util\RangeIterator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">
@@ -199,6 +200,7 @@
     </ClCompile>
     <ClCompile Include="Math\Matrix4x4.cpp" />
     <ClCompile Include="Math\RangeInt.cpp" />
+    <ClCompile Include="Math\RangeIterator.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />
     <ClCompile Include="Renderer\GdiRenderer.cpp" />
     <ClCompile Include="Renderer\PrimitiveGenerators\LineGenerator.cpp" />
@@ -218,7 +220,6 @@
     <ClCompile Include="Scene\SampleScene.cpp" />
     <ClCompile Include="Scene\SceneFactory.cpp" />
     <ClCompile Include="Time.cpp" />
-    <ClCompile Include="Util\RangeIterator.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>

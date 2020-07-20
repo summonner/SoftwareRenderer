@@ -22,8 +22,8 @@ namespace Renderer
 	// http://www.r-5.org/files/books/computers/algo-list/realtime-3d/Christer_Ericson-Real-Time_Collision_Detection-EN.pdf
 	Line::Result Line::RasterizeInternal( const Vector2& c ) const
 	{
-		auto a = this->a.screenCoordinate;
-		auto b = this->b.screenCoordinate;
+		auto a = this->a.screen;
+		auto b = this->b.screen;
 
 		auto ab = b - a;
 		auto ac = c - a;

@@ -18,7 +18,7 @@ namespace Renderer
 
 	bool Point::Contains( const Vector2& coordinate ) const
 	{
-		auto p = v.screenCoordinate;
+		auto p = v.screen;
 		return p.SquaredDistance( coordinate ) <= radius * radius;
 	}
 

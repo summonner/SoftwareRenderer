@@ -1,16 +1,23 @@
 #include "framework.h"
 #include "Bresenham.h"
+#include "Renderer/Vertex.h"
 
 namespace Renderer
 {
-	Bresenham::Bresenham( const Vector2Int& a, const Vector2Int& b )
-		: b( b )
-		, diff( b - a )
+	Bresenham::Bresenham( const Vertex& a, const Vertex& b )
+		: a( a )
+		, b( b )
+		, diff( b.screen - a.screen )
 		, sign( diff.x >= 0 ? 1 : -1, diff.y >= 0 ? 1 : -1 )
 		, d( 2 * diff.y - diff.x )
-		, p( a )
+		, p( a.screen )
 		, CalculateT( diff.x > diff.y ? &Bresenham::CalculateTx : &Bresenham::CalculateTy )
-		, t( 1 )
+		, t( 0 )
+	{
+	}
+
+	Bresenham::Bresenham( const Vertex* a, const Vertex* b )
+		: Bresenham( *a, *b )
 	{
 	}
 
@@ -20,7 +27,7 @@ namespace Renderer
 
 	bool Bresenham::Next()
 	{
-		if ( t <= 0.f )
+		if ( t > 1.f )
 		{
 			return false;
 		}
@@ -43,11 +50,21 @@ namespace Renderer
 
 	float Bresenham::CalculateTx() const
 	{
-		return (b.x - p.x) / (float)diff.x;
+		return (b.screen.x - p.x) / (float)diff.x;
 	}
 
 	float Bresenham::CalculateTy() const
 	{
-		return (b.y - p.y) / (float)diff.y;
+		return (b.screen.y - p.y) / (float)diff.y;
+	}
+
+	Vector4 Bresenham::GetColor() const
+	{
+		return Vector4::Lerp( a.color, b.color, t );
+	}
+
+	float Bresenham::GetDepth() const
+	{
+		return ::Lerp( (float)a.depth, (float)b.depth, t );
 	}
 }
