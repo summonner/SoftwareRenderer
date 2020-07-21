@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Math\Bounds.h" />
     <ClInclude Include="Math\MathExt.h" />
     <ClInclude Include="Math\Matrix4x4.h" />
     <ClInclude Include="Math\RangeInt.h" />
@@ -200,6 +201,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Math\Bounds.cpp" />
     <ClCompile Include="Math\Matrix4x4.cpp" />
     <ClCompile Include="Math\RangeInt.cpp" />
     <ClCompile Include="Math\RangeIterator.cpp" />

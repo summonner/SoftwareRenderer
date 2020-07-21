@@ -6,15 +6,13 @@
 #include "Rasterizer/RasterizedPixel.h"
 #include "RasterizerGenerators/RasterizerGenerator.h"
 #include "Math/Vector3.hpp"
-#include "Math/Matrix4x4.h"
 
 
 namespace Renderer
 {
 	GdiRenderer::GdiRenderer( const HWND hWnd, const int width, const int height )
 		: hWnd( hWnd )
-		, width( width )
-		, height( height )
+		, bounds( width, height )
 		, generator( std::make_unique<RasterizerGenerator>() )
 		, depthBuffer( std::make_unique<DepthBuffer>( width, height ) )
 	{
@@ -51,22 +49,15 @@ namespace Renderer
 
 		for ( const auto& rasterizer : rasterizers )
 		{
-			for ( const auto& p : rasterizer->pixels )
+			rasterizer->Rasterize( bounds, [this]( const RasterizedPixel& p )
 			{
-				auto isVisible = p.coordinate.x >= 0 && p.coordinate.x < width
-							  && p.coordinate.y >= 0 && p.coordinate.y < height;
-				if ( isVisible == false )
-				{
-					continue;
-				}
-
 				if ( depthBuffer->Test( p.coordinate, p.depth ) == false )
 				{
-					continue;
+					return;
 				}
 
 				backBuffer->SetPixel( p.coordinate, p.color );
-			}
+			} );
 		}
 
 		backBuffer->BitBlt( dc );

@@ -1,22 +1,32 @@
 #include "framework.h"
 #include "Line.h"
-#include "Renderer/Vertex.h"
-#include "Math/Vector4.hpp"
-#include "Math/Vector2.hpp"
+#include "Math/Bounds.h"
 #include "Bresenham.h"
 #include "RasterizedPixel.h"
 
 namespace Renderer
 {
 	Line::Line( const Vertex& a, const Vertex& b )
+		: a( a )
+		, b( b )
 	{
-		auto e = Bresenham( a, b );
-		do {
-			pixels.push_back( RasterizedPixel( e.p, e.GetColor(), e.GetDepth() ) );
-		} while ( e.Next() );
+
 	}
 
 	Line::~Line()
 	{
+	}
+
+	void Line::Rasterize( const Bounds& bounds, ProcessPixel process ) const
+	{
+		auto e = Bresenham( a, b );
+		do {
+			if ( bounds.Contains( e.p ) == false )
+			{
+				continue;
+			}
+
+			process( RasterizedPixel( e.p, e.GetColor(), e.GetDepth() ) );
+		} while ( e.Next() );
 	}
 }

@@ -120,9 +120,6 @@
     <ClInclude Include="Renderer\Rasterizer\Bresenham.h">
       <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\IRasterizer.h">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Rasterizer\RasterizedPixel.h">
       <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
@@ -146,6 +143,12 @@
     </ClInclude>
     <ClInclude Include="Renderer\DepthBuffer.h">
       <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Bounds.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\IRasterizer.h">
+      <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +242,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\DepthBuffer.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Bounds.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

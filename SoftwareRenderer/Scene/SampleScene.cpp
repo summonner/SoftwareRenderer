@@ -41,12 +41,12 @@ void SampleScene::Render( std::shared_ptr<IRenderer> renderer ) const
 	renderer->Begin( IRenderer::DrawMode::TriangleFan );
 	renderer->SetColor( 1.0f, 0.5f, 0.5f );
 	renderer->AddVertex( -1.0f, 1.0f, 0.0f );
-	renderer->SetColor( 0.5f, 1.0f, 0.5f );
-	renderer->AddVertex( 1.0f, 1.0f, 0.0f );
-	renderer->SetColor( 0.5f, 0.5f, 1.0f );
-	renderer->AddVertex( 1.0f, -1.0f, 0.0f ); 
 	renderer->SetColor( 0.5f, 0.5f, 0.5f );
 	renderer->AddVertex( -1.0f, -1.0f, 0.0f );
+	renderer->SetColor( 0.5f, 0.5f, 1.0f );
+	renderer->AddVertex( 1.0f, -1.0f, 0.0f ); 
+	renderer->SetColor( 0.5f, 1.0f, 0.5f );
+	renderer->AddVertex( 1.0f, 1.0f, 0.0f );
 	renderer->End();
 
 	renderer->Present();

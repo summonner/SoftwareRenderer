@@ -1,15 +1,15 @@
 #pragma once
-#include "Math/Vector.h"
-#include "RasterizedPixel.h"
 
+class Bounds;
 namespace Renderer
 {
+	class RasterizedPixel;
 	class IRasterizer abstract
 	{
 	public:
 		virtual ~IRasterizer() {}
 
-	public:
-		std::vector<RasterizedPixel> pixels;
+		using ProcessPixel = std::function<void( const RasterizedPixel& )>;
+		virtual void Rasterize( const Bounds& bounds, ProcessPixel process ) const abstract;
 	};
 }

@@ -2,6 +2,7 @@
 #include "IRenderer.h"
 #include "Vertex.h"
 #include "Math/Matrix4x4.h"
+#include "Math/Bounds.h"
 
 namespace Renderer
 {
@@ -38,8 +39,7 @@ namespace Renderer
 
 	private:
 		const HWND hWnd;
-		const int width;
-		const int height;
+		const Bounds bounds;
 
 		std::unique_ptr<FrameBuffer> backBuffer;
 		std::unique_ptr<DepthBuffer> depthBuffer;

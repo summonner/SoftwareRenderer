@@ -3,6 +3,7 @@
 #include "Math/Vector2.hpp"
 
 class RangeInt;
+class Bounds;
 namespace Renderer
 {
 	class Bresenham;
@@ -13,8 +14,15 @@ namespace Renderer
 		Triangle( const Vertex& a, const Vertex& b, const Vertex& c );
 		~Triangle() override;
 
+		void Rasterize( const Bounds& bounds, ProcessPixel process ) const;
+
 	private:
 		static std::vector<const Vertex*> Sort( const Vertex& a, const Vertex& b, const Vertex& c );
-		void Rasterize( const RangeInt&, Bresenham* e01, Bresenham* e02, Bresenham* e12 );
+		static void Rasterize( const Bounds& bounds, Bresenham* e01, Bresenham* e02, Bresenham* e12, ProcessPixel process );
+
+	private:
+		const Vertex& a;
+		const Vertex& b;
+		const Vertex& c;
 	};
 }

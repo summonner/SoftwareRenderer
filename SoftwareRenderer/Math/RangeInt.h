@@ -6,9 +6,25 @@ class RangeInt final
 public:
 	RangeInt( int min, int max );
 
-	int Clamp( int value ) const
+	inline int Clamp( int value ) const
 	{
 		return std::clamp( value, min, max );
+	}
+
+	inline RangeInt Clamp( const RangeInt& subject ) const
+	{
+		return Clamp( subject.min, subject.max );
+	}
+
+	inline RangeInt Clamp( int subjectMin, int subjectMax ) const
+	{
+		return RangeInt( Clamp( subjectMin ), Clamp( subjectMax ) );
+	}
+
+	inline bool Contains( int p ) const
+	{
+		return p >= min
+			&& p <= max;
 	}
 
 	inline RangeIterator begin() const

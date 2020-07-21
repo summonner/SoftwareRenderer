@@ -4,6 +4,7 @@
 #include "Math/RangeInt.h"
 #include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
+#include "Math/Bounds.h"
 #include "Bresenham.h"
 #include "RasterizedPixel.h"
 
@@ -11,42 +12,54 @@
 namespace Renderer
 {
 	Triangle::Triangle( const Vertex& a, const Vertex& b, const Vertex& c )
+		: a( a )
+		, b( b )
+		, c( c )
 	{
-		auto sorted = Sort( a, b, c );
-
-		auto e01 = Bresenham( sorted[0], sorted[1] );
-		auto e02 = Bresenham( sorted[0], sorted[2] );
-		auto e12 = Bresenham( sorted[1], sorted[2] );
-		auto range = RangeInt( std::max( sorted[0]->screen.y, 0 ), sorted[2]->screen.y );
-
-		if ( sorted[0]->screen.y == sorted[1]->screen.y )
-		{
-			Rasterize( range, &e02, &e12, &e02 );
-		}
-		else if ( sorted[1]->screen.y == sorted[2]->screen.y )
-		{
-			Rasterize( range, &e01, &e02, &e01 );
-		}
-		else
-		{
-			Rasterize( range, &e01, &e02, &e12 );
-		}
 	}
 
 	Triangle::~Triangle()
 	{
 	}
 
-	void Triangle::Rasterize( const RangeInt& range, Bresenham* e01, Bresenham* e02, Bresenham* e12 )
+	void Triangle::Rasterize( const Bounds& bounds, ProcessPixel process ) const
+	{
+		auto sorted = Sort( a, b, c );
+
+		auto e01 = Bresenham( sorted[0], sorted[1] );
+		auto e02 = Bresenham( sorted[0], sorted[2] );
+		auto e12 = Bresenham( sorted[1], sorted[2] );
+		auto range = bounds.y.Clamp( sorted[0]->screen.y, sorted[2]->screen.y );
+		Bounds adjust( bounds.x, range );
+
+		if ( sorted[0]->screen.y == sorted[1]->screen.y )
+		{
+			Rasterize( adjust, &e02, &e12, &e02, process );
+		}
+		else if ( sorted[1]->screen.y == sorted[2]->screen.y )
+		{
+			Rasterize( adjust, &e01, &e02, &e01, process );
+		}
+		else
+		{
+			Rasterize( adjust, &e01, &e02, &e12, process );
+		}
+	}
+
+	void Triangle::Rasterize( const Bounds& bounds, Bresenham* e01, Bresenham* e02, Bresenham* e12, ProcessPixel process )
 	{
 		auto* e1 = e01;
 		auto* e2 = e02;
 
-		for ( auto y : range )
+		for ( auto y : bounds.y )
 		{
 			while ( e1->p.y < y )
 			{
-				pixels.push_back( RasterizedPixel( e1->p, e1->GetColor(), e1->GetDepth() ) );
+				if ( bounds.Contains( e1->p ) == true )
+				{
+					process( RasterizedPixel( e1->p, e1->GetColor(), e1->GetDepth() ) );
+				}
+
 				if ( e1->Next() == false )
 				{
 					e1 = e12;
@@ -55,7 +68,10 @@ namespace Renderer
 
 			while ( e2->p.y < y )
 			{
-				pixels.push_back( RasterizedPixel( e2->p, e2->GetColor(), e2->GetDepth() ) );
+				if ( bounds.Contains( e2->p ) == true )
+				{
+					process( RasterizedPixel( e2->p, e2->GetColor(), e2->GetDepth() ) );
+				}
 				e2->Next();
 			}
 
@@ -64,10 +80,11 @@ namespace Renderer
 			auto d1 = e1->GetDepth();
 			auto d2 = e2->GetDepth();
 			auto minmax = std::minmax( e1->p.x, e2->p.x );
-			for ( auto x = std::max( minmax.first, 0 ); x <= minmax.second; ++x )
+			float length = (float)(e2->p.x - e1->p.x);
+			for ( auto x : bounds.x.Clamp( minmax.first, minmax.second ) )
 			{
-				auto t = (float)(x - e1->p.x) / (float)(e2->p.x - e1->p.x);
-				pixels.push_back( RasterizedPixel( Vector2Int( x, y ), Vector4::Lerp( c1, c2, t ), ::Lerp( d1, d2, t ) ) );
+				auto t = (float)(x - e1->p.x) / length;
+				process( RasterizedPixel( Vector2Int( x, y ), Vector4::Lerp( c1, c2, t ), ::Lerp( d1, d2, t ) ) );
 			}
 		}
 	}

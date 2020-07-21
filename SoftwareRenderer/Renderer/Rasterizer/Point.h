@@ -1,6 +1,7 @@
 #pragma once
 #include "IRasterizer.h"
 
+class Bounds;
 namespace Renderer
 {
 	class Vertex;
@@ -9,5 +10,10 @@ namespace Renderer
 	public:
 		Point( const Vertex& v );
 		~Point() override;
+
+		void Rasterize( const Bounds& bounds, ProcessPixel process ) const;
+
+	private:
+		const Vertex& v;
 	};
 }
