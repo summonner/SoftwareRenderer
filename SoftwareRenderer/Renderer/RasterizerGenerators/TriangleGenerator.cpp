@@ -16,7 +16,7 @@ namespace Renderer
 		auto lastIndex = endIndex - 2;
 		for ( auto i = startIndex; i < lastIndex; i += 3 )
 		{
-			outRasterizers.push_back( std::make_unique<Triangle>( vertices[i], vertices[i + 1], vertices[i + 2] ) );
+			Build( vertices[i], vertices[i + 1], vertices[i + 2], outRasterizers );
 		}
 	}
 
@@ -47,7 +47,7 @@ namespace Renderer
 
 	void TriangleGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, IRasterizerList& outRasterizers )
 	{
-		if ( CheckClipped( a.clip, b.clip, c.clip ) == false )
+		if ( CheckFacet( a.screen, b.screen, c.screen ) == false )
 		{
 			return;
 		}
@@ -55,7 +55,14 @@ namespace Renderer
 		outRasterizers.emplace_back( std::make_unique<Triangle>( a, b, c ) );
 	}
 
-	bool TriangleGenerator::CheckClipped( const Vector3& v0, const Vector3& v1, const Vector3& v2 )
+	bool TriangleGenerator::CheckFacet( const Vector2Int& a, const Vector2Int& b, const Vector2Int& c )
+	{
+		auto ab = b - a;
+		auto ac = c - a;
+		return ab.Area( ac ) > 0.f;
+	}
+
+	bool CheckClipped( const Vector3& v0, const Vector3& v1, const Vector3& v2 )
 	{
 		auto f0 = v1 - v0;
 		auto f1 = v2 - v1;
