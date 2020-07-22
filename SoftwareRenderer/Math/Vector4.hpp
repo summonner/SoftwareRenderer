@@ -61,6 +61,45 @@ public:
 		return (*this) * (1.f / scalar);
 	}
 
+	inline void operator +=( const TVector4& other )
+	{
+		x += other.x;
+		y += other.y;
+		z += other.z;
+		w += other.w;
+	}
+
+	inline void operator -=( const TVector4& other )
+	{
+		*this += -other;
+	}
+
+	inline void operator *=( const float scalar )
+	{
+		x *= scalar;
+		y *= scalar;
+		z *= scalar;
+		w *= scalar;
+	}
+
+	inline void operator /=( const float scalar )
+	{
+		*this *= 1.f / scalar;
+	}
+
+	inline void operator *=( const TVector4& other )
+	{
+		x *= other.x;
+		y *= other.y;
+		z *= other.z;
+		w *= other.w;
+	}
+
+	inline void operator /=( const TVector4& other )
+	{
+		*this *= 1.f / other;
+	}
+
 	inline float SquaredDistance( const TVector4& other ) const
 	{
 		TVector4 diff = ((*this) - other);

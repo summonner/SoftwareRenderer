@@ -57,7 +57,7 @@ namespace Renderer
 			{
 				if ( bounds.Contains( e1->p ) == true )
 				{
-					process( RasterizedPixel( e1->p, e1->GetColor(), e1->GetDepth() ) );
+					process( RasterizedPixel( e1->p, e1->GetColor(), e1->GetDepth(), e1->GetTexcoord() ) );
 				}
 
 				if ( e1->Next() == false )
@@ -70,7 +70,7 @@ namespace Renderer
 			{
 				if ( bounds.Contains( e2->p ) == true )
 				{
-					process( RasterizedPixel( e2->p, e2->GetColor(), e2->GetDepth() ) );
+					process( RasterizedPixel( e2->p, e2->GetColor(), e2->GetDepth(), e2->GetTexcoord() ) );
 				}
 				e2->Next();
 			}
@@ -79,12 +79,14 @@ namespace Renderer
 			auto c2 = e2->GetColor();
 			auto d1 = e1->GetDepth();
 			auto d2 = e2->GetDepth();
+			auto uv1 = e1->GetTexcoord();
+			auto uv2 = e2->GetTexcoord();
 			auto minmax = std::minmax( e1->p.x, e2->p.x );
 			float length = (float)(e2->p.x - e1->p.x);
 			for ( auto x : bounds.x.Clamp( minmax.first, minmax.second ) )
 			{
 				auto t = (float)(x - e1->p.x) / length;
-				process( RasterizedPixel( Vector2Int( x, y ), Vector4::Lerp( c1, c2, t ), ::Lerp( d1, d2, t ) ) );
+				process( RasterizedPixel( Vector2Int( x, y ), Vector4::Lerp( c1, c2, t ), ::Lerp( d1, d2, t ), Vector2::Lerp( uv1, uv2, t ) ) );
 			}
 		}
 	}

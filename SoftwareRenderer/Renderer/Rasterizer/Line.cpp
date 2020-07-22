@@ -26,7 +26,7 @@ namespace Renderer
 				continue;
 			}
 
-			process( RasterizedPixel( e.p, e.GetColor(), e.GetDepth() ) );
+			process( RasterizedPixel( e.p, e.GetColor(), e.GetDepth(), e.GetTexcoord() ) );
 		} while ( e.Next() );
 	}
 }

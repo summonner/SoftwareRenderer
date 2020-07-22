@@ -22,8 +22,8 @@ namespace Renderer
 		struct Generator
 		{
 			GeneratorFunction generator;
-			int start;
-			int end;
+			int start = 0;
+			int end = 0;
 
 			void Generate( const VertexBuffer& vertices, IRasterizerList& primitives );
 		};

@@ -65,3 +65,11 @@ Vector4 Bitmap::GetPixel( const Vector2Int& p ) const
 					pixels[i] / 255.f,
 					1.f );
 }
+
+Vector4 Bitmap::GetPixel( const Vector2& p ) const
+{
+	Vector2Int coord( width - 1, height - 1 );
+	coord.x *= p.x;
+	coord.y *= p.y;
+	return GetPixel( coord );
+}

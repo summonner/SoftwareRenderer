@@ -6,6 +6,8 @@ namespace Renderer
 {
 	Vertex::Vertex()
 		: color( 1, 1, 1, 1 )
+		, depth( 0 )
+		, texcoord( 0, 0 )
 	{
 	}
 
@@ -15,12 +17,13 @@ namespace Renderer
 
 	void Vertex::Process( const Matrix4x4& projection, const Matrix4x4& viewport )
 	{
-		auto ndc = projection * position;
-		ndc = ndc / ndc.w;
-		clip = ndc;
+		clip = projection * position;
+		auto w = 1.f / clip.w;
+		clip = clip * w;
 
-		auto p = viewport * ndc;
+		auto p = viewport * clip;
 		screen = Vector2( p.x, p.y );
-		depth = -clip.z + 1.f;
+		depth = clip.z;
+		clip.w = w;
 	}
 }

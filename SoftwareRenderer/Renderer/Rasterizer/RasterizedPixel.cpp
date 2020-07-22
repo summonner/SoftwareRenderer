@@ -8,19 +8,16 @@ namespace Renderer
 		: isValid( false )
 		, color( Vector4::zero )
 		, depth( 0.0f )
+		, texcoord( 0.0f, 0.0f )
 	{
 	}
 
-	RasterizedPixel::RasterizedPixel( const Vector4& color, float depth )
-		: RasterizedPixel( Vector2Int::zero, color, depth )
-	{
-	}
-
-	RasterizedPixel::RasterizedPixel( const Vector2Int& coordinate, const Vector4& color, float depth )
+	RasterizedPixel::RasterizedPixel( const Vector2Int& coordinate, const Vector4& color, float depth, const Vector2& texcoord )
 		: isValid( true )
 		, coordinate( coordinate )
 		, color( color )
 		, depth( depth )
+		, texcoord( texcoord )
 	{
 	}
 

@@ -14,6 +14,7 @@ namespace Renderer
 		bool Next();
 		Vector4 GetColor() const;
 		float GetDepth() const;
+		Vector2 GetTexcoord() const;
 
 	private:
 		float CalculateTx() const;

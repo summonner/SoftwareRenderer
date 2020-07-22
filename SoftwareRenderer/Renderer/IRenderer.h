@@ -42,5 +42,6 @@ public:
 	virtual void Ortho( float left, float right, float top, float bottom, float near, float far ) abstract;
 
 	virtual void BindTexture( std::shared_ptr<const Bitmap> bitmap ) abstract;
+	virtual void TexCoord( float u, float v ) abstract;
 };
 

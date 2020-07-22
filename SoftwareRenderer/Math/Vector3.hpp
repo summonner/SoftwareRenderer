@@ -65,6 +65,43 @@ public:
 		return (*this) * (1.f / scalar);
 	}
 
+	inline void operator +=( const TVector3& other )
+	{
+		x += other.x;
+		y += other.y;
+		z += other.z;
+	}
+
+	inline void operator -=( const TVector3& other )
+	{
+		*this += -other;
+	}
+
+
+	inline void operator *=( const float scalar )
+	{
+		x *= scalar;
+		y *= scalar;
+		z *= scalar;
+	}
+
+	inline void operator /=( const float scalar )
+	{
+		*this *= 1.f / scalar;
+	}
+
+	inline void operator *=( const TVector3& other )
+	{
+		x *= other.x;
+		y *= other.y;
+		z *= other.z;
+	}
+
+	inline void operator /=( const TVector3& other )
+	{
+		*this *= 1.f / other;
+	}
+
 	inline float SquaredDistance( const TVector3& other ) const
 	{
 		auto diff = (*this) - other;
@@ -98,6 +135,7 @@ public:
 	}
 
 	static const TVector3<T> zero;
+	static const TVector3<T> one;
 	//inline static const TVector3 left =  TVector3( T( 1), T( 0), T( 0) );
 	//inline static const TVector3 right = TVector3( T(-1), T( 0), T( 0) );
 	//inline static const TVector3 up =	  TVector3( T( 0), T( 1), T( 0) );
@@ -119,3 +157,6 @@ inline TVector3<T> operator *( float scalar, const TVector3<T>& vector )
 
 template<typename T>
 const TVector3<T> TVector3<T>::zero = TVector3<T>( T( 0 ), T( 0 ), T( 0 ) );
+
+template<typename T>
+const TVector3<T> TVector3<T>::one = TVector3<T>( T( 1 ), T( 1 ), T( 1 ) );

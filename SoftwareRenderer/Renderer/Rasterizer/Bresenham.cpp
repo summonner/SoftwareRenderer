@@ -67,4 +67,9 @@ namespace Renderer
 	{
 		return ::Lerp( (float)a.depth, (float)b.depth, t );
 	}
+
+	Vector2 Bresenham::GetTexcoord() const
+	{
+		return Vector2::Lerp( a.texcoord, b.texcoord, t );
+	}
 }

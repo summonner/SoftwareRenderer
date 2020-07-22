@@ -7,8 +7,7 @@ namespace Renderer
 	class RasterizedPixel
 	{
 	public:
-		RasterizedPixel( const Vector4& color, float depth );
-		RasterizedPixel( const Vector2Int& coordinate, const Vector4& color, float depth );
+		RasterizedPixel( const Vector2Int& coordinate, const Vector4& color, float depth, const Vector2& texcoord );
 		~RasterizedPixel();
 
 		const static RasterizedPixel discard;
@@ -20,6 +19,7 @@ namespace Renderer
 		const bool isValid;
 		const Vector4 color;
 		const float depth;
+		const Vector2 texcoord;
 	};
 
 }

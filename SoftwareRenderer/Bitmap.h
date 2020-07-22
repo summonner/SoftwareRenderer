@@ -13,6 +13,7 @@ public:
 	~Bitmap();
 
 	Vector4 GetPixel( const Vector2Int& p ) const;
+	Vector4 GetPixel( const Vector2& uv ) const;
 
 	inline PixelIterator begin() const 
 	{

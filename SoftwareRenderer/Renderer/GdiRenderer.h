@@ -39,6 +39,7 @@ namespace Renderer
 		void Ortho( float left, float right, float top, float bottom, float near, float far ) override;
 
 		void BindTexture( std::shared_ptr<const Bitmap> bitmap ) override;
+		void TexCoord( float u, float v ) override;
 
 	private:
 		const HWND hWnd;

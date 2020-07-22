@@ -57,7 +57,13 @@ namespace Renderer
 					return;
 				}
 
-				backBuffer->SetPixel( p.coordinate, p.color );
+				Vector4 color = p.color;
+				if ( bitmap != nullptr )
+				{
+					color *= bitmap->GetPixel( p.texcoord );
+				}
+
+				backBuffer->SetPixel( p.coordinate, color );
 			} );
 		}
 
@@ -155,5 +161,10 @@ namespace Renderer
 	void GdiRenderer::BindTexture( std::shared_ptr<const Bitmap> bitmap )
 	{
 		this->bitmap = bitmap;
+	}
+
+	void GdiRenderer::TexCoord( float u, float v )
+	{
+		temp.texcoord = Vector2( u, v );
 	}
 }
