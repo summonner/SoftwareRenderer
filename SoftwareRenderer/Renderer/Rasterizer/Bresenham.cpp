@@ -13,6 +13,7 @@ namespace Renderer
 		, p( a.screen )
 		, CalculateT( (diff.x * sign.x) > (diff.y * sign.y) ? &Bresenham::CalculateTx : &Bresenham::CalculateTy )
 		, t( 0 )
+		, w( a.clip.w )
 	{
 	}
 
@@ -45,6 +46,7 @@ namespace Renderer
 		}
 
 		t = 1 - CalculateT( *this );
+		w = ::Lerp( a.clip.w, b.clip.w, t );
 		return t < 1.f;
 	}
 
@@ -60,16 +62,16 @@ namespace Renderer
 
 	Vector4 Bresenham::GetColor() const
 	{
-		return Vector4::Lerp( a.color, b.color, t );
+		return Vector4::Lerp( a.color * a.clip.w, b.color * b.clip.w, t ) / w;
 	}
 
 	float Bresenham::GetDepth() const
 	{
-		return ::Lerp( (float)a.depth, (float)b.depth, t );
+		return ::Lerp( a.depth, b.depth, t );
 	}
 
 	Vector2 Bresenham::GetTexcoord() const
 	{
-		return Vector2::Lerp( a.texcoord, b.texcoord, t );
+		return Vector2::Lerp( a.texcoord * a.clip.w, b.texcoord * b.clip.w, t ) / w;
 	}
 }

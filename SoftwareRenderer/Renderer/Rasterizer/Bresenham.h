@@ -32,5 +32,6 @@ namespace Renderer
 	public:
 		Vector2Int p;
 		float t;
+		float w;
 	};
 }

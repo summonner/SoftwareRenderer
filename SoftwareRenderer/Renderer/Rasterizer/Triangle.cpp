@@ -75,18 +75,20 @@ namespace Renderer
 				e2->Next();
 			}
 
-			auto c1 = e1->GetColor();
-			auto c2 = e2->GetColor();
+			auto c1 = e1->GetColor() * e1->w;
+			auto c2 = e2->GetColor() * e2->w;
 			auto d1 = e1->GetDepth();
 			auto d2 = e2->GetDepth();
-			auto uv1 = e1->GetTexcoord();
-			auto uv2 = e2->GetTexcoord();
+			auto uv1 = e1->GetTexcoord() * e1->w;
+			auto uv2 = e2->GetTexcoord() * e2->w;
+			
 			auto minmax = std::minmax( e1->p.x, e2->p.x );
 			float length = (float)(e2->p.x - e1->p.x);
 			for ( auto x : bounds.x.Clamp( minmax.first, minmax.second ) )
 			{
 				auto t = (float)(x - e1->p.x) / length;
-				process( RasterizedPixel( Vector2Int( x, y ), Vector4::Lerp( c1, c2, t ), ::Lerp( d1, d2, t ), Vector2::Lerp( uv1, uv2, t ) ) );
+				auto w = ::Lerp( e1->w, e2->w, t );
+				process( RasterizedPixel( Vector2Int( x, y ), Vector4::Lerp( c1, c2, t ) / w, ::Lerp( d1, d2, t ), Vector2::Lerp( uv1, uv2, t ) / w ) );
 			}
 		}
 	}

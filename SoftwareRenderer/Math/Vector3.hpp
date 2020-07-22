@@ -87,7 +87,7 @@ public:
 
 	inline void operator /=( const float scalar )
 	{
-		*this *= 1.f / scalar;
+		*this *= (1.f / scalar);
 	}
 
 	inline void operator *=( const TVector3& other )
@@ -99,7 +99,7 @@ public:
 
 	inline void operator /=( const TVector3& other )
 	{
-		*this *= 1.f / other;
+		*this *= (1.f / other);
 	}
 
 	inline float SquaredDistance( const TVector3& other ) const

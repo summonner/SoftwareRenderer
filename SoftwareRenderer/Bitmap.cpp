@@ -69,7 +69,7 @@ Vector4 Bitmap::GetPixel( const Vector2Int& p ) const
 Vector4 Bitmap::GetPixel( const Vector2& p ) const
 {
 	Vector2Int coord( width - 1, height - 1 );
-	coord.x *= p.x;
-	coord.y *= p.y;
+	coord.x = (int)(coord.x * p.x);
+	coord.y = (int)(coord.y * p.y);
 	return GetPixel( coord );
 }

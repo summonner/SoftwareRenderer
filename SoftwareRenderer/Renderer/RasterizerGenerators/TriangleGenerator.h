@@ -1,6 +1,5 @@
 #pragma once
 #include "Types.h"
-#include "Math/Vector.h"
 
 namespace Renderer
 {

@@ -67,6 +67,11 @@ public:
 		return TVector2( x * other.x, y * other.y );
 	}
 
+	inline TVector2 operator /( const float scalar ) const
+	{
+		return *this * (1.f / scalar);
+	}
+
 	inline void operator +=( const TVector2& other )
 	{
 		x += other.x;
