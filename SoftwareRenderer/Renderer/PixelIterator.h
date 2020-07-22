@@ -13,6 +13,16 @@ namespace Renderer
 		const PixelIterator& operator ++() override;
 		Vector2Int operator *() const override;
 
+		inline static PixelIterator begin( int width, int height )
+		{
+			return PixelIterator( width, height, 0, 0 );
+		}
+
+		inline static PixelIterator end( int width, int height )
+		{
+			return PixelIterator( width, height, width - 1, height - 1 );
+		}
+
 	private:
 		Vector2Int current;
 		const int width;

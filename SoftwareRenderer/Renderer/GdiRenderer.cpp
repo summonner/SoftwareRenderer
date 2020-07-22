@@ -6,6 +6,7 @@
 #include "Rasterizer/RasterizedPixel.h"
 #include "RasterizerGenerators/RasterizerGenerator.h"
 #include "Math/Vector3.hpp"
+#include "Bitmap.h"
 
 
 namespace Renderer
@@ -149,5 +150,10 @@ namespace Renderer
 			0, 0, 2 / (f - n), -(f + n) / (f - n),
 			0, 0, 0, 1
 		);
+	}
+
+	void GdiRenderer::BindTexture( std::shared_ptr<const Bitmap> bitmap )
+	{
+		this->bitmap = bitmap;
 	}
 }

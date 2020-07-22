@@ -4,6 +4,7 @@
 #include "Math/Matrix4x4.h"
 #include "Math/Bounds.h"
 
+class Bitmap;
 namespace Renderer
 {
 	class FrameBuffer;
@@ -37,6 +38,8 @@ namespace Renderer
 		void Perspective( Degree fovY, float aspect, float near, float far ) override;
 		void Ortho( float left, float right, float top, float bottom, float near, float far ) override;
 
+		void BindTexture( std::shared_ptr<const Bitmap> bitmap ) override;
+
 	private:
 		const HWND hWnd;
 		const Bounds bounds;
@@ -52,6 +55,8 @@ namespace Renderer
 		Matrix4x4 viewport;
 
 		const std::unique_ptr<RasterizerGenerator> generator;
+
+		std::shared_ptr<const Bitmap> bitmap;
 	};
 
 }

@@ -4,7 +4,9 @@
 #include "Renderer/IRenderer.h"
 
 SampleScene::SampleScene()
+	: checker( Bitmap::Load( _T( "Data/Checker.bmp" ) ) )
 {
+	
 }
 
 
@@ -21,6 +23,7 @@ void SampleScene::Update( const Time& time )
 
 void SampleScene::Render( std::shared_ptr<IRenderer> renderer ) const
 {
+	renderer->BindTexture( checker );
 	renderer->Clear();
 	renderer->LoadIdentity();
 

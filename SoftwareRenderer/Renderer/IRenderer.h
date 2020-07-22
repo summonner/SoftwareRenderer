@@ -2,6 +2,7 @@
 #undef near
 #undef far
 
+class Bitmap;
 class IRenderer abstract
 {
 public:
@@ -39,5 +40,7 @@ public:
 	virtual void Frustum( float left, float right, float top, float bottom, float near, float far ) abstract;
 	virtual void Perspective( Degree fovY, float aspect, float near, float far ) abstract;
 	virtual void Ortho( float left, float right, float top, float bottom, float near, float far ) abstract;
+
+	virtual void BindTexture( std::shared_ptr<const Bitmap> bitmap ) abstract;
 };
 
