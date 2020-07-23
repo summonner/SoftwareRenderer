@@ -102,3 +102,13 @@ WINGDIAPI void APIENTRY glTexParameteri( GLenum target, GLenum pname, GLint para
 {
 	// TODO	
 }
+
+WINGDIAPI void APIENTRY glDeleteTextures( GLsizei n, const GLuint* textures )
+{
+	while ( n > 0 )
+	{
+		textureManager.Delete( *textures );
+		++textures;
+		--n;
+	}
+}

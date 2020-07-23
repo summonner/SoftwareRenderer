@@ -2,26 +2,19 @@
 #include "SampleScene.h"
 #include "gl/glAdapter.h"
 #include "Time.h"
-#include "Renderer/IRenderer.h"
-
-extern std::shared_ptr<IRenderer> _renderer;
 
 void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> texture )
 {
 	_renderer->BindTexture( texture );
 }
 
-SampleScene::SampleScene()
+SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
 	: checker( Bitmap::Load( _T( "Data/Checker.bmp" ) ) )
 {
 }
 
 
 SampleScene::~SampleScene()
-{
-}
-
-void SampleScene::Init( std::shared_ptr<IRenderer> renderer )
 {
 }
 

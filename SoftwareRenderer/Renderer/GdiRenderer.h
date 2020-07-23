@@ -15,6 +15,7 @@ namespace Renderer
 	class GdiRenderer final : public IRenderer
 	{
 	public:
+		static std::unique_ptr<GdiRenderer> Create( const HWND hWnd );
 		GdiRenderer( const HWND hWnd, const int width, const int height );
 		GdiRenderer( const GdiRenderer& source ) = delete;
 		~GdiRenderer() override;

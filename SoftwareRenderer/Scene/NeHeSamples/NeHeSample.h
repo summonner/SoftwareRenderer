@@ -4,10 +4,9 @@
 class NeHeSample : public IScene
 {
 public:
-	NeHeSample();
+	NeHeSample( std::shared_ptr<IRenderer> renderer );
 	~NeHeSample() override;
 
-	void Init( std::shared_ptr<IRenderer> ) override;
 	void Update( const Time& time ) override;
 	void Render( std::shared_ptr<IRenderer> ) const override;
 };

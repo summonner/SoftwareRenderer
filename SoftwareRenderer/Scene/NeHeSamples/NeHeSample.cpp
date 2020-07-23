@@ -1,25 +1,21 @@
 #include "framework.h"
 #include "NeHeSample.h"
-#include "Renderer/IRenderer.h"
-
-extern std::shared_ptr<IRenderer> _renderer;
+#include "../gl/glAdapter.h"
 
 int InitGL();
 int DrawGLScene();
+int CleanGL();
 
-NeHeSample::NeHeSample()
-{
-}
-
-NeHeSample::~NeHeSample()
-{
-}
-
-void NeHeSample::Init( std::shared_ptr<IRenderer> renderer )
+NeHeSample::NeHeSample( std::shared_ptr<IRenderer> renderer )
 {
 	_renderer = renderer;
 	InitGL();
 	_renderer = nullptr;
+}
+
+NeHeSample::~NeHeSample()
+{
+	CleanGL();
 }
 
 void NeHeSample::Update( const Time& time )

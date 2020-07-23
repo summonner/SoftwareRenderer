@@ -5,7 +5,8 @@
 #include "SoftwareRenderer.h"
 #include "Renderer/GdiRenderer.h"
 #include "Time.h"
-#include "Scene/SceneFactory.h"
+#include "Scene/IScene.h"
+#include "SceneMenu.h"
 
 #define MAX_LOADSTRING 100
 #define WIDTH 800
@@ -154,8 +155,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			renderer.reset( new Renderer::GdiRenderer( hWnd, rect.right, rect.bottom ) );
 			renderer->Viewport( 0, 0, (float)rect.right, (float)rect.bottom );
 			renderer->Perspective( 45.f, (float)rect.right / (float)rect.bottom, 0.1f, 100.f );
-			scene = SceneFactory::Create();
-			scene->Init( renderer );
+            scene = SceneMenu::Select( renderer, hWnd, ID_SCENE_DEFAULT );
 			break;
 
 		case WM_COMMAND:
@@ -170,6 +170,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					case IDM_EXIT:
 						DestroyWindow(hWnd);
 						break;
+                    case ID_SCENE_NEHE:
+                    case ID_SCENE_DEFAULT:
+                    {
+                        auto newScene = SceneMenu::Select( renderer, hWnd, wmId );
+                        if ( newScene != nullptr )
+                        {
+                            scene = std::move( newScene );
+                        }
+                    }
+                        break;
 					default:
 						return DefWindowProc(hWnd, message, wParam, lParam);
 				}

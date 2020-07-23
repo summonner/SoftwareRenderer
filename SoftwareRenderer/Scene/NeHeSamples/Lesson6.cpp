@@ -8,6 +8,12 @@ GLfloat	zrot;				// Z Rotation ( NEW )
 GLuint	texture[1];			// Storage For One Texture ( NEW )
 int LoadGLTextures();
 
+int CleanGL()
+{
+	glDeleteTextures( 1, texture );
+	return TRUE;
+}
+
 int InitGL( GLvoid )										// All Setup For OpenGL Goes Here
 {
 	if ( !LoadGLTextures() )								// Jump To Texture Loading Routine ( NEW )

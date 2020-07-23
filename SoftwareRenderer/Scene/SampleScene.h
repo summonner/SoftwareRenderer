@@ -5,10 +5,9 @@
 class SampleScene final : public IScene
 {
 public:
-	SampleScene();
+	SampleScene( std::shared_ptr<IRenderer> renderer );
 	~SampleScene() override;
 
-	void Init( std::shared_ptr<IRenderer> renderer ) override;
 	void Update( const Time& time ) override;
 	void Render( std::shared_ptr<IRenderer> renderer ) const override;
 

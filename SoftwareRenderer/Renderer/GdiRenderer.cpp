@@ -10,6 +10,13 @@
 
 namespace Renderer
 {
+	std::unique_ptr<GdiRenderer> GdiRenderer::Create( const HWND hWnd )
+	{
+		RECT rect;
+		GetClientRect( hWnd, &rect );
+		return std::make_unique<GdiRenderer>( hWnd, rect.right, rect.bottom );
+	}
+
 	GdiRenderer::GdiRenderer( const HWND hWnd, const int width, const int height )
 		: hWnd( hWnd )
 		, bounds( width, height )
@@ -76,6 +83,7 @@ namespace Renderer
 
 		vertices.clear();
 		generator->Flush();
+		temp = Vertex();
 	}
 
 	void GdiRenderer::Color( float r, float g, float b )
