@@ -79,7 +79,7 @@ namespace Renderer
 		rasterizers.clear();
 	}
 
-	void GdiRenderer::SetColor( float r, float g, float b )
+	void GdiRenderer::Color( float r, float g, float b )
 	{
 		temp.color = Vector4( r, g, b, 1 );
 	}

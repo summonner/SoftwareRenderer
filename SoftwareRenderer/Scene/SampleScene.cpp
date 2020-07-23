@@ -1,12 +1,14 @@
 #include "framework.h"
 #include "SampleScene.h"
+#include "gl/glAdapter.h"
 #include "Time.h"
 #include "Renderer/IRenderer.h"
+
+extern std::shared_ptr<IRenderer> _renderer;
 
 SampleScene::SampleScene()
 	: checker( Bitmap::Load( _T( "Data/Checker.bmp" ) ) )
 {
-	
 }
 
 
@@ -21,51 +23,55 @@ void SampleScene::Update( const Time& time )
 	x = (sin( t ));// +1.f) * 0.5f;
 }
 
+void DrawScene( std::shared_ptr<const Bitmap> checker ) 
+{
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+	glLoadIdentity();
+
+	_renderer->BindTexture( nullptr );
+	glTranslatef( -1.5f, 0.0f, -6.0f + 3 * 0 );
+	glRotatef( x * -90.f, 0.f, 1.f, 0.f );
+	glBegin( GL_TRIANGLES );
+	glColor3f( 1.f, 0.f, 0.f );
+	glTexCoord2f( 0.5f, 1.0f );
+	glVertex3f( 0.f, 1.f, 0.f );
+
+	glColor3f( 0.f, 1.f, 0.f );
+	glTexCoord2f( 0.0f, 0.0f );
+	glVertex3f( -1.f, -1.f, 0.f );
+
+	glColor3f( 0.f, 0.f, 1.f );
+	glTexCoord2f( 1.0f, 0.0f );
+	glVertex3f( 1.f, -1.f, 0.f );
+	glEnd();
+
+	glLoadIdentity();
+	_renderer->BindTexture( checker );
+	glTranslatef( 1.5f, 0.0f, -6.0f );
+	glRotatef( x * 90.f, 1.f, 0.f, 0.f );
+	glBegin( GL_QUADS );
+	glColor3f( 1.0f, 0.5f, 0.5f );
+	glTexCoord2f( 0.0f, 1.0f );
+	glVertex3f( -1.0f, 1.0f, 0.0f );
+	
+	glColor3f( 0.5f, 0.5f, 0.5f );
+	glTexCoord2f( 0.0f, 0.0f );
+	glVertex3f( -1.0f, -1.0f, 0.0f );
+
+	glColor3f( 0.5f, 0.5f, 1.0f );
+	glTexCoord2f( 1.0f, 0.0f );
+	glVertex3f( 1.0f, -1.0f, 0.0f );
+
+	glColor3f( 0.5f, 1.0f, 0.5f );
+	glTexCoord2f( 1.0f, 1.0f );
+	glVertex3f( 1.0f, 1.0f, 0.0f );
+	glEnd();
+}
+
 void SampleScene::Render( std::shared_ptr<IRenderer> renderer ) const
 {
-	renderer->Clear();
-	renderer->LoadIdentity();
-
-//	renderer->Scale( x, x, x );
-//	renderer->Scale( 1, -1, 1 );
-	renderer->BindTexture( nullptr );
-	renderer->Translate( -1.5f, 0.0f, -6.0f + 3 * 0 );
-	renderer->Rotate( x * -90.f, 0.f, 1.f, 0.f );
-	renderer->Begin( IRenderer::DrawMode::Triangles );
-	renderer->SetColor( 1.f, 0.f, 0.f );
-	renderer->TexCoord( 0.5f, 1.0f );
-	renderer->AddVertex( 0.f, 1.f, 0.f );
-
-	renderer->SetColor( 0.f, 1.f, 0.f );
-	renderer->TexCoord( 0.0f, 0.0f );
-	renderer->AddVertex( -1.f, -1.f, 0.f );
-
-	renderer->SetColor( 0.f, 0.f, 1.f );
-	renderer->TexCoord( 1.0f, 0.0f );
-	renderer->AddVertex( 1.f, -1.f, 0.f );
-	renderer->End();
-
-	renderer->LoadIdentity();
-	renderer->BindTexture( checker );
-	renderer->Translate( 1.5f, 0.0f, -6.0f );
-	renderer->Rotate( x * 90.f, 1.f, 0.f, 0.f );
-	renderer->Begin( IRenderer::DrawMode::Quads );
-	renderer->SetColor( 1.0f, 0.5f, 0.5f );
-	renderer->TexCoord( 0.0f, 1.0f );
-	renderer->AddVertex( -1.0f, 1.0f, 0.0f );
-
-	renderer->SetColor( 0.5f, 0.5f, 0.5f );
-	renderer->TexCoord( 0.0f, 0.0f );
-	renderer->AddVertex( -1.0f, -1.0f, 0.0f );
-
-	renderer->SetColor( 0.5f, 0.5f, 1.0f );
-	renderer->TexCoord( 1.0f, 0.0f );
-	renderer->AddVertex( 1.0f, -1.0f, 0.0f );
-
-	renderer->SetColor( 0.5f, 1.0f, 0.5f );
-	renderer->TexCoord( 1.0f, 1.0f );
-	renderer->AddVertex( 1.0f, 1.0f, 0.0f );
-	renderer->End();
-
+	_renderer = renderer;
+	DrawScene( checker );
+	_renderer = nullptr;
 	renderer->Present();
 }

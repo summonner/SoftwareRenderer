@@ -185,8 +185,8 @@
     <ClInclude Include="Renderer\Rasterizer\Triangle.h" />
     <ClInclude Include="Renderer\Vertex.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scene\gl\glAdapter.h" />
     <ClInclude Include="Scene\IScene.h" />
-    <ClInclude Include="Scene\NeHeSamples\Adapter.h" />
     <ClInclude Include="Scene\NeHeSamples\NeHeSample.h" />
     <ClInclude Include="Scene\SampleScene.h" />
     <ClInclude Include="Scene\SceneFactory.h" />
@@ -222,7 +222,7 @@
     <ClCompile Include="Renderer\Rasterizer\RasterizedPixel.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Triangle.cpp" />
     <ClCompile Include="Renderer\Vertex.cpp" />
-    <ClCompile Include="Scene\NeHeSamples\Adapter.cpp" />
+    <ClCompile Include="Scene\gl\glAdapter.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson5.cpp" />
     <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp" />
     <ClCompile Include="Scene\SampleScene.cpp" />

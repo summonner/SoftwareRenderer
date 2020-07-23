@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "Adapter.h"
+#include "glAdapter.h"
 #include "Renderer/IRenderer.h"
 
 std::shared_ptr<IRenderer> _renderer;
@@ -53,7 +53,7 @@ WINGDIAPI void APIENTRY glBegin( GLenum mode )
 
 WINGDIAPI void APIENTRY glColor3f( GLfloat red, GLfloat green, GLfloat blue )
 {
-	renderer->SetColor( red, green, blue );
+	renderer->Color( red, green, blue );
 }
 
 WINGDIAPI void APIENTRY glVertex3f( GLfloat x, GLfloat y, GLfloat z )
@@ -61,6 +61,10 @@ WINGDIAPI void APIENTRY glVertex3f( GLfloat x, GLfloat y, GLfloat z )
 	renderer->AddVertex( x, y, z );
 }
 
+WINGDIAPI void APIENTRY glTexCoord2f( GLfloat s, GLfloat t )
+{
+	renderer->TexCoord( s, t );
+}
 
 WINGDIAPI void APIENTRY glEnd( void )
 {

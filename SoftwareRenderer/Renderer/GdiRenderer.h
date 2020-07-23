@@ -25,7 +25,7 @@ namespace Renderer
 
 		void Begin( DrawMode mode ) override;
 		void End() override;
-		void SetColor( float r, float g, float b ) override;
+		void Color( float r, float g, float b ) override;
 		void AddVertex( float x, float y, float z ) override;
 
 		void LoadIdentity() override;

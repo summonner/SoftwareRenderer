@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "Adapter.h"
+#include "../gl/glAdapter.h"
 
 GLfloat	rtri;				// Angle For The Triangle ( NEW )
 GLfloat	rquad;				// Angle For The Quad ( NEW )

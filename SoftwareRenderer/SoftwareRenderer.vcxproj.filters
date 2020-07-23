@@ -34,6 +34,9 @@
     <Filter Include="Renderer\RasterizerGenerators">
       <UniqueIdentifier>{8b7dbe1e-614d-4740-a91c-5e55dacdf028}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\gl">
+      <UniqueIdentifier>{2cb3a64e-57d7-4e4b-b7de-0c99ca59f6a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -99,9 +102,6 @@
     <ClInclude Include="Scene\NeHeSamples\NeHeSample.h">
       <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\NeHeSamples\Adapter.h">
-      <Filter>Scene\NeHeSamples</Filter>
-    </ClInclude>
     <ClInclude Include="Math\RangeIterator.h">
       <Filter>Math</Filter>
     </ClInclude>
@@ -152,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="Bitmap.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glAdapter.h">
+      <Filter>Scene\gl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -204,9 +207,6 @@
     <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp">
       <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\NeHeSamples\Adapter.cpp">
-      <Filter>Scene\NeHeSamples</Filter>
-    </ClCompile>
     <ClCompile Include="Math\RangeIterator.cpp">
       <Filter>Math</Filter>
     </ClCompile>
@@ -251,6 +251,9 @@
     </ClCompile>
     <ClCompile Include="Bitmap.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glAdapter.cpp">
+      <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
