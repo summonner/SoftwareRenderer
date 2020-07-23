@@ -7,6 +7,7 @@ Bitmap::Bitmap( BITMAPINFOHEADER info, BYTE* data )
 	, height( info.biHeight )
 	, rowSize( info.biSizeImage / info.biHeight )
 	, pixels( data )
+	, pixelSize( info.biBitCount / 8 )
 {
 }
 
@@ -52,6 +53,12 @@ BYTE* Bitmap::Parse( FILE* file, BITMAPINFOHEADER& outInfo )
 		return nullptr;
 	}
 
+	if ( outInfo.biSizeImage == 0 )
+	{
+		auto rowSize = (outInfo.biWidth + 3) & ~3;
+		outInfo.biSizeImage = rowSize * outInfo.biHeight * (outInfo.biBitCount / 8);
+	}
+
 	auto bytes = new BYTE[outInfo.biSizeImage];
 	fread( bytes, sizeof( BYTE ), outInfo.biSizeImage, file );
 	return bytes;
@@ -59,11 +66,18 @@ BYTE* Bitmap::Parse( FILE* file, BITMAPINFOHEADER& outInfo )
 
 Vector4 Bitmap::GetPixel( const Vector2Int& p ) const
 {
-	auto i = p.x * 3 + p.y * rowSize;
-	return Vector4( pixels[i + 2] / 255.f,
-					pixels[i + 1] / 255.f,
-					pixels[i] / 255.f,
-					1.f );
+	auto i = p.x * pixelSize + p.y * rowSize;
+	switch ( pixelSize )
+	{
+	case 3:
+		return Vector4( pixels[i + 2] / 255.f,
+						pixels[i + 1] / 255.f,
+						pixels[i + 0] / 255.f,
+						1.f );
+	default:
+		assert( "Not implemented yet" && false );
+		return Vector4::zero;
+	}
 }
 
 Vector4 Bitmap::GetPixel( const Vector2& p ) const

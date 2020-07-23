@@ -13,10 +13,33 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="SoftwareRenderer">
+      <UniqueIdentifier>{f776329f-d72b-4cc4-8487-d8b3f5338ce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gl">
+      <UniqueIdentifier>{90e63e39-2fd1-41ff-95ca-9d753525bdf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lesson2.cpp">
+    <ClCompile Include="Lesson6.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\SoftwareRenderer\Bitmap.cpp">
+      <Filter>SoftwareRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SoftwareRenderer\Renderer\PixelIterator.cpp">
+      <Filter>SoftwareRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="gl\AUX_RGBImageRec.cpp">
+      <Filter>gl</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gl\glaux.h">
+      <Filter>gl</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\AUX_RGBImageRec.h">
+      <Filter>gl</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

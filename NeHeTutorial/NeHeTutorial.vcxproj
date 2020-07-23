@@ -18,6 +18,16 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\SoftwareRenderer\Bitmap.cpp" />
+    <ClCompile Include="..\SoftwareRenderer\Renderer\PixelIterator.cpp" />
+    <ClCompile Include="gl\AUX_RGBImageRec.cpp" />
+    <ClCompile Include="Lesson6.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gl\AUX_RGBImageRec.h" />
+    <ClInclude Include="gl\glaux.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -139,9 +149,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Lesson2.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

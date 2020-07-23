@@ -25,12 +25,14 @@ public:
 		return PixelIterator::end( width, height );
 	}
 
+public:
+	const int width = 0;
+	const int height = 0;
 
 private:
 	static BYTE* Parse( FILE* file, BITMAPINFOHEADER& outInfo );
-	const int width = 0;
-	const int height = 0;
 	const int rowSize = 0;
+	const int pixelSize = 0;
 	const std::unique_ptr<BYTE[]> pixels;
 };
 
