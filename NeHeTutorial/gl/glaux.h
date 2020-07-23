@@ -1,2 +1,2 @@
 #pragma once
-#include "AUX_RGBImageRec.h"
+#include "Scene/gl/AUX_RGBImageRec.h"

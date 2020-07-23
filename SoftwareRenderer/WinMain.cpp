@@ -155,6 +155,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			renderer->Viewport( 0, 0, (float)rect.right, (float)rect.bottom );
 			renderer->Perspective( 45.f, (float)rect.right / (float)rect.bottom, 0.1f, 100.f );
 			scene = SceneFactory::Create();
+			scene->Init( renderer );
 			break;
 
 		case WM_COMMAND:

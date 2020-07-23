@@ -10,3 +10,4 @@ using Vector3Int = TVector3<int>;
 template<typename T> class TVector4;
 using Vector4 = TVector4<float>;
 using Vector4Int = TVector4<int>;
+using Color4 = TVector4<BYTE>;

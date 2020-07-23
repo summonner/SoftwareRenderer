@@ -37,6 +37,9 @@
     <Filter Include="Scene\gl">
       <UniqueIdentifier>{2cb3a64e-57d7-4e4b-b7de-0c99ca59f6a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\Texturing">
+      <UniqueIdentifier>{756bcc1a-ce64-46a3-8a8b-4c0bdc4f10d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -150,10 +153,25 @@
     <ClInclude Include="Renderer\Rasterizer\IRasterizer.h">
       <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
-    <ClInclude Include="Bitmap.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\gl\glAdapter.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Texturing\ITexture.h">
+      <Filter>Renderer\Texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Texturing\Texture2D.h">
+      <Filter>Renderer\Texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\IImageSource.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Bitmap.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glTextureManager.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\AUX_RGBImageRec.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
   </ItemGroup>
@@ -237,9 +255,6 @@
     <ClCompile Include="Renderer\RasterizerGenerators\RasterizerGenerator.cpp">
       <Filter>Renderer\RasterizerGenerators</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\NeHeSamples\Lesson5.cpp">
-      <Filter>Scene\NeHeSamples</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\RasterizerGenerators\QuadGenerator.cpp">
       <Filter>Renderer\RasterizerGenerators</Filter>
     </ClCompile>
@@ -249,10 +264,22 @@
     <ClCompile Include="Math\Bounds.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="Bitmap.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\gl\glAdapter.cpp">
+      <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson6.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Texturing\Texture2D.cpp">
+      <Filter>Renderer\Texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Bitmap.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glTextureManager.cpp">
+      <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\AUX_RGBImageRec.cpp">
       <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>

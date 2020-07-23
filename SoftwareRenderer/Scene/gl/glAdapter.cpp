@@ -1,9 +1,20 @@
 #include "framework.h"
 #include "glAdapter.h"
+#include "glTextureManager.h"
 #include "Renderer/IRenderer.h"
 
 std::shared_ptr<IRenderer> _renderer;
+glTextureManager textureManager;
 #define renderer _renderer
+
+WINGDIAPI void APIENTRY glEnable( GLenum cap )
+{
+	switch ( cap )
+	{
+	case GL_TEXTURE_2D:
+		return;
+	}
+}
 
 WINGDIAPI void APIENTRY glClear( GLbitfield mask )
 {
@@ -69,4 +80,25 @@ WINGDIAPI void APIENTRY glTexCoord2f( GLfloat s, GLfloat t )
 WINGDIAPI void APIENTRY glEnd( void )
 {
 	renderer->End();
+}
+
+WINGDIAPI void APIENTRY glGenTextures( GLsizei n, GLuint *textures )
+{
+	textureManager.Generate( n, textures );
+}
+
+WINGDIAPI void APIENTRY glBindTexture( GLenum target, GLuint texture )
+{
+	auto t = textureManager.Bind( texture );
+	renderer->BindTexture( t );
+}
+
+WINGDIAPI void APIENTRY glTexImage2D( GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels )
+{
+	textureManager.SetImage( level, internalformat, width, height, format, type, pixels );
+}
+
+WINGDIAPI void APIENTRY glTexParameteri( GLenum target, GLenum pname, GLint param )
+{
+	// TODO	
 }

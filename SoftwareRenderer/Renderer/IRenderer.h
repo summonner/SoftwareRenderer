@@ -2,7 +2,11 @@
 #undef near
 #undef far
 
-class Bitmap;
+namespace Renderer
+{
+	class ITexture;
+}
+
 class IRenderer abstract
 {
 public:
@@ -41,7 +45,7 @@ public:
 	virtual void Perspective( Degree fovY, float aspect, float near, float far ) abstract;
 	virtual void Ortho( float left, float right, float top, float bottom, float near, float far ) abstract;
 
-	virtual void BindTexture( std::shared_ptr<const Bitmap> bitmap ) abstract;
+	virtual void BindTexture( std::shared_ptr<const Renderer::ITexture> bitmap ) abstract;
 	virtual void TexCoord( float u, float v ) abstract;
 };
 

@@ -26,7 +26,6 @@
 
 #include "Math/MathExt.h"
 #include "Math/Vector.h"
-//#include "Util/TSingleton.hpp"
 
 #undef max
 #undef min

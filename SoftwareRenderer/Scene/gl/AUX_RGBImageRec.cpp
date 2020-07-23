@@ -1,7 +1,6 @@
-#include <memory>
-#include <tchar.h>
+#include "framework.h"
 #include "AUX_RGBImageRec.h"
-#include "Bitmap.h"
+#include "Util/Bitmap.h"
 
 AUX_RGBImageRec* auxDIBImageLoad( LPCTSTR filePath )
 {
@@ -16,9 +15,9 @@ AUX_RGBImageRec* auxDIBImageLoad( LPCTSTR filePath )
 	{
 		auto color = bitmap->GetPixel( p );
 		auto i = (p.y * bitmap->width + p.x) * 3;
-		data[i + 0] = (int)(color.x * 255);
-		data[i + 1] = (int)(color.y * 255);
-		data[i + 2] = (int)(color.z * 255);
+		data[i + 0] = color.x;
+		data[i + 1] = color.y;
+		data[i + 2] = color.z;
 	}
 
 	auto image = new AUX_RGBImageRec();

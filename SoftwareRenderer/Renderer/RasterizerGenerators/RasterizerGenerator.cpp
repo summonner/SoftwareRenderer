@@ -4,6 +4,7 @@
 #include "LineGenerator.h"
 #include "TriangleGenerator.h"
 #include "QuadGenerator.h"
+#include "Renderer/Rasterizer/IRasterizer.h"
 
 namespace Renderer
 {
@@ -44,13 +45,18 @@ namespace Renderer
 		}
 	}
 
-	void RasterizerGenerator::Generate( const VertexBuffer& vertices, IRasterizerList& outRasterizers )
+	const IRasterizerList& RasterizerGenerator::Generate( const VertexBuffer& vertices )
 	{
-		if ( generator == nullptr )
+		if ( generator != nullptr )
 		{
-			return;
+			generator( vertices, rasterizers );
 		}
 
-		generator( vertices, outRasterizers );
+		return rasterizers;
+	}
+
+	void RasterizerGenerator::Flush()
+	{
+		rasterizers.clear();
 	}
 }

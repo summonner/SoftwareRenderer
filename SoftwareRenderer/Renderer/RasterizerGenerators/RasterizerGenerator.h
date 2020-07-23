@@ -11,7 +11,8 @@ namespace Renderer
 		~RasterizerGenerator();
 
 		void Begin( IRenderer::DrawMode mode );
-		void Generate( const VertexBuffer& vertices, IRasterizerList& primitives );
+		const IRasterizerList& Generate( const VertexBuffer& vertices );
+		void Flush();
 
 	private:
 		using GeneratorFunction = std::function<void( const std::vector<Vertex>&, IRasterizerList& )>;
@@ -19,6 +20,7 @@ namespace Renderer
 		static const GeneratorFunction FindGenerator( IRenderer::DrawMode mode );
 
 		GeneratorFunction generator;
+		IRasterizerList rasterizers;
 	};
 
 }

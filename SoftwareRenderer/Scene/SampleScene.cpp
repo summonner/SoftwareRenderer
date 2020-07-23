@@ -16,6 +16,10 @@ SampleScene::~SampleScene()
 {
 }
 
+void SampleScene::Init( std::shared_ptr<IRenderer> renderer )
+{
+}
+
 float x = 0;
 void SampleScene::Update( const Time& time )
 {

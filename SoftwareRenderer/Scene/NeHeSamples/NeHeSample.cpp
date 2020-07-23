@@ -4,6 +4,7 @@
 
 extern std::shared_ptr<IRenderer> _renderer;
 
+int InitGL();
 int DrawGLScene();
 
 NeHeSample::NeHeSample()
@@ -12,6 +13,13 @@ NeHeSample::NeHeSample()
 
 NeHeSample::~NeHeSample()
 {
+}
+
+void NeHeSample::Init( std::shared_ptr<IRenderer> renderer )
+{
+	_renderer = renderer;
+	InitGL();
+	_renderer = nullptr;
 }
 
 void NeHeSample::Update( const Time& time )

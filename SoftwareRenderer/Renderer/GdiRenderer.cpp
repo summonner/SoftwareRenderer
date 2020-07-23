@@ -6,8 +6,7 @@
 #include "Rasterizer/RasterizedPixel.h"
 #include "RasterizerGenerators/RasterizerGenerator.h"
 #include "Math/Vector3.hpp"
-#include "Bitmap.h"
-
+#include "Texturing/ITexture.h"
 
 namespace Renderer
 {
@@ -54,7 +53,7 @@ namespace Renderer
 			vertex.Process( projection, viewport );
 		}
 
-		generator->Generate( vertices, rasterizers );
+		auto& rasterizers = generator->Generate( vertices );
 
 		for ( const auto& rasterizer : rasterizers )
 		{
@@ -66,9 +65,9 @@ namespace Renderer
 				}
 
 				Vector4 color = p.color;
-				if ( bitmap != nullptr )
+				if ( texture != nullptr )
 				{
-					color *= bitmap->GetPixel( p.texcoord );
+					color *= texture->GetPixel( p.texcoord );
 				}
 
 				backBuffer->SetPixel( p.coordinate, color );
@@ -76,7 +75,7 @@ namespace Renderer
 		}
 
 		vertices.clear();
-		rasterizers.clear();
+		generator->Flush();
 	}
 
 	void GdiRenderer::Color( float r, float g, float b )
@@ -157,9 +156,9 @@ namespace Renderer
 		);
 	}
 
-	void GdiRenderer::BindTexture( std::shared_ptr<const Bitmap> bitmap )
+	void GdiRenderer::BindTexture( std::shared_ptr<const ITexture> texture )
 	{
-		this->bitmap = bitmap;
+		this->texture = texture;
 	}
 
 	void GdiRenderer::TexCoord( float u, float v )

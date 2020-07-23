@@ -3,8 +3,7 @@
 #include "Math/Vector2.hpp"
 
 Bitmap::Bitmap( BITMAPINFOHEADER info, BYTE* data )
-	: width( info.biWidth )
-	, height( info.biHeight )
+	: IImageSource( info.biWidth, info.biHeight )
 	, rowSize( info.biSizeImage / info.biHeight )
 	, pixels( data )
 	, pixelSize( info.biBitCount / 8 )
@@ -64,19 +63,19 @@ BYTE* Bitmap::Parse( FILE* file, BITMAPINFOHEADER& outInfo )
 	return bytes;
 }
 
-Vector4 Bitmap::GetPixel( const Vector2Int& p ) const
+Color4 Bitmap::GetPixel( const Vector2Int& p ) const
 {
 	auto i = p.x * pixelSize + p.y * rowSize;
 	switch ( pixelSize )
 	{
 	case 3:
-		return Vector4( pixels[i + 2] / 255.f,
-						pixels[i + 1] / 255.f,
-						pixels[i + 0] / 255.f,
-						1.f );
+		return Color4( pixels[i + 2],
+					   pixels[i + 1],
+					   pixels[i + 0],
+					   255 );
 	default:
 		assert( "Not implemented yet" && false );
-		return Vector4::zero;
+		return Color4::zero;
 	}
 }
 
@@ -85,5 +84,10 @@ Vector4 Bitmap::GetPixel( const Vector2& p ) const
 	Vector2Int coord( width - 1, height - 1 );
 	coord.x = (int)(coord.x * p.x);
 	coord.y = (int)(coord.y * p.y);
-	return GetPixel( coord );
+	
+	auto color = GetPixel( coord );
+	return Vector4( color.x / 255.f,
+					color.y / 255.f,
+					color.z / 255.f,
+					color.w / 255.f );
 }

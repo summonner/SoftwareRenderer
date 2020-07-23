@@ -4,13 +4,13 @@
 #include "Math/Matrix4x4.h"
 #include "Math/Bounds.h"
 
-class Bitmap;
 namespace Renderer
 {
 	class FrameBuffer;
 	class DepthBuffer;
 	class IRasterizer;
 	class RasterizerGenerator;
+	class ITexture;
 
 	class GdiRenderer final : public IRenderer
 	{
@@ -38,7 +38,7 @@ namespace Renderer
 		void Perspective( Degree fovY, float aspect, float near, float far ) override;
 		void Ortho( float left, float right, float top, float bottom, float near, float far ) override;
 
-		void BindTexture( std::shared_ptr<const Bitmap> bitmap ) override;
+		void BindTexture( std::shared_ptr<const ITexture> texture ) override;
 		void TexCoord( float u, float v ) override;
 
 	private:
@@ -47,17 +47,16 @@ namespace Renderer
 
 		std::unique_ptr<FrameBuffer> backBuffer;
 		std::unique_ptr<DepthBuffer> depthBuffer;
-		std::vector<std::unique_ptr<IRasterizer>> rasterizers;
-		std::vector<Vertex> vertices;
+
+		const std::unique_ptr<RasterizerGenerator> generator;
+		std::shared_ptr<const ITexture> texture;
 
 		Vertex temp;
+		std::vector<Vertex> vertices;
+
 		Matrix4x4 transform;
 		Matrix4x4 projection;
 		Matrix4x4 viewport;
-
-		const std::unique_ptr<RasterizerGenerator> generator;
-
-		std::shared_ptr<const Bitmap> bitmap;
 	};
 
 }
