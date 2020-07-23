@@ -5,35 +5,35 @@
 
 namespace Renderer
 {
-	void LineGenerator::Default( VertexBuffer vertices, int startIndex, int endIndex, IRasterizerList& outRasterizers )
+	void LineGenerator::Default( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
-		auto numVertices = endIndex - 1;
-		for ( auto i = startIndex; i < numVertices; i += 2 )
+		auto numVertices = vertices.size() - 1;
+		for ( auto i = 0; i < numVertices; i += 2 )
 		{
 			outRasterizers.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
 	}
 
-	void LineGenerator::Strip( VertexBuffer vertices, int startIndex, int endIndex, IRasterizerList& outRasterizers )
+	void LineGenerator::Strip( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
-		auto numVertices = endIndex - 1;
-		for ( auto i = startIndex; i < numVertices; ++i )
+		auto numVertices = vertices.size() - 1;
+		for ( auto i = 0; i < numVertices; ++i )
 		{
 			outRasterizers.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
 	}
 	
-	void LineGenerator::Loop( VertexBuffer vertices, int startIndex, int endIndex, IRasterizerList& outRasterizers )
+	void LineGenerator::Loop( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
-		auto numVertices = endIndex - 1;
-		for ( auto i = startIndex; i < numVertices; ++i )
+		auto numVertices = vertices.size() - 1;
+		for ( auto i = 0; i < numVertices; ++i )
 		{
 			outRasterizers.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
 
 		if ( numVertices > 1 )
 		{
-			outRasterizers.emplace_back( std::make_unique<Line>( vertices[numVertices], vertices[startIndex] ) );
+			outRasterizers.emplace_back( std::make_unique<Line>( vertices[numVertices], vertices[0] ) );
 		}
 	}
 }

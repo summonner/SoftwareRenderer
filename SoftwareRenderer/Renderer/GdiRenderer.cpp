@@ -30,8 +30,6 @@ namespace Renderer
 	{
 		backBuffer->Clear();
 		depthBuffer->Clear();
-		rasterizers.clear();
-		vertices.clear();
 	}
 
 	void GdiRenderer::Present()
@@ -40,6 +38,16 @@ namespace Renderer
 	}
 
 	void GdiRenderer::Present( const HDC dc )
+	{
+		backBuffer->BitBlt( dc );
+	}
+
+	void GdiRenderer::Begin( DrawMode mode )
+	{
+		generator->Begin( mode );
+	}
+
+	void GdiRenderer::End()
 	{
 		for ( auto& vertex : vertices )
 		{
@@ -67,17 +75,8 @@ namespace Renderer
 			} );
 		}
 
-		backBuffer->BitBlt( dc );
-	}
-
-	void GdiRenderer::Begin( DrawMode mode )
-	{
-		generator->Begin( mode, (int)vertices.size() );
-	}
-
-	void GdiRenderer::End()
-	{
-		generator->End( (int)vertices.size() );
+		vertices.clear();
+		rasterizers.clear();
 	}
 
 	void GdiRenderer::SetColor( float r, float g, float b )

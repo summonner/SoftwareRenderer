@@ -6,9 +6,9 @@ namespace Renderer
 	class TriangleGenerator final abstract
 	{
 	public:
-		static void Triangles( VertexBuffer vertices, int startIndex, int endIndex, IRasterizerList& outRasterizers );
-		static void TriangleStrip( VertexBuffer vertices, int startIndex, int endIndex, IRasterizerList& outRasterizers );
-		static void TriangleFan( VertexBuffer vertices, int startIndex, int endIndex, IRasterizerList& outRasterizers );
+		static void Default	( VertexBuffer vertices, IRasterizerList& outRasterizers );
+		static void Strip	( VertexBuffer vertices, IRasterizerList& outRasterizers );
+		static void Fan		( VertexBuffer vertices, IRasterizerList& outRasterizers );
 
 	private:
 		static void Build( const Vertex& a, const Vertex& b, const Vertex& c, IRasterizerList& outRasterizers );

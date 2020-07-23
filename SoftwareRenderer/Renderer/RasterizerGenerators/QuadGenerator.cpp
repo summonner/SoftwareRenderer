@@ -6,10 +6,10 @@
 
 namespace Renderer
 {
-	void QuadGenerator::Quads( VertexBuffer vertices, int startIndex, int endIndex, IRasterizerList& outRasterizers )
+	void QuadGenerator::Quads( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
-		auto lastIndex = endIndex - 3;
-		for ( auto i = startIndex; i < lastIndex; i += 4 )
+		auto lastIndex = vertices.size() - 3;
+		for ( auto i = 0; i < lastIndex; i += 4 )
 		{
 			Build( vertices[i], vertices[i + 1], vertices[i + 2], vertices[i + 3], outRasterizers );
 		}

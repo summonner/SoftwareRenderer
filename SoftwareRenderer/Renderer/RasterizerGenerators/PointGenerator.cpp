@@ -5,10 +5,10 @@
 
 namespace Renderer
 {
-	void PointGenerator::Default( VertexBuffer vertices, int startIndex, int endIndex, IRasterizerList& outRasterizers )
+	void PointGenerator::Default( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
-		auto numVertices = endIndex;
-		for ( auto i = startIndex; i < numVertices; ++i )
+		auto numVertices = vertices.size();
+		for ( auto i = 0; i < numVertices; ++i )
 		{
 			outRasterizers.emplace_back( std::make_unique<Point>( vertices[i] ) );
 		}

@@ -28,7 +28,7 @@ void SampleScene::Render( std::shared_ptr<IRenderer> renderer ) const
 
 //	renderer->Scale( x, x, x );
 //	renderer->Scale( 1, -1, 1 );
-	renderer->BindTexture( checker );
+	renderer->BindTexture( nullptr );
 	renderer->Translate( -1.5f, 0.0f, -6.0f + 3 * 0 );
 	renderer->Rotate( x * -90.f, 0.f, 1.f, 0.f );
 	renderer->Begin( IRenderer::DrawMode::Triangles );
