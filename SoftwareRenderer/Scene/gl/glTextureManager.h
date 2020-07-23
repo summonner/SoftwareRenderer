@@ -12,6 +12,9 @@ class IRenderer;
 class glTextureManager final
 {
 public:
+	glTextureManager();
+	~glTextureManager();
+
 	void Generate( int num, GLuint* outHandles );
 	void Delete( GLuint handle );
 	std::shared_ptr<ITexture> Bind( GLuint handle );
@@ -20,6 +23,7 @@ public:
 private:
 	std::map<GLuint, std::shared_ptr<ITexture>> textures;
 	GLuint current;
+
 
 	class glImageSource final : public IImageSource
 	{

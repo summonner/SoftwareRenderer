@@ -3,6 +3,15 @@
 #include "Renderer/Texturing/Texture2D.h"
 #include "Math/Vector4.hpp"
 
+glTextureManager::glTextureManager()
+	: current( 0 )
+{
+}
+
+glTextureManager::~glTextureManager()
+{
+}
+
 void glTextureManager::Generate( int num, GLuint* outHandles )
 {
 	GLuint i = 0u;
@@ -24,17 +33,32 @@ void glTextureManager::Generate( int num, GLuint* outHandles )
 
 void glTextureManager::Delete( GLuint handle )
 {
+	if ( handle == 0 )
+	{
+		return;
+	}
+
 	textures.erase( handle );
 }
 
 std::shared_ptr<ITexture> glTextureManager::Bind( GLuint handle )
 {
+	if ( handle == 0 )
+	{
+		return nullptr;
+	}
+
 	current = handle;
 	return textures[current];
 }
 
 void glTextureManager::SetImage( GLint level, GLint internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels )
 {
+	if ( current == 0 )
+	{
+		return;
+	}
+
 	auto source = new glImageSource( width, height, format, type, pixels );
 	textures[current].reset( new Renderer::Texture2D( source ) );
 }

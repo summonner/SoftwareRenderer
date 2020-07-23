@@ -14,5 +14,6 @@ public:
 
 private:
 	std::shared_ptr<const Bitmap> checker;
+	void DrawScene() const;
 };
 

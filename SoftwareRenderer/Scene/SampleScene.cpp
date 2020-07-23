@@ -6,6 +6,11 @@
 
 extern std::shared_ptr<IRenderer> _renderer;
 
+void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> texture )
+{
+	_renderer->BindTexture( texture );
+}
+
 SampleScene::SampleScene()
 	: checker( Bitmap::Load( _T( "Data/Checker.bmp" ) ) )
 {
@@ -27,12 +32,12 @@ void SampleScene::Update( const Time& time )
 	x = (sin( t ));// +1.f) * 0.5f;
 }
 
-void DrawScene( std::shared_ptr<const Bitmap> checker ) 
+void SampleScene::DrawScene() const
 {
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	glLoadIdentity();
 
-	_renderer->BindTexture( nullptr );
+	glBindTexture( GL_TEXTURE_2D, 0 );
 	glTranslatef( -1.5f, 0.0f, -6.0f + 3 * 0 );
 	glRotatef( x * -90.f, 0.f, 1.f, 0.f );
 	glBegin( GL_TRIANGLES );
@@ -50,7 +55,7 @@ void DrawScene( std::shared_ptr<const Bitmap> checker )
 	glEnd();
 
 	glLoadIdentity();
-	_renderer->BindTexture( checker );
+	glBindTexture( GL_TEXTURE_2D, checker );
 	glTranslatef( 1.5f, 0.0f, -6.0f );
 	glRotatef( x * 90.f, 1.f, 0.f, 0.f );
 	glBegin( GL_QUADS );
@@ -75,7 +80,7 @@ void DrawScene( std::shared_ptr<const Bitmap> checker )
 void SampleScene::Render( std::shared_ptr<IRenderer> renderer ) const
 {
 	_renderer = renderer;
-	DrawScene( checker );
+	DrawScene();
 	_renderer = nullptr;
 	renderer->Present();
 }
