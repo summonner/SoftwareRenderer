@@ -3,7 +3,6 @@
 #include "Util/IImageSource.h"
 #include "Math/Vector4.hpp"
 #include "Math/Vector2.hpp"
-#include "Util/StlMapExtension.h"
 
 namespace Renderer
 {
@@ -27,14 +26,14 @@ namespace Renderer
 
 	Vector4 Texture2D::GetPixel( const Vector2& uv ) const
 	{
-		auto wrapped = wrapFuncs( uv );
+		auto wrapped = wrapMode( uv );
 		return FilterNearest( wrapped );
 	}
 
-	void Texture2D::SetWrapMode( ITexture::WrapMode uMode, ITexture::WrapMode vMode )
+	void Texture2D::SetWrapMode( WrapMode::Type uMode, WrapMode::Type vMode )
 	{
-		wrapFuncs.u = StlMapExtension::Find( wrapFuncTable, uMode, (Texture2D::WrapFunc)&Texture2D::WrapClamp );
-		wrapFuncs.v = StlMapExtension::Find( wrapFuncTable, vMode, (Texture2D::WrapFunc)&Texture2D::WrapClamp );
+		wrapMode.u = uMode;
+		wrapMode.v = vMode;
 	}
 
 	Vector4 Texture2D::GetPixel( int x, int y ) const
@@ -55,40 +54,8 @@ namespace Renderer
 		return Vector4::zero;
 	}
 
-	std::map<ITexture::WrapMode, Texture2D::WrapFunc> Texture2D::wrapFuncTable =
-	{
-		{ ITexture::WrapMode::Clamp, &Texture2D::WrapClamp },
-		{ ITexture::WrapMode::Repeat, &Texture2D::WrapRepeat },
-		{ ITexture::WrapMode::MirroredRepeat, &Texture2D::WrapMirror }
-	};
 
-	float Texture2D::WrapClamp( float v )
-	{
-		return std::clamp( v, 0.f, 1.f );
-	}
-
-	float Texture2D::WrapRepeat( float v )
-	{
-		return v - (int)v + (v >= 0.f ? 0 : 1);
-	}
-
-	float Texture2D::WrapMirror( float v )
-	{
-		v = std::fmodf( v, 2.f );
-		if ( v < 0 )
-		{
-			v *= -1;
-		}
-
-		v = (v - 1);
-		if ( v < 0 )
-		{
-			v *= -1;
-		}
-		return v;
-	}
-
-	Vector2 Texture2D::WrapFuncs::operator ()( const Vector2& uv ) const
+	Vector2 Texture2D::WrapModes::operator ()( const Vector2& uv ) const
 	{
 		return Vector2(
 			u( uv.x ),

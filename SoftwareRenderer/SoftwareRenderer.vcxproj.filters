@@ -177,7 +177,10 @@
     <ClInclude Include="SceneMenu.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Util\StlMapExtension.h">
+    <ClInclude Include="Renderer\Texturing\WrapMode.h">
+      <Filter>Renderer\Texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Dictionary.hpp">
       <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
@@ -291,8 +294,8 @@
     <ClCompile Include="SceneMenu.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Util\StlMapExtension.cpp">
-      <Filter>Util</Filter>
+    <ClCompile Include="Renderer\Texturing\WrapMode.cpp">
+      <Filter>Renderer\Texturing</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

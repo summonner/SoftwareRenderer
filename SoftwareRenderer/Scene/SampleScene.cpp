@@ -5,6 +5,8 @@
 #include "Util/Bitmap.h"
 #include "Renderer/Texturing/Texture2D.h"
 
+using WrapMode = Renderer::WrapMode::Type;
+
 void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> texture )
 {
 	_renderer->BindTexture( texture );
@@ -15,7 +17,7 @@ SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
 {
 	auto bitmap = Bitmap::Load( _T( "Data/Crate.bmp" ) );
 	checker = std::make_shared<Renderer::Texture2D>( bitmap.get() );
-	checker->SetWrapMode( Renderer::ITexture::WrapMode::MirroredRepeat, Renderer::ITexture::WrapMode::MirroredRepeat );
+	checker->SetWrapMode( WrapMode::MirroredRepeat, WrapMode::MirroredRepeat );
 }
 
 

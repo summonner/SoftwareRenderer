@@ -184,6 +184,7 @@
     <ClInclude Include="Renderer\Rasterizer\Triangle.h" />
     <ClInclude Include="Renderer\Texturing\ITexture.h" />
     <ClInclude Include="Renderer\Texturing\Texture2D.h" />
+    <ClInclude Include="Renderer\Texturing\WrapMode.h" />
     <ClInclude Include="Renderer\Vertex.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SceneMenu.h" />
@@ -200,7 +201,7 @@
     <ClInclude Include="Util\Bitmap.h" />
     <ClInclude Include="Util\IBaseIterator.h" />
     <ClInclude Include="Util\IImageSource.h" />
-    <ClInclude Include="Util\StlMapExtension.h" />
+    <ClInclude Include="Util\Dictionary.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">
@@ -228,6 +229,7 @@
     <ClCompile Include="Renderer\Rasterizer\RasterizedPixel.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Triangle.cpp" />
     <ClCompile Include="Renderer\Texturing\Texture2D.cpp" />
+    <ClCompile Include="Renderer\Texturing\WrapMode.cpp" />
     <ClCompile Include="Renderer\Vertex.cpp" />
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="Scene\gl\AUX_RGBImageRec.cpp" />
@@ -239,7 +241,6 @@
     <ClCompile Include="Scene\SceneFactory.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Util\Bitmap.cpp" />
-    <ClCompile Include="Util\StlMapExtension.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
