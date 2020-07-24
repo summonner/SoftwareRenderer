@@ -14,7 +14,7 @@ namespace Renderer
 	void TriangleGenerator::Default( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
 		auto lastIndex = vertices.size() - 2;
-		for ( auto i = 0; i < lastIndex; i += 3 )
+		for ( auto i = 0u; i < lastIndex; i += 3 )
 		{
 			Build( vertices[i], vertices[i + 1], vertices[i + 2], outRasterizers );
 		}
@@ -23,7 +23,7 @@ namespace Renderer
 	void TriangleGenerator::Strip( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
 		auto lastIndex = vertices.size() - 3;
-		auto i = 0;
+		auto i = 0u;
 		for ( ; i < lastIndex; i += 2 )
 		{
 			Build( vertices[i], vertices[i + 1], vertices[i + 2], outRasterizers );
@@ -39,7 +39,7 @@ namespace Renderer
 	void TriangleGenerator::Fan( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
 		auto lastIndex = vertices.size() - 1;
-		for ( auto i = 1; i < lastIndex; i += 1 )
+		for ( auto i = 1u; i < lastIndex; i += 1 )
 		{
 			Build( vertices[0], vertices[i], vertices[i + 1], outRasterizers );
 		}

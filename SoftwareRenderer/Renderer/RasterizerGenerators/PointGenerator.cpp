@@ -8,7 +8,7 @@ namespace Renderer
 	void PointGenerator::Default( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
 		auto numVertices = vertices.size();
-		for ( auto i = 0; i < numVertices; ++i )
+		for ( auto i = 0u; i < numVertices; ++i )
 		{
 			outRasterizers.emplace_back( std::make_unique<Point>( vertices[i] ) );
 		}

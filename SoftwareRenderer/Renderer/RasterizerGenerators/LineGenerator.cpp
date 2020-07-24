@@ -8,7 +8,7 @@ namespace Renderer
 	void LineGenerator::Default( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
 		auto numVertices = vertices.size() - 1;
-		for ( auto i = 0; i < numVertices; i += 2 )
+		for ( auto i = 0u; i < numVertices; i += 2 )
 		{
 			outRasterizers.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
@@ -17,7 +17,7 @@ namespace Renderer
 	void LineGenerator::Strip( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
 		auto numVertices = vertices.size() - 1;
-		for ( auto i = 0; i < numVertices; ++i )
+		for ( auto i = 0u; i < numVertices; ++i )
 		{
 			outRasterizers.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
@@ -26,7 +26,7 @@ namespace Renderer
 	void LineGenerator::Loop( VertexBuffer vertices, IRasterizerList& outRasterizers )
 	{
 		auto numVertices = vertices.size() - 1;
-		for ( auto i = 0; i < numVertices; ++i )
+		for ( auto i = 0u; i < numVertices; ++i )
 		{
 			outRasterizers.emplace_back( std::make_unique<Line>( vertices[i], vertices[i + 1] ) );
 		}
