@@ -52,6 +52,16 @@ public:
 		return (*this) + (-other);
 	}
 
+	inline TVector2 operator +( T scalar ) const
+	{
+		return (*this) + TVector2( scalar, scalar );
+	}
+
+	inline TVector2 operator -( T scalar ) const
+	{
+		return (*this) + -scalar;
+	}
+
 	inline TVector2 operator *( const int scalar ) const
 	{
 		return TVector2( x * scalar, y * scalar );
@@ -78,15 +88,30 @@ public:
 		y += other.y;
 	}
 
+	inline void operator +=( const T scalar )
+	{
+		(*this) += TVector2( scalar, scalar );
+	}
+
 	inline void operator -=( const TVector2& other )
 	{
 		(*this) += -other;
 	}
 
-	inline void operator *=( const float scalar )
+	inline void operator -=( const T scalar )
 	{
-		x *= scalar;
-		y *= scalar;
+		(*this) += -scalar;
+	}
+
+	inline void operator *=( const TVector2& other )
+	{
+		x *= other.x;
+		y *= other.y;
+	}
+
+	inline void operator *=( const T scalar )
+	{
+		x *= TVector( scalar, scalar );
 	}
 
 	inline bool operator ==( const TVector2& other ) const

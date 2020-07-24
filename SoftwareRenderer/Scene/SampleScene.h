@@ -1,6 +1,10 @@
 #pragma once
 #include "IScene.h"
-#include "Util/Bitmap.h"
+
+namespace Renderer
+{
+	class Texture2D;
+}
 
 class SampleScene final : public IScene
 {
@@ -12,7 +16,7 @@ public:
 	void Render( std::shared_ptr<IRenderer> renderer ) const override;
 
 private:
-	std::shared_ptr<const Bitmap> checker;
+	std::shared_ptr<Renderer::Texture2D> checker;
 	void DrawScene() const;
 };
 

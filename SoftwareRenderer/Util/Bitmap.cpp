@@ -2,12 +2,12 @@
 #include "Bitmap.h"
 #include "Math/Vector2.hpp"
 
-Bitmap::Bitmap( BITMAPINFOHEADER info, BYTE* data, RGBQUAD* palette )
+Bitmap::Bitmap( BITMAPINFOHEADER info, std::unique_ptr<BYTE[]> data, std::unique_ptr<RGBQUAD[]> palette )
 	: IImageSource( info.biWidth, info.biHeight )
 	, rowSize( info.biSizeImage / info.biHeight )
-	, pixels( data )
+	, pixels( std::move( data ) )
 	, pixelSize( info.biBitCount / 8 )
-	, palette( palette )
+	, palette( std::move( palette ) )
 {
 }
 
@@ -15,7 +15,7 @@ Bitmap::~Bitmap()
 {
 }
 
-std::shared_ptr<Bitmap> Bitmap::Load( LPCTSTR filePath )
+std::unique_ptr<Bitmap> Bitmap::Load( LPCTSTR filePath )
 {
 	FILE* file;
 	auto err = _tfopen_s( &file, filePath, _T( "rb" ) );
@@ -29,7 +29,7 @@ std::shared_ptr<Bitmap> Bitmap::Load( LPCTSTR filePath )
 	return bitmap;
 }
 
-std::shared_ptr<Bitmap> Bitmap::Parse( FILE* file )
+std::unique_ptr<Bitmap> Bitmap::Parse( FILE* file )
 {
 	BITMAPFILEHEADER header;
 	if ( fread( &header, sizeof( BITMAPFILEHEADER ), 1, file ) != 1 )
@@ -55,13 +55,13 @@ std::shared_ptr<Bitmap> Bitmap::Parse( FILE* file )
 	}
 
 	auto palette = ParsePalette( file, info );
-	auto data = new BYTE[info.biSizeImage];
-	fread( data, sizeof( BYTE ), info.biSizeImage, file );
+	std::unique_ptr<BYTE[]> data( new BYTE[info.biSizeImage] );
+	fread( data.get(), sizeof( BYTE ), info.biSizeImage, file );
 
-	return std::shared_ptr<Bitmap>( new Bitmap( info, data, palette ) );
+	return std::unique_ptr<Bitmap>( new Bitmap( info, std::move( data ), std::move( palette ) ) );
 }
 
-RGBQUAD* Bitmap::ParsePalette( FILE* file, BITMAPINFOHEADER& info )
+std::unique_ptr<RGBQUAD[]> Bitmap::ParsePalette( FILE* file, BITMAPINFOHEADER& info )
 {
 	if ( info.biCompression != BI_RGB || info.biBitCount > 8 )
 	{
@@ -73,8 +73,8 @@ RGBQUAD* Bitmap::ParsePalette( FILE* file, BITMAPINFOHEADER& info )
 		info.biClrUsed = 1 << info.biBitCount;
 	}
 
-	auto palette = new RGBQUAD[info.biClrUsed];
-	fread( palette, sizeof( RGBQUAD ), info.biClrUsed, file );
+	std::unique_ptr<RGBQUAD[]> palette( new RGBQUAD[info.biClrUsed] );
+	fread( palette.get(), sizeof( RGBQUAD ), info.biClrUsed, file );
 	return palette;
 }
 

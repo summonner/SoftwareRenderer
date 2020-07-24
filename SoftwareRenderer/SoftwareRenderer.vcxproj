@@ -200,6 +200,7 @@
     <ClInclude Include="Util\Bitmap.h" />
     <ClInclude Include="Util\IBaseIterator.h" />
     <ClInclude Include="Util\IImageSource.h" />
+    <ClInclude Include="Util\StlMapExtension.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">
@@ -238,6 +239,7 @@
     <ClCompile Include="Scene\SceneFactory.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Util\Bitmap.cpp" />
+    <ClCompile Include="Util\StlMapExtension.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>

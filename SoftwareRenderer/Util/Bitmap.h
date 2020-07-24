@@ -1,23 +1,22 @@
 #pragma once
 #include "Math/Vector4.hpp"
 #include "IImageSource.h"
-#include "Renderer/Texturing/ITexture.h"
 
-class Bitmap final : public IImageSource, public Renderer::ITexture
+class Bitmap final : public IImageSource
 {
 private:
-	Bitmap( BITMAPINFOHEADER info, BYTE* data, RGBQUAD* palette );
+	Bitmap( BITMAPINFOHEADER info, std::unique_ptr<BYTE[]> data, std::unique_ptr<RGBQUAD[]> palette );
 
 public:
-	static std::shared_ptr<Bitmap> Load( LPCTSTR filePath );
+	static std::unique_ptr<Bitmap> Load( LPCTSTR filePath );
 	~Bitmap();
 
 	Color4 GetPixel( const Vector2Int& p ) const override;
-	Vector4 GetPixel( const Vector2& uv ) const override;
+	Vector4 GetPixel( const Vector2& uv ) const;
 
 private:
-	static std::shared_ptr<Bitmap> Parse( FILE* file );
-	static RGBQUAD* ParsePalette( FILE* file, BITMAPINFOHEADER& info );
+	static std::unique_ptr<Bitmap> Parse( FILE* file );
+	static std::unique_ptr<RGBQUAD[]> ParsePalette( FILE* file, BITMAPINFOHEADER& info );
 	static const WORD BM = 0x4D42;
 
 private:
