@@ -2,11 +2,12 @@
 #include "Bitmap.h"
 #include "Math/Vector2.hpp"
 
-Bitmap::Bitmap( BITMAPINFOHEADER info, BYTE* data )
+Bitmap::Bitmap( BITMAPINFOHEADER info, BYTE* data, RGBQUAD* palette )
 	: IImageSource( info.biWidth, info.biHeight )
 	, rowSize( info.biSizeImage / info.biHeight )
 	, pixels( data )
 	, pixelSize( info.biBitCount / 8 )
+	, palette( palette )
 {
 }
 
@@ -23,18 +24,12 @@ std::shared_ptr<Bitmap> Bitmap::Load( LPCTSTR filePath )
 		return nullptr;
 	}
 
-	BITMAPINFOHEADER info;
-	auto bytes = Parse( file, info );
+	auto bitmap = Parse( file );
 	fclose( file );
-	if ( bytes == nullptr )
-	{
-		return nullptr;
-	}
-
-	return std::shared_ptr<Bitmap>( new Bitmap( info, bytes ) );
+	return bitmap;
 }
 
-BYTE* Bitmap::Parse( FILE* file, BITMAPINFOHEADER& outInfo )
+std::shared_ptr<Bitmap> Bitmap::Parse( FILE* file )
 {
 	BITMAPFILEHEADER header;
 	if ( fread( &header, sizeof( BITMAPFILEHEADER ), 1, file ) != 1 )
@@ -42,25 +37,45 @@ BYTE* Bitmap::Parse( FILE* file, BITMAPINFOHEADER& outInfo )
 		return nullptr;
 	}
 
-	if ( header.bfType != 0x4D42 )
+	if ( header.bfType != BM )
 	{
 		return nullptr;
 	}
 
-	if ( fread( &outInfo, sizeof( BITMAPINFOHEADER ), 1, file ) != 1 )
+	BITMAPINFOHEADER info;
+	if ( fread( &info, sizeof( BITMAPINFOHEADER ), 1, file ) != 1 )
 	{
 		return nullptr;
 	}
 
-	if ( outInfo.biSizeImage == 0 )
+	if ( info.biSizeImage == 0 )
 	{
-		auto rowSize = (outInfo.biWidth + 3) & ~3;
-		outInfo.biSizeImage = rowSize * outInfo.biHeight * (outInfo.biBitCount / 8);
+		auto rowSize = (info.biWidth + 3) & ~3;
+		info.biSizeImage = rowSize * info.biHeight * (info.biBitCount / 8);
 	}
 
-	auto bytes = new BYTE[outInfo.biSizeImage];
-	fread( bytes, sizeof( BYTE ), outInfo.biSizeImage, file );
-	return bytes;
+	auto palette = ParsePalette( file, info );
+	auto data = new BYTE[info.biSizeImage];
+	fread( data, sizeof( BYTE ), info.biSizeImage, file );
+
+	return std::shared_ptr<Bitmap>( new Bitmap( info, data, palette ) );
+}
+
+RGBQUAD* Bitmap::ParsePalette( FILE* file, BITMAPINFOHEADER& info )
+{
+	if ( info.biCompression != BI_RGB || info.biBitCount > 8 )
+	{
+		return nullptr;
+	}
+
+	if ( info.biClrUsed == 0 )
+	{
+		info.biClrUsed = 1 << info.biBitCount;
+	}
+
+	auto palette = new RGBQUAD[info.biClrUsed];
+	fread( palette, sizeof( RGBQUAD ), info.biClrUsed, file );
+	return palette;
 }
 
 Color4 Bitmap::GetPixel( const Vector2Int& p ) const
@@ -73,6 +88,18 @@ Color4 Bitmap::GetPixel( const Vector2Int& p ) const
 					   pixels[i + 1],
 					   pixels[i + 0],
 					   255 );
+	case 1:
+		if ( palette == nullptr )
+		{
+			assert( "Unknown format" && false );
+			return Color4::zero;
+		}
+		auto color = palette[pixels[i]];
+		return Color4( color.rgbRed,
+					   color.rgbGreen,
+					   color.rgbBlue, 
+					   255 );
+
 	default:
 		assert( "Not implemented yet" && false );
 		return Color4::zero;
