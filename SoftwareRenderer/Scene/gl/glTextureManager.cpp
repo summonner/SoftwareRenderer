@@ -18,12 +18,12 @@ void glTextureManager::Generate( int num, GLuint* outHandles )
 	while ( num > 0 && i < MAXUINT )
 	{
 		++i;
-		if ( textures.find( i ) != textures.end() )
+		if ( textures.Contains( i ) == true )
 		{
 			continue;
 		}
 
-		textures.emplace( i, nullptr );
+		textures.Add( i, nullptr );
 
 		*outHandles = i;
 		++outHandles;
@@ -38,7 +38,7 @@ void glTextureManager::Delete( GLuint handle )
 		return;
 	}
 
-	textures.erase( handle );
+	textures.Remove( handle );
 }
 
 std::shared_ptr<ITexture> glTextureManager::Bind( GLuint handle )
@@ -79,7 +79,7 @@ Color4 glTextureManager::glImageSource::GetPixel( const Vector2Int& p ) const
 	switch ( format )
 	{
 	case GL_RGB:
-		return Color4( pixels[i + 0],
+		return Color4(  pixels[i + 0],
 						pixels[i + 1],
 						pixels[i + 2],
 						255 );

@@ -1,6 +1,7 @@
 #pragma once
 #include "Renderer/IRenderer.h"
 #include "Types.h"
+#include "Util/Dictionary.hpp"
 
 namespace Renderer
 {
@@ -16,8 +17,7 @@ namespace Renderer
 
 	private:
 		using GeneratorFunction = std::function<void( const std::vector<Vertex>&, IRasterizerList& )>;
-		static std::map<IRenderer::DrawMode, const GeneratorFunction> table;
-		static const GeneratorFunction FindGenerator( IRenderer::DrawMode mode );
+		static const Dictionary<IRenderer::DrawMode, const GeneratorFunction> table;
 
 		GeneratorFunction generator;
 		IRasterizerList rasterizers;

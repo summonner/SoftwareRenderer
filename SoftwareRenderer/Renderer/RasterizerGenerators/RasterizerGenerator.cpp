@@ -8,7 +8,7 @@
 
 namespace Renderer
 {
-	std::map<IRenderer::DrawMode, const RasterizerGenerator::GeneratorFunction> RasterizerGenerator::table
+	const Dictionary<IRenderer::DrawMode, const RasterizerGenerator::GeneratorFunction> RasterizerGenerator::table
 	{
 		{ IRenderer::DrawMode::Points,		PointGenerator::Default },
 		{ IRenderer::DrawMode::Lines,		LineGenerator::Default },
@@ -30,19 +30,7 @@ namespace Renderer
 
 	void RasterizerGenerator::Begin( IRenderer::DrawMode mode )
 	{
-		generator = FindGenerator( mode );
-	}
-
-	const RasterizerGenerator::GeneratorFunction RasterizerGenerator::FindGenerator( IRenderer::DrawMode mode )
-	{
-		if ( const auto& found { table.find( mode ) }; found != table.end() )
-		{
-			return found->second;
-		}
-		else
-		{
-			return nullptr;
-		}
+		generator = table[mode];
 	}
 
 	const IRasterizerList& RasterizerGenerator::Generate( const VertexBuffer& vertices )

@@ -5,26 +5,24 @@
 #include "SampleScene.h"
 #include "resource.h"
 
-std::map<int, SceneFactory::CreateFunc> SceneFactory::table =
+const Dictionary<UINT, SceneFactory::CreateFunc> SceneFactory::table(
 {
 	{ ID_SCENE_DEFAULT, Create<SampleScene> },
 	{ ID_SCENE_NEHE, Create<NeHeSample> }
-};
+}, OnInvalidSceneId );
 
-std::unique_ptr<IScene> SceneFactory::Create( std::shared_ptr<IRenderer> renderer, int resourceId )
+std::unique_ptr<IScene> SceneFactory::Create( std::shared_ptr<IRenderer> renderer, UINT resourceId )
 {
-	if ( const auto& found{ table.find( resourceId ) }; found != table.end() )
-	{
-		return found->second( renderer );
-	}
-	else
-	{
-		return nullptr;
-	}
+	return table[resourceId]( renderer );
 }
 
 template<typename T>
 std::unique_ptr<IScene> SceneFactory::Create( std::shared_ptr<IRenderer> renderer )
 {
 	return std::make_unique<T>( renderer );
+}
+
+std::unique_ptr<IScene> SceneFactory::OnInvalidSceneId( std::shared_ptr<IRenderer> renderer )
+{
+	return nullptr;
 }

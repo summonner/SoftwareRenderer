@@ -1,6 +1,7 @@
 #pragma once
 #include "glAdapter.h"
 #include "Util/IImageSource.h"
+#include "Util/Dictionary.hpp"
 
 namespace Renderer
 {
@@ -21,7 +22,7 @@ public:
 	void SetImage( GLint level, GLint internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels );
 
 private:
-	std::map<GLuint, std::shared_ptr<ITexture>> textures;
+	Dictionary<GLuint, std::shared_ptr<ITexture>> textures;
 	GLuint current;
 
 
