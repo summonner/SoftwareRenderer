@@ -165,6 +165,7 @@
     <ClInclude Include="Math\Vector2.hpp" />
     <ClInclude Include="Math\Vector3.hpp" />
     <ClInclude Include="Math\Vector4.hpp" />
+    <ClInclude Include="Mipmap.h" />
     <ClInclude Include="Renderer\DepthBuffer.h" />
     <ClInclude Include="Renderer\FrameBuffer.h" />
     <ClInclude Include="Renderer\GdiRenderer.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Scene\SceneFactory.h" />
     <ClInclude Include="SoftwareRenderer.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TextureFilter.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Util\Bitmap.h" />
     <ClInclude Include="Util\IBaseIterator.h" />
@@ -214,6 +216,7 @@
     <ClCompile Include="Math\Matrix4x4.cpp" />
     <ClCompile Include="Math\RangeInt.cpp" />
     <ClCompile Include="Math\RangeIterator.cpp" />
+    <ClCompile Include="Mipmap.cpp" />
     <ClCompile Include="Renderer\DepthBuffer.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />
     <ClCompile Include="Renderer\GdiRenderer.cpp" />
@@ -239,6 +242,7 @@
     <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp" />
     <ClCompile Include="Scene\SampleScene.cpp" />
     <ClCompile Include="Scene\SceneFactory.cpp" />
+    <ClCompile Include="TextureFilter.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Util\Bitmap.cpp" />
     <ClCompile Include="WinMain.cpp" />

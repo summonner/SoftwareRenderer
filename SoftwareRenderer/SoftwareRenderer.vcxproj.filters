@@ -156,9 +156,6 @@
     <ClInclude Include="Scene\gl\glAdapter.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Texturing\ITexture.h">
-      <Filter>Renderer\Texturing</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Texturing\Texture2D.h">
       <Filter>Renderer\Texturing</Filter>
     </ClInclude>
@@ -182,6 +179,15 @@
     </ClInclude>
     <ClInclude Include="Util\Dictionary.hpp">
       <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Mipmap.h">
+      <Filter>Renderer\Texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Texturing\ITexture.h">
+      <Filter>Renderer\Texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureFilter.h">
+      <Filter>Renderer\Texturing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +301,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Texturing\WrapMode.cpp">
+      <Filter>Renderer\Texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="Mipmap.cpp">
+      <Filter>Renderer\Texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureFilter.cpp">
       <Filter>Renderer\Texturing</Filter>
     </ClCompile>
   </ItemGroup>

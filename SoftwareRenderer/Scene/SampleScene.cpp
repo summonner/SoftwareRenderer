@@ -18,6 +18,8 @@ SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
 	auto bitmap = Bitmap::Load( _T( "Data/Crate.bmp" ) );
 	checker = std::make_shared<Renderer::Texture2D>( bitmap.get() );
 	checker->SetWrapMode( WrapMode::MirroredRepeat, WrapMode::MirroredRepeat );
+	checker->SetFilter( TextureMagFilter::Linear );
+	checker->SetFilter( TextureMinFilter::LinearMipmapNearest );
 }
 
 
