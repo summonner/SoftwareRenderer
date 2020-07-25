@@ -71,10 +71,10 @@ namespace Renderer
 					return;
 				}
 
-				Vector4 color = p.color;
+				Vector4 color = p.GetColor();
 				if ( texture != nullptr )
 				{
-					color *= texture->GetPixel( p.texcoord );
+					color *= texture->GetPixel( p.GetTexcoord() );
 				}
 
 				backBuffer->SetPixel( p.coordinate, color );

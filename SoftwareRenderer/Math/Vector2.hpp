@@ -111,7 +111,7 @@ public:
 
 	inline void operator *=( const T scalar )
 	{
-		x *= TVector( scalar, scalar );
+		(*this) *= TVector2( scalar, scalar );
 	}
 
 	inline bool operator ==( const TVector2& other ) const

@@ -4,21 +4,29 @@
 
 namespace Renderer
 {
+	class Bresenham;
 	class RasterizedPixel
 	{
 	public:
-		RasterizedPixel( const Vector2Int& coordinate, const Vector4& color, float depth, const Vector2& texcoord );
+		RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord );
+		RasterizedPixel( const Bresenham& edge );
 		~RasterizedPixel();
+
+		Vector4 GetColor() const;
+		Vector2 GetTexcoord() const;
 
 		const static RasterizedPixel discard;
 	private:
 		RasterizedPixel();
 
 	public:
-		const Vector2Int coordinate;
 		const bool isValid;
-		const Vector4 color;
+		const Vector2Int coordinate;
 		const float depth;
+
+	private:
+		const float w;
+		const Vector4 color;
 		const Vector2 texcoord;
 	};
 
