@@ -15,11 +15,11 @@ void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> tex
 SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
 	: checker( nullptr )
 {
-	auto bitmap = Bitmap::Load( _T( "Data/Crate.bmp" ) );
-	checker = std::make_shared<Renderer::Texture2D>( bitmap.get() );
+	const auto bitmap = Bitmap::Load( _T( "Data/Crate.bmp" ) );
+	checker = std::make_shared<Renderer::Texture2D>( *bitmap, true );
 	checker->SetWrapMode( WrapMode::MirroredRepeat, WrapMode::MirroredRepeat );
 	checker->SetFilter( TextureMagFilter::Linear );
-	checker->SetFilter( TextureMinFilter::LinearMipmapNearest );
+	checker->SetFilter( TextureMinFilter::LinearMipmapLinear );
 }
 
 

@@ -11,7 +11,8 @@ namespace Renderer
 	class Texture2D final : public ITexture
 	{
 	public:
-		Texture2D( IImageSource* data );
+		Texture2D( const IImageSource& source );
+		Texture2D( const IImageSource& source, const bool buildMipmap );
 		~Texture2D();
 
 		Vector4 GetPixel( const Vector2& uv ) const;

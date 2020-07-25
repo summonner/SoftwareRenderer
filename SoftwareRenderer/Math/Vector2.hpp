@@ -140,6 +140,11 @@ public:
 
 	static TVector2 Lerp( const TVector2& left, const TVector2& right, const float t );
 	static const TVector2<T> zero;
+	static const TVector2<T> one;
+	static const TVector2<T> left;
+	static const TVector2<T> right;
+	static const TVector2<T> up;
+	static const TVector2<T> down;
 
 public:
 	T x;
@@ -148,6 +153,21 @@ public:
 
 template<typename T>
 const TVector2<T> TVector2<T>::zero = TVector2( T( 0 ), T( 0 ) );
+
+template<typename T>
+const TVector2<T> TVector2<T>::one = TVector2( T( 1 ), T( 1 ) );
+
+template<typename T>
+const TVector2<T> TVector2<T>::left = TVector2( T( -1 ), T( 0 ) );
+
+template<typename T>
+const TVector2<T> TVector2<T>::right = TVector2( T( 1 ), T( 0 ) );
+
+template<typename T>
+const TVector2<T> TVector2<T>::up = TVector2( T( 0 ), T( 1 ) );
+
+template<typename T>
+const TVector2<T> TVector2<T>::down = TVector2( T( 0 ), T( -1 ) );
 
 template<typename T>
 inline const TVector2<T> operator *( const int scalar, const TVector2<T>& vector )

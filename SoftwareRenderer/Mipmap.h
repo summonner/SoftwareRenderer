@@ -1,16 +1,20 @@
 #pragma once
 #include "Math/Vector2.hpp"
+#include "Util/IImageSource.h"
 
-class IImageSource;
 namespace Renderer
 {
-	class Mipmap final
+	class Mipmap final : private IImageSource
 	{
 	public:
-		Mipmap( IImageSource* source );
+		Mipmap( const Mipmap& source );
+		Mipmap( const IImageSource& source );
 		~Mipmap();
 
 		Vector4 GetPixel( int x, int y ) const;
+
+	private:
+		Color4 GetPixel( const Vector2Int& p ) const override;
 
 	private:
 		inline int ToIndex( int x, int y ) const
@@ -19,8 +23,6 @@ namespace Renderer
 		}
 
 	public:
-		const int width;
-		const int height;
 		const Vector2 size;
 
 	private:

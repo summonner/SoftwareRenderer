@@ -59,7 +59,7 @@ void glTextureManager::SetImage( GLint level, GLint internalformat, GLsizei widt
 		return;
 	}
 
-	auto source = new glImageSource( width, height, format, type, pixels );
+	glImageSource source( width, height, format, type, pixels );
 	textures[current].reset( new Renderer::Texture2D( source ) );
 }
 

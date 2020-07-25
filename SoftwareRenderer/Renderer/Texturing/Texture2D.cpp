@@ -7,10 +7,29 @@
 
 namespace Renderer
 {
-	Texture2D::Texture2D( IImageSource* image )
+	Texture2D::Texture2D( const IImageSource& source )
+		: Texture2D( source, false )
 	{
-		mipmaps.reserve( 1 );
-		mipmaps.emplace_back( std::make_unique<Mipmap>( image ) );
+	}
+
+	Texture2D::Texture2D( const IImageSource& source, const bool buildMipmap )
+	{
+		if ( buildMipmap == false )
+		{
+			mipmaps.reserve( 1 );
+			mipmaps.emplace_back( std::make_unique<Mipmap>( source ) );
+			return;
+		}
+
+		auto length = std::max( source.width, source.height );
+		mipmaps.reserve( (int)std::_Ceiling_of_log_2( length ) );
+		mipmaps.emplace_back( std::make_unique<Mipmap>( source ) );
+
+		while ( length >>= 1 )
+		{
+			mipmaps.emplace_back( std::make_unique<Mipmap>( *mipmaps[mipmaps.size() - 1] ) );
+		}
+
 	}
 
 	Texture2D::~Texture2D()
