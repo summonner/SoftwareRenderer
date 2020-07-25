@@ -8,8 +8,7 @@ namespace Renderer
 {
 	Texture2D::Texture2D( IImageSource* image )
 		: width( image->width )
-		, size( image->width - 1, image->height - 1 )
-		, texelSize( 1.f / image->width, 1.f / image->height )
+		, size( image->width - 1.f, image->height - 1.f )
 		, data( new Color4[ image->width * image->height ] )
 	{
 		for ( auto p : *image )
@@ -27,7 +26,7 @@ namespace Renderer
 	Vector4 Texture2D::GetPixel( const Vector2& uv ) const
 	{
 		auto wrapped = wrapMode( uv );
-		return FilterNearest( wrapped );
+		return FilterLinear( wrapped );
 	}
 
 	void Texture2D::SetWrapMode( WrapMode::Type uMode, WrapMode::Type vMode )
@@ -45,13 +44,75 @@ namespace Renderer
 
 	Vector4 Texture2D::FilterNearest( const Vector2& uv ) const
 	{
-		auto p = uv * size;
+		auto p = uv * size + 0.5f;
 		return GetPixel( (int)p.x, (int)p.y );
 	}
 
 	Vector4 Texture2D::FilterLinear( const Vector2& uv ) const
 	{
-		return Vector4::zero;
+		Vector2Int p( uv * size );
+		Vector2 t = uv * size - p;
+		if ( t.x <= 0.f )
+		{
+			if ( t.y <= 0.f )
+			{
+				return GetPixel( p.x, p.y );
+			}
+			else if ( t.y >= 1.f )
+			{
+				return GetPixel( p.x, p.y + 1 );
+			}
+			else
+			{
+				auto p00 = GetPixel( p.x, p.y );
+				auto p01 = GetPixel( p.x, p.y + 1 );
+				return Vector4::Lerp( p00, p01, t.y );
+			}
+		}
+		else if ( t.x >= 1.f )
+		{
+			if ( t.y <= 0.f )
+			{
+				return GetPixel( p.x + 1, p.y );
+			}
+			else if ( t.y >= 1.f )
+			{
+				return GetPixel( p.x + 1, p.y + 1 );
+			}
+			else
+			{
+				auto p10 = GetPixel( p.x + 1, p.y );
+				auto p11 = GetPixel( p.x + 1, p.y + 1 );
+				return Vector4::Lerp( p10, p11, t.y );
+			}
+		}
+		else
+		{
+			if ( t.y <= 0.f )
+			{
+				auto p00 = GetPixel( p.x, p.y );
+				auto p10 = GetPixel( p.x + 1, p.y );
+				return Vector4::Lerp( p00, p10, t.x );
+			}
+			else if ( t.y >= 1.f )
+			{
+				auto p01 = GetPixel( p.x + 1, p.y );
+				auto p11 = GetPixel( p.x + 1, p.y + 1 );
+				return Vector4::Lerp( p01, p11, t.x );
+			}
+			else
+			{
+				auto p00 = GetPixel( p.x, p.y );
+				auto p10 = GetPixel( p.x + 1, p.y );
+				auto p01 = GetPixel( p.x, p.y + 1 );
+				auto p11 = GetPixel( p.x + 1, p.y + 1 );
+
+				return p00 * (1 - t.x) * (1 - t.y)
+					+ p10 * t.x * (1 - t.y)
+					+ p01 * (1 - t.x) * t.y
+					+ p11 * t.x * t.y;
+			}
+		}
 	}
 
 

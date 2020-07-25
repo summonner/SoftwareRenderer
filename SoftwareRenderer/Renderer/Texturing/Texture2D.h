@@ -29,7 +29,6 @@ namespace Renderer
 	private:
 		const int width;
 		const Vector2 size;
-		const Vector2 texelSize;
 		const std::unique_ptr<Color4[]> data;
 
 	private:

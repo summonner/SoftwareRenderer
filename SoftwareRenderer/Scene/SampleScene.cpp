@@ -56,10 +56,10 @@ void SampleScene::DrawScene() const
 
 	glLoadIdentity();
 	glBindTexture( GL_TEXTURE_2D, checker );
-	glTranslatef( 1.5f, 0.0f, -6.0f );
-	glRotatef( x * 90.f, 1.f, 0.f, 0.f );
+	glTranslatef( 1.5f * (1 - x), 0.0f, -6.0f + 5.5f * x );
+//	glRotatef( x * 90.f, 1.f, 0.f, 0.f );
 	glBegin( GL_QUADS );
-	auto min = -3.f;
+	auto min = -0.f;
 	auto max = -min + 1.f;
 //	glColor3f( 1.0f, 0.5f, 0.5f );
 	glTexCoord2f( min, max );
