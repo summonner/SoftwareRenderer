@@ -56,6 +56,11 @@ public:
 		return TVector4( x * scalar, y * scalar, z * scalar, w * scalar );
 	}
 
+	inline TVector4 operator *( const TVector4& other ) const
+	{
+		return TVector4( x * other.x, y * other.y, z * other.z, w * other.w );
+	}
+
 	inline TVector4 operator /( const float scalar ) const
 	{
 		return (*this) * (1.f / scalar);

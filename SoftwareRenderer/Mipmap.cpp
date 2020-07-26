@@ -3,7 +3,6 @@
 #include "Math/Vector4.hpp"
 #include "Util/IImageSource.h"
 
-
 namespace Renderer
 {
 	Mipmap::Mipmap( const IImageSource& source )
@@ -20,9 +19,9 @@ namespace Renderer
 	}
 
 	Mipmap::Mipmap( const Mipmap& source )
-		: IImageSource( source.width / 2, source.height / 2 )
-		, size( this->width - 1.f, this->height - 1.f )
-		, data( new Color4[this->width * this->height] )
+		: IImageSource( std::max( source.width / 2, 1 ), std::max( source.height / 2, 1 ) )
+		, size( width - 1.f, height - 1.f )
+		, data( new Color4[width * height] )
 	{
 		for ( auto p : *this )
 		{

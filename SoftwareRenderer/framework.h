@@ -25,6 +25,7 @@
 
 #include "Math/MathExt.h"
 #include "Math/Vector.h"
+#include "Util/Dictionary.hpp"
 
 #undef max
 #undef min

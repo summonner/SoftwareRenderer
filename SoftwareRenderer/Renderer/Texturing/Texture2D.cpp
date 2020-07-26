@@ -13,6 +13,7 @@ namespace Renderer
 	}
 
 	Texture2D::Texture2D( const IImageSource& source, const bool buildMipmap )
+		: size( (float)source.width, (float)source.height )
 	{
 		if ( buildMipmap == false )
 		{
@@ -36,10 +37,18 @@ namespace Renderer
 	{
 	}
 
-	Vector4 Texture2D::GetPixel( const Vector2& uv ) const
+	float Texture2D::CalculateMipLevel( Vector2 ddx, Vector2 ddy ) const
+	{
+		ddx *= size;
+		ddy *= size;
+		const auto maxDelta = std::max( ddx.Dot( ddx ), ddy.Dot( ddy ) );
+		return std::log2f( maxDelta ) * 0.5f;
+	}
+
+	Vector4 Texture2D::GetPixel( const Vector2& uv, const float mipLevel ) const
 	{
 		const auto wrapped = wrapMode( uv );
-		return filter( wrapped, mipmaps, 0 );
+		return filter( wrapped, mipmaps, mipLevel );
 	}
 
 	void Texture2D::SetFilter( TextureFilter::MinType type )

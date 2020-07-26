@@ -74,7 +74,11 @@ namespace Renderer
 				Vector4 color = p.GetColor();
 				if ( texture != nullptr )
 				{
-					color *= texture->GetPixel( p.GetTexcoord() );
+					const auto d = 1.f / 256.f * 1.f;
+					const auto ddx = Vector2( d, 0.f );
+					const auto ddy = Vector2( 0.f, d );
+					const auto mipLevel = texture->CalculateMipLevel( ddx, ddy );
+					color *= texture->GetPixel( p.GetTexcoord(), mipLevel );
 				}
 
 				backBuffer->SetPixel( p.coordinate, color );

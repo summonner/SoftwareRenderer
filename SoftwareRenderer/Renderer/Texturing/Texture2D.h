@@ -15,12 +15,15 @@ namespace Renderer
 		Texture2D( const IImageSource& source, const bool buildMipmap );
 		~Texture2D();
 
-		Vector4 GetPixel( const Vector2& uv ) const;
+		float CalculateMipLevel( Vector2 ddx, Vector2 ddy ) const override;
+		Vector4 GetPixel( const Vector2& uv, const float mipLevel ) const override;
 		void SetWrapMode( WrapMode::Type u, WrapMode::Type v );
 		void SetFilter( TextureFilter::MinType type );
 		void SetFilter( TextureFilter::MagType type );
 
 	private:
+		const Vector2 size;
+
 		struct WrapModes
 		{
 			WrapMode u;

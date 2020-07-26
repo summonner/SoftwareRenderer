@@ -25,7 +25,7 @@ namespace Renderer
 
 	void FrameBuffer::Clear()
 	{
-		memset( pixels.get(), 0, sizeof( BYTE ) * info.biSizeImage );
+		memset( pixels.get(), 128, sizeof( BYTE ) * info.biSizeImage );
 	}
 
 	void FrameBuffer::BitBlt( const HDC source )
