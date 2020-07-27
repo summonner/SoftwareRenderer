@@ -20,7 +20,7 @@ namespace Renderer
 
 		inline static PixelIterator end( int width, int height )
 		{
-			return PixelIterator( width, height, width - 1, height - 1 );
+			return PixelIterator( width, height, 0, height );
 		}
 
 	private:

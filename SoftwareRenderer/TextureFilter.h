@@ -44,18 +44,18 @@ namespace Renderer
 			FilterFunc filter;
 		} minFilter;
 
-	private:
+	public:
 		static Vector4 Nearest( const Vector2& p, const Mipmap& mipmap );
 		static Vector4 Linear( const Vector2& p, const Mipmap& mipmap );
-		static const Dictionary<MagType, FilterFunc> magTable;
 
-		static const MinFilter MinNearest;
-
+	private:
 		static std::pair<int, float> NoMipmap( float mipLevel );
 		static std::pair<int, float> NearestMipmap( float mipLevel );
 		static std::pair<int, float> LinearMipmap( float mipLevel );
 
+		static const Dictionary<MagType, FilterFunc> magTable;
 		static const Dictionary<MinType, MinFilter> minTable;
+		static const MinFilter MinNearest;
 	};
 }
 

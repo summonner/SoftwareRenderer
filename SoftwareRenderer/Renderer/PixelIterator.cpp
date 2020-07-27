@@ -21,7 +21,7 @@ namespace Renderer
 		{
 			current.x += 1;
 		}
-		else if ( current.y < height - 1 )
+		else
 		{
 			current.x = 0;
 			current.y += 1;

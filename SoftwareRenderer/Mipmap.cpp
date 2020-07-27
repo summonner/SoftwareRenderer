@@ -2,6 +2,7 @@
 #include "Mipmap.h"
 #include "Math/Vector4.hpp"
 #include "Util/IImageSource.h"
+#include "TextureFilter.h"
 
 namespace Renderer
 {
@@ -19,25 +20,21 @@ namespace Renderer
 	}
 
 	Mipmap::Mipmap( const Mipmap& source )
-		: IImageSource( std::max( source.width / 2, 1 ), std::max( source.height / 2, 1 ) )
+		: IImageSource( (source.width + 1) / 2, (source.height + 1) / 2 )
 		, size( width - 1.f, height - 1.f )
 		, data( new Color4[width * height] )
 	{
 		for ( auto p : *this )
 		{
 			const auto i = ToIndex( p.x, p.y );
-			p *= 2;
-			const auto p00 = source.GetPixel( p );
-			const auto p10 = source.GetPixel( p + Vector2Int::right );
-			const auto p01 = source.GetPixel( p + Vector2Int::up );
-			const auto p11 = source.GetPixel( p + Vector2Int::one );
-
-			data[i] = Color4(
-				(BYTE)(p00.x * 0.25f + p10.x * 0.25f + p01.x * 0.25f + p11.x * 0.25f),
-				(BYTE)(p00.y * 0.25f + p10.y * 0.25f + p01.y * 0.25f + p11.y * 0.25f),
-				(BYTE)(p00.z * 0.25f + p10.z * 0.25f + p01.z * 0.25f + p11.z * 0.25f),
-				(BYTE)(p00.w * 0.25f + p10.w * 0.25f + p01.w * 0.25f + p11.w * 0.25f)
-			);
+			auto q = (Vector2( p ) * 2 + 0.5) / source.size;
+			q.x = std::min( q.x, 1.f );
+			q.y = std::min( q.y, 1.f );
+			const auto color = TextureFilter::Linear( q, source );
+			data[i] = Color4( color.x * 255
+							, color.y * 255
+							, color.z * 255
+							, color.w * 255 );
 		}
 	}
 

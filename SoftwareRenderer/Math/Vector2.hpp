@@ -79,7 +79,12 @@ public:
 
 	inline TVector2 operator /( const float scalar ) const
 	{
-		return *this * (1.f / scalar);
+		return (*this) * (1.f / scalar);
+	}
+
+	inline TVector2 operator /( const TVector2& other ) const
+	{
+		return TVector2( x / other.x, y / other.y );
 	}
 
 	inline void operator +=( const TVector2& other )
@@ -112,6 +117,18 @@ public:
 	inline void operator *=( const T scalar )
 	{
 		(*this) *= TVector2( scalar, scalar );
+	}
+
+	inline void operator /=( const TVector2& other )
+	{
+		x /= other.x;
+		y /= other.y;
+	}
+
+	inline void operator /=( const float scalar )
+	{
+		x /= scalar;
+		y /= scalar;
 	}
 
 	inline bool operator ==( const TVector2& other ) const
