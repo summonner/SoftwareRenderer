@@ -23,7 +23,7 @@ namespace Renderer
 		}
 
 		auto length = std::max( source.width, source.height );
-		mipmaps.reserve( (int)std::_Ceiling_of_log_2( length ) );
+		mipmaps.reserve( (int)std::ceilf( std::log2( length ) ) );
 		mipmaps.emplace_back( std::make_unique<Mipmap>( source ) );
 
 		while ( length >>= 1 )
