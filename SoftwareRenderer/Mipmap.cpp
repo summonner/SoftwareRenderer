@@ -42,8 +42,21 @@ namespace Renderer
 	{
 	}
 
+	Dictionary<int, Vector4> colors( {
+		{ 225, { 1, 1, 1, 1 } },
+		{ 113, { 1, 0, 0, 1 } },
+		{  57, { 0, 1, 0, 1 } },
+		{  29, { 0, 0, 1, 1 } },
+		{  15, { 1, 0, 0, 1 } },
+		{   8, { 0, 1, 0, 1 } },
+		{   4, { 0, 0, 1, 1 } },
+		{   2, { 1, 0, 0, 1 } },
+		{   1, { 0, 1, 0, 1 } },
+	}, Vector4( 0.2f, 0.2f, 0.2f, 1 ) );
+
 	Vector4 Mipmap::GetPixel( int x, int y ) const
 	{
+		return colors[width];
 		const auto i = ToIndex( x, y );
 		const auto pixel = data[i];
 		return Vector4( pixel.x, pixel.y, pixel.z, pixel.w ) / 255.f;

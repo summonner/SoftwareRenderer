@@ -23,7 +23,7 @@ namespace Renderer
 		}
 
 		auto length = std::max( source.width, source.height );
-		mipmaps.reserve( (int)std::ceilf( std::log2( length ) ) );
+		mipmaps.reserve( (int)std::ceil( std::log2( length ) ) );
 		mipmaps.emplace_back( std::make_unique<Mipmap>( source ) );
 
 		while ( length >>= 1 )
@@ -42,6 +42,10 @@ namespace Renderer
 		ddx *= size;
 		ddy *= size;
 		const auto maxDelta = std::max( ddx.Dot( ddx ), ddy.Dot( ddy ) );
+		if ( isnan( maxDelta ) )
+		{
+			return 0.f;
+		}
 		return std::log2f( maxDelta ) * 0.5f;
 	}
 

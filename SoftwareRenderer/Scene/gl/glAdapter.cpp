@@ -36,6 +36,11 @@ WINGDIAPI void APIENTRY glRotatef( GLfloat angle, GLfloat x, GLfloat y, GLfloat 
 	renderer->Rotate( angle, x, y, z );
 }
 
+WINGDIAPI void APIENTRY glScalef( GLfloat x, GLfloat y, GLfloat z )
+{
+	renderer->Scale( x, y, z );
+}
+
 IRenderer::DrawMode Convert( GLenum mode )
 {
 	switch ( mode )

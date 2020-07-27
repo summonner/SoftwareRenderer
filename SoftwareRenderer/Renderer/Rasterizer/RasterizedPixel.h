@@ -8,8 +8,8 @@ namespace Renderer
 	class RasterizedPixel
 	{
 	public:
-		RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord );
-		RasterizedPixel( const Bresenham& edge );
+		RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord, const Vector2 ddx = Vector2::zero, const Vector2 ddy = Vector2::zero );
+		RasterizedPixel( const Bresenham& edge, const Vector2 ddx = Vector2::zero, const Vector2 ddy = Vector2::zero );
 		~RasterizedPixel();
 
 		Vector4 GetColor() const;
@@ -23,6 +23,7 @@ namespace Renderer
 		const bool isValid;
 		const Vector2Int coordinate;
 		const float depth;
+		const Vector2 ddx, ddy;
 
 	private:
 		const float w;

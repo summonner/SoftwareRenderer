@@ -15,11 +15,11 @@ void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> tex
 SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
 	: checker( nullptr )
 {
-	const auto bitmap = Bitmap::Load( _T( "Data/Crate.bmp" ) );
+	const auto bitmap = Bitmap::Load( _T( "Data/Checker.bmp" ) );
 	checker = std::make_shared<Renderer::Texture2D>( *bitmap, true );
 	checker->SetWrapMode( WrapMode::MirroredRepeat, WrapMode::MirroredRepeat );
 	checker->SetFilter( TextureMagFilter::Linear );
-	checker->SetFilter( TextureMinFilter::LinearMipmapLinear );
+	checker->SetFilter( TextureMinFilter::NearestMipmapLinear );
 }
 
 
@@ -38,7 +38,7 @@ void SampleScene::DrawScene() const
 {
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	glLoadIdentity();
-
+	
 	glBindTexture( GL_TEXTURE_2D, 0 );
 	glTranslatef( -1.5f, 0.0f, -6.0f + 3 * 0 );
 	glRotatef( x * -90.f, 0.f, 1.f, 0.f );
@@ -58,9 +58,10 @@ void SampleScene::DrawScene() const
 
 	glLoadIdentity();
 	glBindTexture( GL_TEXTURE_2D, checker );
-	glTranslatef( 1.5f * (1 - x), 0.0f, -6.0f + 5.5f * x );
+	glTranslatef( 1.5f * (1 - x), 0.0f, -6.0f + 5.5f * 0 );
+	glScalef( x, x, 1 );
 //	glRotatef( x * 90.f, 1.f, 0.f, 0.f );
-	glBegin( GL_QUADS );
+	glBegin( GL_LINE_LOOP );
 	auto min = -0.f;
 	auto max = -min + 1.f;
 //	glColor3f( 1.0f, 0.5f, 0.5f );
