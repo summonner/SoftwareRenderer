@@ -31,10 +31,10 @@ namespace Renderer
 			q.x = std::min( q.x, 1.f );
 			q.y = std::min( q.y, 1.f );
 			const auto color = TextureFilter::Linear( q, source );
-			data[i] = Color4( color.x * 255
-							, color.y * 255
-							, color.z * 255
-							, color.w * 255 );
+			data[i] = Color4( BYTE(color.x * 255)
+							, BYTE(color.y * 255)
+							, BYTE(color.z * 255)
+							, BYTE(color.w * 255) );
 		}
 	}
 
