@@ -22,6 +22,6 @@ namespace Renderer
 			return;
 		}
 
-		process( RasterizedPixel( v.screen, v.position.w, v.color, v.position.z, v.texcoord, Vector2::zero, Vector2::zero ) );
+		process( RasterizedPixel( v.screen, v.position.w, v.color, v.position.z, v.texcoord ) );
 	}
 }

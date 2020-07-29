@@ -5,8 +5,6 @@
 #include "Util/Bitmap.h"
 #include "Renderer/Texturing/Texture2D.h"
 
-using WrapMode = Renderer::WrapMode::Type;
-
 void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> texture )
 {
 	_renderer->BindTexture( texture );
@@ -17,7 +15,7 @@ SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
 {
 	const auto bitmap = Bitmap::Load( _T( "Data/Checker.bmp" ) );
 	checker = std::make_shared<Renderer::Texture2D>( *bitmap, true );
-	checker->SetWrapMode( WrapMode::MirroredRepeat, WrapMode::MirroredRepeat );
+	checker->SetWrapMode( TextureWrapMode::MirroredRepeat, TextureWrapMode::MirroredRepeat );
 	checker->SetFilter( TextureMagFilter::Linear );
 	checker->SetFilter( TextureMinFilter::LinearMipmapLinear );
 }

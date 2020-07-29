@@ -5,11 +5,13 @@
 namespace Renderer
 {
 	class Bresenham;
-	class RasterizedPixel
+	class DerivativeTexcoord;
+	class RasterizedPixel final
 	{
 	public:
-		RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord, const Vector2& ddx, const Vector2& ddy );
-		RasterizedPixel( const Bresenham& edge, const Vector2& ddx, const Vector2& ddy );
+		RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord, const DerivativeTexcoord& derivatives );
+		RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord );
+		RasterizedPixel( const Bresenham& edge, const DerivativeTexcoord& derivatives );
 		~RasterizedPixel();
 
 		Vector4 GetColor() const;

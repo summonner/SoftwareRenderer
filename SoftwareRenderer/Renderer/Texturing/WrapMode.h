@@ -30,3 +30,5 @@ namespace Renderer
 		WrapFunc current;
 	};
 }
+
+using TextureWrapMode = Renderer::WrapMode::Type;

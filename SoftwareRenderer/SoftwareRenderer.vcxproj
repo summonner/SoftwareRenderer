@@ -165,7 +165,6 @@
     <ClInclude Include="Math\Vector2.hpp" />
     <ClInclude Include="Math\Vector3.hpp" />
     <ClInclude Include="Math\Vector4.hpp" />
-    <ClInclude Include="Mipmap.h" />
     <ClInclude Include="Renderer\DepthBuffer.h" />
     <ClInclude Include="Renderer\FrameBuffer.h" />
     <ClInclude Include="Renderer\GdiRenderer.h" />
@@ -178,13 +177,16 @@
     <ClInclude Include="Renderer\RasterizerGenerators\TriangleGenerator.h" />
     <ClInclude Include="Renderer\RasterizerGenerators\Types.h" />
     <ClInclude Include="Renderer\Rasterizer\Bresenham.h" />
+    <ClInclude Include="Renderer\Rasterizer\DerivativeTexcoord.h" />
     <ClInclude Include="Renderer\Rasterizer\IRasterizer.h" />
     <ClInclude Include="Renderer\Rasterizer\Line.h" />
     <ClInclude Include="Renderer\Rasterizer\Point.h" />
     <ClInclude Include="Renderer\Rasterizer\RasterizedPixel.h" />
     <ClInclude Include="Renderer\Rasterizer\Triangle.h" />
     <ClInclude Include="Renderer\Texturing\ITexture.h" />
+    <ClInclude Include="Renderer\Texturing\Mipmap.h" />
     <ClInclude Include="Renderer\Texturing\Texture2D.h" />
+    <ClInclude Include="Renderer\Texturing\TextureFilter.h" />
     <ClInclude Include="Renderer\Texturing\WrapMode.h" />
     <ClInclude Include="Renderer\Vertex.h" />
     <ClInclude Include="Resource.h" />
@@ -198,7 +200,6 @@
     <ClInclude Include="Scene\SceneFactory.h" />
     <ClInclude Include="SoftwareRenderer.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TextureFilter.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Util\Bitmap.h" />
     <ClInclude Include="Util\IBaseIterator.h" />
@@ -216,7 +217,6 @@
     <ClCompile Include="Math\Matrix4x4.cpp" />
     <ClCompile Include="Math\RangeInt.cpp" />
     <ClCompile Include="Math\RangeIterator.cpp" />
-    <ClCompile Include="Mipmap.cpp" />
     <ClCompile Include="Renderer\DepthBuffer.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />
     <ClCompile Include="Renderer\GdiRenderer.cpp" />
@@ -227,11 +227,14 @@
     <ClCompile Include="Renderer\RasterizerGenerators\RasterizerGenerator.cpp" />
     <ClCompile Include="Renderer\RasterizerGenerators\TriangleGenerator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Line.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Point.cpp" />
     <ClCompile Include="Renderer\Rasterizer\RasterizedPixel.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Triangle.cpp" />
+    <ClCompile Include="Renderer\Texturing\Mipmap.cpp" />
     <ClCompile Include="Renderer\Texturing\Texture2D.cpp" />
+    <ClCompile Include="Renderer\Texturing\TextureFilter.cpp" />
     <ClCompile Include="Renderer\Texturing\WrapMode.cpp" />
     <ClCompile Include="Renderer\Vertex.cpp" />
     <ClCompile Include="SceneMenu.cpp" />
@@ -242,7 +245,6 @@
     <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp" />
     <ClCompile Include="Scene\SampleScene.cpp" />
     <ClCompile Include="Scene\SceneFactory.cpp" />
-    <ClCompile Include="TextureFilter.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Util\Bitmap.cpp" />
     <ClCompile Include="WinMain.cpp" />

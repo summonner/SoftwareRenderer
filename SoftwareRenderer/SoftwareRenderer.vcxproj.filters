@@ -180,13 +180,16 @@
     <ClInclude Include="Util\Dictionary.hpp">
       <Filter>Util</Filter>
     </ClInclude>
-    <ClInclude Include="Mipmap.h">
-      <Filter>Renderer\Texturing</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Texturing\ITexture.h">
       <Filter>Renderer\Texturing</Filter>
     </ClInclude>
-    <ClInclude Include="TextureFilter.h">
+    <ClInclude Include="Renderer\Texturing\TextureFilter.h">
+      <Filter>Renderer\Texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\DerivativeTexcoord.h">
+      <Filter>Renderer\Rasterizer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Texturing\Mipmap.h">
       <Filter>Renderer\Texturing</Filter>
     </ClInclude>
   </ItemGroup>
@@ -303,10 +306,13 @@
     <ClCompile Include="Renderer\Texturing\WrapMode.cpp">
       <Filter>Renderer\Texturing</Filter>
     </ClCompile>
-    <ClCompile Include="Mipmap.cpp">
+    <ClCompile Include="Renderer\Texturing\TextureFilter.cpp">
       <Filter>Renderer\Texturing</Filter>
     </ClCompile>
-    <ClCompile Include="TextureFilter.cpp">
+    <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp">
+      <Filter>Renderer\Rasterizer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Texturing\Mipmap.cpp">
       <Filter>Renderer\Texturing</Filter>
     </ClCompile>
   </ItemGroup>

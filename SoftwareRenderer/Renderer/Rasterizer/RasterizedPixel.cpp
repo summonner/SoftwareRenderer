@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "RasterizedPixel.h"
 #include "Bresenham.h"
+#include "DerivativeTexcoord.h"
 
 namespace Renderer
 {
@@ -16,20 +17,25 @@ namespace Renderer
 	{
 	}
 
-	RasterizedPixel::RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord, const Vector2& ddx, const Vector2& ddy )
+	RasterizedPixel::RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord, const DerivativeTexcoord& derivatives )
 		: isValid( true )
 		, coordinate( coordinate )
 		, w( w )
 		, color( color )
 		, depth( depth )
 		, texcoord( texcoord )
-		, ddx( ddx )
-		, ddy( ddy )
+		, ddx( derivatives.dFdx( texcoord, w ) )
+		, ddy( derivatives.dFdy( texcoord, w ) )
 	{
 	}
 
-	RasterizedPixel::RasterizedPixel( const Bresenham& edge, const Vector2& ddx, const Vector2& ddy )
-		: RasterizedPixel( edge.p, edge.w, edge.GetColor(), edge.GetDepth(), edge.GetTexcoord(), ddx, ddy )
+	RasterizedPixel::RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord )
+		: RasterizedPixel( coordinate, w, color, depth, texcoord, DerivativeTexcoord::invalid )
+	{
+	}
+
+	RasterizedPixel::RasterizedPixel( const Bresenham& edge, const DerivativeTexcoord& derivatives )
+		: RasterizedPixel( edge.p, edge.w, edge.GetColor(), edge.GetDepth(), edge.GetTexcoord(), derivatives )
 	{
 	}
 
