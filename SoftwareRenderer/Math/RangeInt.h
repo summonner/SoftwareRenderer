@@ -34,7 +34,7 @@ public:
 
 	inline RangeIterator end() const
 	{
-		return RangeIterator( *this, max );
+		return RangeIterator( *this, max + 1 );
 	}
 
 public:

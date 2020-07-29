@@ -15,13 +15,13 @@ namespace Renderer
 	{
 	}
 
-	void Point::Rasterize( const Bounds& bounds, ProcessPixel process ) const
+	void Point::Rasterize( const Bounds& bounds, ProcessPixel process )
 	{
 		if ( bounds.Contains( v.screen ) == false )
 		{
 			return;
 		}
 
-		process( RasterizedPixel( v.screen, v.position.w, v.color, v.position.z, v.texcoord ) );
+		process( RasterizedPixel( v.screen, v.position.w, v.color, v.position.z, v.texcoord, Vector2::zero, Vector2::zero ) );
 	}
 }

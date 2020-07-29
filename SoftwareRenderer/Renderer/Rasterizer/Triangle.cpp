@@ -2,7 +2,6 @@
 #include "Triangle.h"
 #include "Renderer/Vertex.h"
 #include "Math/RangeInt.h"
-#include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
 #include "Math/Bounds.h"
 #include "Bresenham.h"
@@ -22,9 +21,19 @@ namespace Renderer
 	{
 	}
 
-	void Triangle::Rasterize( const Bounds& bounds, ProcessPixel process ) const
+	void Triangle::Rasterize( const Bounds& bounds, ProcessPixel process )
 	{
-		auto sorted = Sort( a, b, c );
+		const auto sorted = Sort( a, b, c );
+		const Vector2 ab = b.screen - a.screen;
+		const Vector2 ac = c.screen - a.screen;
+		const auto area = ab.Area( ac );
+		const auto dx = Vector2( ac.y, -ab.y ) / area;
+		const auto dy = Vector2( -ac.x, ab.x ) / area;
+		dw = (b.position.w - a.position.w) * Vector2( dx.x, dy.x ) + (c.position.w - a.position.w) * Vector2( dx.y, dy.y );
+		const auto abTexcoord = b.texcoord - a.texcoord;
+		const auto acTexcoord = c.texcoord - a.texcoord;
+		ddx = abTexcoord * dx.x + acTexcoord * dx.y;
+		ddy = abTexcoord * dy.x + acTexcoord * dy.y;
 
 		auto e01 = Bresenham( sorted[0], sorted[1] );
 		auto e02 = Bresenham( sorted[0], sorted[2] );
@@ -51,49 +60,48 @@ namespace Renderer
 		auto* e1 = e01;
 		auto* e2 = e02;
 
-		for ( auto y : bounds.y )
+		for ( const auto y : bounds.y )
 		{
-			while ( e1->p.y < y )
+			if ( e1->NextY( y ) == false )
 			{
-				if ( bounds.Contains( e1->p ) == true )
-				{
-					process( RasterizedPixel( *e1 ) );
-				}
-
-				if ( e1->Next() == false )
-				{
-					e1 = e12;
-				}
+				e1 = e12;
 			}
 
-			while ( e2->p.y < y )
+			e2->NextY( y );
+
+			const float length = (float)(e2->p.x - e1->p.x);
+			if ( length == 0.f )
 			{
-				if ( bounds.Contains( e2->p ) == true )
-				{
-					process( RasterizedPixel( *e2 ) );
-				}
-				e2->Next();
+				const auto w = e1->w;
+				const auto uv = e1->GetTexcoord();
+				const auto dFdx = (w * ddx - uv * dw.x) / (w * (w + dw.x));
+				const auto dFdy = (w * ddy - uv * dw.y) / (w * (w + dw.y));
+				process( RasterizedPixel( e1->p, w, e1->GetColor(), e1->GetDepth(), uv, dFdx, dFdy ) );
+				continue;
 			}
 
-			auto c1 = e1->GetColor();
-			auto c2 = e2->GetColor();
-			auto d1 = e1->GetDepth();
-			auto d2 = e2->GetDepth();
-			auto uv1 = e1->GetTexcoord();
-			auto uv2 = e2->GetTexcoord();
+			const auto c1 = e1->GetColor();
+			const auto c2 = e2->GetColor();
+			const auto d1 = e1->GetDepth();
+			const auto d2 = e2->GetDepth();
+			const auto uv1 = e1->GetTexcoord();
+			const auto uv2 = e2->GetTexcoord();
 			
-			auto minmax = std::minmax( e1->p.x, e2->p.x );
-			float length = (float)(e2->p.x - e1->p.x);
-			for ( auto x : bounds.x.Clamp( minmax.first, minmax.second ) )
+			const auto minmax = std::minmax( e1->p.x, e2->p.x );
+			for ( const auto x : bounds.x.Clamp( minmax.first, minmax.second ) )
 			{
-				auto t = (float)(x - e1->p.x) / length;
-				auto w = ::Lerp( e1->w, e2->w, t );
-				process( RasterizedPixel( Vector2Int( x, y ), w, Vector4::Lerp( c1, c2, t ), ::Lerp( d1, d2, t ), Vector2::Lerp( uv1, uv2, t ) ) );
+				const auto t = (float)(x - e1->p.x) / length;
+				const auto w = ::Lerp( e1->w, e2->w, t );
+				const auto uv = Vector2::Lerp( uv1, uv2, t );
+
+				const auto dFdx = (w * ddx - uv * dw.x) / (w * (w + dw.x));
+				const auto dFdy = (w * ddy - uv * dw.y) / (w * (w + dw.y));
+				process( RasterizedPixel( Vector2Int( x, y ), w, Vector4::Lerp( c1, c2, t ), ::Lerp( d1, d2, t ), uv, dFdx, dFdy ) );
 			}
 		}
 	}
 
-	bool AscendingY( const Vertex* l, const Vertex* r )
+	bool Triangle::AscendingY( const Vertex* l, const Vertex* r )
 	{
 		return l->screen.y < r->screen.y;
 	}

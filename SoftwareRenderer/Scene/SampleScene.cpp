@@ -19,7 +19,7 @@ SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
 	checker = std::make_shared<Renderer::Texture2D>( *bitmap, true );
 	checker->SetWrapMode( WrapMode::MirroredRepeat, WrapMode::MirroredRepeat );
 	checker->SetFilter( TextureMagFilter::Linear );
-	checker->SetFilter( TextureMinFilter::NearestMipmapLinear );
+	checker->SetFilter( TextureMinFilter::LinearMipmapLinear );
 }
 
 
@@ -61,7 +61,7 @@ void SampleScene::DrawScene() const
 	glTranslatef( 1.5f * (1 - x), 0.0f, -6.0f + 5.5f * 0 );
 	glScalef( x, x, 1 );
 //	glRotatef( x * 90.f, 1.f, 0.f, 0.f );
-	glBegin( GL_LINE_LOOP );
+	glBegin( GL_QUADS );
 	auto min = -0.f;
 	auto max = -min + 1.f;
 //	glColor3f( 1.0f, 0.5f, 0.5f );

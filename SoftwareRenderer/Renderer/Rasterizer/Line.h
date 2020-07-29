@@ -11,7 +11,7 @@ namespace Renderer
 		Line( const Vertex& a, const Vertex& b );
 		~Line() override;
 
-		void Rasterize( const Bounds& bounds, ProcessPixel process ) const;
+		void Rasterize( const Bounds& bounds, ProcessPixel process );
 
 	private:
 		const Vertex& a;

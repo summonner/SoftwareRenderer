@@ -4,7 +4,7 @@
 
 RangeIterator::RangeIterator( const RangeInt& range, int current )
 	: range( range )
-	, current( range.Clamp( current ) )
+	, current( current )
 {
 }
 
@@ -15,11 +15,7 @@ bool RangeIterator::operator !=( const RangeIterator& other ) const
 
 const RangeIterator& RangeIterator::operator ++()
 {
-	if ( current < range.max )
-	{
-		++current;
-	}
-
+	++current;
 	return *this;
 }
 

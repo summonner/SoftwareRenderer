@@ -19,7 +19,7 @@ namespace Renderer
 	{
 	}
 
-	void Line::Rasterize( const Bounds& bounds, ProcessPixel process ) const
+	void Line::Rasterize( const Bounds& bounds, ProcessPixel process )
 	{
 		const Vector2 d = b.screen - a.screen;
 		const auto denom = d.x * d.x + d.y * d.y;

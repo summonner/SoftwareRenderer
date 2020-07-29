@@ -10,6 +10,6 @@ namespace Renderer
 		virtual ~IRasterizer() {}
 
 		using ProcessPixel = std::function<void( const RasterizedPixel& )>;
-		virtual void Rasterize( const Bounds& bounds, ProcessPixel process ) const abstract;
+		virtual void Rasterize( const Bounds& bounds, ProcessPixel process ) abstract;
 	};
 }

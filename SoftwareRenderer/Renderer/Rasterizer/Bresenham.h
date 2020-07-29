@@ -12,11 +12,14 @@ namespace Renderer
 		~Bresenham();
 
 		bool Next();
+		bool NextY( const int y );
 		Vector4 GetColor() const;
 		float GetDepth() const;
 		Vector2 GetTexcoord() const;
 
 	private:
+		void MoveNext();
+		void CalculateParams();
 		float CalculateTx() const;
 		float CalculateTy() const;
 
@@ -31,7 +34,9 @@ namespace Renderer
 
 	public:
 		Vector2Int p;
-		float t;
 		float w;
+
+	private:
+		float t;
 	};
 }

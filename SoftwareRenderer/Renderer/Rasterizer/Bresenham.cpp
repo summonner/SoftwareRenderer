@@ -33,7 +33,25 @@ namespace Renderer
 			return false;
 		}
 
-		if ( d > 0 )
+		MoveNext();
+		CalculateParams();
+		return t < 1.f;
+	}
+
+	bool Bresenham::NextY( const int y )
+	{
+		while ( y > p.y || d < 0 )
+		{
+			MoveNext();
+		}
+
+		CalculateParams();
+		return t < 1.f;
+	}
+
+	void Bresenham::MoveNext()
+	{
+		if ( d >= 0 )
 		{
 			p.y += sign.y;
 			d -= 2 * diff.x * sign.x;
@@ -44,20 +62,22 @@ namespace Renderer
 			p.x += sign.x;
 			d += 2 * diff.y * sign.y;
 		}
+	}
 
-		t = 1 - CalculateT( *this );
+	void Bresenham::CalculateParams()
+	{
+		t = CalculateT( *this );
 		w = ::Lerp( a.position.w, b.position.w, t );
-		return t < 1.f;
 	}
 
 	float Bresenham::CalculateTx() const
 	{
-		return (b.screen.x - p.x) / (float)diff.x;
+		return (p.x - a.screen.x) / (float)diff.x;
 	}
 
 	float Bresenham::CalculateTy() const
 	{
-		return (b.screen.y - p.y) / (float)diff.y;
+		return (p.y - a.screen.y) / (float)diff.y;
 	}
 
 	Vector4 Bresenham::GetColor() const

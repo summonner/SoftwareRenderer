@@ -56,7 +56,7 @@ namespace Renderer
 
 	Vector4 Mipmap::GetPixel( int x, int y ) const
 	{
-		return colors[width];
+//		return colors[width];
 		const auto i = ToIndex( x, y );
 		const auto pixel = data[i];
 		return Vector4( pixel.x, pixel.y, pixel.z, pixel.w ) / 255.f;

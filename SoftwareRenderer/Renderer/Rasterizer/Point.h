@@ -11,7 +11,7 @@ namespace Renderer
 		Point( const Vertex& v );
 		~Point() override;
 
-		void Rasterize( const Bounds& bounds, ProcessPixel process ) const;
+		void Rasterize( const Bounds& bounds, ProcessPixel process ) override;
 
 	private:
 		const Vertex& v;

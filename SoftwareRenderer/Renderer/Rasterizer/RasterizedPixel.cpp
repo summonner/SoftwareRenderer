@@ -11,10 +11,12 @@ namespace Renderer
 		, color( Vector4::zero )
 		, depth( 0.0f )
 		, texcoord( 0.0f, 0.0f )
+		, ddx( Vector2::zero )
+		, ddy( Vector2::zero )
 	{
 	}
 
-	RasterizedPixel::RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord, const Vector2 ddx, const Vector2 ddy )
+	RasterizedPixel::RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord, const Vector2& ddx, const Vector2& ddy )
 		: isValid( true )
 		, coordinate( coordinate )
 		, w( w )
@@ -26,7 +28,7 @@ namespace Renderer
 	{
 	}
 
-	RasterizedPixel::RasterizedPixel( const Bresenham& edge, const Vector2 ddx, const Vector2 ddy )
+	RasterizedPixel::RasterizedPixel( const Bresenham& edge, const Vector2& ddx, const Vector2& ddy )
 		: RasterizedPixel( edge.p, edge.w, edge.GetColor(), edge.GetDepth(), edge.GetTexcoord(), ddx, ddy )
 	{
 	}
