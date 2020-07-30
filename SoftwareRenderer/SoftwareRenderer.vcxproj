@@ -184,6 +184,7 @@
     <ClInclude Include="Renderer\Rasterizer\PixelValues.h" />
     <ClInclude Include="Renderer\Rasterizer\Point.h" />
     <ClInclude Include="Renderer\Rasterizer\RasterizedPixel.h" />
+    <ClInclude Include="Renderer\Rasterizer\SutherlanHodgmanClipping.h" />
     <ClInclude Include="Renderer\Rasterizer\Triangle.h" />
     <ClInclude Include="Renderer\Texturing\ITexture.h" />
     <ClInclude Include="Renderer\Texturing\Mipmap.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="Renderer\Rasterizer\PixelValues.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Point.cpp" />
     <ClCompile Include="Renderer\Rasterizer\RasterizedPixel.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\SutherlanHodgmanClipping.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Triangle.cpp" />
     <ClCompile Include="Renderer\Texturing\Mipmap.cpp" />
     <ClCompile Include="Renderer\Texturing\Texture2D.cpp" />

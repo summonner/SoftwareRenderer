@@ -10,9 +10,11 @@ namespace Renderer
 	{
 	public:
 		Vertex();
+		Vertex( const Vertex& left, const Vertex& right, const float t );
 		~Vertex();
 
 		void Process( const Matrix4x4& projection, const Matrix4x4& viewport );
+		static Vertex Lerp( const Vertex& left, const Vertex& right, const float t );
 
 	public:
 		Vector4 position;

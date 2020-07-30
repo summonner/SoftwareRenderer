@@ -69,7 +69,7 @@ public:
 
 	inline TVector2 operator *( const float scalar ) const
 	{
-		return TVector2( x * scalar, y * scalar );
+		return TVector2( T(x * scalar), T(y * scalar) );
 	}
 
 	inline TVector2 operator *( const TVector2& other ) const

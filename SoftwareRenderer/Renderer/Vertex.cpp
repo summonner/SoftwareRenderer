@@ -11,6 +11,14 @@ namespace Renderer
 	{
 	}
 
+	Vertex::Vertex( const Vertex& left, const Vertex& right, const float t )
+		: position( Vector4::Lerp( left.position, right.position, t ) )
+		, color( Vector4::Lerp( left.color, right.color, t ) )
+		, texcoord( Vector2::Lerp( left.texcoord, right.texcoord, t ) )
+		, screen( Vector2Int::Lerp( left.screen, right.screen, t ) )
+	{
+	}
+
 	Vertex::~Vertex()
 	{
 	}
@@ -26,5 +34,10 @@ namespace Renderer
 		auto p = viewport * position;
 		screen = Vector2Int( (int)p.x, (int)p.y );
 		position.w = w;
+	}
+
+	Vertex Vertex::Lerp( const Vertex& left, const Vertex& right, const float t )
+	{
+		return Vertex( left, right, t );
 	}
 }
