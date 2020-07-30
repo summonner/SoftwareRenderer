@@ -192,6 +192,12 @@
     <ClInclude Include="Renderer\Texturing\Mipmap.h">
       <Filter>Renderer\Texturing</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\BresenhamList.h">
+      <Filter>Renderer\Rasterizer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\PixelValues.h">
+      <Filter>Renderer\Rasterizer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -314,6 +320,12 @@
     </ClCompile>
     <ClCompile Include="Renderer\Texturing\Mipmap.cpp">
       <Filter>Renderer\Texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\BresenhamList.cpp">
+      <Filter>Renderer\Rasterizer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\PixelValues.cpp">
+      <Filter>Renderer\Rasterizer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,34 +8,28 @@ namespace Renderer
 	RasterizedPixel::RasterizedPixel()
 		: isValid( false )
 		, coordinate( 0, 0 )
-		, w( 1 )
-		, color( Vector4::zero )
-		, depth( 0.0f )
-		, texcoord( 0.0f, 0.0f )
 		, ddx( Vector2::zero )
 		, ddy( Vector2::zero )
+		, values { 1.f, 0.f, Vector4::zero, Vector2::zero }
 	{
 	}
 
-	RasterizedPixel::RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord, const DerivativeTexcoord& derivatives )
+	RasterizedPixel::RasterizedPixel( const Vector2Int& coordinate, const PixelValues& values, const DerivativeTexcoord& derivatives )
 		: isValid( true )
 		, coordinate( coordinate )
-		, w( w )
-		, color( color )
-		, depth( depth )
-		, texcoord( texcoord )
-		, ddx( derivatives.dFdx( texcoord, w ) )
-		, ddy( derivatives.dFdy( texcoord, w ) )
+		, ddx( derivatives.dFdx( values.texcoord, values.w ) )
+		, ddy( derivatives.dFdy( values.texcoord, values.w ) )
+		, values( values )
 	{
 	}
 
-	RasterizedPixel::RasterizedPixel( const Vector2Int& coordinate, float w, const Vector4& color, float depth, const Vector2& texcoord )
-		: RasterizedPixel( coordinate, w, color, depth, texcoord, DerivativeTexcoord::invalid )
+	RasterizedPixel::RasterizedPixel( const Vector2Int& coordinate, const PixelValues& values )
+		: RasterizedPixel( coordinate, values, DerivativeTexcoord::invalid )
 	{
 	}
 
 	RasterizedPixel::RasterizedPixel( const Bresenham& edge, const DerivativeTexcoord& derivatives )
-		: RasterizedPixel( edge.p, edge.w, edge.GetColor(), edge.GetDepth(), edge.GetTexcoord(), derivatives )
+		: RasterizedPixel( edge.p, edge.GetValues(), derivatives )
 	{
 	}
 
@@ -47,11 +41,11 @@ namespace Renderer
 
 	Vector4 RasterizedPixel::GetColor() const
 	{
-		return color / w;
+		return values.color / values.w;
 	}
 
 	Vector2 RasterizedPixel::GetTexcoord() const
 	{
-		return texcoord / w;
+		return values.texcoord / values.w;
 	}
 }

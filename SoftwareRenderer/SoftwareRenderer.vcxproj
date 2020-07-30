@@ -177,9 +177,11 @@
     <ClInclude Include="Renderer\RasterizerGenerators\TriangleGenerator.h" />
     <ClInclude Include="Renderer\RasterizerGenerators\Types.h" />
     <ClInclude Include="Renderer\Rasterizer\Bresenham.h" />
+    <ClInclude Include="Renderer\Rasterizer\BresenhamList.h" />
     <ClInclude Include="Renderer\Rasterizer\DerivativeTexcoord.h" />
     <ClInclude Include="Renderer\Rasterizer\IRasterizer.h" />
     <ClInclude Include="Renderer\Rasterizer\Line.h" />
+    <ClInclude Include="Renderer\Rasterizer\PixelValues.h" />
     <ClInclude Include="Renderer\Rasterizer\Point.h" />
     <ClInclude Include="Renderer\Rasterizer\RasterizedPixel.h" />
     <ClInclude Include="Renderer\Rasterizer\Triangle.h" />
@@ -227,8 +229,10 @@
     <ClCompile Include="Renderer\RasterizerGenerators\RasterizerGenerator.cpp" />
     <ClCompile Include="Renderer\RasterizerGenerators\TriangleGenerator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\BresenhamList.cpp" />
     <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Line.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\PixelValues.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Point.cpp" />
     <ClCompile Include="Renderer\Rasterizer\RasterizedPixel.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Triangle.cpp" />

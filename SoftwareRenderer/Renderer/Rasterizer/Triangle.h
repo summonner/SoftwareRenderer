@@ -7,6 +7,7 @@ class Bounds;
 namespace Renderer
 {
 	class Bresenham;
+	class BresenhamList;
 	class Vertex;
 	class DerivativeTexcoord;
 	class Triangle final : public IRasterizer
@@ -20,7 +21,7 @@ namespace Renderer
 	private:
 		static bool AscendingY( const Vertex* l, const Vertex* r );
 		static std::vector<const Vertex*> Sort( const Vertex& a, const Vertex& b, const Vertex& c );
-		static void Rasterize( const Bounds& bounds, Bresenham* e01, Bresenham* e02, Bresenham* e12, ProcessPixel process, const DerivativeTexcoord& derivatives );
+		static void Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, ProcessPixel process, const DerivativeTexcoord& derivatives );
 
 	private:
 		const Vertex& a;

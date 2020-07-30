@@ -22,6 +22,13 @@ namespace Renderer
 			return;
 		}
 
-		process( RasterizedPixel( v.screen, v.position.w, v.color, v.position.z, v.texcoord ) );
+		const auto values = PixelValues
+		{
+			v.position.w,
+			v.position.z,
+			v.color,
+			v.texcoord
+		};
+		process( RasterizedPixel( v.screen, values ) );
 	}
 }

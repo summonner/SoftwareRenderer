@@ -4,11 +4,13 @@
 namespace Renderer
 {
 	class Vertex;
+	struct PixelValues;
 	class Bresenham final
 	{
 	public:
 		Bresenham( const Vertex& a, const Vertex& b );
 		Bresenham( const Vertex* a, const Vertex* b );
+		Bresenham( const Bresenham& source );
 		~Bresenham();
 
 		bool Next();
@@ -16,6 +18,7 @@ namespace Renderer
 		Vector4 GetColor() const;
 		float GetDepth() const;
 		Vector2 GetTexcoord() const;
+		PixelValues GetValues() const;
 
 	private:
 		void MoveNext();
@@ -32,11 +35,12 @@ namespace Renderer
 
 		const std::function<float(const Bresenham&)> CalculateT;
 
-	public:
-		Vector2Int p;
-		float w;
-
-	private:
+		Vector2Int _p;
+		float _w;
 		float t;
+
+	public:
+		const Vector2Int& p;
+		const float& w;
 	};
 }

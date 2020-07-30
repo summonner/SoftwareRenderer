@@ -66,7 +66,7 @@ namespace Renderer
 		{
 			rasterizer->Rasterize( bounds, [this]( const RasterizedPixel& p )
 			{
-				if ( depthBuffer->Test( p.coordinate, p.depth ) == false )
+				if ( depthBuffer->Test( p.coordinate, p.GetDepth() ) == false )
 				{
 					return;
 				}

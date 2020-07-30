@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "Bresenham.h"
+#include "PixelValues.h"
 #include "Renderer/Vertex.h"
 
 namespace Renderer
@@ -10,15 +11,32 @@ namespace Renderer
 		, diff( b.screen - a.screen )
 		, sign( diff.x >= 0 ? 1 : -1, diff.y >= 0 ? 1 : -1 )
 		, d( 2 * diff.y * sign.y - diff.x * sign.x )
-		, p( a.screen )
+		, _p( a.screen )
 		, CalculateT( (diff.x * sign.x) > (diff.y * sign.y) ? &Bresenham::CalculateTx : &Bresenham::CalculateTy )
 		, t( 0 )
-		, w( a.position.w )
+		, _w( a.position.w )
+		, p( _p )
+		, w( _w )
 	{
 	}
 
 	Bresenham::Bresenham( const Vertex* a, const Vertex* b )
 		: Bresenham( *a, *b )
+	{
+	}
+
+	Bresenham::Bresenham( const Bresenham& source )
+		: a( source.a )
+		, b( source.b )
+		, diff( source.diff )
+		, sign( source.sign )
+		, d( source.d )
+		, _p( source._p )
+		, CalculateT( source.CalculateT )
+		, t( source.t )
+		, _w( source._w )
+		, p( _p )
+		, w( _w )
 	{
 	}
 
@@ -40,9 +58,16 @@ namespace Renderer
 
 	bool Bresenham::NextY( const int y )
 	{
-		while ( y > p.y || d < 0 )
+		if ( diff.y == 0 )
 		{
-			MoveNext();
+			_p = b.screen;
+		}
+		else
+		{
+			while ( y > _p.y || d < 0 )
+			{
+				MoveNext();
+			}
 		}
 
 		CalculateParams();
@@ -53,13 +78,13 @@ namespace Renderer
 	{
 		if ( d >= 0 )
 		{
-			p.y += sign.y;
+			_p.y += sign.y;
 			d -= 2 * diff.x * sign.x;
 		}
 
 		if ( d <= 0 )
 		{
-			p.x += sign.x;
+			_p.x += sign.x;
 			d += 2 * diff.y * sign.y;
 		}
 	}
@@ -67,17 +92,17 @@ namespace Renderer
 	void Bresenham::CalculateParams()
 	{
 		t = CalculateT( *this );
-		w = ::Lerp( a.position.w, b.position.w, t );
+		_w = ::Lerp( a.position.w, b.position.w, t );
 	}
 
 	float Bresenham::CalculateTx() const
 	{
-		return (p.x - a.screen.x) / (float)diff.x;
+		return (_p.x - a.screen.x) / (float)diff.x;
 	}
 
 	float Bresenham::CalculateTy() const
 	{
-		return (p.y - a.screen.y) / (float)diff.y;
+		return (_p.y - a.screen.y) / (float)diff.y;
 	}
 
 	Vector4 Bresenham::GetColor() const
@@ -93,5 +118,16 @@ namespace Renderer
 	Vector2 Bresenham::GetTexcoord() const
 	{
 		return Vector2::Lerp( a.texcoord, b.texcoord, t );
+	}
+
+	PixelValues Bresenham::GetValues() const
+	{
+		return PixelValues
+		{
+			_w,
+			GetDepth(),
+			GetColor(),
+			GetTexcoord()
+		};
 	}
 }
