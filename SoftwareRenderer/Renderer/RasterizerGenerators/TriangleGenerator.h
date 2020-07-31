@@ -10,7 +10,6 @@ namespace Renderer
 		static void Strip	( VertexBuffer vertices, IRasterizerList& outRasterizers );
 		static void Fan		( VertexBuffer vertices, IRasterizerList& outRasterizers );
 
-	private:
 		static void Build( const Vertex& a, const Vertex& b, const Vertex& c, IRasterizerList& outRasterizers );
 
 	public:

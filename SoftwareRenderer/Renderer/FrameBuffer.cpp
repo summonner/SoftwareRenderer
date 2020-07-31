@@ -37,8 +37,8 @@ namespace Renderer
 	void FrameBuffer::SetPixel( const Vector2Int& p, const Vector3& color )
 	{
 		auto i = (p.x + p.y * info.biWidth) * colorBytes;
-		pixels[i + 0] = (int)(color.z * 255);	// B
-		pixels[i + 1] = (int)(color.y * 255);	// G
-		pixels[i + 2] = (int)(color.x * 255);	// R
+		pixels[i + 0] = (BYTE)(color.z * 255);	// B
+		pixels[i + 1] = (BYTE)(color.y * 255);	// G
+		pixels[i + 2] = (BYTE)(color.x * 255);	// R
 	}
 }

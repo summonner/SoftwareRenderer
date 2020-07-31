@@ -198,8 +198,8 @@
     <ClInclude Include="Renderer\Rasterizer\PixelValues.h">
       <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\SutherlanHodgmanClipping.h">
-      <Filter>Renderer\Rasterizer</Filter>
+    <ClInclude Include="Renderer\RasterizerGenerators\SutherlanHodgmanClipping.h">
+      <Filter>Renderer\RasterizerGenerators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -330,8 +330,8 @@
     <ClCompile Include="Renderer\Rasterizer\PixelValues.cpp">
       <Filter>Renderer\Rasterizer</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\SutherlanHodgmanClipping.cpp">
-      <Filter>Renderer\Rasterizer</Filter>
+    <ClCompile Include="Renderer\RasterizerGenerators\SutherlanHodgmanClipping.cpp">
+      <Filter>Renderer\RasterizerGenerators</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -174,6 +174,7 @@
     <ClInclude Include="Renderer\RasterizerGenerators\PointGenerator.h" />
     <ClInclude Include="Renderer\RasterizerGenerators\QuadGenerator.h" />
     <ClInclude Include="Renderer\RasterizerGenerators\RasterizerGenerator.h" />
+    <ClInclude Include="Renderer\RasterizerGenerators\SutherlanHodgmanClipping.h" />
     <ClInclude Include="Renderer\RasterizerGenerators\TriangleGenerator.h" />
     <ClInclude Include="Renderer\RasterizerGenerators\Types.h" />
     <ClInclude Include="Renderer\Rasterizer\Bresenham.h" />
@@ -184,7 +185,6 @@
     <ClInclude Include="Renderer\Rasterizer\PixelValues.h" />
     <ClInclude Include="Renderer\Rasterizer\Point.h" />
     <ClInclude Include="Renderer\Rasterizer\RasterizedPixel.h" />
-    <ClInclude Include="Renderer\Rasterizer\SutherlanHodgmanClipping.h" />
     <ClInclude Include="Renderer\Rasterizer\Triangle.h" />
     <ClInclude Include="Renderer\Texturing\ITexture.h" />
     <ClInclude Include="Renderer\Texturing\Mipmap.h" />
@@ -228,6 +228,7 @@
     <ClCompile Include="Renderer\RasterizerGenerators\PointGenerator.cpp" />
     <ClCompile Include="Renderer\RasterizerGenerators\QuadGenerator.cpp" />
     <ClCompile Include="Renderer\RasterizerGenerators\RasterizerGenerator.cpp" />
+    <ClCompile Include="Renderer\RasterizerGenerators\SutherlanHodgmanClipping.cpp" />
     <ClCompile Include="Renderer\RasterizerGenerators\TriangleGenerator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp" />
     <ClCompile Include="Renderer\Rasterizer\BresenhamList.cpp" />
@@ -236,7 +237,6 @@
     <ClCompile Include="Renderer\Rasterizer\PixelValues.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Point.cpp" />
     <ClCompile Include="Renderer\Rasterizer\RasterizedPixel.cpp" />
-    <ClCompile Include="Renderer\Rasterizer\SutherlanHodgmanClipping.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Triangle.cpp" />
     <ClCompile Include="Renderer\Texturing\Mipmap.cpp" />
     <ClCompile Include="Renderer\Texturing\Texture2D.cpp" />

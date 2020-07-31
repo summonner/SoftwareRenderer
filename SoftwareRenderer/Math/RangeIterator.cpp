@@ -6,6 +6,7 @@ RangeIterator::RangeIterator( const RangeInt& range, int current )
 	: range( range )
 	, current( current )
 {
+	assert( range.min <= range.max );
 }
 
 bool RangeIterator::operator !=( const RangeIterator& other ) const

@@ -58,7 +58,7 @@ namespace Renderer
 
 	bool Bresenham::NextY( const int y )
 	{
-		if ( diff.y == 0 )
+		if ( (y - p.y) >= (b.screen.y - p.y) )
 		{
 			_p = b.screen;
 		}

@@ -17,12 +17,7 @@ namespace Renderer
 	
 	void QuadGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, const Vertex& d, IRasterizerList& outRasterizers )
 	{
-		if ( TriangleGenerator::CheckFacet( a.screen, b.screen, c.screen ) == false )
-		{
-			return;
-		}
-
-		outRasterizers.emplace_back( std::make_unique<Triangle>( a, b, c ) );
-		outRasterizers.emplace_back( std::make_unique<Triangle>( a, c, d ) );
+		TriangleGenerator::Build( a, b, c, outRasterizers );
+		TriangleGenerator::Build( a, c, d, outRasterizers );
 	}
 }

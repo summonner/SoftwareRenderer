@@ -5,18 +5,29 @@
 #include "Math/Vector3.hpp"
 #include "Math/Bounds.h"
 #include "RasterizedPixel.h"
-#include "DerivativeTexcoord.h"
 #include "Point.h"
 #include "BresenhamList.h"
 #include "PixelValues.h"
 
 namespace Renderer
 {
-	Triangle::Triangle( const Vertex& a, const Vertex& b, const Vertex& c )
-		: a( a )
-		, b( b )
-		, c( c )
+	Triangle::Triangle( const std::vector<Vertex>& vertices, const DerivativeTexcoord& derivatives )
+		: vertices( vertices )
+		, minmax { 0, 0 }
+		, derivatives( derivatives )
 	{
+		assert( vertices.size() >= 3 );
+		for ( auto i = 1; i < vertices.size(); ++i )
+		{
+			if ( AscendingY( vertices[i], vertices[minmax.first] ) == true )
+			{
+				minmax.first = i;
+			}
+			else if ( AscendingY( vertices[minmax.second], vertices[i] ) == true )
+			{
+				minmax.second = i;
+			}
+		}
 	}
 
 	Triangle::~Triangle()
@@ -25,18 +36,36 @@ namespace Renderer
 
 	void Triangle::Rasterize( const Bounds& bounds, ProcessPixel process )
 	{
-		const auto derivatives = DerivativeTexcoord::Triangle( a, b, c );
-		if ( derivatives.IsValid() == false )
+		if ( minmax.first == minmax.second )
 		{
-			Point( a ).Rasterize( bounds, process );
 			return;
 		}
 
-		const auto sorted = Sort( a, b, c );
-		auto range = bounds.y.Clamp( sorted[0]->screen.y, sorted[2]->screen.y );
+		if ( derivatives.IsValid() == false )
+		{
+			Point( vertices[0] ).Rasterize( bounds, process );
+			return;
+		}
+
+		std::vector<const Vertex*> v1, v2;
+		v1.reserve( vertices.size() - 1 );
+		v2.reserve( vertices.size() - 1 );
+		for ( auto i = minmax.first; i != minmax.second; i = (i + 1) % vertices.size() )
+		{
+			v1.push_back( &vertices[i] );
+		}
+		v1.push_back( &vertices[minmax.second] );
+
+		for ( auto i = minmax.first; i != minmax.second; i = (i > 0) ? (i - 1) : (vertices.size() - 1) )
+		{
+			v2.push_back( &vertices[i] );
+		}
+		v2.push_back( &vertices[minmax.second] );
+
+		auto range = bounds.y.Clamp( vertices[minmax.first].screen.y, vertices[minmax.second].screen.y );
 		Bounds adjust( bounds.x, range );
-		BresenhamList e1 { sorted[0], sorted[1], sorted[2] };
-		BresenhamList e2 { sorted[0], sorted[2] };
+		BresenhamList e1( v1 );
+		BresenhamList e2( v2 );
 		Rasterize( adjust, e1, e2, process, derivatives );
 	}
 
@@ -67,19 +96,8 @@ namespace Renderer
 		}
 	}
 
-	bool Triangle::AscendingY( const Vertex* l, const Vertex* r )
+	bool Triangle::AscendingY( const Vertex& left, const Vertex& right )
 	{
-		return l->screen.y < r->screen.y;
-	}
-
-	std::vector<const Vertex*> Triangle::Sort( const Vertex& a, const Vertex& b, const Vertex& c )
-	{
-		std::vector<const Vertex*> sorted( 3 );
-		sorted[0] = &a;
-		sorted[1] = &b;
-		sorted[2] = &c;
-
-		sort( sorted.begin(), sorted.end(), AscendingY );
-		return sorted;
+		return left.screen.y < right.screen.y;
 	}
 }

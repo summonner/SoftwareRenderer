@@ -1,10 +1,11 @@
 #include "framework.h"
 #include "BresenhamList.h"
 #include "PixelValues.h"
+#include "Renderer/Vertex.h"
 
 namespace Renderer
 {
-	BresenhamList::BresenhamList( std::initializer_list<const Vertex*> vertices )
+	BresenhamList::BresenhamList( const std::vector<const Vertex*>& vertices )
 		: currentIndex( 0 )
 		, x( _x )
 	{
