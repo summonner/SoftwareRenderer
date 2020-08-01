@@ -31,14 +31,20 @@
     <Filter Include="Renderer\Rasterizer">
       <UniqueIdentifier>{a1a4675b-61df-4521-a203-b95292cd6fc4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer\RasterizerGenerators">
-      <UniqueIdentifier>{8b7dbe1e-614d-4740-a91c-5e55dacdf028}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene\gl">
       <UniqueIdentifier>{2cb3a64e-57d7-4e4b-b7de-0c99ca59f6a0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Renderer\Texturing">
       <UniqueIdentifier>{756bcc1a-ce64-46a3-8a8b-4c0bdc4f10d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Geometry">
+      <UniqueIdentifier>{0ca84a82-93bb-4b7f-812f-5ec6bfc9928d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\GeometryGenerators">
+      <UniqueIdentifier>{8b7dbe1e-614d-4740-a91c-5e55dacdf028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Rasterizer\Algorithm">
+      <UniqueIdentifier>{b888f9e3-9198-4bc3-9ff1-08d793cd082d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -111,38 +117,8 @@
     <ClInclude Include="Math\MathExt.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\Line.h">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\Point.h">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\Triangle.h">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\Bresenham.h">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Rasterizer\RasterizedPixel.h">
       <Filter>Renderer\Rasterizer</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\RasterizerGenerators\RasterizerGenerator.h">
-      <Filter>Renderer\RasterizerGenerators</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\RasterizerGenerators\TriangleGenerator.h">
-      <Filter>Renderer\RasterizerGenerators</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\RasterizerGenerators\Types.h">
-      <Filter>Renderer\RasterizerGenerators</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\RasterizerGenerators\LineGenerator.h">
-      <Filter>Renderer\RasterizerGenerators</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\RasterizerGenerators\PointGenerator.h">
-      <Filter>Renderer\RasterizerGenerators</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\RasterizerGenerators\QuadGenerator.h">
-      <Filter>Renderer\RasterizerGenerators</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\DepthBuffer.h">
       <Filter>Renderer</Filter>
@@ -186,22 +162,64 @@
     <ClInclude Include="Renderer\Texturing\TextureFilter.h">
       <Filter>Renderer\Texturing</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\DerivativeTexcoord.h">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Texturing\Mipmap.h">
       <Filter>Renderer\Texturing</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\BresenhamList.h">
-      <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Rasterizer\PixelValues.h">
       <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\Polygon.h">
+    <ClInclude Include="Renderer\Geometry\IGeometry.h">
+      <Filter>Renderer\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Geometry\Line.h">
+      <Filter>Renderer\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\LineRasterizer.h">
       <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\SutherlanHodgmanClipping.h">
+    <ClInclude Include="Renderer\Geometry\Triangle.h">
+      <Filter>Renderer\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Geometry\SutherlanHodgmanClipping.h">
+      <Filter>Renderer\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\PointRasterizer.h">
+      <Filter>Renderer\Rasterizer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Geometry\Point.h">
+      <Filter>Renderer\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\PolygonRasterizer.h">
+      <Filter>Renderer\Rasterizer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Generators\LineGenerator.h">
+      <Filter>Renderer\GeometryGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Generators\PointGenerator.h">
+      <Filter>Renderer\GeometryGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Generators\QuadGenerator.h">
+      <Filter>Renderer\GeometryGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Generators\TriangleGenerator.h">
+      <Filter>Renderer\GeometryGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Generators\Types.h">
+      <Filter>Renderer\GeometryGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Generators\GeometryGenerator.h">
+      <Filter>Renderer\GeometryGenerators</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\Bresenham.h">
+      <Filter>Renderer\Rasterizer\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\BresenhamList.h">
+      <Filter>Renderer\Rasterizer\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\DerivativeTexcoord.h">
+      <Filter>Renderer\Rasterizer\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\CommonRasterizer.h">
       <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
   </ItemGroup>
@@ -258,35 +276,8 @@
     <ClCompile Include="Math\RangeIterator.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\Line.cpp">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\Point.cpp">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\Triangle.cpp">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\Rasterizer\RasterizedPixel.cpp">
       <Filter>Renderer\Rasterizer</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\RasterizerGenerators\TriangleGenerator.cpp">
-      <Filter>Renderer\RasterizerGenerators</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\RasterizerGenerators\LineGenerator.cpp">
-      <Filter>Renderer\RasterizerGenerators</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\RasterizerGenerators\PointGenerator.cpp">
-      <Filter>Renderer\RasterizerGenerators</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\RasterizerGenerators\RasterizerGenerator.cpp">
-      <Filter>Renderer\RasterizerGenerators</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\RasterizerGenerators\QuadGenerator.cpp">
-      <Filter>Renderer\RasterizerGenerators</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\DepthBuffer.cpp">
       <Filter>Renderer</Filter>
@@ -321,22 +312,58 @@
     <ClCompile Include="Renderer\Texturing\TextureFilter.cpp">
       <Filter>Renderer\Texturing</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\Texturing\Mipmap.cpp">
       <Filter>Renderer\Texturing</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\BresenhamList.cpp">
-      <Filter>Renderer\Rasterizer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Rasterizer\PixelValues.cpp">
       <Filter>Renderer\Rasterizer</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\Polygon.cpp">
+    <ClCompile Include="Renderer\Geometry\Line.cpp">
+      <Filter>Renderer\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\LineRasterizer.cpp">
       <Filter>Renderer\Rasterizer</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\SutherlanHodgmanClipping.cpp">
+    <ClCompile Include="Renderer\Geometry\Triangle.cpp">
+      <Filter>Renderer\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Geometry\SutherlanHodgmanClipping.cpp">
+      <Filter>Renderer\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\PointRasterizer.cpp">
+      <Filter>Renderer\Rasterizer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Geometry\Point.cpp">
+      <Filter>Renderer\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\PolygonRasterizer.cpp">
+      <Filter>Renderer\Rasterizer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Generators\LineGenerator.cpp">
+      <Filter>Renderer\GeometryGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Generators\PointGenerator.cpp">
+      <Filter>Renderer\GeometryGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Generators\QuadGenerator.cpp">
+      <Filter>Renderer\GeometryGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Generators\TriangleGenerator.cpp">
+      <Filter>Renderer\GeometryGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Generators\GeometryGenerator.cpp">
+      <Filter>Renderer\GeometryGenerators</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp">
+      <Filter>Renderer\Rasterizer\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\BresenhamList.cpp">
+      <Filter>Renderer\Rasterizer\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp">
+      <Filter>Renderer\Rasterizer\Algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\CommonRasterizer.cpp">
       <Filter>Renderer\Rasterizer</Filter>
     </ClCompile>
   </ItemGroup>

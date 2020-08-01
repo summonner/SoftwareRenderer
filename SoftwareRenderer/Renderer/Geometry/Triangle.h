@@ -1,15 +1,11 @@
 #pragma once
-#include "IRasterizer.h"
+#include "IGeometry.h"
 
-class RangeInt;
-class Bounds;
 namespace Renderer
 {
-	class Bresenham;
-	class BresenhamList;
 	class Vertex;
 	class DerivativeTexcoord;
-	class Triangle final : public IRasterizer
+	class Triangle final : public IGeometry
 	{
 	public:
 		Triangle( const Vertex& a, const Vertex& b, const Vertex& c );

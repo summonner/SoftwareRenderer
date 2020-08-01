@@ -1,11 +1,11 @@
 #include "framework.h"
 #include "LineGenerator.h"
-#include "Renderer/Rasterizer/Line.h"
+#include "Renderer/Geometry/Line.h"
 #include "Renderer/Vertex.h"
 
 namespace Renderer
 {
-	void LineGenerator::Default( VertexBuffer vertices, IRasterizerList& outRasterizers )
+	void LineGenerator::Default( VertexBuffer vertices, IGeometryList& outRasterizers )
 	{
 		auto numVertices = vertices.size() - 1;
 		for ( auto i = 0u; i < numVertices; i += 2 )
@@ -14,7 +14,7 @@ namespace Renderer
 		}
 	}
 
-	void LineGenerator::Strip( VertexBuffer vertices, IRasterizerList& outRasterizers )
+	void LineGenerator::Strip( VertexBuffer vertices, IGeometryList& outRasterizers )
 	{
 		auto numVertices = vertices.size() - 1;
 		for ( auto i = 0u; i < numVertices; ++i )
@@ -23,7 +23,7 @@ namespace Renderer
 		}
 	}
 	
-	void LineGenerator::Loop( VertexBuffer vertices, IRasterizerList& outRasterizers )
+	void LineGenerator::Loop( VertexBuffer vertices, IGeometryList& outRasterizers )
 	{
 		auto numVertices = vertices.size() - 1;
 		for ( auto i = 0u; i < numVertices; ++i )

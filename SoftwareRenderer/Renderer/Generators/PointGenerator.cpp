@@ -1,11 +1,11 @@
 #include "framework.h"
 #include "PointGenerator.h"
-#include "Renderer/Rasterizer/Point.h"
+#include "Renderer/Geometry/Point.h"
 #include "Renderer/Vertex.h"
 
 namespace Renderer
 {
-	void PointGenerator::Default( VertexBuffer vertices, IRasterizerList& outRasterizers )
+	void PointGenerator::Default( VertexBuffer vertices, IGeometryList& outRasterizers )
 	{
 		auto numVertices = vertices.size();
 		for ( auto i = 0u; i < numVertices; ++i )

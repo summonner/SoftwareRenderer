@@ -6,6 +6,6 @@ namespace Renderer
 	class PointGenerator final
 	{
 	public:
-		static void Default( VertexBuffer vertices, IRasterizerList& outRasterizers );
+		static void Default( VertexBuffer vertices, IGeometryList& outRasterizers );
 	};
 }

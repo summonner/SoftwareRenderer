@@ -1,22 +1,23 @@
 #include "framework.h"
-#include "Point.h"
+#include "PointRasterizer.h"
 #include "Math/Bounds.h"
-#include "Renderer/Vertex.h"
 #include "RasterizedPixel.h"
 
 namespace Renderer
 {
-	Point::Point( const Vertex& v )
+	PointRasterizer::PointRasterizer( const Vertex& v )
 		: v( v )
 	{
 	}
 
-	Point::~Point()
+	PointRasterizer::~PointRasterizer()
 	{
 	}
 
-	void Point::Rasterize( const Bounds& bounds, ProcessPixel process )
+	void PointRasterizer::Rasterize( const Matrix4x4& viewport, const Bounds& bounds, ProcessPixel process )
 	{
+		v.PerspectiveDivide( viewport );
+
 		if ( bounds.Contains( v.screen ) == false )
 		{
 			return;

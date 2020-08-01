@@ -2,9 +2,9 @@
 
 namespace Renderer
 {
-	class IRasterizer;
+	class IGeometry;
 	class Vertex;
 
-	using IRasterizerList = std::vector<std::unique_ptr<IRasterizer>>;
+	using IGeometryList = std::vector<std::unique_ptr<IGeometry>>;
 	using VertexBuffer = const std::vector<Vertex>&;
 }

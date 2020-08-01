@@ -1,12 +1,12 @@
 #include "framework.h"
 #include "QuadGenerator.h"
-#include "Renderer/Rasterizer/Triangle.h"
+#include "Renderer/Geometry/Triangle.h"
 #include "Renderer/Vertex.h"
 #include "TriangleGenerator.h"
 
 namespace Renderer
 {
-	void QuadGenerator::Quads( VertexBuffer vertices, IRasterizerList& outRasterizers )
+	void QuadGenerator::Quads( VertexBuffer vertices, IGeometryList& outRasterizers )
 	{
 		auto lastIndex = vertices.size() - 3;
 		for ( auto i = 0u; i < lastIndex; i += 4 )
@@ -15,7 +15,7 @@ namespace Renderer
 		}
 	}
 	
-	void QuadGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, const Vertex& d, IRasterizerList& outRasterizers )
+	void QuadGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, const Vertex& d, IGeometryList& outRasterizers )
 	{
 		TriangleGenerator::Build( a, b, c, outRasterizers );
 		TriangleGenerator::Build( a, c, d, outRasterizers );

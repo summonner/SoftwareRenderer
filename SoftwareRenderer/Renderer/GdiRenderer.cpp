@@ -2,9 +2,9 @@
 #include "GdiRenderer.h"
 #include "FrameBuffer.h"
 #include "DepthBuffer.h"
+#include "Geometry/IGeometry.h"
 #include "Rasterizer/IRasterizer.h"
 #include "Rasterizer/RasterizedPixel.h"
-#include "RasterizerGenerators/RasterizerGenerator.h"
 #include "Math/Vector3.hpp"
 #include "Texturing/ITexture.h"
 
@@ -20,7 +20,6 @@ namespace Renderer
 	GdiRenderer::GdiRenderer( const HWND hWnd, const int width, const int height )
 		: hWnd( hWnd )
 		, bounds( width, height )
-		, generator( std::make_unique<RasterizerGenerator>() )
 		, depthBuffer( std::make_unique<DepthBuffer>( width, height ) )
 	{
 		auto dc = GetDC( hWnd );
@@ -50,7 +49,7 @@ namespace Renderer
 
 	void GdiRenderer::Begin( DrawMode mode )
 	{
-		generator->Begin( mode );
+		generator.Begin( mode );
 	}
 
 	void GdiRenderer::End()
@@ -60,7 +59,7 @@ namespace Renderer
 			vertex.Process( projection );
 		}
 
-		auto& geometries = generator->Generate( vertices );
+		auto geometries = generator.Generate( vertices );
 
 		auto rasterizers = Clip( geometries );
 
@@ -90,7 +89,6 @@ namespace Renderer
 		}
 
 		vertices.clear();
-		generator->Flush();
 		temp = Vertex();
 	}
 
@@ -182,7 +180,7 @@ namespace Renderer
 		temp.texcoord = Vector2( u, v );
 	}
 
-	std::vector<std::unique_ptr<IRasterizer>> GdiRenderer::Clip( const std::vector<std::unique_ptr<IRasterizer>>& geometries )
+	std::vector<std::unique_ptr<IRasterizer>> GdiRenderer::Clip( const IGeometryList& geometries )
 	{
 		std::vector<std::unique_ptr<IRasterizer>> rasterizers;
 		for ( auto& geometry : geometries )

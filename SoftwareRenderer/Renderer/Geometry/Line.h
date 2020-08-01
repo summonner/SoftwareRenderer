@@ -1,18 +1,17 @@
 #pragma once
-#include "IRasterizer.h"
+#include "IGeometry.h"
 
-class Bounds;
 namespace Renderer
 {
 	class Vertex;
 	class DerivativeTexcoord;
-	class Line final : public IRasterizer
+	class Line final : public IGeometry
 	{
 	public:
 		Line( const Vertex& a, const Vertex& b );
 		~Line() override;
 
-		void Rasterize( const Bounds& bounds, ProcessPixel process );
+		std::unique_ptr<IRasterizer> Clip() const;
 
 	private:
 		DerivativeTexcoord Derivative() const;

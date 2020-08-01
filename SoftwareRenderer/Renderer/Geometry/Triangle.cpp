@@ -2,7 +2,7 @@
 #include "Triangle.h"
 #include "Renderer/Vertex.h"
 #include "SutherlanHodgmanClipping.h"
-#include "Polygon.h"
+#include "Renderer/Rasterizer/PolygonRasterizer.h"
 
 namespace Renderer
 {
@@ -26,7 +26,7 @@ namespace Renderer
 		}
 
 		auto derivatives = [&]() { return Derivative(); };
-		return std::make_unique<Polygon>( std::move( vertices ), derivatives );
+		return std::make_unique<PolygonRasterizer>( std::move( vertices ), derivatives );
 	}
 
 	DerivativeTexcoord Triangle::Derivative() const

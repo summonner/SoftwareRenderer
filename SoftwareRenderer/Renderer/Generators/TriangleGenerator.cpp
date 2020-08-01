@@ -1,12 +1,12 @@
 #include "framework.h"
 #include "TriangleGenerator.h"
-#include "Renderer/Rasterizer/Triangle.h"
+#include "Renderer/Geometry/Triangle.h"
 #include "Renderer/Vertex.h"
 #include "Math/Vector3.hpp"
 
 namespace Renderer
 {
-	void TriangleGenerator::Default( VertexBuffer vertices, IRasterizerList& outRasterizers )
+	void TriangleGenerator::Default( VertexBuffer vertices, IGeometryList& outRasterizers )
 	{
 		auto lastIndex = vertices.size() - 2;
 		for ( auto i = 0u; i < lastIndex; i += 3 )
@@ -15,7 +15,7 @@ namespace Renderer
 		}
 	}
 
-	void TriangleGenerator::Strip( VertexBuffer vertices, IRasterizerList& outRasterizers )
+	void TriangleGenerator::Strip( VertexBuffer vertices, IGeometryList& outRasterizers )
 	{
 		auto lastIndex = vertices.size() - 3;
 		auto i = 0u;
@@ -31,7 +31,7 @@ namespace Renderer
 		}
 	}
 
-	void TriangleGenerator::Fan( VertexBuffer vertices, IRasterizerList& outRasterizers )
+	void TriangleGenerator::Fan( VertexBuffer vertices, IGeometryList& outRasterizers )
 	{
 		auto lastIndex = vertices.size() - 1;
 		for ( auto i = 1u; i < lastIndex; i += 1 )
@@ -40,7 +40,7 @@ namespace Renderer
 		}
 	}
 
-	void TriangleGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, IRasterizerList& outRasterizers )
+	void TriangleGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, IGeometryList& outRasterizers )
 	{
 		if ( CheckFacet( a.position, b.position, c.position ) < 0.f )
 		{

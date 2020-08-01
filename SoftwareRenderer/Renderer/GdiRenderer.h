@@ -3,13 +3,14 @@
 #include "Vertex.h"
 #include "Math/Matrix4x4.h"
 #include "Math/Bounds.h"
+#include "Generators/GeometryGenerator.h"
 
 namespace Renderer
 {
 	class FrameBuffer;
 	class DepthBuffer;
 	class IRasterizer;
-	class RasterizerGenerator;
+	class IGeometry;
 	class ITexture;
 
 	class GdiRenderer final : public IRenderer
@@ -43,7 +44,7 @@ namespace Renderer
 		void TexCoord( float u, float v ) override;
 
 	private:
-		static std::vector<std::unique_ptr<IRasterizer>> Clip( const std::vector<std::unique_ptr<IRasterizer>>& geometries );
+		static std::vector<std::unique_ptr<IRasterizer>> Clip( const IGeometryList& geometries );
 
 	private:
 		const HWND hWnd;
@@ -52,7 +53,7 @@ namespace Renderer
 		std::unique_ptr<FrameBuffer> backBuffer;
 		std::unique_ptr<DepthBuffer> depthBuffer;
 
-		const std::unique_ptr<RasterizerGenerator> generator;
+		GeometryGenerator generator;
 		std::shared_ptr<const ITexture> texture;
 
 		Vertex temp;

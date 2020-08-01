@@ -1,6 +1,6 @@
 #include "framework.h"
-#include "Polygon.h"
-#include "Point.h"
+#include "PolygonRasterizer.h"
+#include "PointRasterizer.h"
 #include "BresenhamList.h"
 #include "RasterizedPixel.h"
 #include "Renderer/Vertex.h"
@@ -8,31 +8,18 @@
 
 namespace Renderer
 {
-	Polygon::Polygon( std::vector<Vertex>&& vertices, std::function<DerivativeTexcoord()> derivativeBuilder )
-		: vertices( std::move( vertices ) )
-		, derivativeBuilder( derivativeBuilder )
+	PolygonRasterizer::PolygonRasterizer( std::vector<Vertex>&& vertices, std::function<DerivativeTexcoord()> derivativeBuilder )
+		: CommonRasterizer( std::move( vertices ), derivativeBuilder )
 	{
 		assert( this->vertices.size() > 0 );
 	}
 
-	Polygon::~Polygon()
+	PolygonRasterizer::~PolygonRasterizer()
 	{
 	}
 
-	void Polygon::Rasterize( const Matrix4x4& viewport, const Bounds& bounds, ProcessPixel process )
+	void PolygonRasterizer::Rasterize( const Bounds& bounds, ProcessPixel process, const DerivativeTexcoord& derivatives )
 	{
-		auto derivatives = derivativeBuilder();
-		if ( derivatives.IsValid() == false )
-		{
-			Point( vertices[0] ).Rasterize( bounds, process );
-			return;
-		}
-
-		for ( auto& v : vertices )
-		{
-			v.PerspectiveDivide( viewport );
-		}
-
 		const auto minmax = FindMinMax();
 		if ( minmax.first == minmax.second )
 		{
@@ -42,12 +29,12 @@ namespace Renderer
 		auto range = bounds.y.Clamp( vertices[minmax.first].screen.y, vertices[minmax.second].screen.y );
 		Bounds adjust( bounds.x, range );
 
-		auto e1 = BuildEdge( minmax, &Polygon::Forward );
-		auto e2 = BuildEdge( minmax, &Polygon::Backward );
+		auto e1 = BuildEdge( minmax, &PolygonRasterizer::Forward );
+		auto e2 = BuildEdge( minmax, &PolygonRasterizer::Backward );
 		Rasterize( adjust, e1, e2, process, derivatives );
 	}
 
-	std::pair<size_t, size_t> Polygon::FindMinMax() const
+	std::pair<size_t, size_t> PolygonRasterizer::FindMinMax() const
 	{
 		std::pair<size_t, size_t> minmax( 0, 0 );
 
@@ -66,7 +53,7 @@ namespace Renderer
 		return minmax;
 	}
 
-	BresenhamList Polygon::BuildEdge( const std::pair<size_t, size_t>& minmax, std::function<size_t( const Polygon&, size_t )> Next ) const
+	BresenhamList PolygonRasterizer::BuildEdge( const std::pair<size_t, size_t>& minmax, std::function<size_t( const PolygonRasterizer&, size_t )> Next ) const
 	{
 		std::vector<const Vertex*> v;
 		v.reserve( vertices.size() - 1 );
@@ -79,7 +66,7 @@ namespace Renderer
 		return BresenhamList( v );
 	}
 
-	size_t Polygon::Forward( size_t i ) const
+	size_t PolygonRasterizer::Forward( size_t i ) const
 	{
 		if ( i < vertices.size() - 1 )
 		{
@@ -91,7 +78,7 @@ namespace Renderer
 		}
 	}
 
-	size_t Polygon::Backward( size_t i ) const
+	size_t PolygonRasterizer::Backward( size_t i ) const
 	{
 		if ( i > 0 )
 		{
@@ -103,7 +90,7 @@ namespace Renderer
 		}
 	}
 
-	void Polygon::Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, ProcessPixel process, const DerivativeTexcoord& derivatives )
+	void PolygonRasterizer::Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, ProcessPixel process, const DerivativeTexcoord& derivatives )
 	{
 		for ( const auto y : bounds.y )
 		{
@@ -130,7 +117,7 @@ namespace Renderer
 		}
 	}
 
-	bool Polygon::AscendingY( const Vertex& left, const Vertex& right )
+	bool PolygonRasterizer::AscendingY( const Vertex& left, const Vertex& right )
 	{
 		return left.position.y < right.position.y;
 	}

@@ -1,14 +1,14 @@
 #include "framework.h"
-#include "RasterizerGenerator.h"
+#include "GeometryGenerator.h"
 #include "PointGenerator.h"
 #include "LineGenerator.h"
 #include "TriangleGenerator.h"
 #include "QuadGenerator.h"
-#include "Renderer/Rasterizer/IRasterizer.h"
+#include "Renderer/Geometry/IGeometry.h"
 
 namespace Renderer
 {
-	const Dictionary<IRenderer::DrawMode, const RasterizerGenerator::GeneratorFunction> RasterizerGenerator::table
+	const Dictionary<IRenderer::DrawMode, const GeometryGenerator::GeneratorFunction> GeometryGenerator::table
 	{
 		{ IRenderer::DrawMode::Points,		PointGenerator::Default },
 		{ IRenderer::DrawMode::Lines,		LineGenerator::Default },
@@ -20,31 +20,27 @@ namespace Renderer
 		{ IRenderer::DrawMode::Quads,		QuadGenerator::Quads },
 	};
 
-	RasterizerGenerator::RasterizerGenerator()
+	GeometryGenerator::GeometryGenerator()
 	{
 	}
 
-	RasterizerGenerator::~RasterizerGenerator()
+	GeometryGenerator::~GeometryGenerator()
 	{
 	}
 
-	void RasterizerGenerator::Begin( IRenderer::DrawMode mode )
+	void GeometryGenerator::Begin( IRenderer::DrawMode mode )
 	{
 		generator = table[mode];
 	}
 
-	const IRasterizerList& RasterizerGenerator::Generate( const VertexBuffer& vertices )
+	IGeometryList GeometryGenerator::Generate( const VertexBuffer& vertices )
 	{
+		IGeometryList geometries;
 		if ( generator != nullptr )
 		{
-			generator( vertices, rasterizers );
+			generator( vertices, geometries );
 		}
 
-		return rasterizers;
-	}
-
-	void RasterizerGenerator::Flush()
-	{
-		rasterizers.clear();
+		return geometries;
 	}
 }

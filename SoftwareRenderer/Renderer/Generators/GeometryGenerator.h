@@ -5,22 +5,20 @@
 
 namespace Renderer
 {
-	class RasterizerGenerator final
+	class GeometryGenerator final
 	{
 	public:
-		RasterizerGenerator();
-		~RasterizerGenerator();
+		GeometryGenerator();
+		~GeometryGenerator();
 
 		void Begin( IRenderer::DrawMode mode );
-		const IRasterizerList& Generate( const VertexBuffer& vertices );
-		void Flush();
+		IGeometryList Generate( const VertexBuffer& vertices );
 
 	private:
-		using GeneratorFunction = std::function<void( const std::vector<Vertex>&, IRasterizerList& )>;
+		using GeneratorFunction = std::function<void( const std::vector<Vertex>&, IGeometryList& )>;
 		static const Dictionary<IRenderer::DrawMode, const GeneratorFunction> table;
 
 		GeneratorFunction generator;
-		IRasterizerList rasterizers;
 	};
 
 }
