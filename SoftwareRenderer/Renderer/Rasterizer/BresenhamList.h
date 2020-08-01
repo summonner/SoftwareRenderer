@@ -20,7 +20,7 @@ namespace Renderer
 
 	private:
 		int _x;
-		int currentIndex;
+		size_t currentIndex;
 		std::vector<Bresenham> edges;
 	};
 }

@@ -13,6 +13,7 @@ namespace Renderer
 		static void Build( const Vertex& a, const Vertex& b, const Vertex& c, IRasterizerList& outRasterizers );
 
 	public:
-		static bool CheckFacet( const Vector2Int& a, const Vector2Int& b, const Vector2Int& c );
+		template<typename T>
+		static float CheckFacet( const T& a, const T& b, const T& c );
 	};
 }

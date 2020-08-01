@@ -13,7 +13,6 @@ namespace Renderer
 		: a( a )
 		, b( b )
 	{
-
 	}
 
 	Line::~Line()
@@ -22,7 +21,7 @@ namespace Renderer
 
 	void Line::Rasterize( const Bounds& bounds, ProcessPixel process )
 	{
-		const auto derivatives = DerivativeTexcoord::Line( a, b );
+		const auto derivatives = Derivative();
 		if ( derivatives.IsValid() == false )
 		{
 			Point( a ).Rasterize( bounds, process );
@@ -38,5 +37,10 @@ namespace Renderer
 
 			process( RasterizedPixel( e, derivatives ) );
 		} while ( e.Next() );
+	}
+
+	DerivativeTexcoord Line::Derivative() const
+	{
+		return DerivativeTexcoord::Line( a, b );
 	}
 }

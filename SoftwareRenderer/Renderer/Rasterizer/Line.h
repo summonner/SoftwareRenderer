@@ -5,6 +5,7 @@ class Bounds;
 namespace Renderer
 {
 	class Vertex;
+	class DerivativeTexcoord;
 	class Line final : public IRasterizer
 	{
 	public:
@@ -12,6 +13,9 @@ namespace Renderer
 		~Line() override;
 
 		void Rasterize( const Bounds& bounds, ProcessPixel process );
+
+	private:
+		DerivativeTexcoord Derivative() const;
 
 	private:
 		const Vertex& a;

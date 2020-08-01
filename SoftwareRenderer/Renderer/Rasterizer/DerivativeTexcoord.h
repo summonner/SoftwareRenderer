@@ -16,11 +16,13 @@ namespace Renderer
 		Vector2 dFdx( const Vector2& texcoord, const float w ) const;
 		Vector2 dFdy( const Vector2& texcoord, const float w ) const;
 
-		static const DerivativeTexcoord invalid;
 		inline bool IsValid() const
 		{
 			return denom != 0.f;
 		}
+
+		static const DerivativeTexcoord invalid;
+		static const DerivativeTexcoord disabled;
 
 	private:
 		const Vector2 dw;

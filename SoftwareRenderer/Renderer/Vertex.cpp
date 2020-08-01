@@ -23,9 +23,13 @@ namespace Renderer
 	{
 	}
 
-	void Vertex::Process( const Matrix4x4& projection, const Matrix4x4& viewport )
+	void Vertex::Process( const Matrix4x4& projection )
 	{
 		position = projection * position;
+	}
+
+	void Vertex::PerspectiveDivide( const Matrix4x4& viewport )
+	{
 		auto w = 1.f / position.w;
 		position *= w;
 		color *= w;

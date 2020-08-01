@@ -3,12 +3,6 @@
 #include "Renderer/Rasterizer/Triangle.h"
 #include "Renderer/Vertex.h"
 #include "Math/Vector3.hpp"
-#include "SutherlanHodgmanClipping.h"
-
-#undef max
-#undef min
-#define max std::max
-#define min std::min
 
 namespace Renderer
 {
@@ -48,25 +42,19 @@ namespace Renderer
 
 	void TriangleGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, IRasterizerList& outRasterizers )
 	{
-		if ( CheckFacet( a.screen, b.screen, c.screen ) == false )
+		if ( CheckFacet( a.position, b.position, c.position ) < 0.f )
 		{
 			return;
 		}
 
-		const auto clippedVertices = SutherlandHodgmanClipping::Clip( { a, b, c } );
-		if ( clippedVertices.size() < 3 )
-		{
-			return;
-		}
-
-		const auto derivatives = DerivativeTexcoord::Triangle( a, b, c );
-		outRasterizers.emplace_back( std::make_unique<Triangle>( clippedVertices, derivatives ) );
+		outRasterizers.emplace_back( std::make_unique<Triangle>( a, b, c ) );
 	}
 
-	bool TriangleGenerator::CheckFacet( const Vector2Int& a, const Vector2Int& b, const Vector2Int& c )
+	template<typename T>
+	float TriangleGenerator::CheckFacet( const T& a, const T& b, const T& c )
 	{
 		auto ab = b - a;
 		auto ac = c - a;
-		return ab.Area( ac ) > 0.f;
+		return ab.x * ac.y - ab.y * ac.x;
 	}
 }

@@ -57,14 +57,21 @@ namespace Renderer
 	{
 		for ( auto& vertex : vertices )
 		{
-			vertex.Process( projection, viewport );
+			vertex.Process( projection );
 		}
 
-		auto& rasterizers = generator->Generate( vertices );
+		auto& geometries = generator->Generate( vertices );
+
+		auto rasterizers = Clip( geometries );
+
+		for ( auto& vertex : vertices )
+		{
+			vertex.PerspectiveDivide( viewport );
+		}
 
 		for ( const auto& rasterizer : rasterizers )
 		{
-			rasterizer->Rasterize( bounds, [this]( const RasterizedPixel& p )
+			rasterizer->Rasterize( viewport, bounds, [&]( const RasterizedPixel& p )
 			{
 				if ( depthBuffer->Test( p.coordinate, p.GetDepth() ) == false )
 				{
@@ -173,5 +180,22 @@ namespace Renderer
 	void GdiRenderer::TexCoord( float u, float v )
 	{
 		temp.texcoord = Vector2( u, v );
+	}
+
+	std::vector<std::unique_ptr<IRasterizer>> GdiRenderer::Clip( const std::vector<std::unique_ptr<IRasterizer>>& geometries )
+	{
+		std::vector<std::unique_ptr<IRasterizer>> rasterizers;
+		for ( auto& geometry : geometries )
+		{
+			auto rasterizer = geometry->Clip();
+			if ( rasterizer == nullptr )
+			{
+				continue;
+			}
+
+			rasterizers.push_back( std::move( rasterizer ) );
+		}
+
+		return rasterizers;
 	}
 }

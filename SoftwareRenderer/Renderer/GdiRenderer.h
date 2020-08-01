@@ -43,6 +43,9 @@ namespace Renderer
 		void TexCoord( float u, float v ) override;
 
 	private:
+		static std::vector<std::unique_ptr<IRasterizer>> Clip( const std::vector<std::unique_ptr<IRasterizer>>& geometries );
+
+	private:
 		const HWND hWnd;
 		const Bounds bounds;
 

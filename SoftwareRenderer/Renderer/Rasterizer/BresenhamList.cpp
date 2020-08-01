@@ -7,6 +7,7 @@ namespace Renderer
 {
 	BresenhamList::BresenhamList( const std::vector<const Vertex*>& vertices )
 		: currentIndex( 0 )
+		, _x( 0 )
 		, x( _x )
 	{
 		edges.reserve( vertices.size() - 1 );
@@ -25,6 +26,7 @@ namespace Renderer
 	BresenhamList::BresenhamList( const BresenhamList& source )
 		: currentIndex( source.currentIndex )
 		, edges( source.edges )
+		, _x( source.x )
 		, x( _x )
 	{
 	}
