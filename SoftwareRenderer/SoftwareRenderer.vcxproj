@@ -177,7 +177,7 @@
     <ClInclude Include="Renderer\Geometry\IGeometry.h" />
     <ClInclude Include="Renderer\Geometry\Line.h" />
     <ClInclude Include="Renderer\Geometry\Point.h" />
-    <ClInclude Include="Renderer\Geometry\SutherlanHodgmanClipping.h" />
+    <ClInclude Include="Renderer\Geometry\SutherlanHodgman.h" />
     <ClInclude Include="Renderer\Geometry\Triangle.h" />
     <ClInclude Include="Renderer\IRenderer.h" />
     <ClInclude Include="Renderer\PixelIterator.h" />
@@ -235,7 +235,7 @@
     <ClCompile Include="Renderer\Generators\TriangleGenerator.cpp" />
     <ClCompile Include="Renderer\Geometry\Line.cpp" />
     <ClCompile Include="Renderer\Geometry\Point.cpp" />
-    <ClCompile Include="Renderer\Geometry\SutherlanHodgmanClipping.cpp" />
+    <ClCompile Include="Renderer\Geometry\SutherlanHodgman.cpp" />
     <ClCompile Include="Renderer\Geometry\Triangle.cpp" />
     <ClCompile Include="Renderer\PixelIterator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp" />

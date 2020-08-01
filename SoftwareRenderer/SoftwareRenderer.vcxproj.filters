@@ -180,9 +180,6 @@
     <ClInclude Include="Renderer\Geometry\Triangle.h">
       <Filter>Renderer\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Geometry\SutherlanHodgmanClipping.h">
-      <Filter>Renderer\Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Rasterizer\PointRasterizer.h">
       <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
@@ -221,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="Renderer\Rasterizer\CommonRasterizer.h">
       <Filter>Renderer\Rasterizer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Geometry\SutherlanHodgman.h">
+      <Filter>Renderer\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -327,9 +327,6 @@
     <ClCompile Include="Renderer\Geometry\Triangle.cpp">
       <Filter>Renderer\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Geometry\SutherlanHodgmanClipping.cpp">
-      <Filter>Renderer\Geometry</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\Rasterizer\PointRasterizer.cpp">
       <Filter>Renderer\Rasterizer</Filter>
     </ClCompile>
@@ -365,6 +362,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\Rasterizer\CommonRasterizer.cpp">
       <Filter>Renderer\Rasterizer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Geometry\SutherlanHodgman.cpp">
+      <Filter>Renderer\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

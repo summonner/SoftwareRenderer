@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "Triangle.h"
 #include "Renderer/Vertex.h"
-#include "SutherlanHodgmanClipping.h"
+#include "SutherlanHodgman.h"
 #include "Renderer/Rasterizer/PolygonRasterizer.h"
 
 namespace Renderer
@@ -19,7 +19,7 @@ namespace Renderer
 
 	std::unique_ptr<IRasterizer> Triangle::Clip() const
 	{
-		auto vertices = SutherlandHodgmanClipping::Clip( { a, b, c } );
+		auto vertices = SutherlandHodgman::ClipPolygon( { a, b, c } );
 		if ( vertices.size() < 3 )
 		{
 			return nullptr;

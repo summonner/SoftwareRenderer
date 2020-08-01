@@ -3,10 +3,12 @@
 namespace Renderer
 {
 	class Vertex;
-	class SutherlandHodgmanClipping abstract final
+	class SutherlandHodgman abstract final
 	{
 	public:
-		static std::vector<Vertex> Clip( const std::vector<Vertex>& vertices );
+		static std::vector<Vertex> ClipPolygon( const std::vector<Vertex>& vertices );
+		static std::vector<Vertex> ClipLine( const std::vector<Vertex>& vertices );
+		static bool ClipPoint( const Vertex& vertex );
 
 	private:
 		static void PushIntersect( const Vertex& previous, const Vertex& current, float dotPrevious, const Vector4& plane, std::vector<Vertex>& out );
