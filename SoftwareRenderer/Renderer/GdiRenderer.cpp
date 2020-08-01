@@ -133,7 +133,7 @@ namespace Renderer
 		viewport = Matrix4x4(
 			halfWidth, 0, 0, halfWidth + left,
 			0, halfHeight, 0, halfHeight + bottom,
-			0, 0, 0, 1,
+			0, 0, 1, -1,
 			0, 0, 0, 1
 		);
 	}

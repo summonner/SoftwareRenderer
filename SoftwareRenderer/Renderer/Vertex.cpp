@@ -37,6 +37,7 @@ namespace Renderer
 
 		auto p = viewport * position;
 		screen = Vector2Int( (int)p.x, (int)p.y );
+		position.z = p.z;
 		position.w = w;
 	}
 

@@ -24,8 +24,7 @@ namespace Renderer
 	bool DepthBuffer::Test( const Vector2Int& coordinate, float depth )
 	{
 		auto p = coordinate.y * width + coordinate.x;
-		depth -= 1.f;
-		if ( depth <= pixels[p] && depth >= -2.f )
+		if ( depth <= pixels[p] )
 		{
 			pixels[p] = depth;
 			return true;
