@@ -22,7 +22,7 @@ namespace Renderer
 
 	float WrapMode::MirroredRepeat( float v )
 	{
-		v = std::fmodf( v, 2.f );
+		v = v - ((int)v & ~1);
 		if ( v < 0 )
 		{
 			v *= -1;

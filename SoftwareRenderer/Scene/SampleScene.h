@@ -16,6 +16,12 @@ public:
 	void Render( std::shared_ptr<IRenderer> renderer ) const override;
 
 private:
+	void Floor() const;
+	void Triangle() const;
+	void Quad() const;
+
+
+private:
 	std::shared_ptr<Renderer::Texture2D> checker;
 	void DrawScene() const;
 };

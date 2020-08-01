@@ -35,8 +35,13 @@ void SampleScene::Update( const Time& time )
 void SampleScene::DrawScene() const
 {
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+	Floor();
+}
+
+void SampleScene::Floor() const
+{
 	glLoadIdentity();
-	
 	glBegin( GL_QUADS );
 	glBindTexture( GL_TEXTURE_2D, checker );
 	glTranslatef( 0, -2, 15 * x - 10 );
@@ -45,8 +50,11 @@ void SampleScene::DrawScene() const
 	glTexCoord2f( 1.0f, 1.0f ); glVertex3f( 10, 0, 10 );
 	glTexCoord2f( 1.0f, 0.0f ); glVertex3f( 10, 0, -10 );
 	glEnd();
+}
 
-	return;
+void SampleScene::Triangle() const
+{
+	glLoadIdentity();
 	glBindTexture( GL_TEXTURE_2D, 0 );
 	glTranslatef( -1.5f * 0, 0.0f, -6.0f + 6 * x );
 	glRotatef( 0 * -90.f, 0.f, 1.f, 0.f );
@@ -63,8 +71,10 @@ void SampleScene::DrawScene() const
 	glTexCoord2f( 1.0f, 0.0f );
 	glVertex3f( 1.f, -1.f, 0.f );
 	glEnd();
-	return;
+}
 
+void SampleScene::Quad() const
+{
 	glLoadIdentity();
 	glBindTexture( GL_TEXTURE_2D, checker );
 	glTranslatef( 1.5f * (1 - x), 0.0f, -6.0f + 5.5f * 0 );
