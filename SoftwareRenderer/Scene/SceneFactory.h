@@ -11,7 +11,9 @@ public:
 private:
 	template<typename T>
 	static std::unique_ptr<IScene> Create( std::shared_ptr<IRenderer> renderer );
-	static std::unique_ptr<IScene> OnInvalidSceneId( std::shared_ptr<IRenderer> renderer );
+	template<class Lesson>
+	static std::unique_ptr<IScene> NeHeLesson( std::shared_ptr<IRenderer> renderer );
+	static std::unique_ptr<IScene> ReturnNullPtr( std::shared_ptr<IRenderer> renderer );
 
 	using CreateFunc = std::function<std::unique_ptr<IScene>( std::shared_ptr<IRenderer> )>;
 	static const Dictionary<UINT, CreateFunc> table;

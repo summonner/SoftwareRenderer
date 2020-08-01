@@ -52,6 +52,11 @@ namespace Renderer
 
 	void WrapMode::operator =( const WrapMode::Type type )
 	{
+		if ( type == WrapMode::Type::_ )
+		{
+			return;
+		}
+
 		current = table[type];
 	}
 }

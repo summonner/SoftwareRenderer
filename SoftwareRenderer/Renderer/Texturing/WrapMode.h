@@ -8,6 +8,7 @@ namespace Renderer
 	public:
 		enum class Type
 		{
+			_,
 			Clamp,
 			Repeat,
 			MirroredRepeat,

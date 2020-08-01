@@ -63,6 +63,59 @@ void glTextureManager::SetImage( GLint level, GLint internalformat, GLsizei widt
 	textures[current].reset( new Renderer::Texture2D( source ) );
 }
 
+void glTextureManager::SetWrapModeS( GLint param )
+{
+
+}
+
+void glTextureManager::SetWrapModeT( GLint param )
+{
+
+}
+
+void glTextureManager::SetMinFilter( GLint param )
+{
+	static Dictionary<GLint, TextureMinFilter> table
+	{
+		{ GL_NEAREST, TextureMinFilter::Nearest },
+		{ GL_LINEAR, TextureMinFilter::Linear },
+		{ GL_NEAREST_MIPMAP_NEAREST, TextureMinFilter::NearestMipmapNearest },
+		{ GL_NEAREST_MIPMAP_LINEAR, TextureMinFilter::NearestMipmapLinear },
+		{ GL_LINEAR_MIPMAP_NEAREST, TextureMinFilter::LinearMipmapNearest },
+		{ GL_LINEAR_MIPMAP_LINEAR, TextureMinFilter::LinearMipmapLinear },
+	};
+
+	if ( auto texture = Get2D(); texture != nullptr )
+	{
+		texture->SetFilter( table[param] );
+	}
+}
+
+void glTextureManager::SetMagFilter( GLint param )
+{
+	static Dictionary<GLint, TextureMagFilter> table
+	{
+		{ GL_NEAREST, TextureMagFilter::Nearest },
+		{ GL_LINEAR, TextureMagFilter::Linear },
+	};
+
+	if ( auto texture = Get2D(); texture != nullptr )
+	{
+		texture->SetFilter( table[param] );
+	}
+}
+
+
+std::shared_ptr<Texture2D> glTextureManager::Get2D() const
+{
+	if ( current == 0 )
+	{
+		return nullptr;
+	}
+
+	return std::dynamic_pointer_cast<Texture2D>( textures[current] );
+}
+
 
 glTextureManager::glImageSource::glImageSource( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels )
 	: IImageSource( width, height )

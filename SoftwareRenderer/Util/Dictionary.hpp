@@ -8,7 +8,7 @@ public:
 	}
 
 	Dictionary( std::initializer_list<std::pair<const Key, Value>> records )
-		: Dictionary( records, nullptr )
+		: Dictionary( records, Value() )
 	{
 	}
 

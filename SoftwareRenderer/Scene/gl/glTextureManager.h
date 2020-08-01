@@ -6,8 +6,10 @@
 namespace Renderer
 {
 	class ITexture;
+	class Texture2D;
 }
 using ITexture = Renderer::ITexture;
+using Texture2D = Renderer::Texture2D;
 class IRenderer;
 
 class glTextureManager final
@@ -21,7 +23,13 @@ public:
 	std::shared_ptr<ITexture> Bind( GLuint handle );
 	void SetImage( GLint level, GLint internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels );
 
+	void SetWrapModeS( GLint param );
+	void SetWrapModeT( GLint param );
+	void SetMinFilter( GLint param );
+	void SetMagFilter( GLint param );
+
 private:
+	std::shared_ptr<Texture2D> Get2D() const;
 	Dictionary<GLuint, std::shared_ptr<ITexture>> textures;
 	GLuint current;
 

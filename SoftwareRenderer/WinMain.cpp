@@ -170,18 +170,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					case IDM_EXIT:
 						DestroyWindow(hWnd);
 						break;
-                    case ID_SCENE_NEHE:
-                    case ID_SCENE_DEFAULT:
-                    {
-                        auto newScene = SceneMenu::Select( renderer, hWnd, wmId );
-                        if ( newScene != nullptr )
-                        {
-                            scene = std::move( newScene );
-                        }
-                    }
-                        break;
 					default:
-						return DefWindowProc(hWnd, message, wParam, lParam);
+                        {
+                            auto newScene = SceneMenu::Select( renderer, hWnd, wmId );
+                            if ( newScene != nullptr )
+                            {
+                                scene = std::move( newScene );
+                            }
+                            else
+                            {
+						        return DefWindowProc(hWnd, message, wParam, lParam);
+                            }
+                        }
 				}
 			}
 			break;

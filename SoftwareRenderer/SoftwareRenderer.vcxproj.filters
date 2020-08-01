@@ -222,6 +222,18 @@
     <ClInclude Include="Renderer\Geometry\SutherlanHodgman.h">
       <Filter>Renderer\Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson6.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\ILesson.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson8.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\LessonList.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -365,6 +377,12 @@
     </ClCompile>
     <ClCompile Include="Renderer\Geometry\SutherlanHodgman.cpp">
       <Filter>Renderer\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson8.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\ILesson.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

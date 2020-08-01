@@ -82,6 +82,11 @@ WINGDIAPI void APIENTRY glTexCoord2f( GLfloat s, GLfloat t )
 	renderer->TexCoord( s, t );
 }
 
+WINGDIAPI void APIENTRY glNormal3f( GLfloat nx, GLfloat ny, GLfloat nz )
+{
+//	renderer->Normal( nx, ny, nz );
+}
+
 WINGDIAPI void APIENTRY glEnd( void )
 {
 	renderer->End();
@@ -105,7 +110,21 @@ WINGDIAPI void APIENTRY glTexImage2D( GLenum target, GLint level, GLint internal
 
 WINGDIAPI void APIENTRY glTexParameteri( GLenum target, GLenum pname, GLint param )
 {
-	// TODO	
+	switch ( pname )
+	{
+	case GL_TEXTURE_WRAP_S:
+		textureManager.SetWrapModeS( param );
+		return;
+	case GL_TEXTURE_WRAP_T:
+		textureManager.SetWrapModeT( param );
+		return;
+	case GL_TEXTURE_MAG_FILTER:
+		textureManager.SetMagFilter( param );
+		return;
+	case GL_TEXTURE_MIN_FILTER:
+		textureManager.SetMinFilter( param );
+		return;
+	}
 }
 
 WINGDIAPI void APIENTRY glDeleteTextures( GLsizei n, const GLuint* textures )
@@ -116,4 +135,17 @@ WINGDIAPI void APIENTRY glDeleteTextures( GLsizei n, const GLuint* textures )
 		++textures;
 		--n;
 	}
+}
+
+int APIENTRY gluBuild2DMipmaps(
+	GLenum      target,
+	GLint       components,
+	GLint       width,
+	GLint       height,
+	GLenum      format,
+	GLenum      type,
+	const void* data )
+{
+	textureManager.SetImage( 0, components, width, height, format, type, data );
+	return 1;
 }

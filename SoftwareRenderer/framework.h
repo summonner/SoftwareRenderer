@@ -14,6 +14,7 @@
 #include <memory.h>
 #include <tchar.h>
 #include <assert.h>
+#include <atlbase.h>
 
 #include <vector>
 #include <unordered_map>

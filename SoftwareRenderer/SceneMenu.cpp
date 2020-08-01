@@ -19,5 +19,11 @@ std::unique_ptr<IScene> SceneMenu::Select( std::shared_ptr<IRenderer> renderer, 
 void SceneMenu::CheckMenuItem( HWND hWnd, UINT resourceId )
 {
     auto hMenu = GetMenu( hWnd );
-    ::CheckMenuRadioItem( hMenu, ID_SCENE_NEHE, ID_SCENE_DEFAULT, resourceId, MF_BYCOMMAND );
+    auto hScene = GetSubMenu( hMenu, 2 );
+    auto hNeHe = GetSubMenu( hScene, 1 );
+
+    auto first = ID_SCENE_NEHE;
+    auto last = ID_NEHE_LESSON8;
+    ::CheckMenuRadioItem( hScene, first, last, resourceId, MF_BYCOMMAND );
+    ::CheckMenuRadioItem( hNeHe, first, last, resourceId, MF_BYCOMMAND );
 }
