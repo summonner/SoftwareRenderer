@@ -10,8 +10,9 @@ namespace Renderer
 		~FrameBuffer();
 
 		void Clear();
+		void SetClearValue( const Vector4& value );
 		void BitBlt( const HDC dc );
-		void SetPixel( const Vector2Int& p, const Vector3& color );
+		void SetPixel( const Vector2Int& p, const Vector4& color );
 
 		inline PixelIterator begin() const
 		{
@@ -28,5 +29,6 @@ namespace Renderer
 		const HBITMAP buffer;
 		const BITMAPINFOHEADER info;
 		std::unique_ptr<BYTE[]> pixels;
+		RGBQUAD clearValue;
 	};
 }

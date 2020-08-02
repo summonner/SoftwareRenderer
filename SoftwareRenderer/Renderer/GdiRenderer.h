@@ -22,12 +22,14 @@ namespace Renderer
 		~GdiRenderer() override;
 
 		void Clear() override;
+		void SetClearColor( float r, float g, float b, float a ) override;
 		void Present() override;
 		void Present( const HDC dc );
 
 		void Begin( DrawMode mode ) override;
 		void End() override;
-		void Color( float r, float g, float b ) override;
+		void Color( float r, float g, float b, float a ) override;
+		void TexCoord( float u, float v ) override;
 		void AddVertex( float x, float y, float z ) override;
 
 		void LoadIdentity() override;
@@ -35,13 +37,10 @@ namespace Renderer
 		void Rotate( Degree angle, float x, float y, float z ) override;
 		void Scale( float x, float y, float z ) override;
 
-		void Viewport( float left, float bottom, float width, float height ) override;
+		void Viewport( int left, int bottom, int width, int height ) override;
 		void Frustum( float left, float right, float top, float bottom, float near, float far ) override;
 		void Perspective( Degree fovY, float aspect, float near, float far ) override;
 		void Ortho( float left, float right, float top, float bottom, float near, float far ) override;
-
-		void BindTexture( std::shared_ptr<const ITexture> texture ) override;
-		void TexCoord( float u, float v ) override;
 
 	private:
 		static std::vector<std::unique_ptr<IRasterizer>> Clip( const IGeometryList& geometries );
@@ -51,10 +50,8 @@ namespace Renderer
 		const Bounds bounds;
 
 		std::unique_ptr<FrameBuffer> backBuffer;
-		std::unique_ptr<DepthBuffer> depthBuffer;
 
 		GeometryGenerator generator;
-		std::shared_ptr<const ITexture> texture;
 
 		Vertex temp;
 		std::vector<Vertex> vertices;

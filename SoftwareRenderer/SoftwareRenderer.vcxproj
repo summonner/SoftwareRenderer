@@ -165,7 +165,8 @@
     <ClInclude Include="Math\Vector2.hpp" />
     <ClInclude Include="Math\Vector3.hpp" />
     <ClInclude Include="Math\Vector4.hpp" />
-    <ClInclude Include="Renderer\DepthBuffer.h" />
+    <ClInclude Include="Renderer\DepthTest\DepthBuffer.h" />
+    <ClInclude Include="Renderer\DepthTest\DepthFunc.h" />
     <ClInclude Include="Renderer\FrameBuffer.h" />
     <ClInclude Include="Renderer\GdiRenderer.h" />
     <ClInclude Include="Renderer\Generators\GeometryGenerator.h" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Renderer\Texturing\Mipmap.h" />
     <ClInclude Include="Renderer\Texturing\Texture2D.h" />
     <ClInclude Include="Renderer\Texturing\TextureFilter.h" />
+    <ClInclude Include="Renderer\Texturing\TextureComponent.h" />
     <ClInclude Include="Renderer\Texturing\WrapMode.h" />
     <ClInclude Include="Renderer\Vertex.h" />
     <ClInclude Include="Resource.h" />
@@ -229,7 +231,8 @@
     <ClCompile Include="Math\Matrix4x4.cpp" />
     <ClCompile Include="Math\RangeInt.cpp" />
     <ClCompile Include="Math\RangeIterator.cpp" />
-    <ClCompile Include="Renderer\DepthBuffer.cpp" />
+    <ClCompile Include="Renderer\DepthTest\DepthBuffer.cpp" />
+    <ClCompile Include="Renderer\DepthTest\DepthFunc.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />
     <ClCompile Include="Renderer\GdiRenderer.cpp" />
     <ClCompile Include="Renderer\Generators\GeometryGenerator.cpp" />
@@ -254,6 +257,7 @@
     <ClCompile Include="Renderer\Texturing\Mipmap.cpp" />
     <ClCompile Include="Renderer\Texturing\Texture2D.cpp" />
     <ClCompile Include="Renderer\Texturing\TextureFilter.cpp" />
+    <ClCompile Include="Renderer\Texturing\TextureComponent.cpp" />
     <ClCompile Include="Renderer\Texturing\WrapMode.cpp" />
     <ClCompile Include="Renderer\Vertex.cpp" />
     <ClCompile Include="SceneMenu.cpp" />

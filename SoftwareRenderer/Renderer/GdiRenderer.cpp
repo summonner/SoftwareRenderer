@@ -1,12 +1,10 @@
 #include "framework.h"
 #include "GdiRenderer.h"
 #include "FrameBuffer.h"
-#include "DepthBuffer.h"
 #include "Geometry/IGeometry.h"
 #include "Rasterizer/IRasterizer.h"
 #include "Rasterizer/RasterizedPixel.h"
 #include "Math/Vector3.hpp"
-#include "Texturing/ITexture.h"
 
 namespace Renderer
 {
@@ -18,9 +16,9 @@ namespace Renderer
 	}
 
 	GdiRenderer::GdiRenderer( const HWND hWnd, const int width, const int height )
-		: hWnd( hWnd )
+		: IRenderer( width, height )
+		, hWnd( hWnd )
 		, bounds( width, height )
-		, depthBuffer( std::make_unique<DepthBuffer>( width, height ) )
 	{
 		auto dc = GetDC( hWnd );
 		backBuffer = std::make_unique<FrameBuffer>( dc, width, height );
@@ -34,7 +32,11 @@ namespace Renderer
 	void GdiRenderer::Clear()
 	{
 		backBuffer->Clear();
-		depthBuffer->Clear();
+	}
+
+	void GdiRenderer::SetClearColor( float r, float g, float b, float a )
+	{
+		backBuffer->SetClearValue( Vector4( r, g, b, a ) );
 	}
 
 	void GdiRenderer::Present()
@@ -72,29 +74,29 @@ namespace Renderer
 		{
 			rasterizer->Rasterize( viewport, bounds, [&]( const RasterizedPixel& p )
 			{
-				if ( depthBuffer->Test( p.coordinate, p.GetDepth() ) == false )
+				if ( depthBuffer.Test( p ) == false )
 				{
 					return;
 				}
 
 				Vector4 color = p.GetColor();
-				if ( texture != nullptr )
-				{
-					const auto mipLevel = texture->CalculateMipLevel( p.ddx, p.ddy );
-					color *= texture->GetPixel( p.GetTexcoord(), mipLevel );
-				}
+				color *= texture.GetColor( p );
 
 				backBuffer->SetPixel( p.coordinate, color );
 			} );
 		}
 
 		vertices.clear();
-		temp = Vertex();
 	}
 
-	void GdiRenderer::Color( float r, float g, float b )
+	void GdiRenderer::Color( float r, float g, float b, float a )
 	{
-		temp.color = Vector4( r, g, b, 1 );
+		temp.color = Vector4( r, g, b, a );
+	}
+
+	void GdiRenderer::TexCoord( float u, float v )
+	{
+		temp.texcoord = Vector2( u, v );
 	}
 
 	void GdiRenderer::AddVertex( float x, float y, float z )
@@ -126,14 +128,14 @@ namespace Renderer
 		transform = transform * Matrix4x4::Scale( Vector3( x, y, z ) );
 	}
 
-	void GdiRenderer::Viewport( float left, float bottom, float width, float height )
+	void GdiRenderer::Viewport( int left, int bottom, int width, int height )
 	{
 		auto halfWidth = width * 0.5f;
 		auto halfHeight = height * 0.5f;
 		viewport = Matrix4x4(
 			halfWidth, 0, 0, halfWidth + left,
 			0, halfHeight, 0, halfHeight + bottom,
-			0, 0, 1, -1,
+			0, 0, 1.0f, 0,
 			0, 0, 0, 1
 		);
 	}
@@ -168,16 +170,6 @@ namespace Renderer
 			0, 0, 2 / (f - n), -(f + n) / (f - n),
 			0, 0, 0, 1
 		);
-	}
-
-	void GdiRenderer::BindTexture( std::shared_ptr<const ITexture> texture )
-	{
-		this->texture = texture;
-	}
-
-	void GdiRenderer::TexCoord( float u, float v )
-	{
-		temp.texcoord = Vector2( u, v );
 	}
 
 	std::vector<std::unique_ptr<IRasterizer>> GdiRenderer::Clip( const IGeometryList& geometries )

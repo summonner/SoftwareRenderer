@@ -131,6 +131,7 @@ public:
 
 	static TVector4 Lerp( const TVector4& left, const TVector4& right, const float t );
 	static const TVector4<T> zero;
+	static const TVector4<T> one;
 
 public:
 	T x, y, z, w;
@@ -150,3 +151,6 @@ TVector4<T> TVector4<T>::Lerp( const TVector4<T>& start, const TVector4<T>& end,
 
 template<typename T>
 const TVector4<T> TVector4<T>::zero = TVector4<T>( T( 0 ), T( 0 ), T( 0 ), T( 0 ) );
+
+template<typename T>
+const TVector4<T> TVector4<T>::one = TVector4<T>( T( 1 ), T( 1 ), T( 1 ), T( 1 ) );

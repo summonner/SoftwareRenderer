@@ -77,16 +77,16 @@ namespace NeHe
 			height = 1;										// Making Height Equal One
 		}
 
-		//glViewport( 0, 0, width, height );						// Reset The Current Viewport
+		glViewport( 0, 0, width, height );						// Reset The Current Viewport
 
 		//glMatrixMode( GL_PROJECTION );						// Select The Projection Matrix
-		//glLoadIdentity();									// Reset The Projection Matrix
+		glLoadIdentity();									// Reset The Projection Matrix
 
 		//// Calculate The Aspect Ratio Of The Window
-		//gluPerspective( 45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 100.0f );
+		gluPerspective( 45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 100.0f );
 
 		//glMatrixMode( GL_MODELVIEW );							// Select The Modelview Matrix
-		//glLoadIdentity();									// Reset The Modelview Matrix
+		glLoadIdentity();									// Reset The Modelview Matrix
 	}
 
 	int LESSON::InitGL( GLvoid )										// All Setup For OpenGL Goes Here
@@ -96,20 +96,20 @@ namespace NeHe
 			return FALSE;									// If Texture Didn't Load Return FALSE
 		}
 
-		//glEnable( GL_TEXTURE_2D );							// Enable Texture Mapping
+		glEnable( GL_TEXTURE_2D );							// Enable Texture Mapping
 		//glShadeModel( GL_SMOOTH );							// Enable Smooth Shading
-		//glClearColor( 0.0f, 0.0f, 0.0f, 0.5f );				// Black Background
-		//glClearDepth( 1.0f );									// Depth Buffer Setup
-		//glEnable( GL_DEPTH_TEST );							// Enables Depth Testing
-		//glDepthFunc( GL_LEQUAL );								// The Type Of Depth Testing To Do
+		glClearColor( 0.0f, 0.0f, 0.0f, 0.5f );				// Black Background
+		glClearDepth( 1.0f );									// Depth Buffer Setup
+		glEnable( GL_DEPTH_TEST );							// Enables Depth Testing
+		glDepthFunc( GL_LEQUAL );								// The Type Of Depth Testing To Do
 		//glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );	// Really Nice Perspective Calculations
 
 		//glLightfv( GL_LIGHT1, GL_AMBIENT, LightAmbient );		// Setup The Ambient Light
 		//glLightfv( GL_LIGHT1, GL_DIFFUSE, LightDiffuse );		// Setup The Diffuse Light
 		//glLightfv( GL_LIGHT1, GL_POSITION, LightPosition );	// Position The Light
-		//glEnable( GL_LIGHT1 );								// Enable Light One
+		glEnable( GL_LIGHT1 );								// Enable Light One
 
-		//glColor4f( 1.0f, 1.0f, 1.0f, 0.5 );					// Full Brightness.  50% Alpha
+		glColor4f( 1.0f, 1.0f, 1.0f, 0.5 );					// Full Brightness.  50% Alpha
 		//glBlendFunc( GL_SRC_ALPHA, GL_ONE );					// Set The Blending Function For Translucency
 
 		return TRUE;										// Initialization Went OK

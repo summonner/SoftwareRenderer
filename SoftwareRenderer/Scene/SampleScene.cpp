@@ -4,10 +4,11 @@
 #include "Time.h"
 #include "Util/Bitmap.h"
 #include "Renderer/Texturing/Texture2D.h"
+#include "Renderer/Texturing/TextureComponent.h"
 
 void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> texture )
 {
-	_renderer->BindTexture( texture );
+	_renderer->texture.Bind( texture );
 }
 
 SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
@@ -18,8 +19,11 @@ SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
 	checker->SetWrapMode( TextureWrapMode::MirroredRepeat, TextureWrapMode::MirroredRepeat );
 	checker->SetFilter( TextureMagFilter::Linear );
 	checker->SetFilter( TextureMinFilter::LinearMipmapLinear );
-}
 
+	renderer->depthBuffer.SetEnable( true );
+	renderer->SetClearColor( 0.5f, 0.5f, 0.5f, 0.5f );
+	renderer->texture.SetEnable( true );
+}
 
 SampleScene::~SampleScene()
 {

@@ -46,6 +46,9 @@
     <Filter Include="Renderer\Rasterizer\Algorithm">
       <UniqueIdentifier>{b888f9e3-9198-4bc3-9ff1-08d793cd082d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\DepthTest">
+      <UniqueIdentifier>{f0189401-e065-458c-8452-abedf2538b7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -119,9 +122,6 @@
     </ClInclude>
     <ClInclude Include="Renderer\Rasterizer\RasterizedPixel.h">
       <Filter>Renderer\Rasterizer</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\DepthBuffer.h">
-      <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Math\Bounds.h">
       <Filter>Math</Filter>
@@ -234,6 +234,15 @@
     <ClInclude Include="Scene\NeHeSamples\LessonList.h">
       <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Texturing\TextureComponent.h">
+      <Filter>Renderer\Texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\DepthTest\DepthFunc.h">
+      <Filter>Renderer\DepthTest</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\DepthTest\DepthBuffer.h">
+      <Filter>Renderer\DepthTest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -290,9 +299,6 @@
     </ClCompile>
     <ClCompile Include="Renderer\Rasterizer\RasterizedPixel.cpp">
       <Filter>Renderer\Rasterizer</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\DepthBuffer.cpp">
-      <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Math\Bounds.cpp">
       <Filter>Math</Filter>
@@ -383,6 +389,15 @@
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\ILesson.cpp">
       <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Texturing\TextureComponent.cpp">
+      <Filter>Renderer\Texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\DepthTest\DepthFunc.cpp">
+      <Filter>Renderer\DepthTest</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\DepthTest\DepthBuffer.cpp">
+      <Filter>Renderer\DepthTest</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

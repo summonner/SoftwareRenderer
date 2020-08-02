@@ -37,6 +37,11 @@ public:
 		return RangeIterator( *this, max + 1 );
 	}
 
+	inline int Length() const
+	{
+		return max - min + 1;
+	}
+
 public:
 	int min;
 	int max;

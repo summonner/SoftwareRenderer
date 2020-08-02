@@ -2,23 +2,79 @@
 #include "glAdapter.h"
 #include "glTextureManager.h"
 #include "Renderer/IRenderer.h"
+#include "Math/Vector4.hpp"
 
 std::shared_ptr<IRenderer> _renderer;
 glTextureManager textureManager;
 #define renderer _renderer
 
-WINGDIAPI void APIENTRY glEnable( GLenum cap )
+void glEnable( GLenum cap, bool enable )
 {
 	switch ( cap )
 	{
+	case GL_DEPTH_TEST:
+		renderer->depthBuffer.SetEnable( enable );
+		break;
+
 	case GL_TEXTURE_2D:
-		return;
+		renderer->texture.SetEnable( enable );
+		break;
 	}
+}
+
+WINGDIAPI void APIENTRY glEnable( GLenum cap )
+{
+	glEnable( cap, true );
+}
+
+WINGDIAPI void APIENTRY glDisable( GLenum cap )
+{
+	glEnable( cap, false );
 }
 
 WINGDIAPI void APIENTRY glClear( GLbitfield mask )
 {
-	renderer->Clear();
+	if ( mask & GL_COLOR_BUFFER_BIT )
+	{
+		renderer->Clear();
+	}
+
+	if ( mask & GL_DEPTH_BUFFER_BIT )
+	{
+		renderer->depthBuffer.Clear();
+	}
+}
+
+WINGDIAPI void APIENTRY glClearColor( GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha )
+{
+	renderer->SetClearColor( red, green, blue, alpha );
+}
+
+WINGDIAPI void APIENTRY glClearDepth( GLclampd depth )
+{
+	renderer->depthBuffer.SetClearValue( (float)depth );
+}
+
+WINGDIAPI void APIENTRY glDepthFunc( GLenum func )
+{
+	static const Dictionary<GLenum, DepthFunc> table
+	{
+		{ GL_NEVER, DepthFunc::Never },
+		{ GL_LESS, DepthFunc::Less },
+		{ GL_EQUAL, DepthFunc::Equal },
+		{ GL_LEQUAL, DepthFunc::LEqual },
+		{ GL_GREATER, DepthFunc::Greater },
+		{ GL_NOTEQUAL, DepthFunc::NotEqual },
+		{ GL_GEQUAL, DepthFunc::GEqual },
+		{ GL_ALWAYS, DepthFunc::Always },
+	};
+
+	renderer->depthBuffer.SetDepthFunc( table[func] );
+}
+
+WINGDIAPI void APIENTRY glViewport( GLint x, GLint y, GLsizei width, GLsizei height )
+{
+	renderer->Viewport( x, y, width, height );
 }
 
 WINGDIAPI void APIENTRY glLoadIdentity( void )
@@ -41,35 +97,31 @@ WINGDIAPI void APIENTRY glScalef( GLfloat x, GLfloat y, GLfloat z )
 	renderer->Scale( x, y, z );
 }
 
-IRenderer::DrawMode Convert( GLenum mode )
-{
-	switch ( mode )
-	{
-	case GL_LINES:
-		return IRenderer::DrawMode::Lines;
-	case GL_LINE_STRIP:
-		return IRenderer::DrawMode::LineStrip;
-	case GL_LINE_LOOP:
-		return IRenderer::DrawMode::LineLoop;
-	case GL_TRIANGLES:
-		return IRenderer::DrawMode::Triangles;
-	case GL_QUADS:
-		return IRenderer::DrawMode::Quads;
-	case GL_POINTS:
-	default:
-		return IRenderer::DrawMode::Points;
-	}
-}
-
 WINGDIAPI void APIENTRY glBegin( GLenum mode )
 {
-	auto drawMode = Convert( mode );
-	renderer->Begin( drawMode );
+	static const Dictionary<GLenum, IRenderer::DrawMode> table
+	{
+		{ GL_POINTS, IRenderer::DrawMode::Points },
+		{ GL_LINES, IRenderer::DrawMode::Lines },
+		{ GL_LINE_STRIP, IRenderer::DrawMode::LineStrip },
+		{ GL_LINE_LOOP, IRenderer::DrawMode::LineLoop },
+		{ GL_TRIANGLES, IRenderer::DrawMode::Triangles },
+		{ GL_TRIANGLE_STRIP, IRenderer::DrawMode::TriangleFan },
+		{ GL_TRIANGLE_FAN, IRenderer::DrawMode::TriangleFan },
+		{ GL_QUADS, IRenderer::DrawMode::Quads },
+	};
+
+	renderer->Begin( table[mode] );
 }
 
 WINGDIAPI void APIENTRY glColor3f( GLfloat red, GLfloat green, GLfloat blue )
 {
-	renderer->Color( red, green, blue );
+	renderer->Color( red, green, blue, 1.f );
+}
+
+WINGDIAPI void APIENTRY glColor4f( GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha )
+{
+	renderer->Color( red, green, blue, alpha );
 }
 
 WINGDIAPI void APIENTRY glVertex3f( GLfloat x, GLfloat y, GLfloat z )
@@ -100,7 +152,7 @@ WINGDIAPI void APIENTRY glGenTextures( GLsizei n, GLuint *textures )
 WINGDIAPI void APIENTRY glBindTexture( GLenum target, GLuint texture )
 {
 	auto t = textureManager.Bind( texture );
-	renderer->BindTexture( t );
+	renderer->texture.Bind( t );
 }
 
 WINGDIAPI void APIENTRY glTexImage2D( GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels )
@@ -148,4 +200,13 @@ int APIENTRY gluBuild2DMipmaps(
 {
 	textureManager.SetImage( 0, components, width, height, format, type, data );
 	return 1;
+}
+
+void APIENTRY gluPerspective(
+	GLdouble fovy,
+	GLdouble aspect,
+	GLdouble zNear,
+	GLdouble zFar )
+{
+	renderer->Perspective( (float)fovy, (float)aspect, (float)zNear, (float)zFar );
 }
