@@ -116,6 +116,7 @@ namespace Renderer
 
 	Vector4 BlendFunc::SrcAlphaSaturate( const Vector4& src, const Vector4& dst )
 	{
-		return Vector4::one * std::min( src.w, 1 - dst.w );
+		const auto i = std::min( src.w, 1 - dst.w );
+		return Vector4( i, i, i, 1.f );
 	}
 }
