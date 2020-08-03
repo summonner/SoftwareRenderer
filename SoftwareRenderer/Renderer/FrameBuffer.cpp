@@ -1,10 +1,9 @@
 #include "framework.h"
 #include "FrameBuffer.h"
-#include "Math/Vector4.hpp"
 
 namespace Renderer
 {
-	const int colorBytes = 3;
+	const BYTE FrameBuffer::colorBytes = 4;
 
 	FrameBuffer::FrameBuffer( const HDC source, const int width, const int height )
 		: dc( CreateCompatibleDC( source ) )
@@ -28,7 +27,7 @@ namespace Renderer
 	{
 		for ( auto i = 0u; i < info.biSizeImage; i += colorBytes )
 		{
-			memcpy( pixels.get() + i, &clearValue, sizeof( RGBTRIPLE ) );
+			memcpy( pixels.get() + i, &clearValue, sizeof( RGBQUAD ) );
 		}
 	}
 
@@ -48,9 +47,15 @@ namespace Renderer
 
 	void FrameBuffer::SetPixel( const Vector2Int& p, const Vector4& color )
 	{
-		auto i = (p.x + p.y * info.biWidth) * colorBytes;
-		pixels[i + 0] = (BYTE)(color.z * 255);	// B
-		pixels[i + 1] = (BYTE)(color.y * 255);	// G
-		pixels[i + 2] = (BYTE)(color.x * 255);	// R
+		const auto i = GetIndex( p );
+		SetPixel( i, color );
+	}
+
+	void FrameBuffer::SetPixel( const Vector2Int& p, const Vector4& srcColor, std::function<Vector4( const Vector4&, const Vector4& )> blender )
+	{
+		const auto i = GetIndex( p );
+		const auto dstColor = GetPixel( i );
+		const auto result = blender( srcColor, dstColor );
+		SetPixel( i, result );
 	}
 }

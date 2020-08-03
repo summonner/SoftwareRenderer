@@ -2,8 +2,8 @@
 #include "Bounds.h"
 
 Bounds::Bounds( int width, int height )
-	: x( 0, width - 1 )
-	, y( 0, height - 1 )
+	: x( 0, width )
+	, y( 0, height )
 {
 }
 

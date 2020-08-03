@@ -7,12 +7,14 @@ namespace Renderer
 {
 	class Bresenham;
 	class DerivativeTexcoord;
+	class Vertex;
 	class RasterizedPixel final
 	{
 	public:
 		RasterizedPixel( const Vector2Int& coordinate, const PixelValues& values, const DerivativeTexcoord& derivatives );
 		RasterizedPixel( const Vector2Int& coordinate, const PixelValues& values );
 		RasterizedPixel( const Bresenham& edge, const DerivativeTexcoord& derivatives );
+		RasterizedPixel( const Vertex& vertex );
 		~RasterizedPixel();
 
 		Vector4 GetColor() const;

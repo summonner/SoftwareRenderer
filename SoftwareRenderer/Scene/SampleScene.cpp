@@ -5,6 +5,7 @@
 #include "Util/Bitmap.h"
 #include "Renderer/Texturing/Texture2D.h"
 #include "Renderer/Texturing/TextureComponent.h"
+#include "Renderer/Blending/BlendComponent.h"
 
 void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> texture )
 {
@@ -20,9 +21,9 @@ SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
 	checker->SetFilter( TextureMagFilter::Linear );
 	checker->SetFilter( TextureMinFilter::LinearMipmapLinear );
 
-	renderer->depthBuffer.SetEnable( true );
-	renderer->SetClearColor( 0.5f, 0.5f, 0.5f, 0.5f );
+	renderer->SetClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
 	renderer->texture.SetEnable( true );
+	renderer->blender.SetBlendFunc( BlendFunc::SrcAlpha, BlendFunc::One );
 }
 
 SampleScene::~SampleScene()
@@ -40,7 +41,14 @@ void SampleScene::DrawScene() const
 {
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
+	glEnable( GL_DEPTH_TEST );
+	glDisable( GL_BLEND );
 	Floor();
+
+	glDisable( GL_DEPTH_TEST );
+	glEnable( GL_BLEND );
+	glColor4f( 1, 1, 1, 0.5f );
+	Cube();
 }
 
 void SampleScene::Floor() const
@@ -49,6 +57,7 @@ void SampleScene::Floor() const
 	glBegin( GL_QUADS );
 	glBindTexture( GL_TEXTURE_2D, checker );
 	glTranslatef( 0, -2, 15 * x - 10 );
+	glColor3f( 1, 1, 1 );
 	glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -10, 0, -10 );
 	glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -10, 0, 10 );
 	glTexCoord2f( 1.0f, 1.0f ); glVertex3f( 10, 0, 10 );
@@ -63,15 +72,15 @@ void SampleScene::Triangle() const
 	glTranslatef( -1.5f * 0, 0.0f, -6.0f + 6 * x );
 	glRotatef( 0 * -90.f, 0.f, 1.f, 0.f );
 	glBegin( GL_TRIANGLES );
-	glColor3f( 1.f, 0.f, 0.f );
+	glColor4f( 1.f, 0.f, 0.f, 0.5f );
 	glTexCoord2f( 0.5f, 1.0f );
 	glVertex3f( 0.f, 1.f, 0.f );
 
-	glColor3f( 0.f, 1.f, 0.f );
+	glColor4f( 0.f, 1.f, 0.f, 0.5f );
 	glTexCoord2f( 0.0f, 0.0f );
 	glVertex3f( -1.f, -1.f, 0.f );
 
-	glColor3f( 0.f, 0.f, 1.f );
+	glColor4f( 0.f, 0.f, 1.f, 0.5f );
 	glTexCoord2f( 1.0f, 0.0f );
 	glVertex3f( 1.f, -1.f, 0.f );
 	glEnd();
@@ -82,7 +91,7 @@ void SampleScene::Quad() const
 	glLoadIdentity();
 	glBindTexture( GL_TEXTURE_2D, checker );
 	glTranslatef( 1.5f * (1 - x), 0.0f, -6.0f + 5.5f * 0 );
-	glScalef( x, x, 1 );
+//	glScalef( x, x, 1 );
 //	glRotatef( x * 90.f, 1.f, 0.f, 0.f );
 	glBegin( GL_QUADS );
 	auto min = -0.f;
@@ -102,6 +111,53 @@ void SampleScene::Quad() const
 //	glColor3f( 0.5f, 1.0f, 0.5f );
 	glTexCoord2f( max, max );
 	glVertex3f( 1.0f, 1.0f, 0.0f );
+	glEnd();
+}
+
+void SampleScene::Cube() const
+{
+	glLoadIdentity();
+	glTranslatef( 0.0f, 0.0f, -5.f );
+	glRotatef( x * 90.f, 1.0f, 0.0f, 0.0f );
+	glRotatef( x * 90.f, 0.0f, 1.0f, 0.0f );
+	glBindTexture( GL_TEXTURE_2D, checker );
+	glBegin( GL_QUADS );
+	// Front Face
+	glNormal3f( 0.0f, 0.0f, 1.0f );
+	glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -1.0f, -1.0f, 1.0f );
+	glTexCoord2f( 1.0f, 0.0f ); glVertex3f( 1.0f, -1.0f, 1.0f );
+	glTexCoord2f( 1.0f, 1.0f ); glVertex3f( 1.0f, 1.0f, 1.0f );
+	glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -1.0f, 1.0f, 1.0f );
+	// Back Face
+	glNormal3f( 0.0f, 0.0f, -1.0f );
+	glTexCoord2f( 1.0f, 0.0f ); glVertex3f( -1.0f, -1.0f, -1.0f );
+	glTexCoord2f( 1.0f, 1.0f ); glVertex3f( -1.0f, 1.0f, -1.0f );
+	glTexCoord2f( 0.0f, 1.0f ); glVertex3f( 1.0f, 1.0f, -1.0f );
+	glTexCoord2f( 0.0f, 0.0f ); glVertex3f( 1.0f, -1.0f, -1.0f );
+	// Top Face
+	glNormal3f( 0.0f, 1.0f, 0.0f );
+	glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -1.0f, 1.0f, -1.0f );
+	glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -1.0f, 1.0f, 1.0f );
+	glTexCoord2f( 1.0f, 0.0f ); glVertex3f( 1.0f, 1.0f, 1.0f );
+	glTexCoord2f( 1.0f, 1.0f ); glVertex3f( 1.0f, 1.0f, -1.0f );
+	// Bottom Face
+	glNormal3f( 0.0f, -1.0f, 0.0f );
+	glTexCoord2f( 1.0f, 1.0f ); glVertex3f( -1.0f, -1.0f, -1.0f );
+	glTexCoord2f( 0.0f, 1.0f ); glVertex3f( 1.0f, -1.0f, -1.0f );
+	glTexCoord2f( 0.0f, 0.0f ); glVertex3f( 1.0f, -1.0f, 1.0f );
+	glTexCoord2f( 1.0f, 0.0f ); glVertex3f( -1.0f, -1.0f, 1.0f );
+	// Right face
+	glNormal3f( 1.0f, 0.0f, 0.0f );
+	glTexCoord2f( 1.0f, 0.0f ); glVertex3f( 1.0f, -1.0f, -1.0f );
+	glTexCoord2f( 1.0f, 1.0f ); glVertex3f( 1.0f, 1.0f, -1.0f );
+	glTexCoord2f( 0.0f, 1.0f ); glVertex3f( 1.0f, 1.0f, 1.0f );
+	glTexCoord2f( 0.0f, 0.0f ); glVertex3f( 1.0f, -1.0f, 1.0f );
+	// Left Face
+	glNormal3f( -1.0f, 0.0f, 0.0f );
+	glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -1.0f, -1.0f, -1.0f );
+	glTexCoord2f( 1.0f, 0.0f ); glVertex3f( -1.0f, -1.0f, 1.0f );
+	glTexCoord2f( 1.0f, 1.0f ); glVertex3f( -1.0f, 1.0f, 1.0f );
+	glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -1.0f, 1.0f, -1.0f );
 	glEnd();
 }
 

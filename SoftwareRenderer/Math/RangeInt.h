@@ -24,7 +24,7 @@ public:
 	inline bool Contains( int p ) const
 	{
 		return p >= min
-			&& p <= max;
+			&& p < max;
 	}
 
 	inline RangeIterator begin() const
@@ -34,12 +34,12 @@ public:
 
 	inline RangeIterator end() const
 	{
-		return RangeIterator( *this, max + 1 );
+		return RangeIterator( *this, max );
 	}
 
 	inline int Length() const
 	{
-		return max - min + 1;
+		return max - min;
 	}
 
 public:

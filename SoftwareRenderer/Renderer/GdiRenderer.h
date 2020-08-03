@@ -44,6 +44,7 @@ namespace Renderer
 
 	private:
 		static std::vector<std::unique_ptr<IRasterizer>> Clip( const IGeometryList& geometries );
+		void SetPixel( const Vector2Int& p, const Vector4& color );
 
 	private:
 		const HWND hWnd;

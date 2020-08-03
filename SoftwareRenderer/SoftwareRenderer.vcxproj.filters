@@ -49,6 +49,9 @@
     <Filter Include="Renderer\DepthTest">
       <UniqueIdentifier>{f0189401-e065-458c-8452-abedf2538b7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\Blending">
+      <UniqueIdentifier>{96d15fa4-a367-47cc-a1d6-8155104aa3b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -243,6 +246,12 @@
     <ClInclude Include="Renderer\DepthTest\DepthBuffer.h">
       <Filter>Renderer\DepthTest</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Blending\BlendFunc.h">
+      <Filter>Renderer\Blending</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Blending\BlendComponent.h">
+      <Filter>Renderer\Blending</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -398,6 +407,12 @@
     </ClCompile>
     <ClCompile Include="Renderer\DepthTest\DepthBuffer.cpp">
       <Filter>Renderer\DepthTest</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Blending\BlendFunc.cpp">
+      <Filter>Renderer\Blending</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Blending\BlendComponent.cpp">
+      <Filter>Renderer\Blending</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

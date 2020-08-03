@@ -3,11 +3,7 @@
 #undef far
 #include "Texturing/TextureComponent.h"
 #include "DepthTest/DepthBuffer.h"
-
-namespace Renderer
-{
-	class ITexture;
-}
+#include "Blending/BlendComponent.h"
 
 class IRenderer abstract
 {
@@ -57,5 +53,6 @@ public:
 public:
 	Renderer::TextureComponent texture;
 	Renderer::DepthBuffer depthBuffer;
+	Renderer::BlendComponent blender;
 };
 

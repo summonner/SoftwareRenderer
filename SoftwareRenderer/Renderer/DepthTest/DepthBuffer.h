@@ -22,6 +22,7 @@ namespace Renderer
 		bool Test( const Vector2Int& coordinate, float depth ) const;
 
 	private:
+		bool enabled;
 		const int width;
 		const int height;
 		std::unique_ptr<float[]> pixels;

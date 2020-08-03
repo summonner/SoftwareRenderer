@@ -19,7 +19,7 @@ private:
 	void Floor() const;
 	void Triangle() const;
 	void Quad() const;
-
+	void Cube() const;
 
 private:
 	std::shared_ptr<Renderer::Texture2D> checker;

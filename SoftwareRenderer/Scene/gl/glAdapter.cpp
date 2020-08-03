@@ -19,6 +19,10 @@ void glEnable( GLenum cap, bool enable )
 	case GL_TEXTURE_2D:
 		renderer->texture.SetEnable( enable );
 		break;
+
+	case GL_BLEND:
+		renderer->blender.SetEnable( enable );
+		break;
 	}
 }
 
@@ -187,6 +191,25 @@ WINGDIAPI void APIENTRY glDeleteTextures( GLsizei n, const GLuint* textures )
 		++textures;
 		--n;
 	}
+}
+
+WINGDIAPI void APIENTRY glBlendFunc( GLenum sfactor, GLenum dfactor )
+{
+	static const Dictionary<GLenum, BlendFunc> table
+	{
+		{ GL_ZERO, BlendFunc::Zero },
+		{ GL_ONE, BlendFunc::One },
+		{ GL_SRC_COLOR, BlendFunc::SrcColor },
+		{ GL_ONE_MINUS_SRC_COLOR, BlendFunc::OneMinusSrcColor },
+		{ GL_DST_COLOR, BlendFunc::DstColor },
+		{ GL_ONE_MINUS_DST_COLOR, BlendFunc::OneMinusDstColor },
+		{ GL_SRC_ALPHA, BlendFunc::SrcAlpha },
+		{ GL_ONE_MINUS_SRC_ALPHA, BlendFunc::OneMinusSrcAlpha },
+		{ GL_DST_ALPHA, BlendFunc::DstAlpha },
+		{ GL_ONE_MINUS_DST_ALPHA, BlendFunc::OneMinusDstAlpha },
+		{ GL_SRC_ALPHA_SATURATE, BlendFunc::SrcAlphaSaturate },
+	};
+	renderer->blender.SetBlendFunc( table[sfactor], table[dfactor] );
 }
 
 int APIENTRY gluBuild2DMipmaps(

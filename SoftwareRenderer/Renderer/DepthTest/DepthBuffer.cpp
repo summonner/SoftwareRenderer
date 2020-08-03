@@ -9,8 +9,9 @@ namespace Renderer
 	DepthBuffer::DepthBuffer( int width, int height )
 		: width( width )
 		, height( height )
-		, pixels( nullptr )
+		, pixels( new float[width * height] )
 		, clearValue( 1.f )
+		, enabled( false )
 	{
 	}
 
@@ -20,49 +21,27 @@ namespace Renderer
 
 	void DepthBuffer::SetEnable( bool enable )
 	{
-		if ( enable == true && pixels == nullptr )
-		{
-			pixels = std::make_unique<float[]>( width * height );
-		}
-		else if ( enable == false )
-		{
-			pixels = nullptr;
-		}
+		enabled = enable;
 	}
 
 	void DepthBuffer::Clear()
 	{
-		if ( pixels == nullptr )
-		{
-			return;
-		}
-
 		std::fill( pixels.get(), pixels.get() + width * height, clearValue );
 	}
 
 	void DepthBuffer::SetClearValue( const float value )
 	{
-		if ( pixels == nullptr )
-		{
-			return;
-		}
-
 		clearValue = value;
 	}
 
 	void DepthBuffer::SetDepthFunc( const DepthFunc::Type type )
 	{
-		if ( pixels == nullptr )
-		{
-			return;
-		}
-
 		depthFunc = type;
 	}
 
 	bool DepthBuffer::Test( const RasterizedPixel& p ) const
 	{
-		if ( pixels == nullptr )
+		if ( enabled == false )
 		{
 			return true;
 		}
