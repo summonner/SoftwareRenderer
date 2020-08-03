@@ -9,19 +9,35 @@ namespace Renderer
 	CommonRasterizer::CommonRasterizer( std::vector<Vertex>&& vertices )
 		: vertices( std::move( vertices ) )
 	{
+		assert( this->vertices.size() > 2 );
 	}
 
 	CommonRasterizer::~CommonRasterizer()
 	{
 	}
 
-	void CommonRasterizer::Rasterize( const Matrix4x4& viewport, const Bounds& bounds, ProcessPixel process )
+	void CommonRasterizer::PerspectiveDivide( const Matrix4x4& viewport )
 	{
 		for ( auto& v : vertices )
 		{
 			v.PerspectiveDivide( viewport );
 		}
+	}
 
+	bool CommonRasterizer::CheckFacet( CullFunc cullFunc )
+	{
+		auto ignore = cullFunc == nullptr
+				   || vertices.size() < 3;
+		if ( ignore )
+		{
+			return true;
+		}
+
+		return cullFunc( vertices[0].screen, vertices[1].screen, vertices[2].screen );
+	}
+
+	void CommonRasterizer::Rasterize( const Bounds& bounds, ProcessPixel process )
+	{
 		const auto derivatives = Derivative();
 		if ( derivatives.IsValid() == false )
 		{

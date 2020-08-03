@@ -23,6 +23,10 @@ void glEnable( GLenum cap, bool enable )
 	case GL_BLEND:
 		renderer->blender.SetEnable( enable );
 		break;
+
+	case GL_CULL_FACE:
+		renderer->cullFace.SetEnable( enable );
+		break;
 	}
 }
 
@@ -210,6 +214,27 @@ WINGDIAPI void APIENTRY glBlendFunc( GLenum sfactor, GLenum dfactor )
 		{ GL_SRC_ALPHA_SATURATE, BlendFunc::SrcAlphaSaturate },
 	};
 	renderer->blender.SetBlendFunc( table[sfactor], table[dfactor] );
+}
+
+WINGDIAPI void APIENTRY glCullFace( GLenum mode )
+{
+	static const Dictionary<GLenum, CullFace> table
+	{
+		{ GL_BACK, CullFace::Back },
+		{ GL_FRONT, CullFace::Front },
+		{ GL_FRONT_AND_BACK, CullFace::FrontAndBack },
+	};
+	renderer->cullFace.SetCullFace( table[mode] );
+}
+
+WINGDIAPI void APIENTRY glFrontFace( GLenum mode )
+{
+	static const Dictionary<GLenum, FrontFace> table
+	{
+		{ GL_CW, FrontFace::CW },
+		{ GL_CCW, FrontFace::CCW },
+	};
+	renderer->cullFace.SetFrontFace( table[mode] );
 }
 
 int APIENTRY gluBuild2DMipmaps(

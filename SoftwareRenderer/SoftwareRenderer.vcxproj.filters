@@ -52,6 +52,9 @@
     <Filter Include="Renderer\Blending">
       <UniqueIdentifier>{96d15fa4-a367-47cc-a1d6-8155104aa3b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\CullFace">
+      <UniqueIdentifier>{33c58c31-1b00-4b12-9041-daffe767fb3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -252,6 +255,9 @@
     <ClInclude Include="Renderer\Blending\BlendComponent.h">
       <Filter>Renderer\Blending</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\CullFace\CullFaceComponent.h">
+      <Filter>Renderer\CullFace</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -413,6 +419,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\Blending\BlendComponent.cpp">
       <Filter>Renderer\Blending</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\CullFace\CullFaceComponent.cpp">
+      <Filter>Renderer\CullFace</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -22,7 +22,7 @@ private:
 	void Cube() const;
 
 private:
-	std::shared_ptr<Renderer::Texture2D> checker;
+	std::shared_ptr<Renderer::Texture2D> texture;
 	void DrawScene() const;
 };
 

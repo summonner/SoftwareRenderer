@@ -167,6 +167,7 @@
     <ClInclude Include="Math\Vector4.hpp" />
     <ClInclude Include="Renderer\Blending\BlendComponent.h" />
     <ClInclude Include="Renderer\Blending\BlendFunc.h" />
+    <ClInclude Include="Renderer\CullFace\CullFaceComponent.h" />
     <ClInclude Include="Renderer\DepthTest\DepthBuffer.h" />
     <ClInclude Include="Renderer\DepthTest\DepthFunc.h" />
     <ClInclude Include="Renderer\FrameBuffer.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="Math\RangeIterator.cpp" />
     <ClCompile Include="Renderer\Blending\BlendComponent.cpp" />
     <ClCompile Include="Renderer\Blending\BlendFunc.cpp" />
+    <ClCompile Include="Renderer\CullFace\CullFaceComponent.cpp" />
     <ClCompile Include="Renderer\DepthTest\DepthBuffer.cpp" />
     <ClCompile Include="Renderer\DepthTest\DepthFunc.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />

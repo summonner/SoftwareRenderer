@@ -13,13 +13,13 @@ void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> tex
 }
 
 SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
-	: checker( nullptr )
+	: texture( nullptr )
 {
-	const auto bitmap = Bitmap::Load( _T( "Data/Checker.bmp" ) );
-	checker = std::make_shared<Renderer::Texture2D>( *bitmap, true );
-	checker->SetWrapMode( TextureWrapMode::MirroredRepeat, TextureWrapMode::MirroredRepeat );
-	checker->SetFilter( TextureMagFilter::Linear );
-	checker->SetFilter( TextureMinFilter::LinearMipmapLinear );
+	const auto bitmap = Bitmap::Load( _T( "Data/glass.bmp" ) );
+	texture = std::make_shared<Renderer::Texture2D>( *bitmap, true );
+	texture->SetWrapMode( TextureWrapMode::MirroredRepeat, TextureWrapMode::MirroredRepeat );
+	texture->SetFilter( TextureMagFilter::Linear );
+	texture->SetFilter( TextureMinFilter::LinearMipmapLinear );
 
 	renderer->SetClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
 	renderer->texture.SetEnable( true );
@@ -43,7 +43,7 @@ void SampleScene::DrawScene() const
 
 	glEnable( GL_DEPTH_TEST );
 	glDisable( GL_BLEND );
-	Floor();
+//	Floor();
 
 	glDisable( GL_DEPTH_TEST );
 	glEnable( GL_BLEND );
@@ -55,7 +55,7 @@ void SampleScene::Floor() const
 {
 	glLoadIdentity();
 	glBegin( GL_QUADS );
-	glBindTexture( GL_TEXTURE_2D, checker );
+	glBindTexture( GL_TEXTURE_2D, texture );
 	glTranslatef( 0, -2, 15 * x - 10 );
 	glColor3f( 1, 1, 1 );
 	glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -10, 0, -10 );
@@ -89,7 +89,7 @@ void SampleScene::Triangle() const
 void SampleScene::Quad() const
 {
 	glLoadIdentity();
-	glBindTexture( GL_TEXTURE_2D, checker );
+	glBindTexture( GL_TEXTURE_2D, texture );
 	glTranslatef( 1.5f * (1 - x), 0.0f, -6.0f + 5.5f * 0 );
 //	glScalef( x, x, 1 );
 //	glRotatef( x * 90.f, 1.f, 0.f, 0.f );
@@ -120,7 +120,7 @@ void SampleScene::Cube() const
 	glTranslatef( 0.0f, 0.0f, -5.f );
 	glRotatef( x * 90.f, 1.0f, 0.0f, 0.0f );
 	glRotatef( x * 90.f, 0.0f, 1.0f, 0.0f );
-	glBindTexture( GL_TEXTURE_2D, checker );
+	glBindTexture( GL_TEXTURE_2D, texture );
 	glBegin( GL_QUADS );
 	// Front Face
 	glNormal3f( 0.0f, 0.0f, 1.0f );

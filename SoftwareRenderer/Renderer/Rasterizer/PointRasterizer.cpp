@@ -14,10 +14,18 @@ namespace Renderer
 	{
 	}
 
-	void PointRasterizer::Rasterize( const Matrix4x4& viewport, const Bounds& bounds, ProcessPixel process )
+	void PointRasterizer::PerspectiveDivide( const Matrix4x4& viewport )
 	{
 		v.PerspectiveDivide( viewport );
+	}
 
+	bool PointRasterizer::CheckFacet( CullFunc cullFunc )
+	{
+		return true;
+	}
+
+	void PointRasterizer::Rasterize( const Bounds& bounds, ProcessPixel process )
+	{
 		if ( bounds.Contains( v.screen ) == false )
 		{
 			return;

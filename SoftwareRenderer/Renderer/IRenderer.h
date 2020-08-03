@@ -4,6 +4,7 @@
 #include "Texturing/TextureComponent.h"
 #include "DepthTest/DepthBuffer.h"
 #include "Blending/BlendComponent.h"
+#include "CullFace/CullFaceComponent.h"
 
 class IRenderer abstract
 {
@@ -54,5 +55,6 @@ public:
 	Renderer::TextureComponent texture;
 	Renderer::DepthBuffer depthBuffer;
 	Renderer::BlendComponent blender;
+	Renderer::CullFaceComponent cullFace;
 };
 

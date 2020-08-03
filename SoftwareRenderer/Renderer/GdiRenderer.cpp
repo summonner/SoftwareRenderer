@@ -67,7 +67,14 @@ namespace Renderer
 
 		for ( const auto& rasterizer : rasterizers )
 		{
-			rasterizer->Rasterize( viewport, bounds, [&]( const RasterizedPixel& p )
+			rasterizer->PerspectiveDivide( viewport );
+
+			if ( rasterizer->CheckFacet( cullFace.AsFunc() ) == false )
+			{
+				continue;
+			}
+
+			rasterizer->Rasterize( bounds, [&]( const RasterizedPixel& p )
 			{
 				if ( depthBuffer.Test( p ) == false )
 				{

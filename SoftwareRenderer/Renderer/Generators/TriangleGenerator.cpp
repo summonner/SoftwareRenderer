@@ -42,19 +42,6 @@ namespace Renderer
 
 	void TriangleGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, IGeometryList& outRasterizers )
 	{
-		if ( CheckFacet( a.position, b.position, c.position ) < 0.f )
-		{
-			return;
-		}
-
 		outRasterizers.emplace_back( std::make_unique<Triangle>( a, b, c ) );
-	}
-
-	template<typename T>
-	float TriangleGenerator::CheckFacet( const T& a, const T& b, const T& c )
-	{
-		auto ab = b - a;
-		auto ac = c - a;
-		return ab.x * ac.y - ab.y * ac.x;
 	}
 }

@@ -110,7 +110,7 @@ namespace NeHe
 		glEnable( GL_LIGHT1 );								// Enable Light One
 
 		glColor4f( 1.0f, 1.0f, 1.0f, 0.5 );					// Full Brightness.  50% Alpha
-		//glBlendFunc( GL_SRC_ALPHA, GL_ONE );					// Set The Blending Function For Translucency
+		glBlendFunc( GL_SRC_ALPHA, GL_ONE );					// Set The Blending Function For Translucency
 
 		return TRUE;										// Initialization Went OK
 	}

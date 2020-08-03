@@ -11,7 +11,9 @@ namespace Renderer
 		PointRasterizer( const Vertex& v );
 		~PointRasterizer() override;
 
-		void Rasterize( const Matrix4x4& viewport, const Bounds& bounds, ProcessPixel process ) override;
+		void PerspectiveDivide( const Matrix4x4& viewport ) override;
+		bool CheckFacet( CullFunc cullFunc ) override;
+		void Rasterize( const Bounds& bounds, ProcessPixel process ) override;
 
 	private:
 		Vertex v;
