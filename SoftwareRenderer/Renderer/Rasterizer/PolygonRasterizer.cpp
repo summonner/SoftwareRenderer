@@ -8,8 +8,8 @@
 
 namespace Renderer
 {
-	PolygonRasterizer::PolygonRasterizer( std::vector<Vertex>&& vertices, std::function<DerivativeTexcoord()> derivativeBuilder )
-		: CommonRasterizer( std::move( vertices ), derivativeBuilder )
+	PolygonRasterizer::PolygonRasterizer( std::vector<Vertex>&& vertices )
+		: CommonRasterizer( std::move( vertices ) )
 	{
 		assert( this->vertices.size() > 0 );
 	}

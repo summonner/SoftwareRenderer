@@ -9,7 +9,7 @@ namespace Renderer
 	class LineRasterizer final : public CommonRasterizer
 	{
 	public:
-		LineRasterizer( std::vector<Vertex>&& vertices, std::function<DerivativeTexcoord(void)> derivativeBuilder );
+		LineRasterizer( std::vector<Vertex>&& vertices );
 		~LineRasterizer() override;
 
 		void Rasterize( const Bounds& bounds, ProcessPixel process, const DerivativeTexcoord& derivatives ) override;

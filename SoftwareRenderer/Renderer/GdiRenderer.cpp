@@ -65,11 +65,6 @@ namespace Renderer
 
 		auto rasterizers = Clip( geometries );
 
-		for ( auto& vertex : vertices )
-		{
-			vertex.PerspectiveDivide( viewport );
-		}
-
 		for ( const auto& rasterizer : rasterizers )
 		{
 			rasterizer->Rasterize( viewport, bounds, [&]( const RasterizedPixel& p )

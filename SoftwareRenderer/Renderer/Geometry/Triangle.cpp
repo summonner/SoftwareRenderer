@@ -25,12 +25,6 @@ namespace Renderer
 			return nullptr;
 		}
 
-		auto derivatives = [&]() { return Derivative(); };
-		return std::make_unique<PolygonRasterizer>( std::move( vertices ), derivatives );
-	}
-
-	DerivativeTexcoord Triangle::Derivative() const
-	{
-		return DerivativeTexcoord::Triangle( a, b, c );
+		return std::make_unique<PolygonRasterizer>( std::move( vertices ) );
 	}
 }

@@ -20,12 +20,6 @@ namespace Renderer
 	std::unique_ptr<IRasterizer> Line::Clip() const
 	{
 		auto vertices = SutherlandHodgman::ClipLine( { a, b } );
-		auto derivatives = [&]() { return Derivative(); };
-		return std::make_unique<LineRasterizer>( std::move( vertices ), derivatives );
-	}
-
-	DerivativeTexcoord Line::Derivative() const
-	{
-		return DerivativeTexcoord::Line( a, b );
+		return std::make_unique<LineRasterizer>( std::move( vertices ) );
 	}
 }

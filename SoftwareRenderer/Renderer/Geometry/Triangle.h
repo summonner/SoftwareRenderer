@@ -12,8 +12,6 @@ namespace Renderer
 		~Triangle() override;
 
 		std::unique_ptr<IRasterizer> Clip() const override;
-	private:
-		DerivativeTexcoord Derivative() const;
 
 	private:
 		const Vertex& a;

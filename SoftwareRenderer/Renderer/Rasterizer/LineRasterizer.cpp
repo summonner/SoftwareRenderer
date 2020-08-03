@@ -9,8 +9,8 @@
 
 namespace Renderer
 {
-	LineRasterizer::LineRasterizer( std::vector<Vertex>&& vertices, std::function<DerivativeTexcoord( void )> derivativeBuilder )
-		: CommonRasterizer( std::move( vertices ), derivativeBuilder )
+	LineRasterizer::LineRasterizer( std::vector<Vertex>&& vertices )
+		: CommonRasterizer( std::move( vertices ) )
 	{
 		assert( this->vertices.size() == 2 );
 	}

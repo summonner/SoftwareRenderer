@@ -2,6 +2,7 @@
 #include "RasterizedPixel.h"
 #include "Bresenham.h"
 #include "DerivativeTexcoord.h"
+#include "Renderer/Vertex.h"
 
 namespace Renderer
 {
@@ -30,6 +31,11 @@ namespace Renderer
 
 	RasterizedPixel::RasterizedPixel( const Bresenham& edge, const DerivativeTexcoord& derivatives )
 		: RasterizedPixel( edge.p, edge.GetValues(), derivatives )
+	{
+	}
+
+	RasterizedPixel::RasterizedPixel( const Vertex& vertex )
+		: RasterizedPixel( vertex.screen, PixelValues { vertex.position.w, vertex.position.z, vertex.color, vertex.texcoord } )
 	{
 	}
 

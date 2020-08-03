@@ -9,7 +9,7 @@ namespace Renderer
 	class PolygonRasterizer final : public CommonRasterizer
 	{
 	public:
-		PolygonRasterizer( std::vector<Vertex>&& vertices, std::function<DerivativeTexcoord()> derivativeBuilder );
+		PolygonRasterizer( std::vector<Vertex>&& vertices );
 		~PolygonRasterizer() override;
 
 		void Rasterize( const Bounds& bounds, ProcessPixel process, const DerivativeTexcoord& derivatives ) override;
