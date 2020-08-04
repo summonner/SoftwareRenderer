@@ -33,7 +33,7 @@ namespace Renderer
 
 				if ( dotCurrent * dotPrevious < 0 )
 				{
-					PushIntersect( *previous, current, dotPrevious, plane, out );
+					PushIntersect( *previous, current, dotPrevious, dotCurrent, plane, out );
 				}
 
 				if ( dotCurrent >= 0 )
@@ -79,7 +79,7 @@ namespace Renderer
 
 			if ( dotPrevious * dotCurrent < 0 )
 			{
-				PushIntersect( previous, current, dotPrevious, plane, out );
+				PushIntersect( previous, current, dotPrevious, dotCurrent, plane, out );
 			}
 
 			if ( dotCurrent >= 0 )
@@ -113,14 +113,24 @@ namespace Renderer
 		return true;
 	}
 
-	void SutherlandHodgman::PushIntersect( const Vertex& previous, const Vertex& current, float dotPrevious, const Vector4& plane, std::vector<Vertex>& out )
+	void SutherlandHodgman::PushIntersect( const Vertex& previous, const Vertex& current, float dotPrevious, float dotCurrent, const Vector4& plane, std::vector<Vertex>& out )
 	{
 		const auto diff( previous.position - current.position );
 		const auto denom = diff.Dot( plane );
 		if ( denom != 0.0f )
 		{
-			const auto t = dotPrevious / denom;
-			out.emplace_back( previous, current, t );
+			const auto t1 = dotPrevious / denom;
+			const auto t2 = plane.Dot( current.position ) / -denom;
+			const auto v1 = Vector4::Lerp( previous.position, current.position, t1 );
+			const auto v2 = Vector4::Lerp( current.position, previous.position, t2 );
+			if ( abs( dotPrevious * 2 ) > abs( denom ) )
+			{
+				out.emplace_back( previous, current, t1 );
+			}
+			else
+			{
+				out.emplace_back( current, previous, t2 );
+			}
 		}
 	}
 }

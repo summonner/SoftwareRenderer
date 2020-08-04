@@ -11,7 +11,7 @@ namespace Renderer
 		static bool ClipPoint( const Vertex& vertex );
 
 	private:
-		static void PushIntersect( const Vertex& previous, const Vertex& current, float dotPrevious, const Vector4& plane, std::vector<Vertex>& out );
+		static void PushIntersect( const Vertex& previous, const Vertex& current, float dotPrevious, float dotCurrent, const Vector4& plane, std::vector<Vertex>& out );
 		static const std::vector<Vector4> clipPlanes;
 	};
 }

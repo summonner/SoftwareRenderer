@@ -45,6 +45,7 @@ namespace Renderer
 		if ( edges[currentIndex].NextY( y ) == false )
 		{
 			++currentIndex;
+			return NextY( y );
 		}
 
 		_x = GetCurrent().p.x;

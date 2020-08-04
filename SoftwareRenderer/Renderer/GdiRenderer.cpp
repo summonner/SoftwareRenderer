@@ -135,8 +135,8 @@ namespace Renderer
 		auto halfWidth = width * 0.5f;
 		auto halfHeight = height * 0.5f;
 		viewport = Matrix4x4(
-			halfWidth, 0, 0, halfWidth + left,
-			0, halfHeight, 0, halfHeight + bottom,
+			halfWidth, 0, 0, halfWidth + left + 0.5f,
+			0, halfHeight, 0, halfHeight + bottom + 0.5f,
 			0, 0, 1.0f, 0,
 			0, 0, 0, 1
 		);
