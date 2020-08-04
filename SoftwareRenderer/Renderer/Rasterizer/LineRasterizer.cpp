@@ -10,18 +10,18 @@
 namespace Renderer
 {
 	LineRasterizer::LineRasterizer( std::vector<Vertex>&& vertices )
-		: CommonRasterizer( std::move( vertices ) )
+		: vertices( std::move( vertices ) )
 	{
 		assert( this->vertices.size() == 2 );
 	}
 
-	LineRasterizer::~LineRasterizer()
+	LineRasterizer::LineRasterizer( const Vertex& a, const Vertex& b )
+		: vertices( { a, b } )
 	{
 	}
 
-	bool LineRasterizer::PostPerspectiveDivide()
+	LineRasterizer::~LineRasterizer()
 	{
-		return vertices[0].screen != vertices[1].screen;
 	}
 
 	void LineRasterizer::Rasterize( const Bounds& bounds, const ProcessPixel process )

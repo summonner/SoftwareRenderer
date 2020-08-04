@@ -1,18 +1,16 @@
 #pragma once
-#include "CommonRasterizer.h"
-#include "DerivativeTexcoord.h"
+#include "IRasterizer.h"
 
 namespace Renderer
 {
 	class Vertex;
 	class BresenhamList;
-	class PolygonRasterizer final : public CommonRasterizer
+	class PolygonRasterizer final : public IRasterizer
 	{
 	public:
-		PolygonRasterizer( std::vector<Vertex>&& vertices );
+		PolygonRasterizer( std::vector<Vertex>&& vertices, const int secondIndex, const int thirdIndex );
 		~PolygonRasterizer() override;
 
-		bool PostPerspectiveDivide() override;
 		void Rasterize( const Bounds& bounds, const ProcessPixel process ) override;
 		bool CheckFacet( const CullFunc cullFunc ) const override;
 		DerivativeTexcoord Derivative( const bool isTextureEnabled ) const override;
@@ -26,9 +24,10 @@ namespace Renderer
 		static bool AscendingY( const Vertex& left, const Vertex& right );
 		static void Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, const ProcessPixel process );
 
-		int SelectSecondVertex() const;
-		int SelectThirdVertex( size_t secondIndex ) const;
 	private:
-		const Vertex* a, *b, *c;
+		const std::vector<Vertex> vertices;
+		const Vertex& a;
+		const Vertex& b;
+		const Vertex& c;
 	};
 }

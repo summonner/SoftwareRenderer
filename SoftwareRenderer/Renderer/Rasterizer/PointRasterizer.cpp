@@ -15,12 +15,6 @@ namespace Renderer
 	{
 	}
 
-	bool PointRasterizer::PerspectiveDivide( const Matrix4x4& viewport )
-	{
-		v.PerspectiveDivide( viewport );
-		return true;
-	}
-
 	bool PointRasterizer::CheckFacet( const CullFunc cullFunc ) const
 	{
 		return true;

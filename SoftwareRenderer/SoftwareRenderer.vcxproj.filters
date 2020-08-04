@@ -222,9 +222,6 @@
     <ClInclude Include="Renderer\Rasterizer\DerivativeTexcoord.h">
       <Filter>Renderer\Rasterizer\Algorithm</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\CommonRasterizer.h">
-      <Filter>Renderer\Rasterizer</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Geometry\SutherlanHodgman.h">
       <Filter>Renderer\Geometry</Filter>
     </ClInclude>
@@ -395,9 +392,6 @@
     </ClCompile>
     <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp">
       <Filter>Renderer\Rasterizer\Algorithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\CommonRasterizer.cpp">
-      <Filter>Renderer\Rasterizer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Geometry\SutherlanHodgman.cpp">
       <Filter>Renderer\Geometry</Filter>

@@ -14,13 +14,16 @@ namespace Renderer
 	{
 	}
 
-	std::unique_ptr<IRasterizer> Point::Clip() const
+	std::unique_ptr<IRasterizer> Point::Clip( const Matrix4x4& viewport ) const
 	{
 		if ( SutherlandHodgman::ClipPoint( v ) == false )
 		{
 			return nullptr;
 		}
 
-		return std::make_unique<PointRasterizer>( v );
+		auto vertex = v;
+		vertex.PerspectiveDivide( viewport );
+
+		return std::make_unique<PointRasterizer>( vertex );
 	}
 }

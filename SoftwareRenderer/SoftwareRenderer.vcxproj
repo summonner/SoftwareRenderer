@@ -188,7 +188,6 @@
     <ClInclude Include="Renderer\PixelIterator.h" />
     <ClInclude Include="Renderer\Rasterizer\Bresenham.h" />
     <ClInclude Include="Renderer\Rasterizer\BresenhamList.h" />
-    <ClInclude Include="Renderer\Rasterizer\CommonRasterizer.h" />
     <ClInclude Include="Renderer\Rasterizer\DerivativeTexcoord.h" />
     <ClInclude Include="Renderer\Rasterizer\IRasterizer.h" />
     <ClInclude Include="Renderer\Rasterizer\LineRasterizer.h" />
@@ -254,7 +253,6 @@
     <ClCompile Include="Renderer\PixelIterator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp" />
     <ClCompile Include="Renderer\Rasterizer\BresenhamList.cpp" />
-    <ClCompile Include="Renderer\Rasterizer\CommonRasterizer.cpp" />
     <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp" />
     <ClCompile Include="Renderer\Rasterizer\LineRasterizer.cpp" />
     <ClCompile Include="Renderer\Rasterizer\PixelValues.cpp" />

@@ -3,71 +3,23 @@
 #include "PointRasterizer.h"
 #include "BresenhamList.h"
 #include "RasterizedPixel.h"
+#include "DerivativeTexcoord.h"
 #include "Renderer/Vertex.h"
 #include "Math/Bounds.h"
 
 namespace Renderer
 {
-	PolygonRasterizer::PolygonRasterizer( std::vector<Vertex>&& vertices )
-		: CommonRasterizer( std::move( vertices ) )
-		, a( nullptr )
-		, b( nullptr )
-		, c( nullptr )
+	PolygonRasterizer::PolygonRasterizer( std::vector<Vertex>&& vertices, const int secondIndex, const int thirdIndex  )
+		: vertices( std::move( vertices ) )
+		, a( this->vertices[0] )
+		, b( this->vertices[secondIndex] )
+		, c( this->vertices[thirdIndex] )
 	{
 		assert( this->vertices.size() >= 3 );
 	}
 
 	PolygonRasterizer::~PolygonRasterizer()
 	{
-	}
-
-	bool PolygonRasterizer::PostPerspectiveDivide()
-	{
-		a = &vertices[0];
-		const auto bIndex = SelectSecondVertex();
-		if ( bIndex < 0 )
-		{
-			return false;
-		}
-
-		b = &vertices[bIndex];
-		const auto cIndex = SelectThirdVertex( bIndex );
-
-		if ( cIndex < 0 )
-		{
-			return false;
-		}
-
-		c = &vertices[cIndex];
-		return true;
-	}
-
-	int PolygonRasterizer::SelectSecondVertex() const
-	{
-		for ( auto i = 0u; i < vertices.size(); ++i )
-		{
-			if ( vertices[i].screen != vertices[0].screen )
-			{
-				return i;
-			}
-		}
-
-		return -1;
-	}
-
-	int PolygonRasterizer::SelectThirdVertex( size_t secondIndex ) const
-	{
-		const auto ab = vertices[secondIndex].screen - vertices[0].screen;
-		for ( auto i = secondIndex + 1; i < vertices.size(); ++i )
-		{
-			const auto ac = vertices[i].screen - vertices[0].screen;
-			if ( ab.Area( ac ) != 0 )
-			{
-				return i;
-			}
-		}
-
-		return -1;
 	}
 
 	bool PolygonRasterizer::CheckFacet( const CullFunc cullFunc ) const
@@ -77,7 +29,7 @@ namespace Renderer
 			return true;
 		}
 
-		return cullFunc( a->screen, b->screen, c->screen );
+		return cullFunc( a.screen, b.screen, c.screen );
 	}
 
 	DerivativeTexcoord PolygonRasterizer::Derivative( bool isTextureEnabled ) const
@@ -87,7 +39,7 @@ namespace Renderer
 			return DerivativeTexcoord::invalid;
 		}
 
-		return DerivativeTexcoord::Triangle( *a, *b, *c );
+		return DerivativeTexcoord::Triangle( a, b, c );
 	}
 
 	void PolygonRasterizer::Rasterize( const Bounds& bounds, const ProcessPixel process )

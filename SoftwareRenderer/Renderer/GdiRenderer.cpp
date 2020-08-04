@@ -65,13 +65,8 @@ namespace Renderer
 		auto geometries = generator.Generate( vertices );
 		for ( const auto& geometry : geometries )
 		{
-			auto rasterizer = geometry->Clip();
+			auto rasterizer = geometry->Clip( viewport );
 			if ( rasterizer == nullptr )
-			{
-				continue;
-			}
-
-			if ( rasterizer->PerspectiveDivide( viewport ) == false )
 			{
 				continue;
 			}
