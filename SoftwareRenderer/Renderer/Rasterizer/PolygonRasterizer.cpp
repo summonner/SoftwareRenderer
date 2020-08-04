@@ -11,14 +11,82 @@ namespace Renderer
 	PolygonRasterizer::PolygonRasterizer( std::vector<Vertex>&& vertices )
 		: CommonRasterizer( std::move( vertices ) )
 	{
-		assert( this->vertices.size() > 0 );
+		assert( this->vertices.size() >= 3 );
 	}
 
 	PolygonRasterizer::~PolygonRasterizer()
 	{
 	}
 
-	void PolygonRasterizer::Rasterize( const Bounds& bounds, ProcessPixel process, const DerivativeTexcoord& derivatives )
+	bool PolygonRasterizer::PostPerspectiveDivide()
+	{
+		const auto bIndex = SelectSecondVertex();
+		if ( bIndex < 0 )
+		{
+			return false;
+		}
+
+		b = &vertices[bIndex];
+		const auto cIndex = SelectThirdVertex( bIndex );
+
+		if ( cIndex < 0 )
+		{
+			return false;
+		}
+
+		c = &vertices[cIndex];
+		return true;
+	}
+
+	int PolygonRasterizer::SelectSecondVertex() const
+	{
+		for ( auto i = 0; i < vertices.size(); ++i )
+		{
+			if ( vertices[i].screen != vertices[0].screen )
+			{
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	int PolygonRasterizer::SelectThirdVertex( int secondIndex ) const
+	{
+		const auto ab = vertices[secondIndex].screen - vertices[0].screen;
+		for ( auto i = secondIndex + 1; i < vertices.size(); ++i )
+		{
+			const auto ac = vertices[i].screen - vertices[0].screen;
+			if ( ab.Area( ac ) != 0 )
+			{
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	bool PolygonRasterizer::CheckFacet( const CullFunc cullFunc ) const
+	{
+		if ( cullFunc == nullptr )
+		{
+			return true;
+		}
+
+		return cullFunc( a->screen, b->screen, c->screen );
+	}
+
+	DerivativeTexcoord PolygonRasterizer::Derivative( bool isTextureEnabled ) const
+	{
+		if ( isTextureEnabled == false )
+		{
+			return DerivativeTexcoord::invalid;
+		}
+
+		return DerivativeTexcoord::Triangle( *a, *b, *c );
+	}
+
+	void PolygonRasterizer::Rasterize( const Bounds& bounds, const ProcessPixel process )
 	{
 		const auto minmax = FindMinMax();
 		if ( minmax.first == minmax.second )
@@ -31,7 +99,7 @@ namespace Renderer
 
 		auto e1 = BuildEdge( minmax, &PolygonRasterizer::Forward );
 		auto e2 = BuildEdge( minmax, &PolygonRasterizer::Backward );
-		Rasterize( adjust, e1, e2, process, derivatives );
+		Rasterize( adjust, e1, e2, process );
 	}
 
 	std::pair<size_t, size_t> PolygonRasterizer::FindMinMax() const
@@ -90,7 +158,7 @@ namespace Renderer
 		}
 	}
 
-	void PolygonRasterizer::Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, ProcessPixel process, const DerivativeTexcoord& derivatives )
+	void PolygonRasterizer::Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, const ProcessPixel process )
 	{
 		for ( const auto y : bounds.y )
 		{
@@ -100,7 +168,7 @@ namespace Renderer
 			const float length = (float)(e2.x - e1.x);
 			if ( length == 0.f )
 			{
-				process( RasterizedPixel( e1.GetCurrent(), derivatives ) );
+				process( RasterizedPixel( e1.GetCurrent() ) );
 				continue;
 			}
 
@@ -112,7 +180,7 @@ namespace Renderer
 			{
 				const auto t = (float)(x - e1.x) / length;
 				const auto values = PixelValues::Lerp( values1, values2, t );
-				process( RasterizedPixel( Vector2Int( x, y ), values, derivatives ) );
+				process( RasterizedPixel( Vector2Int( x, y ), values ) );
 			}
 		}
 	}

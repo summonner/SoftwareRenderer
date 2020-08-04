@@ -4,6 +4,7 @@
 #include "Geometry/IGeometry.h"
 #include "Rasterizer/IRasterizer.h"
 #include "Rasterizer/RasterizedPixel.h"
+#include "Rasterizer/DerivativeTexcoord.h"
 #include "Math/Vector3.hpp"
 
 namespace Renderer
@@ -62,18 +63,25 @@ namespace Renderer
 		}
 
 		auto geometries = generator.Generate( vertices );
-
-		auto rasterizers = Clip( geometries );
-
-		for ( const auto& rasterizer : rasterizers )
+		for ( const auto& geometry : geometries )
 		{
-			rasterizer->PerspectiveDivide( viewport );
+			auto rasterizer = geometry->Clip();
+			if ( rasterizer == nullptr )
+			{
+				continue;
+			}
+
+			if ( rasterizer->PerspectiveDivide( viewport ) == false )
+			{
+				continue;
+			}
 
 			if ( rasterizer->CheckFacet( cullFace.AsFunc() ) == false )
 			{
 				continue;
 			}
 
+			const auto derivatives = rasterizer->Derivative( texture.IsEnable() );
 			rasterizer->Rasterize( bounds, [&]( const RasterizedPixel& p )
 			{
 				if ( depthBuffer.Test( p ) == false )
@@ -82,7 +90,7 @@ namespace Renderer
 				}
 
 				Vector4 color = p.GetColor();
-				color *= texture.GetColor( p );
+				color *= texture.GetColor( p, derivatives );
 
 				backBuffer->SetPixel( p.coordinate, color, blender.AsFunc() );
 			} );
@@ -172,22 +180,5 @@ namespace Renderer
 			0, 0, 2 / (f - n), -(f + n) / (f - n),
 			0, 0, 0, 1
 		);
-	}
-
-	std::vector<std::unique_ptr<IRasterizer>> GdiRenderer::Clip( const IGeometryList& geometries )
-	{
-		std::vector<std::unique_ptr<IRasterizer>> rasterizers;
-		for ( auto& geometry : geometries )
-		{
-			auto rasterizer = geometry->Clip();
-			if ( rasterizer == nullptr )
-			{
-				continue;
-			}
-
-			rasterizers.push_back( std::move( rasterizer ) );
-		}
-
-		return rasterizers;
 	}
 }

@@ -19,7 +19,12 @@ namespace Renderer
 	{
 	}
 
-	void LineRasterizer::Rasterize( const Bounds& bounds, ProcessPixel process, const DerivativeTexcoord& derivatives )
+	bool LineRasterizer::PostPerspectiveDivide()
+	{
+		return vertices[0].screen != vertices[1].screen;
+	}
+
+	void LineRasterizer::Rasterize( const Bounds& bounds, const ProcessPixel process )
 	{
 		auto e = Bresenham( vertices[0], vertices[1] );
 		do {
@@ -28,7 +33,22 @@ namespace Renderer
 				continue;
 			}
 
-			process( RasterizedPixel( e, derivatives ) );
+			process( RasterizedPixel( e ) );
 		} while ( e.Next() );
+	}
+
+	bool LineRasterizer::CheckFacet( const CullFunc cullFunc ) const
+	{
+		return true;
+	}
+
+	DerivativeTexcoord LineRasterizer::Derivative( const bool isTextureEnabled ) const
+	{
+		if ( isTextureEnabled == false )
+		{
+			return DerivativeTexcoord::invalid;
+		}
+
+		return DerivativeTexcoord::Line( vertices[0], vertices[1] );
 	}
 }

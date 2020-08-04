@@ -43,7 +43,6 @@ namespace Renderer
 		void Ortho( float left, float right, float top, float bottom, float near, float far ) override;
 
 	private:
-		static std::vector<std::unique_ptr<IRasterizer>> Clip( const IGeometryList& geometries );
 
 	private:
 		const HWND hWnd;

@@ -12,7 +12,10 @@ namespace Renderer
 		PolygonRasterizer( std::vector<Vertex>&& vertices );
 		~PolygonRasterizer() override;
 
-		void Rasterize( const Bounds& bounds, ProcessPixel process, const DerivativeTexcoord& derivatives ) override;
+		bool PostPerspectiveDivide() override;
+		void Rasterize( const Bounds& bounds, const ProcessPixel process ) override;
+		bool CheckFacet( const CullFunc cullFunc ) const override;
+		DerivativeTexcoord Derivative( const bool isTextureEnabled ) const override;
 
 	private:
 		std::pair<size_t, size_t> FindMinMax() const;
@@ -21,6 +24,11 @@ namespace Renderer
 		size_t Backward( size_t i ) const;
 
 		static bool AscendingY( const Vertex& left, const Vertex& right );
-		static void Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, ProcessPixel process, const DerivativeTexcoord& derivatives );
+		static void Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, const ProcessPixel process );
+
+		int SelectSecondVertex() const;
+		int SelectThirdVertex( int secondIndex ) const;
+	private:
+		const Vertex* a, *b, *c;
 	};
 }

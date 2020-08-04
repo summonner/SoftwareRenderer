@@ -4,11 +4,23 @@
 
 namespace Renderer
 {
-	DerivativeTexcoord::DerivativeTexcoord( const float denom, const Vector2& dw, const Vector2& ddx, const Vector2& ddy )
-		: denom( denom )
+	DerivativeTexcoord::DerivativeTexcoord()
+		: isValid( false )
+		, dw( Vector2::zero )
+		, ddx( Vector2::zero )
+		, ddy( Vector2::zero )
+	{
+	}
+
+	DerivativeTexcoord::DerivativeTexcoord( const Vector2& dw, const Vector2& ddx, const Vector2& ddy )
+		: isValid( true )
 		, dw( dw )
 		, ddx( ddx )
 		, ddy( ddy )
+	{
+	}
+
+	DerivativeTexcoord::~DerivativeTexcoord()
 	{
 	}
 
@@ -27,7 +39,7 @@ namespace Renderer
 		const Vector2 duv_dy = duv_dt * dt_dxy.y;
 		const Vector2 dw_dxy = (b.position.w - a.position.w) * dt_dxy;
 
-		return DerivativeTexcoord( denom, dw_dxy, duv_dx, duv_dy );
+		return DerivativeTexcoord( dw_dxy, duv_dx, duv_dy );
 	}
 
 	DerivativeTexcoord DerivativeTexcoord::Triangle( const Vertex& a, const Vertex& b, const Vertex& c )
@@ -48,11 +60,7 @@ namespace Renderer
 		const auto duv_dx = duv_ds * dst_dx.x + duv_dt * dst_dx.y;
 		const auto duv_dy = duv_ds * dst_dy.x + duv_dt * dst_dy.y;
 
-		return DerivativeTexcoord( area, dw_dxy, duv_dx, duv_dy );
-	}
-
-	DerivativeTexcoord::~DerivativeTexcoord()
-	{
+		return DerivativeTexcoord( dw_dxy, duv_dx, duv_dy );
 	}
 
 	Vector2 DerivativeTexcoord::dFdx( const Vector2& uv, const float w ) const
@@ -75,6 +83,5 @@ namespace Renderer
 		return (w * ddy - uv * dw.y) / (w * (w + dw.y));
 	}
 
-	const DerivativeTexcoord DerivativeTexcoord::invalid( 0, Vector2::zero, Vector2::zero, Vector2::zero );
-	const DerivativeTexcoord DerivativeTexcoord::disabled( 1, Vector2::zero, Vector2::zero, Vector2::zero );
+	const DerivativeTexcoord DerivativeTexcoord::invalid;
 }

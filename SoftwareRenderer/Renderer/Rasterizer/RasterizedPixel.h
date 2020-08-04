@@ -10,10 +10,11 @@ namespace Renderer
 	class Vertex;
 	class RasterizedPixel final
 	{
+	private:
+		RasterizedPixel();
 	public:
-		RasterizedPixel( const Vector2Int& coordinate, const PixelValues& values, const DerivativeTexcoord& derivatives );
 		RasterizedPixel( const Vector2Int& coordinate, const PixelValues& values );
-		RasterizedPixel( const Bresenham& edge, const DerivativeTexcoord& derivatives );
+		RasterizedPixel( const Bresenham& edge );
 		RasterizedPixel( const Vertex& vertex );
 		~RasterizedPixel();
 
@@ -24,14 +25,13 @@ namespace Renderer
 			return values.depth;
 		}
 
+		const PixelValues& GetRawValues() const;
+
 		const static RasterizedPixel discard;
-	private:
-		RasterizedPixel();
 
 	public:
 		const bool isValid;
 		const Vector2Int coordinate;
-		const Vector2 ddx, ddy;
 
 	private:
 		const PixelValues values;

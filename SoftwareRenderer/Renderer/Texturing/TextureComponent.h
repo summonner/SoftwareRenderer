@@ -5,6 +5,7 @@ namespace Renderer
 {
 	class RasterizedPixel;
 	class ITexture;
+	class DerivativeTexcoord;
 	class TextureComponent final : public BaseComponent
 	{
 	public:
@@ -13,7 +14,7 @@ namespace Renderer
 
 		void Bind( std::shared_ptr<const ITexture> texture );
 
-		Vector4 GetColor( const RasterizedPixel& p ) const;
+		Vector4 GetColor( const RasterizedPixel& p, const DerivativeTexcoord& derivatives ) const;
 
 	private:
 		std::shared_ptr<const ITexture> texture;

@@ -7,7 +7,8 @@ namespace Renderer
 	class DerivativeTexcoord final
 	{
 	private:
-		DerivativeTexcoord( const float denom, const Vector2& dw, const Vector2& ddx, const Vector2& ddy );
+		DerivativeTexcoord();
+		DerivativeTexcoord( const Vector2& dw, const Vector2& ddx, const Vector2& ddy );
 	public:
 		static DerivativeTexcoord Line( const Vertex& a, const Vertex& b );
 		static DerivativeTexcoord Triangle( const Vertex& a, const Vertex& b, const Vertex& c );
@@ -18,15 +19,14 @@ namespace Renderer
 
 		inline bool IsValid() const
 		{
-			return denom != 0.f;
+			return isValid;
 		}
 
 		static const DerivativeTexcoord invalid;
-		static const DerivativeTexcoord disabled;
 
 	private:
 		const Vector2 dw;
 		const Vector2 ddx, ddy;
-		const float denom;
+		const bool isValid;
 	};
 }

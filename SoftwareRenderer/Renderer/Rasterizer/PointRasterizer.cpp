@@ -2,6 +2,7 @@
 #include "PointRasterizer.h"
 #include "Math/Bounds.h"
 #include "RasterizedPixel.h"
+#include "DerivativeTexcoord.h"
 
 namespace Renderer
 {
@@ -14,17 +15,23 @@ namespace Renderer
 	{
 	}
 
-	void PointRasterizer::PerspectiveDivide( const Matrix4x4& viewport )
+	bool PointRasterizer::PerspectiveDivide( const Matrix4x4& viewport )
 	{
 		v.PerspectiveDivide( viewport );
-	}
-
-	bool PointRasterizer::CheckFacet( CullFunc cullFunc )
-	{
 		return true;
 	}
 
-	void PointRasterizer::Rasterize( const Bounds& bounds, ProcessPixel process )
+	bool PointRasterizer::CheckFacet( const CullFunc cullFunc ) const
+	{
+		return true;
+	}
+	
+	DerivativeTexcoord PointRasterizer::Derivative( const bool isTextureEnabled ) const
+	{
+		return DerivativeTexcoord::invalid;
+	}
+
+	void PointRasterizer::Rasterize( const Bounds& bounds, const ProcessPixel process )
 	{
 		if ( bounds.Contains( v.screen ) == false )
 		{
