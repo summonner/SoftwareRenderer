@@ -71,7 +71,7 @@ namespace Renderer
 				continue;
 			}
 
-			if ( rasterizer->CheckFacet( cullFace.AsFunc() ) == false )
+			if ( cullFace.Apply( *rasterizer ) == false )
 			{
 				continue;
 			}

@@ -15,9 +15,9 @@ namespace Renderer
 	{
 	}
 
-	bool PointRasterizer::CheckFacet( const CullFunc cullFunc ) const
+	float PointRasterizer::CheckFacet() const
 	{
-		return true;
+		return 0.f;
 	}
 	
 	DerivativeTexcoord PointRasterizer::Derivative( const bool isTextureEnabled ) const

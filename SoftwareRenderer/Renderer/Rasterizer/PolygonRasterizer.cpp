@@ -22,14 +22,11 @@ namespace Renderer
 	{
 	}
 
-	bool PolygonRasterizer::CheckFacet( const CullFunc cullFunc ) const
+	float PolygonRasterizer::CheckFacet() const
 	{
-		if ( cullFunc == nullptr )
-		{
-			return true;
-		}
-
-		return cullFunc( a.screen, b.screen, c.screen );
+		const auto ab = b.screen - a.screen;
+		const auto ac = c.screen - a.screen;
+		return ab.Area( ac );
 	}
 
 	DerivativeTexcoord PolygonRasterizer::Derivative( bool isTextureEnabled ) const

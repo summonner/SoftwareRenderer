@@ -12,7 +12,7 @@ namespace Renderer
 		~PolygonRasterizer() override;
 
 		void Rasterize( const Bounds& bounds, const ProcessPixel process ) override;
-		bool CheckFacet( const CullFunc cullFunc ) const override;
+		float CheckFacet() const override;
 		DerivativeTexcoord Derivative( const bool isTextureEnabled ) const override;
 
 	private:

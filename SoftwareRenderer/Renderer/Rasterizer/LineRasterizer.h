@@ -12,7 +12,7 @@ namespace Renderer
 		LineRasterizer( const Vertex& a, const Vertex& b );
 		~LineRasterizer() override;
 
-		bool CheckFacet( const CullFunc cullFunc ) const override;
+		float CheckFacet() const override;
 		DerivativeTexcoord Derivative( const bool isTextureEnabled ) const override;
 		void Rasterize( const Bounds& bounds, const ProcessPixel process ) override;
 

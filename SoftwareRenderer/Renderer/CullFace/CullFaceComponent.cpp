@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CullFaceComponent.h"
 #include "Math/Vector2.hpp"
+#include "Renderer/Rasterizer/IRasterizer.h"
 
 namespace Renderer
 {
@@ -24,17 +25,6 @@ namespace Renderer
 		this->frontFace = frontFace;
 	}
 
-	std::function<bool( const Vector2Int&, const Vector2Int&, const Vector2Int& )> CullFaceComponent::AsFunc() const
-	{
-		if ( enabled == false )
-		{
-			return nullptr;
-		}
-
-		const auto apply = static_cast<bool (CullFaceComponent::*)(const Vector2Int&, const Vector2Int&, const Vector2Int&) const>(&CullFaceComponent::Apply);
-		return std::bind( apply, *this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3 );
-	}
-
 	bool CullFaceComponent::Apply( const Vector2Int& a, const Vector2Int& b, const Vector2Int& c ) const
 	{
 		const auto ab = b - a;
@@ -45,6 +35,23 @@ namespace Renderer
 
 	bool CullFaceComponent::Apply( const float facet ) const
 	{
-		return facet * (int)cullFace * (int)frontFace > 0;
+		if ( cullFace == Cull::FrontAndBack )
+		{
+			return false;
+		}
+		else
+		{
+			return facet * (int)cullFace * (int)frontFace >= 0;
+		}
+	}
+
+	bool CullFaceComponent::Apply( const IRasterizer& rasterizer ) const
+	{
+		if ( enabled == false )
+		{
+			return true;
+		}
+
+		return Apply( rasterizer.CheckFacet() );
 	}
 }

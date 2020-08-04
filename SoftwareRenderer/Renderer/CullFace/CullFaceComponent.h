@@ -3,6 +3,7 @@
 
 namespace Renderer
 {
+	class IRasterizer;
 	class CullFaceComponent final : public BaseComponent
 	{
 	public:
@@ -26,10 +27,9 @@ namespace Renderer
 		void SetCullFace( const Cull cullFace );
 		void SetFrontFace( const Front frontFace );
 
-		std::function<bool( const Vector2Int&, const Vector2Int&, const Vector2Int& )> AsFunc() const;
-
 		bool Apply( const Vector2Int& a, const Vector2Int& b, const Vector2Int& c ) const;
 		bool Apply( const float facet ) const;
+		bool Apply( const IRasterizer& rasterizer ) const;
 
 	private:
 		Cull cullFace;

@@ -11,8 +11,7 @@ namespace Renderer
 	public:
 		virtual ~IRasterizer() {}
 
-		using CullFunc = std::function<bool( const Vector2Int&, const Vector2Int&, const Vector2Int& )>;
-		virtual bool CheckFacet( const CullFunc cullFunc ) const abstract;
+		virtual float CheckFacet() const abstract;
 
 		virtual DerivativeTexcoord Derivative( const bool isTextureEnabled ) const abstract;
 

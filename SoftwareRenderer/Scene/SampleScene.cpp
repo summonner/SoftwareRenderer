@@ -43,7 +43,9 @@ void SampleScene::DrawScene() const
 
 	glEnable( GL_DEPTH_TEST );
 	glDisable( GL_BLEND );
-//	Floor();
+	//Floor();
+	//Triangle();
+	//Quad();
 
 	glDisable( GL_DEPTH_TEST );
 	glEnable( GL_BLEND );
@@ -69,8 +71,8 @@ void SampleScene::Triangle() const
 {
 	glLoadIdentity();
 	glBindTexture( GL_TEXTURE_2D, 0 );
-	glTranslatef( -1.5f * 0, 0.0f, -6.0f + 6 * x );
-	glRotatef( 0 * -90.f, 0.f, 1.f, 0.f );
+	glTranslatef( -1.5f * 1, 0.0f, -6.0f + 6 * 0 );
+	glRotatef( x * -90.f, 0.f, 1.f, 0.f );
 	glBegin( GL_TRIANGLES );
 	glColor4f( 1.f, 0.f, 0.f, 0.5f );
 	glTexCoord2f( 0.5f, 1.0f );
@@ -91,7 +93,7 @@ void SampleScene::Quad() const
 	glLoadIdentity();
 	glBindTexture( GL_TEXTURE_2D, texture );
 	glTranslatef( 1.5f * (1 - x), 0.0f, -6.0f + 5.5f * 0 );
-//	glScalef( x, x, 1 );
+	glScalef( x, x, 1 );
 //	glRotatef( x * 90.f, 1.f, 0.f, 0.f );
 	glBegin( GL_QUADS );
 	auto min = -0.f;

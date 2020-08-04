@@ -37,9 +37,9 @@ namespace Renderer
 		} while ( e.Next() );
 	}
 
-	bool LineRasterizer::CheckFacet( const CullFunc cullFunc ) const
+	float LineRasterizer::CheckFacet() const
 	{
-		return true;
+		return 0.f;
 	}
 
 	DerivativeTexcoord LineRasterizer::Derivative( const bool isTextureEnabled ) const
