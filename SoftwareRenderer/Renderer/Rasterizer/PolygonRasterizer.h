@@ -27,7 +27,7 @@ namespace Renderer
 		static void Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, const ProcessPixel process );
 
 		int SelectSecondVertex() const;
-		int SelectThirdVertex( int secondIndex ) const;
+		int SelectThirdVertex( size_t secondIndex ) const;
 	private:
 		const Vertex* a, *b, *c;
 	};

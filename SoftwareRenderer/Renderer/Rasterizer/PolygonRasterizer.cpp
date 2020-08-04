@@ -10,6 +10,9 @@ namespace Renderer
 {
 	PolygonRasterizer::PolygonRasterizer( std::vector<Vertex>&& vertices )
 		: CommonRasterizer( std::move( vertices ) )
+		, a( nullptr )
+		, b( nullptr )
+		, c( nullptr )
 	{
 		assert( this->vertices.size() >= 3 );
 	}
@@ -20,6 +23,7 @@ namespace Renderer
 
 	bool PolygonRasterizer::PostPerspectiveDivide()
 	{
+		a = &vertices[0];
 		const auto bIndex = SelectSecondVertex();
 		if ( bIndex < 0 )
 		{
@@ -40,7 +44,7 @@ namespace Renderer
 
 	int PolygonRasterizer::SelectSecondVertex() const
 	{
-		for ( auto i = 0; i < vertices.size(); ++i )
+		for ( auto i = 0u; i < vertices.size(); ++i )
 		{
 			if ( vertices[i].screen != vertices[0].screen )
 			{
@@ -51,7 +55,7 @@ namespace Renderer
 		return -1;
 	}
 
-	int PolygonRasterizer::SelectThirdVertex( int secondIndex ) const
+	int PolygonRasterizer::SelectThirdVertex( size_t secondIndex ) const
 	{
 		const auto ab = vertices[secondIndex].screen - vertices[0].screen;
 		for ( auto i = secondIndex + 1; i < vertices.size(); ++i )
