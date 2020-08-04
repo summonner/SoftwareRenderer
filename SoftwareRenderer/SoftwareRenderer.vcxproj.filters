@@ -258,6 +258,9 @@
     <ClInclude Include="Renderer\CullFace\CullFaceComponent.h">
       <Filter>Renderer\CullFace</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\IComponent.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">

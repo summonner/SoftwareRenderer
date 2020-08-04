@@ -1,8 +1,9 @@
 #pragma once
+#include "Renderer/IComponent.h"
 
 namespace Renderer
 {
-	class CullFaceComponent
+	class CullFaceComponent final : public BaseComponent
 	{
 	public:
 		enum class Cull
@@ -22,8 +23,6 @@ namespace Renderer
 		CullFaceComponent();
 		~CullFaceComponent();
 
-		void SetEnable( const bool enable );
-		bool IsEnable() const { return enabled; }
 		void SetCullFace( const Cull cullFace );
 		void SetFrontFace( const Front frontFace );
 
@@ -33,7 +32,6 @@ namespace Renderer
 		bool Apply( const float facet ) const;
 
 	private:
-		bool enabled;
 		Cull cullFace;
 		Front frontFace;
 	};

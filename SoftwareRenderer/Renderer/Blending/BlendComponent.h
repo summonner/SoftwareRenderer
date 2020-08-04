@@ -1,23 +1,21 @@
 #pragma once
 #include "BlendFunc.h"
+#include "Renderer/IComponent.h"
 
 namespace Renderer
 {
-	class BlendComponent final
+	class BlendComponent final : public BaseComponent
 	{
 	public:
 		BlendComponent();
 		~BlendComponent();
 
-		void SetEnable( bool enable );
-		bool IsEnable() const;
-
-		Vector4 operator ()( const Vector4& srcColor, const Vector4& dstColor ) const;
+		std::function<Vector4( const Vector4&, const Vector4& )> AsFunc() const;
+		Vector4 Apply( const Vector4& srcColor, const Vector4& dstColor ) const;
 		void SetBlendFunc( const BlendFunc::Type src, const BlendFunc::Type dst );
 		void SetBlendColor( const Vector4& color );
 
 	private:
-		bool enabled;
 		BlendFunc srcFunc;
 		BlendFunc dstFunc;
 	};

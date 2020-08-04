@@ -53,9 +53,18 @@ namespace Renderer
 
 	void FrameBuffer::SetPixel( const Vector2Int& p, const Vector4& srcColor, std::function<Vector4( const Vector4&, const Vector4& )> blender )
 	{
+		Vector4 result;
 		const auto i = GetIndex( p );
-		const auto dstColor = GetPixel( i );
-		const auto result = blender( srcColor, dstColor );
+		if ( blender == nullptr )
+		{
+			result = srcColor;
+		}
+		else
+		{
+			const auto dstColor = GetPixel( i );
+			result = blender( srcColor, dstColor );
+		}
+
 		SetPixel( i, result );
 	}
 }

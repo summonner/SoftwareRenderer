@@ -1,23 +1,21 @@
 #pragma once
+#include "Renderer/IComponent.h"
 
 namespace Renderer
 {
 	class RasterizedPixel;
 	class ITexture;
-	class TextureComponent final
+	class TextureComponent final : public BaseComponent
 	{
 	public:
 		TextureComponent();
 		~TextureComponent();
-
-		void SetEnable( bool enable );
 
 		void Bind( std::shared_ptr<const ITexture> texture );
 
 		Vector4 GetColor( const RasterizedPixel& p ) const;
 
 	private:
-		bool enabled;
 		std::shared_ptr<const ITexture> texture;
 	};
 }

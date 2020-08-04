@@ -1,16 +1,15 @@
 #pragma once
 #include "DepthFunc.h"
+#include "Renderer/IComponent.h"
 
 namespace Renderer
 {
 	class RasterizedPixel;
-	class DepthBuffer final
+	class DepthBuffer final : public BaseComponent
 	{
 	public:
 		DepthBuffer( int width, int height );
 		~DepthBuffer();
-
-		void SetEnable( bool enable );
 
 		void Clear();
 		void SetClearValue( const float value );
@@ -22,7 +21,6 @@ namespace Renderer
 		bool Test( const Vector2Int& coordinate, float depth ) const;
 
 	private:
-		bool enabled;
 		const int width;
 		const int height;
 		std::unique_ptr<float[]> pixels;

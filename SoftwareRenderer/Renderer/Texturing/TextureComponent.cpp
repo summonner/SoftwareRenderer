@@ -6,17 +6,11 @@
 namespace Renderer
 {
 	TextureComponent::TextureComponent()
-		: enabled( false )
 	{
 	}
 
 	TextureComponent::~TextureComponent()
 	{
-	}
-
-	void TextureComponent::SetEnable( bool enable )
-	{
-		enabled = enable;
 	}
 
 	void TextureComponent::Bind( std::shared_ptr<const ITexture> texture )

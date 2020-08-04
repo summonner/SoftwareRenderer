@@ -14,11 +14,6 @@ namespace Renderer
 	{
 	}
 
-	void CullFaceComponent::SetEnable( bool enable )
-	{
-		enabled = enable;
-	}
-
 	void CullFaceComponent::SetCullFace( Cull cullFace )
 	{
 		this->cullFace = cullFace;

@@ -14,17 +14,17 @@ namespace Renderer
 	{
 	}
 
-	void BlendComponent::SetEnable( const bool enable )
+	std::function<Vector4( const Vector4&, const Vector4& )> BlendComponent::AsFunc() const
 	{
-		enabled = enable;
+		if ( enabled == false )
+		{
+			return nullptr;
+		}
+
+		return std::bind( &BlendComponent::Apply, *this, std::placeholders::_1, std::placeholders::_2 );
 	}
 
-	bool BlendComponent::IsEnable() const
-	{
-		return enabled;
-	}
-
-	Vector4 BlendComponent::operator ()( const Vector4& srcColor, const Vector4& dstColor ) const
+	Vector4 BlendComponent::Apply( const Vector4& srcColor, const Vector4& dstColor ) const
 	{
 		const auto srcFactor = srcFunc( srcColor, dstColor );
 		const auto dstFactor = dstFunc( srcColor, dstColor );

@@ -84,7 +84,7 @@ namespace Renderer
 				Vector4 color = p.GetColor();
 				color *= texture.GetColor( p );
 
-				SetPixel( p.coordinate, color );
+				backBuffer->SetPixel( p.coordinate, color, blender.AsFunc() );
 			} );
 		}
 
@@ -189,17 +189,5 @@ namespace Renderer
 		}
 
 		return rasterizers;
-	}
-
-	void GdiRenderer::SetPixel( const Vector2Int& p, const Vector4& color )
-	{
-		if ( blender.IsEnable() == true )
-		{
-			backBuffer->SetPixel( p, color, blender );
-		}
-		else
-		{
-			backBuffer->SetPixel( p, color );
-		}
 	}
 }

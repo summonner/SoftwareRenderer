@@ -183,6 +183,7 @@
     <ClInclude Include="Renderer\Geometry\Point.h" />
     <ClInclude Include="Renderer\Geometry\SutherlanHodgman.h" />
     <ClInclude Include="Renderer\Geometry\Triangle.h" />
+    <ClInclude Include="Renderer\IComponent.h" />
     <ClInclude Include="Renderer\IRenderer.h" />
     <ClInclude Include="Renderer\PixelIterator.h" />
     <ClInclude Include="Renderer\Rasterizer\Bresenham.h" />

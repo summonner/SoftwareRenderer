@@ -11,17 +11,11 @@ namespace Renderer
 		, height( height )
 		, pixels( new float[width * height] )
 		, clearValue( 1.f )
-		, enabled( false )
 	{
 	}
 
 	DepthBuffer::~DepthBuffer()
 	{
-	}
-
-	void DepthBuffer::SetEnable( bool enable )
-	{
-		enabled = enable;
 	}
 
 	void DepthBuffer::Clear()
