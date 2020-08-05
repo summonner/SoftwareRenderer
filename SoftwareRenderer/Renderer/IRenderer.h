@@ -5,6 +5,7 @@
 #include "DepthTest/DepthBuffer.h"
 #include "Blending/BlendComponent.h"
 #include "CullFace/CullFaceComponent.h"
+#include "Lighting/LightingComponent.h"
 
 class IRenderer abstract
 {
@@ -39,6 +40,7 @@ public:
 	virtual void End() abstract;
 	virtual void Color( float r, float g, float b, float a ) abstract;
 	virtual void TexCoord( float u, float v ) abstract;
+	virtual void Normal( float x, float y, float z ) abstract;
 	virtual void AddVertex( float x, float y, float z ) abstract;
 
 	virtual void LoadIdentity() abstract;
@@ -56,5 +58,6 @@ public:
 	Renderer::DepthBuffer depthBuffer;
 	Renderer::BlendComponent blender;
 	Renderer::CullFaceComponent cullFace;
+	Renderer::LightingComponent lighting;
 };
 

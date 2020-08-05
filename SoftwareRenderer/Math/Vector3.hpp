@@ -50,6 +50,11 @@ public:
 		return (*this) + other * -1;
 	}
 
+	inline TVector3 operator -() const
+	{
+		return (*this) * -1;
+	}
+
 	inline TVector3 operator *( const int scalar ) const
 	{
 		return TVector3( x * scalar, y * scalar, z * scalar );
@@ -133,15 +138,17 @@ public:
 			x * other.y - y * other.x
 		);
 	}
-
+	
+	static TVector3 Lerp( const TVector3& left, const TVector3& right, const float t );
 	static const TVector3<T> zero;
 	static const TVector3<T> one;
-	//inline static const TVector3 left =  TVector3( T( 1), T( 0), T( 0) );
-	//inline static const TVector3 right = TVector3( T(-1), T( 0), T( 0) );
-	//inline static const TVector3 up =	  TVector3( T( 0), T( 1), T( 0) );
-	//inline static const TVector3 down =  TVector3( T( 0), T(-1), T( 0) );
-	//inline static const TVector3 front = TVector3( T( 0), T( 0), T( 1) );
-	//inline static const TVector3 back =  TVector3( T( 0), T( 0), T(-1) );
+
+	static const TVector3<T> left;
+	static const TVector3<T> right;
+	static const TVector3<T> up;
+	static const TVector3<T> down;
+	static const TVector3<T> front;
+	static const TVector3<T> back;
 
 public:
 	T x;
@@ -156,7 +163,31 @@ inline TVector3<T> operator *( float scalar, const TVector3<T>& vector )
 }
 
 template<typename T>
+TVector3<T> TVector3<T>::Lerp( const TVector3<T>& start, const TVector3<T>& end, const float t )
+{
+	return start * (1.f - t) + end * t;
+}
+
+template<typename T>
 const TVector3<T> TVector3<T>::zero = TVector3<T>( T( 0 ), T( 0 ), T( 0 ) );
 
 template<typename T>
 const TVector3<T> TVector3<T>::one = TVector3<T>( T( 1 ), T( 1 ), T( 1 ) );
+
+template<typename T>
+const TVector3<T> TVector3<T>::left = TVector3( T( 1 ), T( 0 ), T( 0 ) );
+
+template<typename T>
+const TVector3<T> TVector3<T>::right = TVector3( T( -1 ), T( 0 ), T( 0 ) );
+
+template<typename T>
+const TVector3<T> TVector3<T>::up = TVector3( T( 0 ), T( 1 ), T( 0 ) );
+
+template<typename T>
+const TVector3<T> TVector3<T>::down = TVector3( T( 0 ), T( -1 ), T( 0 ) );
+
+template<typename T>
+const TVector3<T> TVector3<T>::front = TVector3( T( 0 ), T( 0 ), T( 1 ) );
+
+template<typename T>
+const TVector3<T> TVector3<T>::back = TVector3( T( 0 ), T( 0 ), T( -1 ) );

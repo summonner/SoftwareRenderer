@@ -59,6 +59,7 @@ namespace Renderer
 	{
 		for ( auto& vertex : vertices )
 		{
+			vertex.color *= lighting.GetColor( vertex.position, vertex.normal );
 			vertex.Process( projection );
 		}
 
@@ -104,33 +105,45 @@ namespace Renderer
 		temp.texcoord = Vector2( u, v );
 	}
 
+	void GdiRenderer::Normal( float x, float y, float z )
+	{
+		temp.normal = Vector3( x, y, z );
+	}
+
 	void GdiRenderer::AddVertex( float x, float y, float z )
 	{
 		Vector4 v( x, y, z, 1.f );
 		auto t = transform * v;
 
-		temp.position = t;
-		vertices.push_back( temp );
+		auto copy = temp;
+		copy.position = t;
+		copy.normal = Vector4( temp.normal, 0 ) * invTransform;
+		vertices.push_back( copy );
 	}
 
 	void GdiRenderer::LoadIdentity()
 	{
 		transform = Matrix4x4::identity;
+		invTransform = Matrix4x4::identity;
 	}
 
 	void GdiRenderer::Translate( float x, float y, float z )
 	{
 		transform = transform * Matrix4x4::Translate( Vector3( x, y, z ) );
+		invTransform = Matrix4x4::Translate( Vector3( x, y, z ) * -1 ) * invTransform;
 	}
 
 	void GdiRenderer::Rotate( Degree angle, float x, float y, float z )
 	{
-		transform = transform * Matrix4x4::Rotate( angle * PI / 180, Vector3( x, y, z ) );
+		const auto rotate = Matrix4x4::Rotate( angle * PI / 180, Vector3( x, y, z ) );
+		transform = transform * rotate;
+		invTransform = rotate.Transpose() * invTransform;
 	}
 
 	void GdiRenderer::Scale( float x, float y, float z )
 	{
 		transform = transform * Matrix4x4::Scale( Vector3( x, y, z ) );
+		invTransform = Matrix4x4::Scale( Vector3( 1 / x, 1 / y, 1 / z ) ) * invTransform;
 	}
 
 	void GdiRenderer::Viewport( int left, int bottom, int width, int height )

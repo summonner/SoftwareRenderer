@@ -8,6 +8,7 @@ namespace Renderer
 		: position( 0, 0, 0, 0 )
 		, color( 1, 1, 1, 1 )
 		, texcoord( 0, 0 )
+		, normal( 0, 0, 1 )
 	{
 	}
 
@@ -16,6 +17,7 @@ namespace Renderer
 		, color( Vector4::Lerp( left.color, right.color, t ) )
 		, texcoord( Vector2::Lerp( left.texcoord, right.texcoord, t ) )
 		, screen( Vector2Int::Lerp( left.screen, right.screen, t ) )
+		, normal( Vector3::Lerp( left.normal, right.normal, t ) )
 	{
 	}
 

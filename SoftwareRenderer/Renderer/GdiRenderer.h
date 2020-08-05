@@ -30,6 +30,7 @@ namespace Renderer
 		void End() override;
 		void Color( float r, float g, float b, float a ) override;
 		void TexCoord( float u, float v ) override;
+		void Normal( float x, float y, float z ) override;
 		void AddVertex( float x, float y, float z ) override;
 
 		void LoadIdentity() override;
@@ -56,6 +57,7 @@ namespace Renderer
 		std::vector<Vertex> vertices;
 
 		Matrix4x4 transform;
+		Matrix4x4 invTransform;
 		Matrix4x4 projection;
 		Matrix4x4 viewport;
 	};

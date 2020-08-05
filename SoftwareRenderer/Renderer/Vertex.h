@@ -21,6 +21,7 @@ namespace Renderer
 		Vector4 position;
 		Vector4 color;
 		Vector2 texcoord;
+		Vector3 normal;
 
 		Vector2Int screen;
 	};

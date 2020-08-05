@@ -4,6 +4,7 @@
 namespace Renderer
 {
 	class Texture2D;
+	class Light;
 }
 
 class SampleScene final : public IScene
@@ -23,6 +24,7 @@ private:
 
 private:
 	std::shared_ptr<Renderer::Texture2D> texture;
+	std::shared_ptr<Renderer::Light> light;
 	void DrawScene() const;
 };
 

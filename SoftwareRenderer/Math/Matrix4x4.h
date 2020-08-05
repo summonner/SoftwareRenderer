@@ -116,3 +116,8 @@ private:
 	DECL_COL( 2 );
 	DECL_COL( 3 );
 };
+
+static inline Vector4 operator *( const Vector4& v, const Matrix4x4& m )
+{
+	return Vector4( v.Dot( m.Col0() ), v.Dot( m.Col1() ), v.Dot( m.Col2() ), v.Dot( m.Col3() ) );
+}

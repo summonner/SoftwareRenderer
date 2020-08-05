@@ -55,6 +55,9 @@
     <Filter Include="Renderer\CullFace">
       <UniqueIdentifier>{33c58c31-1b00-4b12-9041-daffe767fb3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\Ligthing">
+      <UniqueIdentifier>{b3f21f95-c3f1-4ec2-beed-c11bffd7e9a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -258,6 +261,18 @@
     <ClInclude Include="Renderer\IComponent.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Lighting\LightingComponent.h">
+      <Filter>Renderer\Ligthing</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Lighting\Light.h">
+      <Filter>Renderer\Ligthing</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Lighting\Material.h">
+      <Filter>Renderer\Ligthing</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glLightManager.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -419,6 +434,18 @@
     </ClCompile>
     <ClCompile Include="Renderer\CullFace\CullFaceComponent.cpp">
       <Filter>Renderer\CullFace</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Lighting\LightingComponent.cpp">
+      <Filter>Renderer\Ligthing</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Lighting\Material.cpp">
+      <Filter>Renderer\Ligthing</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Lighting\Light.cpp">
+      <Filter>Renderer\Ligthing</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glLightManager.cpp">
+      <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

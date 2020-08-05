@@ -104,9 +104,9 @@ namespace NeHe
 		glDepthFunc( GL_LEQUAL );								// The Type Of Depth Testing To Do
 		//glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );	// Really Nice Perspective Calculations
 
-		//glLightfv( GL_LIGHT1, GL_AMBIENT, LightAmbient );		// Setup The Ambient Light
-		//glLightfv( GL_LIGHT1, GL_DIFFUSE, LightDiffuse );		// Setup The Diffuse Light
-		//glLightfv( GL_LIGHT1, GL_POSITION, LightPosition );	// Position The Light
+		glLightfv( GL_LIGHT1, GL_AMBIENT, LightAmbient );		// Setup The Ambient Light
+		glLightfv( GL_LIGHT1, GL_DIFFUSE, LightDiffuse );		// Setup The Diffuse Light
+		glLightfv( GL_LIGHT1, GL_POSITION, LightPosition );	// Position The Light
 		glEnable( GL_LIGHT1 );								// Enable Light One
 
 		glColor4f( 1.0f, 1.0f, 1.0f, 0.5 );					// Full Brightness.  50% Alpha

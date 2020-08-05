@@ -185,6 +185,9 @@
     <ClInclude Include="Renderer\Geometry\Triangle.h" />
     <ClInclude Include="Renderer\IComponent.h" />
     <ClInclude Include="Renderer\IRenderer.h" />
+    <ClInclude Include="Renderer\Lighting\Light.h" />
+    <ClInclude Include="Renderer\Lighting\LightingComponent.h" />
+    <ClInclude Include="Renderer\Lighting\Material.h" />
     <ClInclude Include="Renderer\PixelIterator.h" />
     <ClInclude Include="Renderer\Rasterizer\Bresenham.h" />
     <ClInclude Include="Renderer\Rasterizer\BresenhamList.h" />
@@ -206,6 +209,7 @@
     <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="Scene\gl\AUX_RGBImageRec.h" />
     <ClInclude Include="Scene\gl\glAdapter.h" />
+    <ClInclude Include="Scene\gl\glLightManager.h" />
     <ClInclude Include="Scene\gl\glTextureManager.h" />
     <ClInclude Include="Scene\IScene.h" />
     <ClInclude Include="Scene\NeHeSamples\ILesson.h" />
@@ -250,6 +254,9 @@
     <ClCompile Include="Renderer\Geometry\Point.cpp" />
     <ClCompile Include="Renderer\Geometry\SutherlanHodgman.cpp" />
     <ClCompile Include="Renderer\Geometry\Triangle.cpp" />
+    <ClCompile Include="Renderer\Lighting\Light.cpp" />
+    <ClCompile Include="Renderer\Lighting\LightingComponent.cpp" />
+    <ClCompile Include="Renderer\Lighting\Material.cpp" />
     <ClCompile Include="Renderer\PixelIterator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp" />
     <ClCompile Include="Renderer\Rasterizer\BresenhamList.cpp" />
@@ -268,6 +275,7 @@
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="Scene\gl\AUX_RGBImageRec.cpp" />
     <ClCompile Include="Scene\gl\glAdapter.cpp" />
+    <ClCompile Include="Scene\gl\glLightManager.cpp" />
     <ClCompile Include="Scene\gl\glTextureManager.cpp" />
     <ClCompile Include="Scene\NeHeSamples\ILesson.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson6.cpp" />

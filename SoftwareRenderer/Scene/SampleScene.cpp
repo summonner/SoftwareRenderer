@@ -6,6 +6,7 @@
 #include "Renderer/Texturing/Texture2D.h"
 #include "Renderer/Texturing/TextureComponent.h"
 #include "Renderer/Blending/BlendComponent.h"
+#include "Renderer/Lighting/Light.h"
 
 void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> texture )
 {
@@ -14,6 +15,7 @@ void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> tex
 
 SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
 	: texture( nullptr )
+	, light( new Renderer::Light() )
 {
 	const auto bitmap = Bitmap::Load( _T( "Data/glass.bmp" ) );
 	texture = std::make_shared<Renderer::Texture2D>( *bitmap, true );
@@ -22,8 +24,11 @@ SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
 	texture->SetFilter( TextureMinFilter::LinearMipmapLinear );
 
 	renderer->SetClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
-	renderer->texture.SetEnable( true );
+//	renderer->texture.SetEnable( true );
 	renderer->blender.SetBlendFunc( BlendFunc::SrcAlpha, BlendFunc::One );
+	renderer->cullFace.SetEnable( true );
+	renderer->lighting.SetEnable( true );
+	renderer->lighting.Add( light );
 }
 
 SampleScene::~SampleScene()
@@ -34,6 +39,7 @@ float x = 0;
 void SampleScene::Update( const Time& time )
 {
 	auto t = time.GetTimeFromStart();
+//	t = .152f;
 	x = (sin( t ));// +1.f) * 0.5f;
 }
 
@@ -46,11 +52,11 @@ void SampleScene::DrawScene() const
 	//Floor();
 	//Triangle();
 	//Quad();
+	Cube();
 
 	glDisable( GL_DEPTH_TEST );
 	glEnable( GL_BLEND );
 	glColor4f( 1, 1, 1, 0.5f );
-	Cube();
 }
 
 void SampleScene::Floor() const

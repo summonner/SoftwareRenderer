@@ -1,12 +1,14 @@
 #include "framework.h"
 #include "glAdapter.h"
 #include "glTextureManager.h"
+#include "glLightManager.h"
 #include "Renderer/IRenderer.h"
 #include "Math/Vector4.hpp"
 
 std::shared_ptr<IRenderer> _renderer;
-glTextureManager textureManager;
 #define renderer _renderer
+glTextureManager textureManager;
+glLightManager lightManager;
 
 void glEnable( GLenum cap, bool enable )
 {
@@ -26,6 +28,21 @@ void glEnable( GLenum cap, bool enable )
 
 	case GL_CULL_FACE:
 		renderer->cullFace.SetEnable( enable );
+		break;
+
+	case GL_LIGHTING:
+		renderer->lighting.SetEnable( enable );
+		break;
+
+	case GL_LIGHT0:
+		if ( enable == true )
+		{
+			renderer->lighting.Add( lightManager.Get( cap ) );
+		}
+		else
+		{
+			renderer->lighting.Remove( lightManager.Get( cap ) );
+		}
 		break;
 	}
 }
@@ -144,7 +161,7 @@ WINGDIAPI void APIENTRY glTexCoord2f( GLfloat s, GLfloat t )
 
 WINGDIAPI void APIENTRY glNormal3f( GLfloat nx, GLfloat ny, GLfloat nz )
 {
-//	renderer->Normal( nx, ny, nz );
+	renderer->Normal( nx, ny, nz );
 }
 
 WINGDIAPI void APIENTRY glEnd( void )
@@ -235,6 +252,12 @@ WINGDIAPI void APIENTRY glFrontFace( GLenum mode )
 		{ GL_CCW, FrontFace::CCW },
 	};
 	renderer->cullFace.SetFrontFace( table[mode] );
+}
+
+
+WINGDIAPI void APIENTRY glLightfv( GLenum light, GLenum pname, const GLfloat *params )
+{
+	lightManager.Set( light, pname, params );
 }
 
 int APIENTRY gluBuild2DMipmaps(

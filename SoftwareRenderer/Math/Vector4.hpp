@@ -46,6 +46,11 @@ public:
 		return (*this) + other * -1;
 	}
 
+	inline TVector4 operator -() const
+	{
+		return *this * -1;
+	}
+
 	inline TVector4 operator *( const int scalar ) const
 	{
 		return TVector4( x * scalar, y * scalar, z * scalar, w * scalar );
