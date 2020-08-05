@@ -4,6 +4,7 @@
 #include "glLightManager.h"
 #include "Renderer/IRenderer.h"
 #include "Math/Vector4.hpp"
+#include "Math/Degree.h"
 
 std::shared_ptr<IRenderer> _renderer;
 #define renderer _renderer

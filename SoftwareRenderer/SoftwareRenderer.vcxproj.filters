@@ -273,6 +273,12 @@
     <ClInclude Include="Scene\gl\glLightManager.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
+    <ClInclude Include="Math\Radian.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Degree.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -446,6 +452,12 @@
     </ClCompile>
     <ClCompile Include="Scene\gl\glLightManager.cpp">
       <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Radian.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Degree.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

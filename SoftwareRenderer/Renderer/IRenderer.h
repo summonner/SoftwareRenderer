@@ -7,6 +7,7 @@
 #include "CullFace/CullFaceComponent.h"
 #include "Lighting/LightingComponent.h"
 
+class Degree;
 class IRenderer abstract
 {
 public:
@@ -21,8 +22,6 @@ public:
 		TriangleFan,
 		Quads,
 	};
-
-	using Degree = float;
 
 public:
 	IRenderer( int width, int height )

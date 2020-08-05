@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "glLightManager.h"
 #include "Renderer/Lighting/Light.h"
+#include "Math/Radian.h"
 using namespace Renderer;
 
 glLightManager::glLightManager()
@@ -42,7 +43,7 @@ void glLightManager::Set( GLenum light, GLenum pname, const GLfloat* params )
 		lights[i]->exponent = AsFloat( params );
 		break;
 	case GL_SPOT_CUTOFF:
-		lights[i]->cosCutoff = cos( AsFloat( params ) / 180.f * PI );
+		lights[i]->cosCutoff = cos( Radian( AsFloat( params ) ) );
 		break;
 	case GL_CONSTANT_ATTENUATION:
 		lights[i]->attenuation.x = AsFloat( params );

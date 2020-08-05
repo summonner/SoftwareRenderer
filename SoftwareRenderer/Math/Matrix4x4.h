@@ -2,8 +2,7 @@
 #include "framework.h"
 #include "Vector3.hpp"
 #include "Vector4.hpp"
-
-using Radian = float;
+#include "Radian.h"
 
 class Matrix4x4 final
 {

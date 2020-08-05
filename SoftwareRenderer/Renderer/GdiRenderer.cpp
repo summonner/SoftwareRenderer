@@ -6,6 +6,7 @@
 #include "Rasterizer/RasterizedPixel.h"
 #include "Rasterizer/DerivativeTexcoord.h"
 #include "Math/Vector3.hpp"
+#include "Math/Degree.h"
 
 namespace Renderer
 {
@@ -135,7 +136,7 @@ namespace Renderer
 
 	void GdiRenderer::Rotate( Degree angle, float x, float y, float z )
 	{
-		const auto rotate = Matrix4x4::Rotate( angle * PI / 180, Vector3( x, y, z ) );
+		const auto rotate = Matrix4x4::Rotate( angle, Vector3( x, y, z ) );
 		transform = transform * rotate;
 		invTransform = rotate.Transpose() * invTransform;
 	}

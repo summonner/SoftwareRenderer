@@ -7,6 +7,7 @@
 #include "Time.h"
 #include "Scene/IScene.h"
 #include "SceneMenu.h"
+#include "Math/Degree.h"
 
 #define MAX_LOADSTRING 100
 #define WIDTH 800
