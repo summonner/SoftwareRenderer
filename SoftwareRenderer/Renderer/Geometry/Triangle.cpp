@@ -54,7 +54,7 @@ namespace Renderer
 		{
 			if ( vertices[i].screen != vertices[0].screen )
 			{
-				return i;
+				return (int)i;
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace Renderer
 			const auto ac = vertices[i].screen - vertices[0].screen;
 			if ( ab.Area( ac ) != 0 )
 			{
-				return i;
+				return (int)i;
 			}
 		}
 
