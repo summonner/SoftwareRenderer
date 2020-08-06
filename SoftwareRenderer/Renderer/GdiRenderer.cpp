@@ -96,6 +96,23 @@ namespace Renderer
 		vertices.clear();
 	}
 
+	void GdiRenderer::Draw( const DrawMode mode, const std::vector<Vertex> inputVertices )
+	{
+		Begin( mode );
+		vertices.reserve( inputVertices.size() );
+		std::transform( inputVertices.begin(), inputVertices.end(), std::back_inserter( vertices ),
+			[this]( const Vertex& v ) { return TransformVertex( v ); } );
+//			std::bind( &GdiRenderer::TransformVertex, *this, std::placeholders::_1 ) );
+		End();
+	}
+
+	Vertex GdiRenderer::TransformVertex( Vertex v ) const
+	{
+		v.position = transform * v.position;
+		v.normal = Vector4( v.normal, 0 ) * invTransform;
+		return v;
+	}
+
 	void GdiRenderer::Color( float r, float g, float b, float a )
 	{
 		temp.color = Vector4( r, g, b, a );
@@ -113,13 +130,10 @@ namespace Renderer
 
 	void GdiRenderer::AddVertex( float x, float y, float z )
 	{
-		Vector4 v( x, y, z, 1.f );
-		auto t = transform * v;
-
-		auto copy = temp;
-		copy.position = t;
-		copy.normal = Vector4( temp.normal, 0 ) * invTransform;
-		vertices.push_back( copy );
+		temp.position = Vector4( x, y, z, 1.f );
+		
+		const auto transformed = TransformVertex( temp );
+		vertices.push_back( transformed );
 	}
 
 	void GdiRenderer::LoadIdentity()

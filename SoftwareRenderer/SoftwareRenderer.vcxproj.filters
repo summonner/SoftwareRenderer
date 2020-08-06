@@ -279,6 +279,15 @@
     <ClInclude Include="Math\Degree.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson45.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glBuffer.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glBufferManager.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -458,6 +467,15 @@
     </ClCompile>
     <ClCompile Include="Math\Degree.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glBuffer.cpp">
+      <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glBufferManager.cpp">
+      <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -21,7 +21,7 @@ public:
 	void Generate( int num, GLuint* outHandles );
 	void Delete( GLuint handle );
 	std::shared_ptr<ITexture> Bind( GLuint handle );
-	void SetImage( GLint level, GLint internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels );
+	std::shared_ptr<ITexture> SetImage( GLint level, GLint internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels );
 
 	void SetWrapModeS( GLint param );
 	void SetWrapModeT( GLint param );

@@ -16,11 +16,6 @@ namespace Renderer
 
 	void TextureComponent::Bind( std::shared_ptr<const ITexture> texture )
 	{
-		if ( enabled == false )
-		{
-			return;
-		}
-
 		this->texture = texture;
 	}
 

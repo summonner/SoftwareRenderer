@@ -2,6 +2,7 @@
 #include "NeHeSample.h"
 #include "ILesson.h"
 #include "../gl/glAdapter.h"
+#include "Time.h"
 
 NeHeSample::NeHeSample( std::shared_ptr<IRenderer> renderer, std::unique_ptr<NeHe::ILesson> lesson )
 	: lesson( std::move( lesson ) )
@@ -18,6 +19,7 @@ NeHeSample::~NeHeSample()
 
 void NeHeSample::Update( const Time& time )
 {
+	lesson->Update( (DWORD)(time.GetDeltaTime() * 1000) );
 }
 
 void NeHeSample::Render( std::shared_ptr<IRenderer> renderer ) const

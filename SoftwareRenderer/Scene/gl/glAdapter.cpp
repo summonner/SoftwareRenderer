@@ -2,6 +2,7 @@
 #include "glAdapter.h"
 #include "glTextureManager.h"
 #include "glLightManager.h"
+#include "glBufferManager.h"
 #include "Renderer/IRenderer.h"
 #include "Math/Vector4.hpp"
 #include "Math/Degree.h"
@@ -10,6 +11,7 @@ std::shared_ptr<IRenderer> _renderer;
 #define renderer _renderer
 glTextureManager textureManager;
 glLightManager lightManager;
+glBufferManager bufferManager;
 
 void glEnable( GLenum cap, bool enable )
 {
@@ -123,21 +125,21 @@ WINGDIAPI void APIENTRY glScalef( GLfloat x, GLfloat y, GLfloat z )
 	renderer->Scale( x, y, z );
 }
 
+static const Dictionary<GLenum, IRenderer::DrawMode> drawModeTable
+{
+	{ GL_POINTS, IRenderer::DrawMode::Points },
+	{ GL_LINES, IRenderer::DrawMode::Lines },
+	{ GL_LINE_STRIP, IRenderer::DrawMode::LineStrip },
+	{ GL_LINE_LOOP, IRenderer::DrawMode::LineLoop },
+	{ GL_TRIANGLES, IRenderer::DrawMode::Triangles },
+	{ GL_TRIANGLE_STRIP, IRenderer::DrawMode::TriangleFan },
+	{ GL_TRIANGLE_FAN, IRenderer::DrawMode::TriangleFan },
+	{ GL_QUADS, IRenderer::DrawMode::Quads },
+};
+
 WINGDIAPI void APIENTRY glBegin( GLenum mode )
 {
-	static const Dictionary<GLenum, IRenderer::DrawMode> table
-	{
-		{ GL_POINTS, IRenderer::DrawMode::Points },
-		{ GL_LINES, IRenderer::DrawMode::Lines },
-		{ GL_LINE_STRIP, IRenderer::DrawMode::LineStrip },
-		{ GL_LINE_LOOP, IRenderer::DrawMode::LineLoop },
-		{ GL_TRIANGLES, IRenderer::DrawMode::Triangles },
-		{ GL_TRIANGLE_STRIP, IRenderer::DrawMode::TriangleFan },
-		{ GL_TRIANGLE_FAN, IRenderer::DrawMode::TriangleFan },
-		{ GL_QUADS, IRenderer::DrawMode::Quads },
-	};
-
-	renderer->Begin( table[mode] );
+	renderer->Begin( drawModeTable[mode] );
 }
 
 WINGDIAPI void APIENTRY glColor3f( GLfloat red, GLfloat green, GLfloat blue )
@@ -183,7 +185,8 @@ WINGDIAPI void APIENTRY glBindTexture( GLenum target, GLuint texture )
 
 WINGDIAPI void APIENTRY glTexImage2D( GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels )
 {
-	textureManager.SetImage( level, internalformat, width, height, format, type, pixels );
+	auto t = textureManager.SetImage( level, internalformat, width, height, format, type, pixels );
+	renderer->texture.Bind( t );
 }
 
 WINGDIAPI void APIENTRY glTexParameteri( GLenum target, GLenum pname, GLint param )
@@ -255,11 +258,48 @@ WINGDIAPI void APIENTRY glFrontFace( GLenum mode )
 	renderer->cullFace.SetFrontFace( table[mode] );
 }
 
+WINGDIAPI void APIENTRY glShadeModel( GLenum mode )
+{
+	// TODO
+}
+
+WINGDIAPI void APIENTRY glHint( GLenum target, GLenum mode )
+{
+	// Not Implement
+}
 
 WINGDIAPI void APIENTRY glLightfv( GLenum light, GLenum pname, const GLfloat *params )
 {
 	lightManager.Set( light, pname, params );
 }
+
+
+WINGDIAPI void APIENTRY glVertexPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
+{
+	bufferManager.vertices = std::make_unique<glBuffer>( size, type, stride, pointer );
+}
+
+WINGDIAPI void APIENTRY glTexCoordPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *pointer ) 
+{
+	bufferManager.texcoords = std::make_unique<glBuffer>( size, type, stride, pointer );
+}
+
+WINGDIAPI void APIENTRY glDrawArrays( GLenum mode, GLint first, GLsizei count )
+{
+	const auto vertices = bufferManager.Build( mode, first, count );
+	renderer->Draw( drawModeTable[mode], vertices );
+}
+
+WINGDIAPI void APIENTRY glEnableClientState( GLenum array )
+{
+
+}
+
+WINGDIAPI void APIENTRY glDisableClientState( GLenum array ) 
+{
+
+}
+
 
 int APIENTRY gluBuild2DMipmaps(
 	GLenum      target,

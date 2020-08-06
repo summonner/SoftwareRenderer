@@ -155,8 +155,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			GetClientRect( hWnd, &rect );
 			renderer.reset( new Renderer::GdiRenderer( hWnd, rect.right, rect.bottom ) );
 			renderer->Viewport( 0, 0, rect.right, rect.bottom );
-			renderer->Perspective( 45.f, (float)rect.right / (float)rect.bottom, 0.1f, 100.f );
-            scene = SceneMenu::Select( renderer, hWnd, ID_SCENE_DEFAULT );
+			renderer->Perspective( 45.f, (float)rect.right / (float)rect.bottom, 0.1f, 1000.f );
+            scene = SceneMenu::Select( renderer, hWnd );
 			break;
 
 		case WM_COMMAND:

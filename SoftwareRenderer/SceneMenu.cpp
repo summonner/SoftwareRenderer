@@ -4,6 +4,12 @@
 #include "Scene/SceneFactory.h"
 
 UINT SceneMenu::currentSelected = 0;
+
+std::unique_ptr<IScene> SceneMenu::Select( std::shared_ptr<IRenderer> renderer, HWND hWnd )
+{
+	return Select( renderer, hWnd, SceneFactory::defaultScene );
+}
+
 std::unique_ptr<IScene> SceneMenu::Select( std::shared_ptr<IRenderer> renderer, HWND hWnd, UINT resourceId )
 {
     if ( currentSelected == resourceId )
@@ -18,12 +24,12 @@ std::unique_ptr<IScene> SceneMenu::Select( std::shared_ptr<IRenderer> renderer, 
 
 void SceneMenu::CheckMenuItem( HWND hWnd, UINT resourceId )
 {
-    auto hMenu = GetMenu( hWnd );
-    auto hScene = GetSubMenu( hMenu, 2 );
-    auto hNeHe = GetSubMenu( hScene, 1 );
+    const auto hMenu = GetMenu( hWnd );
+    const auto hScene = GetSubMenu( hMenu, 2 );
+    const auto hNeHe = GetSubMenu( hScene, 1 );
 
-    auto first = ID_SCENE_NEHE;
-    auto last = ID_NEHE_LESSON8;
+    const auto first = SceneFactory::sceneRange.first;
+    const auto last = SceneFactory::sceneRange.second;
     ::CheckMenuRadioItem( hScene, first, last, resourceId, MF_BYCOMMAND );
     ::CheckMenuRadioItem( hNeHe, first, last, resourceId, MF_BYCOMMAND );
 }

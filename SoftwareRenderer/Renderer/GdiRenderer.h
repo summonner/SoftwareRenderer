@@ -33,6 +33,8 @@ namespace Renderer
 		void Normal( float x, float y, float z ) override;
 		void AddVertex( float x, float y, float z ) override;
 
+		void Draw( const DrawMode mode, const std::vector<Vertex> vertices ) override;
+
 		void LoadIdentity() override;
 		void Translate( float x, float y, float z ) override;
 		void Rotate( Degree angle, float x, float y, float z ) override;
@@ -44,6 +46,7 @@ namespace Renderer
 		void Ortho( float left, float right, float top, float bottom, float near, float far ) override;
 
 	private:
+		Vertex TransformVertex( Vertex v ) const;
 
 	private:
 		const HWND hWnd;

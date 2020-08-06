@@ -5,6 +5,7 @@
 #include "TriangleGenerator.h"
 #include "QuadGenerator.h"
 #include "Renderer/Geometry/IGeometry.h"
+#include "Renderer/Vertex.h"
 
 namespace Renderer
 {
@@ -36,7 +37,7 @@ namespace Renderer
 	IGeometryList GeometryGenerator::Generate( const VertexBuffer& vertices )
 	{
 		IGeometryList geometries;
-		if ( generator != nullptr )
+		if ( generator != nullptr && vertices.size() > 0 )
 		{
 			generator( vertices, geometries );
 		}

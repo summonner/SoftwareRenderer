@@ -22,6 +22,8 @@ private:
 	void Quad() const;
 	void Cube() const;
 
+	void PointerTest() const;
+
 private:
 	std::shared_ptr<Renderer::Texture2D> texture;
 	std::shared_ptr<Renderer::Light> light;

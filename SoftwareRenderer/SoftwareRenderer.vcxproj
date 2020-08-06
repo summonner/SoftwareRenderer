@@ -211,10 +211,13 @@
     <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="Scene\gl\AUX_RGBImageRec.h" />
     <ClInclude Include="Scene\gl\glAdapter.h" />
+    <ClInclude Include="Scene\gl\glBuffer.h" />
+    <ClInclude Include="Scene\gl\glBufferManager.h" />
     <ClInclude Include="Scene\gl\glLightManager.h" />
     <ClInclude Include="Scene\gl\glTextureManager.h" />
     <ClInclude Include="Scene\IScene.h" />
     <ClInclude Include="Scene\NeHeSamples\ILesson.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson45.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson6.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson8.h" />
     <ClInclude Include="Scene\NeHeSamples\LessonList.h" />
@@ -279,9 +282,12 @@
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="Scene\gl\AUX_RGBImageRec.cpp" />
     <ClCompile Include="Scene\gl\glAdapter.cpp" />
+    <ClCompile Include="Scene\gl\glBuffer.cpp" />
+    <ClCompile Include="Scene\gl\glBufferManager.cpp" />
     <ClCompile Include="Scene\gl\glLightManager.cpp" />
     <ClCompile Include="Scene\gl\glTextureManager.cpp" />
     <ClCompile Include="Scene\NeHeSamples\ILesson.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson6.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson8.cpp" />
     <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp" />

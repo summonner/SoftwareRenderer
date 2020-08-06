@@ -22,10 +22,12 @@
     <ClCompile Include="..\SoftwareRenderer\Renderer\PixelIterator.cpp" />
     <ClCompile Include="..\SoftwareRenderer\Scene\gl\AUX_RGBImageRec.cpp" />
     <ClCompile Include="..\SoftwareRenderer\Util\Bitmap.cpp" />
-    <ClCompile Include="Lesson8.cpp" />
+    <ClCompile Include="Lesson45.cpp" />
+    <ClCompile Include="NeHeGL.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl\glaux.h" />
+    <ClInclude Include="NeHeGL.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

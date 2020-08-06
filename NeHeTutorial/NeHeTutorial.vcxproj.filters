@@ -27,12 +27,18 @@
     <ClCompile Include="..\SoftwareRenderer\Scene\gl\AUX_RGBImageRec.cpp">
       <Filter>SoftwareRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="Lesson8.cpp">
+    <ClCompile Include="Lesson45.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="NeHeGL.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl\glaux.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="NeHeGL.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

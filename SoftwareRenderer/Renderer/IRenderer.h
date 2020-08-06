@@ -7,6 +7,11 @@
 #include "CullFace/CullFaceComponent.h"
 #include "Lighting/LightingComponent.h"
 
+namespace Renderer
+{
+	class Vertex;
+}
+
 class Degree;
 class IRenderer abstract
 {
@@ -41,6 +46,8 @@ public:
 	virtual void TexCoord( float u, float v ) abstract;
 	virtual void Normal( float x, float y, float z ) abstract;
 	virtual void AddVertex( float x, float y, float z ) abstract;
+
+	virtual void Draw( const DrawMode mode, const std::vector<Renderer::Vertex> vertices ) abstract;
 
 	virtual void LoadIdentity() abstract;
 	virtual void Translate( float x, float y, float z ) abstract;

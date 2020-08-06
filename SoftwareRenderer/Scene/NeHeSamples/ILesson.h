@@ -11,6 +11,7 @@ namespace NeHe
 		virtual int CleanGL( GLvoid ) abstract;
 		virtual int DrawGLScene( GLvoid ) abstract;
 		virtual int InitGL( GLvoid ) abstract;
+		virtual void Update( DWORD milliseconds ) {};
 	};
 
 	AUX_RGBImageRec* LoadBMP( LPCSTR filePath );

@@ -52,15 +52,17 @@ std::shared_ptr<ITexture> glTextureManager::Bind( GLuint handle )
 	return textures[current];
 }
 
-void glTextureManager::SetImage( GLint level, GLint internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels )
+std::shared_ptr<ITexture> glTextureManager::SetImage( GLint level, GLint internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels )
 {
 	if ( current == 0 )
 	{
-		return;
+		return nullptr;
 	}
 
 	glImageSource source( width, height, format, type, pixels );
 	textures[current].reset( new Renderer::Texture2D( source ) );
+
+	return textures[current];
 }
 
 void glTextureManager::SetWrapModeS( GLint param )

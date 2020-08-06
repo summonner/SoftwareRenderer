@@ -6,6 +6,8 @@ class IRenderer;
 class SceneFactory final abstract
 {
 public:
+	static const UINT defaultScene;
+	static const std::pair<UINT, UINT> sceneRange;
 	static std::unique_ptr<IScene> Create( std::shared_ptr<IRenderer> renderer, UINT resourceId );
 
 private:

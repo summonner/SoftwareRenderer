@@ -53,10 +53,57 @@ void SampleScene::DrawScene() const
 	//Triangle();
 	//Quad();
 	Cube();
+//	PointerTest();
 
 	glDisable( GL_DEPTH_TEST );
 	glEnable( GL_BLEND );
 	glColor4f( 1, 1, 1, 0.5f );
+}
+
+void SampleScene::PointerTest() const
+{
+	const float v[]
+	{
+		-1.0f, -1.0f, 1.0f,		0.0f, 0.0f,
+		1.0f, -1.0f, 1.0f,		1.0f, 0.0f,
+		1.0f, 1.0f, 1.0f,		1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,		0.0f, 1.0f,
+
+		-1.0f, -1.0f, -1.0f,	1.0f, 0.0f,
+		-1.0f, 1.0f, -1.0f,		1.0f, 1.0f,
+		1.0f, 1.0f, -1.0f,		0.0f, 1.0f,
+		1.0f, -1.0f, -1.0f,		0.0f, 0.0f,
+
+		-1.0f, 1.0f, -1.0f,		0.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,		0.0f, 0.0f,
+		1.0f, 1.0f, 1.0f,		1.0f, 0.0f,
+		1.0f, 1.0f, -1.0f,		1.0f, 1.0f,
+
+		-1.0f, -1.0f, -1.0f,	1.0f, 1.0f,
+		1.0f, -1.0f, -1.0f,		0.0f, 1.0f,
+		1.0f, -1.0f, 1.0f,		0.0f, 0.0f,
+		-1.0f, -1.0f, 1.0f,		1.0f, 0.0f,
+
+		1.0f, -1.0f, -1.0f,		1.0f, 0.0f,
+		1.0f, 1.0f, -1.0f,		1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,		0.0f, 1.0f,
+		1.0f, -1.0f, 1.0f,		0.0f, 0.0f,
+
+		-1.0f, -1.0f, -1.0f,	0.0f, 0.0f,
+		-1.0f, -1.0f, 1.0f,		1.0f, 0.0f,
+		-1.0f, 1.0f, 1.0f,		1.0f, 1.0f,
+		-1.0f, 1.0f, -1.0f,		0.0f, 1.0f,
+	};
+
+
+	glLoadIdentity();
+	glTranslatef( 0.0f, 0.0f, -5.f );
+	glRotatef( x * 90.f, 1.0f, 0.0f, 0.0f );
+	glRotatef( x * 90.f, 0.0f, 1.0f, 0.0f );
+	glBindTexture( GL_TEXTURE_2D, texture );
+	glVertexPointer( 3, GL_FLOAT, 2 * 4, v );
+	glTexCoordPointer( 2, GL_FLOAT, 3 * 4, v + 3 );
+	glDrawArrays( GL_QUADS, 0, 6 * 4 );
 }
 
 void SampleScene::Floor() const

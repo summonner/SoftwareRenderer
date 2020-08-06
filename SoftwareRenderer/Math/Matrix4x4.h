@@ -90,9 +90,9 @@ public:
 		auto w = v.Normalize();
 
 		return Matrix4x4(
-			w.x * w.x * t + c,			w.x * w.y * t + w.z * s,	w.x * w.z * t - w.y * s,	0.0f,
-			w.y * w.x * t - w.z * s,	w.y * w.y * t + c,			w.y * w.z * t + w.x * s,	0.0f,
-			w.z * w.x * t + w.y * s,	w.z * w.y * t - w.x * s,	w.z * w.z * t + c,			0.0f,
+			w.x * w.x * t + c,			w.x * w.y * t - w.z * s,	w.x * w.z * t + w.y * s,	0.0f,
+			w.y * w.x * t + w.z * s,	w.y * w.y * t + c,			w.y * w.z * t - w.x * s,	0.0f,
+			w.z * w.x * t - w.y * s,	w.z * w.y * t + w.x * s,	w.z * w.z * t + c,			0.0f,
 			0.0f, 0.0f, 0.0f, 1.0f
 		);
 	}
