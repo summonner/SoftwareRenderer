@@ -1,6 +1,5 @@
 #include "framework.h"
 #include "glMeshBuilder.h"
-#include "glBuffer.h"
 using namespace Renderer;
 
 const Dictionary<GLenum, DrawMode> glMeshBuilder::table
@@ -58,22 +57,22 @@ void glMeshBuilder::Vertex( GLfloat x, GLfloat y, GLfloat z )
 
 void glMeshBuilder::Color( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.colors = std::make_unique<glBuffer>( size, type, stride, pointer );
+	buffer.colors = std::make_unique<glBuffer<float, Vector4>>( size, type, stride, pointer, Vector4( 0, 0, 0, 1 ) );
 }
 
 void glMeshBuilder::Texcoord( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.texcoords = std::make_unique<glBuffer>( size, type, stride, pointer );
+	buffer.texcoords = std::make_unique<glBuffer<float, Vector2>>( size, type, stride, pointer );
 }
 
 void glMeshBuilder::Normal( GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.normals = std::make_unique<glBuffer>( 3, type, stride, pointer );
+	buffer.normals = std::make_unique<glBuffer<float, Vector3>>( 3, type, stride, pointer );
 }
 
 void glMeshBuilder::Vertex( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.vertices = std::make_unique<glBuffer>( size, type, stride, pointer );
+	buffer.vertices = std::make_unique<glBuffer<float, Vector4>>( size, type, stride, pointer, Vector4( 0, 0, 0, 1 ) );
 }
 
 Renderer::Mesh glMeshBuilder::Build( GLenum mode, GLint first, GLsizei count )
@@ -91,6 +90,6 @@ Renderer::Mesh glMeshBuilder::Build( GLenum mode, GLint first, GLsizei count )
 
 Renderer::Mesh glMeshBuilder::Build( GLenum mode, GLsizei count, GLenum type, const GLvoid* indices )
 {
-	const auto inputs = glBuffer( 1, type, 0, indices );
+	const auto inputs = glBuffer<int, int>( 1, type, 0, indices );
 	return Mesh( table[mode], std::move( vertices ) );
 }

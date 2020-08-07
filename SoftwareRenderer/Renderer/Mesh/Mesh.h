@@ -7,6 +7,7 @@ namespace Renderer
 	class Vertex;
 	class Mesh final
 	{
+		using IndexType = unsigned short;
 	public:
 		enum class DrawMode
 		{
@@ -23,8 +24,8 @@ namespace Renderer
 	public:
 		Mesh( DrawMode mode, const std::vector<Vertex>& vertices );
 		Mesh( DrawMode mode, std::vector<Vertex>&& vertices );
-		Mesh( DrawMode mode, const std::vector<Vertex>& vertices, const std::vector<int>& indices );
-		Mesh( DrawMode mode, std::vector<Vertex>&& vertices, std::vector<int>&& indices );
+		Mesh( DrawMode mode, const std::vector<Vertex>& vertices, const std::vector<IndexType>& indices );
+		Mesh( DrawMode mode, std::vector<Vertex>&& vertices, std::vector<IndexType>&& indices );
 		~Mesh();
 
 		inline size_t size() const
@@ -51,7 +52,7 @@ namespace Renderer
 
 	private:
 		const std::vector<Vertex> vertices;
-		const std::vector<int> indices;
+		const std::vector<IndexType> indices;
 
 		const std::function<size_t( const Mesh& )> sizeOp;
 		size_t GetNumVertices() const;

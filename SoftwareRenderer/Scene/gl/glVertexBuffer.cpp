@@ -4,18 +4,18 @@
 Renderer::Vertex glVertexBuffer::operator []( int i ) const
 {
 	Renderer::Vertex v;
-	v.position = vertices->GetVector4( i );
+	v.position = (*vertices)[i];
 	if ( texcoords != nullptr )
 	{
-		v.texcoord = texcoords->GetVector2( i );
+		v.texcoord = (*texcoords)[i];
 	}
 	if ( colors != nullptr )
 	{
-		v.color = colors->GetVector4( i );
+		v.color = (*colors)[i];
 	}
 	if ( normals != nullptr )
 	{
-		v.normal = normals->GetVector4( i );
+		v.normal = (*normals)[i];
 	}
 	return v;
 }

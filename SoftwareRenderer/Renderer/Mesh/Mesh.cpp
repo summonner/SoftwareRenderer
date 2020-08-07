@@ -4,16 +4,16 @@
 namespace Renderer
 {
 	Mesh::Mesh( const DrawMode mode, const std::vector<Vertex>& vertices )
-		: Mesh( mode, vertices, std::vector<int>( 0 ) )
+		: Mesh( mode, vertices, std::vector<IndexType>( 0 ) )
 	{
 	}
 
 	Mesh::Mesh( const DrawMode mode, std::vector<Vertex>&& vertices )
-		: Mesh( mode, std::move( vertices ), std::vector<int>( 0 ) )
+		: Mesh( mode, std::move( vertices ), std::vector<IndexType>( 0 ) )
 	{
 	}
 
-	Mesh::Mesh( const DrawMode mode, const std::vector<Vertex>& vertices, const std::vector<int>& indices )
+	Mesh::Mesh( const DrawMode mode, const std::vector<Vertex>& vertices, const std::vector<IndexType>& indices )
 		: drawMode( mode )
 		, vertices( vertices )
 		, indices( indices )
@@ -22,7 +22,7 @@ namespace Renderer
 	{
 	}
 
-	Mesh::Mesh( const DrawMode mode, std::vector<Vertex>&& vertices, std::vector<int>&& indices )
+	Mesh::Mesh( const DrawMode mode, std::vector<Vertex>&& vertices, std::vector<IndexType>&& indices )
 		: drawMode( mode )
 		, vertices( std::move( vertices ) )
 		, indices( std::move( indices ) )

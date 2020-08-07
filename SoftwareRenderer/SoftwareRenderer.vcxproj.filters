@@ -285,9 +285,6 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson45.h">
       <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\gl\glBuffer.h">
-      <Filter>Scene\gl</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\gl\glBridge.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
@@ -301,6 +298,9 @@
       <Filter>Scene\gl</Filter>
     </ClInclude>
     <ClInclude Include="Scene\gl\glVertexBuffer.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glBuffer.hpp">
       <Filter>Scene\gl</Filter>
     </ClInclude>
   </ItemGroup>
@@ -485,9 +485,6 @@
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp">
       <Filter>Scene\NeHeSamples</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\gl\glBuffer.cpp">
-      <Filter>Scene\gl</Filter>
     </ClCompile>
     <ClCompile Include="Scene\gl\glBridge.cpp">
       <Filter>Scene\gl</Filter>
