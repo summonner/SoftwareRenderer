@@ -2,6 +2,7 @@
 #include "glBridge.h"
 
 glBridge::glBridge()
+	: renderer( nullptr )
 {
 }
 
