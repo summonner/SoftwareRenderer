@@ -51,12 +51,7 @@ namespace Renderer
 		backBuffer->BitBlt( dc );
 	}
 
-	void GdiRenderer::Begin( DrawMode mode )
-	{
-		generator.Begin( mode );
-	}
-
-	void GdiRenderer::End()
+	void GdiRenderer::Render()
 	{
 		for ( auto& vertex : vertices )
 		{
@@ -98,12 +93,12 @@ namespace Renderer
 
 	void GdiRenderer::Draw( const Mesh& mesh )
 	{
-		Begin( mesh.drawMode );
+		generator.Begin( mesh.drawMode );
 		vertices.reserve( mesh.size() );
 		std::transform( mesh.begin(), mesh.end(), std::back_inserter( vertices ),
 			[this]( const Vertex& v ) { return TransformVertex( v ); } );
 //			std::bind( &GdiRenderer::TransformVertex, *this, std::placeholders::_1 ) );
-		End();
+		Render();
 	}
 
 	Vertex GdiRenderer::TransformVertex( Vertex v ) const
@@ -111,29 +106,6 @@ namespace Renderer
 		v.position = transform * v.position;
 		v.normal = Vector4( v.normal, 0 ) * invTransform;
 		return v;
-	}
-
-	void GdiRenderer::Color( float r, float g, float b, float a )
-	{
-		temp.color = Vector4( r, g, b, a );
-	}
-
-	void GdiRenderer::TexCoord( float u, float v )
-	{
-		temp.texcoord = Vector2( u, v );
-	}
-
-	void GdiRenderer::Normal( float x, float y, float z )
-	{
-		temp.normal = Vector3( x, y, z );
-	}
-
-	void GdiRenderer::AddVertex( float x, float y, float z )
-	{
-		temp.position = Vector4( x, y, z, 1.f );
-		
-		const auto transformed = TransformVertex( temp );
-		vertices.push_back( transformed );
 	}
 
 	void GdiRenderer::LoadIdentity()

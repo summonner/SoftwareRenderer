@@ -29,13 +29,6 @@ public:
 	virtual void SetClearColor( float r, float g, float b, float a ) abstract;
 	virtual void Present() abstract;
 
-	virtual void Begin( DrawMode mode ) abstract;
-	virtual void End() abstract;
-	virtual void Color( float r, float g, float b, float a ) abstract;
-	virtual void TexCoord( float u, float v ) abstract;
-	virtual void Normal( float x, float y, float z ) abstract;
-	virtual void AddVertex( float x, float y, float z ) abstract;
-
 	virtual void Draw( const Renderer::Mesh& mesh ) abstract;
 
 	virtual void LoadIdentity() abstract;

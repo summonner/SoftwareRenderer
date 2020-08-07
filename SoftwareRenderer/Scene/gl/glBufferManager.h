@@ -12,5 +12,7 @@ public:
 
 	std::unique_ptr<glBuffer> vertices;
 	std::unique_ptr<glBuffer> texcoords;
+	std::unique_ptr<glBuffer> colors;
+	std::unique_ptr<glBuffer> normals;
 };
 

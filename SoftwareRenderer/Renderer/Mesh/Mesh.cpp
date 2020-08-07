@@ -4,11 +4,12 @@
 namespace Renderer
 {
 	Mesh::Mesh( const DrawMode mode, const std::vector<Vertex>& vertices )
-		: drawMode( mode )
-		, vertices( vertices )
-		, indices()
-		, sizeOp( &Mesh::GetNumVertices )
-		, indexerOp( &Mesh::GetVertex )
+		: Mesh( mode, vertices, std::vector<int>( 0 ) )
+	{
+	}
+
+	Mesh::Mesh( const DrawMode mode, std::vector<Vertex>&& vertices )
+		: Mesh( mode, std::move( vertices ), std::vector<int>( 0 ) )
 	{
 	}
 
@@ -16,6 +17,15 @@ namespace Renderer
 		: drawMode( mode )
 		, vertices( vertices )
 		, indices( indices )
+		, sizeOp( this->indices.size() > 0 ? &Mesh::GetNumIndices : &Mesh::GetNumVertices )
+		, indexerOp( this->indices.size() > 0 ? &Mesh::GetFromIndex : &Mesh::GetVertex )
+	{
+	}
+
+	Mesh::Mesh( const DrawMode mode, std::vector<Vertex>&& vertices, std::vector<int>&& indices )
+		: drawMode( mode )
+		, vertices( std::move( vertices ) )
+		, indices( std::move( indices ) )
 		, sizeOp( this->indices.size() > 0 ? &Mesh::GetNumIndices : &Mesh::GetNumVertices )
 		, indexerOp( this->indices.size() > 0 ? &Mesh::GetFromIndex : &Mesh::GetVertex )
 	{

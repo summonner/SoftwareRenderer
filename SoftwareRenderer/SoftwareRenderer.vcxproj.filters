@@ -300,6 +300,9 @@
     <ClInclude Include="Renderer\Mesh\VertexIterator.h">
       <Filter>Renderer\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\gl\glMeshBuilder.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -497,6 +500,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\Mesh\VertexIterator.cpp">
       <Filter>Renderer\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glMeshBuilder.cpp">
+      <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

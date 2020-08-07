@@ -20,7 +20,18 @@ std::vector<Renderer::Vertex> glBufferManager::Build( GLenum mode, GLint first, 
 	{
 		Renderer::Vertex v;
 		v.position = vertices->GetVector4( i );
-		v.texcoord = texcoords->GetVector2( i );
+		if ( texcoords != nullptr )
+		{
+			v.texcoord = texcoords->GetVector2( i );
+		}
+		if ( colors != nullptr )
+		{
+			v.color = colors->GetVector4( i );
+		}
+		if ( normals != nullptr )
+		{
+			v.normal = normals->GetVector4( i );
+		}
 		result.push_back( v );
 	}
 

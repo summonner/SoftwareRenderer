@@ -22,7 +22,9 @@ namespace Renderer
 
 	public:
 		Mesh( DrawMode mode, const std::vector<Vertex>& vertices );
+		Mesh( DrawMode mode, std::vector<Vertex>&& vertices );
 		Mesh( DrawMode mode, const std::vector<Vertex>& vertices, const std::vector<int>& indices );
+		Mesh( DrawMode mode, std::vector<Vertex>&& vertices, std::vector<int>&& indices );
 		~Mesh();
 
 		inline size_t size() const

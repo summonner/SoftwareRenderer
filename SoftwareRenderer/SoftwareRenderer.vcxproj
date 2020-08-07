@@ -217,6 +217,7 @@
     <ClInclude Include="Scene\gl\glBufferManager.h" />
     <ClInclude Include="Scene\gl\glLightManager.h" />
     <ClInclude Include="Scene\gl\glBridge.h" />
+    <ClInclude Include="Scene\gl\glMeshBuilder.h" />
     <ClInclude Include="Scene\gl\glTextureManager.h" />
     <ClInclude Include="Scene\IScene.h" />
     <ClInclude Include="Scene\NeHeSamples\ILesson.h" />
@@ -291,6 +292,7 @@
     <ClCompile Include="Scene\gl\glBuffer.cpp" />
     <ClCompile Include="Scene\gl\glBufferManager.cpp" />
     <ClCompile Include="Scene\gl\glLightManager.cpp" />
+    <ClCompile Include="Scene\gl\glMeshBuilder.cpp" />
     <ClCompile Include="Scene\gl\glTextureManager.cpp" />
     <ClCompile Include="Scene\NeHeSamples\ILesson.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp" />

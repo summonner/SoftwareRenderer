@@ -26,13 +26,6 @@ namespace Renderer
 		void Present() override;
 		void Present( const HDC dc );
 
-		void Begin( DrawMode mode ) override;
-		void End() override;
-		void Color( float r, float g, float b, float a ) override;
-		void TexCoord( float u, float v ) override;
-		void Normal( float x, float y, float z ) override;
-		void AddVertex( float x, float y, float z ) override;
-
 		void Draw( const Renderer::Mesh& renderer ) override;
 
 		void LoadIdentity() override;
@@ -49,6 +42,7 @@ namespace Renderer
 
 	private:
 		Vertex TransformVertex( Vertex v ) const;
+		void Render();
 
 	private:
 		const HWND hWnd;

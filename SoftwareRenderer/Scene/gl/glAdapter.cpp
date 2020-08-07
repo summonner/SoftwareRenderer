@@ -9,6 +9,7 @@ glBridge* adapter;
 #define textureManager adapter->textureManager
 #define lightManager adapter->lightManager
 #define bufferManager adapter->bufferManager
+#define meshBuilder adapter->meshBuilder
 
 void glEnable( GLenum cap, bool enable )
 {
@@ -141,37 +142,38 @@ static const Dictionary<GLenum, DrawMode> drawModeTable
 
 WINGDIAPI void APIENTRY glBegin( GLenum mode )
 {
-	renderer->Begin( drawModeTable[mode] );
+	meshBuilder.Begin( drawModeTable[mode] );
 }
 
 WINGDIAPI void APIENTRY glColor3f( GLfloat red, GLfloat green, GLfloat blue )
 {
-	renderer->Color( red, green, blue, 1.f );
+	meshBuilder.Color( red, green, blue, 1.f );
 }
 
 WINGDIAPI void APIENTRY glColor4f( GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha )
 {
-	renderer->Color( red, green, blue, alpha );
+	meshBuilder.Color( red, green, blue, alpha );
 }
 
 WINGDIAPI void APIENTRY glVertex3f( GLfloat x, GLfloat y, GLfloat z )
 {
-	renderer->AddVertex( x, y, z );
+	meshBuilder.Vertex( x, y, z );
 }
 
 WINGDIAPI void APIENTRY glTexCoord2f( GLfloat s, GLfloat t )
 {
-	renderer->TexCoord( s, t );
+	meshBuilder.Texcoord( s, t );
 }
 
 WINGDIAPI void APIENTRY glNormal3f( GLfloat nx, GLfloat ny, GLfloat nz )
 {
-	renderer->Normal( nx, ny, nz );
+	meshBuilder.Normal( nx, ny, nz );
 }
 
 WINGDIAPI void APIENTRY glEnd( void )
 {
-	renderer->End();
+	const auto mesh = meshBuilder.End();
+	renderer->Draw( mesh );
 }
 
 WINGDIAPI void APIENTRY glGenTextures( GLsizei n, GLuint *textures )
