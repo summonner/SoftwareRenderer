@@ -16,7 +16,6 @@ private:
 
 private:
 	const GLint size;
-	const GLint numCoordinates;
 	const GLenum type;
 	const GLsizei stride;
 	const BYTE* const pointer;

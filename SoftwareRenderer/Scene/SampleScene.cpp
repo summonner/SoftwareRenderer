@@ -101,8 +101,9 @@ void SampleScene::PointerTest() const
 	glRotatef( x * 90.f, 1.0f, 0.0f, 0.0f );
 	glRotatef( x * 90.f, 0.0f, 1.0f, 0.0f );
 	glBindTexture( GL_TEXTURE_2D, texture );
-	glVertexPointer( 3, GL_FLOAT, 2 * 4, v );
-	glTexCoordPointer( 2, GL_FLOAT, 3 * 4, v + 3 );
+	const auto stride = 5 * 4;
+	glVertexPointer( 3, GL_FLOAT, stride, v );
+	glTexCoordPointer( 2, GL_FLOAT, stride, v + 3 );
 	glDrawArrays( GL_QUADS, 0, 6 * 4 );
 }
 
