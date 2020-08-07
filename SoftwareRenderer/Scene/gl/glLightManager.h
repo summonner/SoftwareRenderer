@@ -18,7 +18,7 @@ public:
 private:
 	std::vector<std::shared_ptr<Renderer::Light>> lights;
 
-	const int maxLights = 8;
+	static const int maxLights = 8;
 	static int AsIndex( GLenum light );
 	static Vector4 AsVector4( const GLfloat* params );
 	static Vector3 AsVector3( const GLfloat* params );

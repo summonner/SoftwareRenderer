@@ -18,6 +18,13 @@ namespace Renderer
 	{
 	}
 
+	void DepthBuffer::Reset()
+	{
+		BaseComponent::Reset();
+		clearValue = 1.f;
+		depthFunc = DepthFunc::Type::Less;
+	}
+
 	void DepthBuffer::Clear()
 	{
 		std::fill( pixels.get(), pixels.get() + width * height, clearValue );

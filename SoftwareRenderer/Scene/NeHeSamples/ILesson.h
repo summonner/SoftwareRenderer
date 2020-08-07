@@ -8,7 +8,8 @@ namespace NeHe
 	public:
 		virtual ~ILesson() {};
 
-		virtual int CleanGL( GLvoid ) abstract;
+		virtual int CleanGL( GLvoid ) { return TRUE; };
+		virtual GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) abstract;
 		virtual int DrawGLScene( GLvoid ) abstract;
 		virtual int InitGL( GLvoid ) abstract;
 		virtual void Update( DWORD milliseconds ) {};

@@ -16,13 +16,7 @@ namespace NeHe
 	LESSON::~LESSON()
 	{
 	}
-
-	int LESSON::CleanGL( GLvoid )
-	{
-		glDeleteTextures( 3, texture );
-		return TRUE;
-	}
-
+	
 	int LESSON::LoadGLTextures()									// Load Bitmaps And Convert To Textures
 	{
 		int Status = FALSE;									// Status Indicator
@@ -79,13 +73,13 @@ namespace NeHe
 
 		glViewport( 0, 0, width, height );						// Reset The Current Viewport
 
-		//glMatrixMode( GL_PROJECTION );						// Select The Projection Matrix
+		glMatrixMode( GL_PROJECTION );						// Select The Projection Matrix
 		glLoadIdentity();									// Reset The Projection Matrix
 
-		//// Calculate The Aspect Ratio Of The Window
+		// Calculate The Aspect Ratio Of The Window
 		gluPerspective( 45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 100.0f );
 
-		//glMatrixMode( GL_MODELVIEW );							// Select The Modelview Matrix
+		glMatrixMode( GL_MODELVIEW );							// Select The Modelview Matrix
 		glLoadIdentity();									// Reset The Modelview Matrix
 	}
 

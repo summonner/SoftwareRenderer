@@ -17,24 +17,24 @@ const Dictionary<UINT, SceneFactory::CreateFunc> SceneFactory::table(
 	{ ID_NEHE_LESSON45, NeHeLesson<NeHe::Lesson45> },
 }, ReturnNullPtr );
 
-std::unique_ptr<IScene> SceneFactory::Create( std::shared_ptr<IRenderer> renderer, UINT resourceId )
+std::unique_ptr<IScene> SceneFactory::Create( UINT resourceId )
 {
-	return table[resourceId]( renderer );
+	return table[resourceId]();
 }
 
 template<typename T>
-std::unique_ptr<IScene> SceneFactory::Create( std::shared_ptr<IRenderer> renderer )
+std::unique_ptr<IScene> SceneFactory::Create()
 {
-	return std::make_unique<T>( renderer );
+	return std::make_unique<T>();
 }
 
 template<class Lesson>
-std::unique_ptr<IScene> SceneFactory::NeHeLesson( std::shared_ptr<IRenderer> renderer )
+std::unique_ptr<IScene> SceneFactory::NeHeLesson()
 {
-	return std::make_unique<NeHeSample>( renderer, std::make_unique<Lesson>() );
+	return std::make_unique<NeHeSample>( std::make_unique<Lesson>() );
 }
 
-std::unique_ptr<IScene> SceneFactory::ReturnNullPtr( std::shared_ptr<IRenderer> renderer )
+std::unique_ptr<IScene> SceneFactory::ReturnNullPtr()
 {
 	return nullptr;
 }

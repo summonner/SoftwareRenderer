@@ -10,6 +10,7 @@ namespace Renderer
 		BlendComponent();
 		~BlendComponent();
 
+		void Reset() override;
 		std::function<Vector4( const Vector4&, const Vector4& )> AsFunc() const;
 		Vector4 Apply( const Vector4& srcColor, const Vector4& dstColor ) const;
 		void SetBlendFunc( const BlendFunc::Type src, const BlendFunc::Type dst );

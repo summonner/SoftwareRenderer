@@ -19,6 +19,17 @@ namespace Renderer
 	{
 	}
 
+	void LightingComponent::Reset()
+	{
+		BaseComponent::Reset();
+		lights.clear();
+
+		ambient = Vector4( 0.2f, 0.2f, 0.2f, 1.0f );
+		localViewer = false;
+		singleColor = true;
+		twoSide = false;
+	}
+
 	void LightingComponent::Add( std::shared_ptr<const Light> light )
 	{
 		if ( const auto found = std::find( lights.begin(), lights.end(), light ); found != lights.end() )

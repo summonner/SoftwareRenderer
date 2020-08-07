@@ -214,6 +214,7 @@
     <ClInclude Include="Scene\gl\glBuffer.h" />
     <ClInclude Include="Scene\gl\glBufferManager.h" />
     <ClInclude Include="Scene\gl\glLightManager.h" />
+    <ClInclude Include="Scene\gl\glBridge.h" />
     <ClInclude Include="Scene\gl\glTextureManager.h" />
     <ClInclude Include="Scene\IScene.h" />
     <ClInclude Include="Scene\NeHeSamples\ILesson.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="Scene\gl\AUX_RGBImageRec.cpp" />
     <ClCompile Include="Scene\gl\glAdapter.cpp" />
+    <ClCompile Include="Scene\gl\glBridge.cpp" />
     <ClCompile Include="Scene\gl\glBuffer.cpp" />
     <ClCompile Include="Scene\gl\glBufferManager.cpp" />
     <ClCompile Include="Scene\gl\glLightManager.cpp" />

@@ -12,6 +12,7 @@ namespace Renderer
 		TextureComponent();
 		~TextureComponent();
 
+		void Reset() override;
 		void Bind( std::shared_ptr<const ITexture> texture );
 
 		Vector4 GetColor( const RasterizedPixel& p, const DerivativeTexcoord& derivatives ) const;

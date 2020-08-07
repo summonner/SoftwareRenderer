@@ -24,6 +24,7 @@ namespace Renderer
 		CullFaceComponent();
 		~CullFaceComponent();
 
+		void Reset() override;
 		void SetCullFace( const Cull cullFace );
 		void SetFrontFace( const Front frontFace );
 

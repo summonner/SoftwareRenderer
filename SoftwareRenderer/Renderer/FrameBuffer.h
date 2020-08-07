@@ -10,6 +10,7 @@ namespace Renderer
 		FrameBuffer( const HDC dc, const int width, const int height );
 		~FrameBuffer();
 
+		void Reset();
 		void Clear();
 		void SetClearValue( const Vector4& value );
 		void BitBlt( const HDC dc );

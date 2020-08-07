@@ -14,6 +14,12 @@ namespace Renderer
 	{
 	}
 
+	void TextureComponent::Reset()
+	{
+		BaseComponent::Reset();
+		this->texture = nullptr;
+	}
+
 	void TextureComponent::Bind( std::shared_ptr<const ITexture> texture )
 	{
 		this->texture = texture;

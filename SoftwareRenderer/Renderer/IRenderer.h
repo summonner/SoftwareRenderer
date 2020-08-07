@@ -59,6 +59,15 @@ public:
 	virtual void Perspective( Degree fovY, float aspect, float near, float far ) abstract;
 	virtual void Ortho( float left, float right, float top, float bottom, float near, float far ) abstract;
 
+	virtual void Reset()
+	{
+		depthBuffer.Reset();
+		texture.Reset();
+		cullFace.Reset();
+		lighting.Reset();
+		blender.Reset();
+	}
+
 public:
 	Renderer::TextureComponent texture;
 	Renderer::DepthBuffer depthBuffer;

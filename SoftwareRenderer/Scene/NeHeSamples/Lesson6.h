@@ -11,9 +11,9 @@ namespace NeHe
 		LESSON();
 		~LESSON() override;
 
-		int CleanGL( GLvoid ) override;
 		int DrawGLScene( GLvoid ) override;
 		int InitGL( GLvoid ) override;
+		GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) override;
 
 	private:
 		int LoadGLTextures();

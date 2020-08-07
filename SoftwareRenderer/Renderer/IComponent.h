@@ -9,6 +9,7 @@ namespace Renderer
 
 		virtual void SetEnable( const bool enable ) abstract;
 		virtual bool IsEnable() const abstract;
+		virtual void Reset() abstract;
 	};
 
 	class BaseComponent abstract : public IComponent
@@ -29,6 +30,11 @@ namespace Renderer
 		inline bool IsEnable() const override
 		{
 			return enabled;
+		}
+
+		virtual void Reset() override
+		{
+			enabled = false;
 		}
 
 	protected:

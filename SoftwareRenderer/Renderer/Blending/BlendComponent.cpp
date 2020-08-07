@@ -14,6 +14,13 @@ namespace Renderer
 	{
 	}
 
+	void BlendComponent::Reset()
+	{
+		BaseComponent::Reset();
+		srcFunc = BlendFunc::Type::One;
+		dstFunc = BlendFunc::Type::Zero;
+	}
+
 	std::function<Vector4( const Vector4&, const Vector4& )> BlendComponent::AsFunc() const
 	{
 		if ( enabled == false )

@@ -5,12 +5,12 @@
 
 UINT SceneMenu::currentSelected = 0;
 
-std::unique_ptr<IScene> SceneMenu::Select( std::shared_ptr<IRenderer> renderer, HWND hWnd )
+std::unique_ptr<IScene> SceneMenu::Select( HWND hWnd )
 {
-	return Select( renderer, hWnd, SceneFactory::defaultScene );
+	return Select( hWnd, SceneFactory::defaultScene );
 }
 
-std::unique_ptr<IScene> SceneMenu::Select( std::shared_ptr<IRenderer> renderer, HWND hWnd, UINT resourceId )
+std::unique_ptr<IScene> SceneMenu::Select( HWND hWnd, UINT resourceId )
 {
     if ( currentSelected == resourceId )
     {
@@ -19,7 +19,7 @@ std::unique_ptr<IScene> SceneMenu::Select( std::shared_ptr<IRenderer> renderer, 
 
     currentSelected = resourceId;
     CheckMenuItem( hWnd, resourceId );
-    return SceneFactory::Create( renderer, resourceId );
+    return SceneFactory::Create( resourceId );
 }
 
 void SceneMenu::CheckMenuItem( HWND hWnd, UINT resourceId )

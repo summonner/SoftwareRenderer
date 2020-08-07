@@ -13,6 +13,7 @@ namespace NeHe
 
 		int CleanGL( GLvoid ) override;
 		int DrawGLScene( GLvoid ) override;
+		GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) override;
 		int InitGL( GLvoid ) override;
 		void Update( DWORD milliseconds );
 	};

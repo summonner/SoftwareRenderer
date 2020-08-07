@@ -288,6 +288,9 @@
     <ClInclude Include="Scene\gl\glBufferManager.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\gl\glBridge.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -475,6 +478,9 @@
       <Filter>Scene\gl</Filter>
     </ClCompile>
     <ClCompile Include="Scene\gl\glBufferManager.cpp">
+      <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glBridge.cpp">
       <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>

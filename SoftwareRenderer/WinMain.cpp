@@ -154,9 +154,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			RECT rect;
 			GetClientRect( hWnd, &rect );
 			renderer.reset( new Renderer::GdiRenderer( hWnd, rect.right, rect.bottom ) );
-			renderer->Viewport( 0, 0, rect.right, rect.bottom );
-			renderer->Perspective( 45.f, (float)rect.right / (float)rect.bottom, 0.1f, 1000.f );
-            scene = SceneMenu::Select( renderer, hWnd );
+            scene = SceneMenu::Select( hWnd );
+			scene->Init( renderer );
+			scene->OnResize( renderer, rect.right, rect.bottom );
 			break;
 
 		case WM_COMMAND:
@@ -173,10 +173,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 						break;
 					default:
                         {
-                            auto newScene = SceneMenu::Select( renderer, hWnd, wmId );
+                            auto newScene = SceneMenu::Select( hWnd, wmId );
                             if ( newScene != nullptr )
                             {
                                 scene = std::move( newScene );
+								renderer->Reset();
+								scene->Init( renderer );
+
+								RECT rect;
+								GetClientRect( hWnd, &rect );
+								scene->OnResize( renderer, rect.right, rect.bottom );
                             }
                             else
                             {

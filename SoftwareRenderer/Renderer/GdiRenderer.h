@@ -45,6 +45,8 @@ namespace Renderer
 		void Perspective( Degree fovY, float aspect, float near, float far ) override;
 		void Ortho( float left, float right, float top, float bottom, float near, float far ) override;
 
+		void Reset() override;
+
 	private:
 		Vertex TransformVertex( Vertex v ) const;
 

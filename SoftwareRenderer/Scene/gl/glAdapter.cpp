@@ -1,17 +1,14 @@
 #include "framework.h"
 #include "glAdapter.h"
-#include "glTextureManager.h"
-#include "glLightManager.h"
-#include "glBufferManager.h"
-#include "Renderer/IRenderer.h"
 #include "Math/Vector4.hpp"
 #include "Math/Degree.h"
+#include "glBridge.h"
 
-std::shared_ptr<IRenderer> _renderer;
-#define renderer _renderer
-glTextureManager textureManager;
-glLightManager lightManager;
-glBufferManager bufferManager;
+glBridge* adapter;
+#define renderer adapter->renderer
+#define textureManager adapter->textureManager
+#define lightManager adapter->lightManager
+#define bufferManager adapter->bufferManager
 
 void glEnable( GLenum cap, bool enable )
 {
@@ -98,6 +95,11 @@ WINGDIAPI void APIENTRY glDepthFunc( GLenum func )
 	};
 
 	renderer->depthBuffer.SetDepthFunc( table[func] );
+}
+
+WINGDIAPI void APIENTRY glMatrixMode( GLenum mode )
+{
+	// TODO
 }
 
 WINGDIAPI void APIENTRY glViewport( GLint x, GLint y, GLsizei width, GLsizei height )

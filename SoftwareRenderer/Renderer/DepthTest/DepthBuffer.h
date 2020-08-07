@@ -11,6 +11,7 @@ namespace Renderer
 		DepthBuffer( int width, int height );
 		~DepthBuffer();
 
+		void Reset() override;
 		void Clear();
 		void SetClearValue( const float value );
 		void SetDepthFunc( const DepthFunc::Type type );

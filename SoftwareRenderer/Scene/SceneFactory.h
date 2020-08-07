@@ -8,15 +8,15 @@ class SceneFactory final abstract
 public:
 	static const UINT defaultScene;
 	static const std::pair<UINT, UINT> sceneRange;
-	static std::unique_ptr<IScene> Create( std::shared_ptr<IRenderer> renderer, UINT resourceId );
+	static std::unique_ptr<IScene> Create( UINT resourceId );
 
 private:
 	template<typename T>
-	static std::unique_ptr<IScene> Create( std::shared_ptr<IRenderer> renderer );
+	static std::unique_ptr<IScene> Create();
 	template<class Lesson>
-	static std::unique_ptr<IScene> NeHeLesson( std::shared_ptr<IRenderer> renderer );
-	static std::unique_ptr<IScene> ReturnNullPtr( std::shared_ptr<IRenderer> renderer );
+	static std::unique_ptr<IScene> NeHeLesson();
+	static std::unique_ptr<IScene> ReturnNullPtr();
 
-	using CreateFunc = std::function<std::unique_ptr<IScene>( std::shared_ptr<IRenderer> )>;
+	using CreateFunc = std::function<std::unique_ptr<IScene>( void )>;
 	static const Dictionary<UINT, CreateFunc> table;
 };

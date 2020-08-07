@@ -15,12 +15,6 @@ namespace NeHe
 	{
 	}
 
-	int LESSON::CleanGL( GLvoid )
-	{
-		glDeleteTextures( 1, texture );
-		return TRUE;
-	}
-
 	int LESSON::InitGL( GLvoid )										// All Setup For OpenGL Goes Here
 	{
 		if ( !LoadGLTextures() )								// Jump To Texture Loading Routine ( NEW )
@@ -36,6 +30,25 @@ namespace NeHe
 		glDepthFunc( GL_LEQUAL );								// The Type Of Depth Testing To Do
 		//glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );	// Really Nice Perspective Calculations
 		return TRUE;										// Initialization Went OK
+	}
+
+	GLvoid LESSON::ReSizeGLScene( GLsizei width, GLsizei height )		// Resize And Initialize The GL Window
+	{
+		if ( height == 0 )										// Prevent A Divide By Zero By
+		{
+			height = 1;										// Making Height Equal One
+		}
+
+		glViewport( 0, 0, width, height );						// Reset The Current Viewport
+
+		glMatrixMode( GL_PROJECTION );						// Select The Projection Matrix
+		glLoadIdentity();									// Reset The Projection Matrix
+
+		// Calculate The Aspect Ratio Of The Window
+		gluPerspective( 45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 100.0f );
+
+		glMatrixMode( GL_MODELVIEW );							// Select The Modelview Matrix
+		glLoadIdentity();									// Reset The Modelview Matrix
 	}
 
 	int LESSON::DrawGLScene( GLvoid )									// Here's Where We Do All The Drawing

@@ -7,32 +7,46 @@
 #include "Renderer/Texturing/TextureComponent.h"
 #include "Renderer/Blending/BlendComponent.h"
 #include "Renderer/Lighting/Light.h"
+#include "Math/Degree.h"
 
 void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> texture )
 {
-	_renderer->texture.Bind( texture );
+	adapter->renderer->texture.Bind( texture );
 }
 
-SampleScene::SampleScene( std::shared_ptr<IRenderer> renderer )
+SampleScene::SampleScene()
 	: texture( nullptr )
 	, light( new Renderer::Light() )
+	, adapter( std::make_unique<glBridge>() )
 {
 	const auto bitmap = Bitmap::Load( _T( "Data/glass.bmp" ) );
 	texture = std::make_shared<Renderer::Texture2D>( *bitmap, true );
 	texture->SetWrapMode( TextureWrapMode::MirroredRepeat, TextureWrapMode::MirroredRepeat );
 	texture->SetFilter( TextureMagFilter::Linear );
 	texture->SetFilter( TextureMinFilter::LinearMipmapLinear );
-
-	renderer->SetClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
-//	renderer->texture.SetEnable( true );
-	renderer->blender.SetBlendFunc( BlendFunc::SrcAlpha, BlendFunc::One );
-	renderer->cullFace.SetEnable( true );
-	renderer->lighting.SetEnable( true );
-	renderer->lighting.Add( light );
 }
 
 SampleScene::~SampleScene()
 {
+}
+
+void SampleScene::Init( const std::shared_ptr<IRenderer> renderer )
+{
+	adapter->Use( renderer.get(), []()
+	{
+		glClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
+		//glEnable( GL_TEXTURE_2D );
+		glBlendFunc( GL_SRC_ALPHA, GL_ONE );
+		glEnable( GL_CULL_FACE );
+		glEnable( GL_LIGHTING );
+	} );
+	renderer->lighting.Add( light );
+}
+
+void SampleScene::OnResize( const std::shared_ptr<IRenderer> renderer, const int width, const int height )
+{
+	renderer->Viewport( 0, 0, width, height );
+	renderer->Perspective( 45.f, (float)width / (float)height, 0.1f, 100.f );
 }
 
 float x = 0;
@@ -217,10 +231,8 @@ void SampleScene::Cube() const
 	glEnd();
 }
 
-void SampleScene::Render( std::shared_ptr<IRenderer> renderer ) const
+void SampleScene::Render( const std::shared_ptr<IRenderer> renderer ) const
 {
-	_renderer = renderer;
-	DrawScene();
-	_renderer = nullptr;
+	adapter->Use( renderer.get(), [this]() { SampleScene::DrawScene(); } );
 	renderer->Present();
 }

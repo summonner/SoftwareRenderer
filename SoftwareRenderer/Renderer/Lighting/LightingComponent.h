@@ -12,6 +12,7 @@ namespace Renderer
 		LightingComponent();
 		~LightingComponent();
 
+		void Reset() override;
 		void Add( std::shared_ptr<const Light> light );
 		void Remove( std::shared_ptr<const Light> light );
 		Vector4 GetColor( const Vector4& position, const Vector3& normal ) const;

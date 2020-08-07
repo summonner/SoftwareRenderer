@@ -204,4 +204,17 @@ namespace Renderer
 			0, 0, 0, 1
 		);
 	}
+
+	void GdiRenderer::Reset()
+	{
+		IRenderer::Reset();
+
+		transform = Matrix4x4::identity;
+		invTransform = Matrix4x4::identity;
+		projection = Matrix4x4::identity;
+		viewport = Matrix4x4::identity;
+
+		vertices.clear();
+		backBuffer->Reset();
+	}
 }

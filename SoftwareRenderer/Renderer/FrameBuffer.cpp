@@ -23,6 +23,11 @@ namespace Renderer
 		DeleteDC( dc );
 	}
 
+	void FrameBuffer::Reset()
+	{
+		clearValue = RGBQUAD { 0, 0, 0, 0 };
+	}
+
 	void FrameBuffer::Clear()
 	{
 		for ( auto i = 0u; i < info.biSizeImage; i += colorBytes )

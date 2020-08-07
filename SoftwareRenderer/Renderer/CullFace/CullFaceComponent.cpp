@@ -15,6 +15,13 @@ namespace Renderer
 	{
 	}
 
+	void CullFaceComponent::Reset()
+	{
+		BaseComponent::Reset();
+		cullFace = Cull::Back;
+		frontFace = Front::CCW;
+	}
+
 	void CullFaceComponent::SetCullFace( Cull cullFace )
 	{
 		this->cullFace = cullFace;
