@@ -2,7 +2,6 @@
 #include "Renderer/IRenderer.h"
 #include "glTextureManager.h"
 #include "glLightManager.h"
-#include "glBufferManager.h"
 #include "glMeshBuilder.h"
 
 class glBridge;
@@ -19,6 +18,5 @@ public:
 	IRenderer* renderer;
 	glTextureManager textureManager;
 	glLightManager lightManager;
-	glBufferManager bufferManager;
 	glMeshBuilder meshBuilder;
 };

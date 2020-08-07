@@ -8,7 +8,6 @@ glBridge* adapter;
 #define renderer adapter->renderer
 #define textureManager adapter->textureManager
 #define lightManager adapter->lightManager
-#define bufferManager adapter->bufferManager
 #define meshBuilder adapter->meshBuilder
 
 void glEnable( GLenum cap, bool enable )
@@ -128,21 +127,9 @@ WINGDIAPI void APIENTRY glScalef( GLfloat x, GLfloat y, GLfloat z )
 	renderer->Scale( x, y, z );
 }
 
-static const Dictionary<GLenum, DrawMode> drawModeTable
-{
-	{ GL_POINTS, DrawMode::Points },
-	{ GL_LINES, DrawMode::Lines },
-	{ GL_LINE_STRIP, DrawMode::LineStrip },
-	{ GL_LINE_LOOP, DrawMode::LineLoop },
-	{ GL_TRIANGLES, DrawMode::Triangles },
-	{ GL_TRIANGLE_STRIP, DrawMode::TriangleFan },
-	{ GL_TRIANGLE_FAN, DrawMode::TriangleFan },
-	{ GL_QUADS, DrawMode::Quads },
-};
-
 WINGDIAPI void APIENTRY glBegin( GLenum mode )
 {
-	meshBuilder.Begin( drawModeTable[mode] );
+	meshBuilder.Begin( mode );
 }
 
 WINGDIAPI void APIENTRY glColor3f( GLfloat red, GLfloat green, GLfloat blue )
@@ -280,18 +267,34 @@ WINGDIAPI void APIENTRY glLightfv( GLenum light, GLenum pname, const GLfloat *pa
 
 WINGDIAPI void APIENTRY glVertexPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
 {
-	bufferManager.vertices = std::make_unique<glBuffer>( size, type, stride, pointer );
+	meshBuilder.Vertex( size, type, stride, pointer );
 }
 
 WINGDIAPI void APIENTRY glTexCoordPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *pointer ) 
 {
-	bufferManager.texcoords = std::make_unique<glBuffer>( size, type, stride, pointer );
+	meshBuilder.Texcoord( size, type, stride, pointer );
+}
+
+WINGDIAPI void APIENTRY glColorPointer( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer )
+{
+	meshBuilder.Color( size, type, stride, pointer );
+}
+
+WINGDIAPI void APIENTRY glNormalPointer( GLenum type, GLsizei stride, const GLvoid* pointer )
+{
+	meshBuilder.Normal( type, stride, pointer );
 }
 
 WINGDIAPI void APIENTRY glDrawArrays( GLenum mode, GLint first, GLsizei count )
 {
-	const auto vertices = bufferManager.Build( mode, first, count );
-	renderer->Draw( Renderer::Mesh( drawModeTable[mode], vertices ) );
+	const auto mesh = meshBuilder.Build( mode, first, count );
+	renderer->Draw( mesh );
+}
+
+WINGDIAPI void APIENTRY glDrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid* indices )
+{
+	const auto mesh = meshBuilder.Build( mode, count, type, indices );
+	renderer->Draw( mesh );
 }
 
 WINGDIAPI void APIENTRY glEnableClientState( GLenum array )

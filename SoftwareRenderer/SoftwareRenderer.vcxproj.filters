@@ -288,9 +288,6 @@
     <ClInclude Include="Scene\gl\glBuffer.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\gl\glBufferManager.h">
-      <Filter>Scene\gl</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\gl\glBridge.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
@@ -301,6 +298,9 @@
       <Filter>Renderer\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Scene\gl\glMeshBuilder.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glVertexBuffer.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
   </ItemGroup>
@@ -489,9 +489,6 @@
     <ClCompile Include="Scene\gl\glBuffer.cpp">
       <Filter>Scene\gl</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\gl\glBufferManager.cpp">
-      <Filter>Scene\gl</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\gl\glBridge.cpp">
       <Filter>Scene\gl</Filter>
     </ClCompile>
@@ -502,6 +499,9 @@
       <Filter>Renderer\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Scene\gl\glMeshBuilder.cpp">
+      <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glVertexBuffer.cpp">
       <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #pragma once
 #include "glAdapter.h"
+#include "glVertexBuffer.h"
 #include "Renderer/Vertex.h"
 #include "Renderer/Mesh/Mesh.h"
 
@@ -9,17 +10,29 @@ public:
 	glMeshBuilder();
 	~glMeshBuilder();
 
-	void Begin( DrawMode mode );
+	void Begin( GLenum mode );
 	Renderer::Mesh End();
 
-	void Color( const float r, const float g, const float b, const float a );
-	void Texcoord( const float u, const float v );
-	void Normal( const float x, const float y, const float z );
-	void Vertex( const float x, const float y, const float z );
+	void Color( GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha );
+	void Texcoord( GLfloat s, GLfloat t );
+	void Normal( GLfloat nx, GLfloat ny, GLfloat nz );
+	void Vertex( GLfloat x, GLfloat y, GLfloat z );
+
+	void Color( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer );
+	void Texcoord( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer );
+	void Normal( GLenum type, GLsizei stride, const GLvoid* pointer );
+	void Vertex( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer );
+	
+	Renderer::Mesh Build( GLenum mode, GLint first, GLsizei count );
+	Renderer::Mesh Build( GLenum mode, GLsizei count, GLenum type, const GLvoid* indices );
 
 private:
 	DrawMode mode;
 	Renderer::Vertex temp;
 	std::vector<Renderer::Vertex> vertices;
+
+	glVertexBuffer buffer;
+
+	static const Dictionary<GLenum, DrawMode> table;
 };
 
