@@ -55,24 +55,59 @@ void glMeshBuilder::Vertex( GLfloat x, GLfloat y, GLfloat z )
 	vertices.push_back( temp );
 }
 
+struct glMeshBuilder::ColorType
+{
+	using Output = Vector4;
+	using Subtype = float;
+	static constexpr Output defaultValue = Vector4( 0, 0, 0, 1 );
+};
+
+struct glMeshBuilder::TexcoordType
+{
+	using Output = Vector2;
+	using Subtype = float;
+	static constexpr Output defaultValue = Vector2();
+};
+
+struct glMeshBuilder::NormalType
+{
+	using Output = Vector3;
+	using Subtype = float;
+	static constexpr Output defaultValue = Vector3();
+};
+
+struct glMeshBuilder::VertexType
+{
+	using Output = Vector4;
+	using Subtype = float;
+	static constexpr Output defaultValue = Vector4( 0, 0, 0, 1 );
+};
+
+struct glMeshBuilder::IndexType
+{
+	using Output = unsigned short;
+	using Subtype = unsigned short;
+	static constexpr Output defaultValue = 0;
+};
+
 void glMeshBuilder::Color( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.colors = std::make_unique<glBuffer<float, Vector4>>( size, type, stride, pointer, Vector4( 0, 0, 0, 1 ) );
+	buffer.colors = glBufferFactory::Create<ColorType>( size, type, stride, pointer );
 }
 
 void glMeshBuilder::Texcoord( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.texcoords = std::make_unique<glBuffer<float, Vector2>>( size, type, stride, pointer );
+	buffer.texcoords = glBufferFactory::Create<TexcoordType>( size, type, stride, pointer );
 }
 
 void glMeshBuilder::Normal( GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.normals = std::make_unique<glBuffer<float, Vector3>>( 3, type, stride, pointer );
+	buffer.normals = glBufferFactory::Create<NormalType>( 3, type, stride, pointer );
 }
 
 void glMeshBuilder::Vertex( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.vertices = std::make_unique<glBuffer<float, Vector4>>( size, type, stride, pointer, Vector4( 0, 0, 0, 1 ) );
+	buffer.vertices = glBufferFactory::Create<VertexType>( size, type, stride, pointer );
 }
 
 Renderer::Mesh glMeshBuilder::Build( GLenum mode, GLint first, GLsizei count )
@@ -90,6 +125,6 @@ Renderer::Mesh glMeshBuilder::Build( GLenum mode, GLint first, GLsizei count )
 
 Renderer::Mesh glMeshBuilder::Build( GLenum mode, GLsizei count, GLenum type, const GLvoid* indices )
 {
-	const auto inputs = glBuffer<int, int>( 1, type, 0, indices );
+	const auto inputs = glBufferFactory::Create<IndexType>( 1, type, 0, indices );
 	return Mesh( table[mode], std::move( vertices ) );
 }

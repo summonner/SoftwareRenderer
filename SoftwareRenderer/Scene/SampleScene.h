@@ -26,6 +26,7 @@ private:
 	void Cube() const;
 
 	void PointerTest() const;
+	void IndexTest() const;
 
 private:
 	std::shared_ptr<Renderer::Texture2D> texture;

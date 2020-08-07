@@ -33,6 +33,13 @@ private:
 
 	glVertexBuffer buffer;
 
+private:
 	static const Dictionary<GLenum, DrawMode> table;
+
+	struct ColorType;
+	struct TexcoordType;
+	struct NormalType;
+	struct VertexType;
+	struct IndexType;
 };
 

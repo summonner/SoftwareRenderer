@@ -5,27 +5,27 @@ template<typename T>
 class TVector2 final
 {
 public:
-	TVector2()
+	constexpr TVector2()
 		: TVector2( T( 0 ), T( 0 ) )
 	{
 	}
 
-	TVector2( const TVector2<int>& v )
+	constexpr TVector2( const TVector2<int>& v )
 		: TVector2( T( v.x ), T( v.y ) )
 	{
 	}
 
-	TVector2( const TVector2<float>& v )
+	constexpr TVector2( const TVector2<float>& v )
 		: TVector2( T( v.x ), T( v.y ) )
 	{
 	}
 
-	TVector2( const TVector3<T>& v )
+	constexpr TVector2( const TVector3<T>& v )
 		: TVector2( T( v.x ), T( v.y ) )
 	{
 	}
 
-	TVector2( T x, T y )
+	constexpr TVector2( T x, T y )
 		: x( x )
 		, y( y )
 	{

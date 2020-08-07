@@ -66,8 +66,8 @@ void SampleScene::DrawScene() const
 	//Floor();
 	//Triangle();
 	//Quad();
-	Cube();
-//	PointerTest();
+//	Cube();
+	PointerTest();
 
 	glDisable( GL_DEPTH_TEST );
 	glEnable( GL_BLEND );
@@ -78,35 +78,68 @@ void SampleScene::PointerTest() const
 {
 	const float v[]
 	{
-		-1.0f, -1.0f, 1.0f,		0.0f, 0.0f,
-		1.0f, -1.0f, 1.0f,		1.0f, 0.0f,
-		1.0f, 1.0f, 1.0f,		1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f,		0.0f, 1.0f,
+	   -1.0f,-1.0f, 1.0f,		0.0f, 0.0f,			 0.f, 0.f, 1.f,
+		1.0f,-1.0f, 1.0f,		1.0f, 0.0f,			 0.f, 0.f, 1.f,
+		1.0f, 1.0f, 1.0f,		1.0f, 1.0f,			 0.f, 0.f, 1.f,
+	   -1.0f, 1.0f, 1.0f,		0.0f, 1.0f,			 0.f, 0.f, 1.f,
 
-		-1.0f, -1.0f, -1.0f,	1.0f, 0.0f,
-		-1.0f, 1.0f, -1.0f,		1.0f, 1.0f,
-		1.0f, 1.0f, -1.0f,		0.0f, 1.0f,
-		1.0f, -1.0f, -1.0f,		0.0f, 0.0f,
+	   -1.0f,-1.0f,-1.0f,		1.0f, 0.0f,			 0.f, 0.f,-1.f,
+	   -1.0f, 1.0f,-1.0f,		1.0f, 1.0f,			 0.f, 0.f,-1.f,
+		1.0f, 1.0f,-1.0f,		0.0f, 1.0f,			 0.f, 0.f,-1.f,
+		1.0f,-1.0f,-1.0f,		0.0f, 0.0f,			 0.f, 0.f,-1.f,
 
-		-1.0f, 1.0f, -1.0f,		0.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f,		0.0f, 0.0f,
-		1.0f, 1.0f, 1.0f,		1.0f, 0.0f,
-		1.0f, 1.0f, -1.0f,		1.0f, 1.0f,
+	   -1.0f, 1.0f,-1.0f,		0.0f, 1.0f,			 0.f, 1.f, 0.f,
+	   -1.0f, 1.0f, 1.0f,		0.0f, 0.0f,			 0.f, 1.f, 0.f,
+		1.0f, 1.0f, 1.0f,		1.0f, 0.0f,			 0.f, 1.f, 0.f,
+		1.0f, 1.0f,-1.0f,		1.0f, 1.0f,			 0.f, 1.f, 0.f,
 
-		-1.0f, -1.0f, -1.0f,	1.0f, 1.0f,
-		1.0f, -1.0f, -1.0f,		0.0f, 1.0f,
-		1.0f, -1.0f, 1.0f,		0.0f, 0.0f,
-		-1.0f, -1.0f, 1.0f,		1.0f, 0.0f,
+	   -1.0f,-1.0f,-1.0f,		1.0f, 1.0f,			 0.f,-1.f, 0.f,
+		1.0f,-1.0f,-1.0f,		0.0f, 1.0f,			 0.f,-1.f, 0.f,
+		1.0f,-1.0f, 1.0f,		0.0f, 0.0f,			 0.f,-1.f, 0.f,
+	   -1.0f,-1.0f, 1.0f,		1.0f, 0.0f,			 0.f,-1.f, 0.f,
 
-		1.0f, -1.0f, -1.0f,		1.0f, 0.0f,
-		1.0f, 1.0f, -1.0f,		1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,		0.0f, 1.0f,
-		1.0f, -1.0f, 1.0f,		0.0f, 0.0f,
+		1.0f,-1.0f,-1.0f,		1.0f, 0.0f,			 1.f, 0.f, 0.f,
+		1.0f, 1.0f,-1.0f,		1.0f, 1.0f,			 1.f, 0.f, 0.f,
+		1.0f, 1.0f, 1.0f,		0.0f, 1.0f,			 1.f, 0.f, 0.f,
+		1.0f,-1.0f, 1.0f,		0.0f, 0.0f,			 1.f, 0.f, 0.f,
 
-		-1.0f, -1.0f, -1.0f,	0.0f, 0.0f,
-		-1.0f, -1.0f, 1.0f,		1.0f, 0.0f,
-		-1.0f, 1.0f, 1.0f,		1.0f, 1.0f,
-		-1.0f, 1.0f, -1.0f,		0.0f, 1.0f,
+	   -1.0f,-1.0f,-1.0f,		0.0f, 0.0f,			-1.f, 0.f, 0.f,
+	   -1.0f,-1.0f, 1.0f,		1.0f, 0.0f,			-1.f, 0.f, 0.f,
+	   -1.0f, 1.0f, 1.0f,		1.0f, 1.0f,			-1.f, 0.f, 0.f,
+	   -1.0f, 1.0f,-1.0f,		0.0f, 1.0f,			-1.f, 0.f, 0.f,
+	};
+
+	const char n[]
+	{
+		 0, 0, 1,
+		 0, 0, 1,
+		 0, 0, 1,
+		 0, 0, 1,
+
+		 0, 0,-1,
+		 0, 0,-1,
+		 0, 0,-1,
+		 0, 0,-1,
+
+		 0, 1, 0,
+		 0, 1, 0,
+		 0, 1, 0,
+		 0, 1, 0,
+
+		 0,-1, 0,
+		 0,-1, 0,
+		 0,-1, 0,
+		 0,-1, 0,
+
+		 1, 0, 0,
+		 1, 0, 0,
+		 1, 0, 0,
+		 1, 0, 0,
+
+		-1, 0, 0,
+		-1, 0, 0,
+		-1, 0, 0,
+		-1, 0, 0,
 	};
 
 
@@ -115,10 +148,49 @@ void SampleScene::PointerTest() const
 	glRotatef( x * 90.f, 1.0f, 0.0f, 0.0f );
 	glRotatef( x * 90.f, 0.0f, 1.0f, 0.0f );
 	glBindTexture( GL_TEXTURE_2D, texture );
-	const auto stride = 5 * 4;
+
+	const auto stride = 8 * 4;
 	glVertexPointer( 3, GL_FLOAT, stride, v );
 	glTexCoordPointer( 2, GL_FLOAT, stride, v + 3 );
+//	glNormalPointer( GL_FLOAT, stride, v + 5 );
+	glNormalPointer( GL_BYTE, 0, n );
 	glDrawArrays( GL_QUADS, 0, 6 * 4 );
+}
+
+void SampleScene::IndexTest() const
+{
+	const float v[]
+	{
+		0.0f, 1.0f, 0.0f,		1.0f, 0.0f, 0.0f,
+		0.0f,-1.0f, 0.0f,		1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f,		0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f,-1.0f,		0.0f, 1.0f, 0.0f,
+		1.0f, 0.0f, 0.0f,		0.0f, 0.0f, 1.0f,
+	   -1.0f, 0.0f, 0.0f,		0.0f, 0.0f, 1.0f,
+	};
+
+	const unsigned short indices[]
+	{
+		0, 2, 4,
+		0, 4, 3,
+		0, 3, 5,
+		0, 5, 2,
+		1, 2, 5,
+		1, 5, 3,
+		1, 3, 4,
+		1, 4, 2,
+	};
+
+	glLoadIdentity();
+	glTranslatef( 0.0f, 0.0f, -5.f );
+	glRotatef( x * 90.f, 1.0f, 0.0f, 0.0f );
+	glRotatef( x * 90.f, 0.0f, 1.0f, 0.0f );
+	glBindTexture( GL_TEXTURE_2D, texture );
+
+	const auto stride = 6 * 4;
+	glVertexPointer( 3, GL_FLOAT, stride, v );
+	glColorPointer( 3, GL_FLOAT, stride, v + 3 );
+	glDrawElements( GL_TRIANGLES, 8 * 3, GL_UNSIGNED_SHORT, indices );
 }
 
 void SampleScene::Floor() const

@@ -6,22 +6,22 @@ template<typename T>
 class TVector3 final
 {
 public:
-	TVector3()
+	constexpr TVector3()
 		: TVector3( T( 0 ), T( 0 ), T( 0 ) )
 	{
 	}
 
-	TVector3( const TVector4<T>& v )
+	constexpr TVector3( const TVector4<T>& v )
 		: TVector3( T( v.x ), T( v.y ), T( v.z ) )
 	{
 	}
 
-	TVector3( const TVector2<T>& v, T z )
+	constexpr TVector3( const TVector2<T>& v, T z )
 		: TVector3( T( v.x ), T( v.y ), z )
 	{
 	}
 
-	TVector3( T x, T y, T z )
+	constexpr TVector3( T x, T y, T z )
 		: x( x )
 		, y( y )
 		, z( z )

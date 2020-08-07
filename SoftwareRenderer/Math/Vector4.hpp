@@ -5,17 +5,17 @@ template<typename T>
 class TVector4 final
 {
 public:
-	TVector4()
+	constexpr TVector4()
 		: TVector4( T( 0 ), T( 0 ), T( 0 ), T( 0 ) )
 	{
 	}
 
-	TVector4( const TVector3<T>& v, T w )
+	constexpr TVector4( const TVector3<T>& v, T w )
 		: TVector4( T( v.x ), T( v.y ), T( v.z ), w )
 	{
 	}
 
-	TVector4( T x, T y, T z, T w )
+	constexpr TVector4( T x, T y, T z, T w )
 		: x( x )
 		, y( y )
 		, z( z )
