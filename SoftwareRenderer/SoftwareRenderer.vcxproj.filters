@@ -58,6 +58,9 @@
     <Filter Include="Renderer\Ligthing">
       <UniqueIdentifier>{b3f21f95-c3f1-4ec2-beed-c11bffd7e9a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\Mesh">
+      <UniqueIdentifier>{ad33fe4f-1b06-4867-8c37-5962e2ac4e42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -291,6 +294,12 @@
     <ClInclude Include="Scene\gl\glBridge.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Mesh\Mesh.h">
+      <Filter>Renderer\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Mesh\VertexIterator.h">
+      <Filter>Renderer\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -482,6 +491,12 @@
     </ClCompile>
     <ClCompile Include="Scene\gl\glBridge.cpp">
       <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Mesh\Mesh.cpp">
+      <Filter>Renderer\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Mesh\VertexIterator.cpp">
+      <Filter>Renderer\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

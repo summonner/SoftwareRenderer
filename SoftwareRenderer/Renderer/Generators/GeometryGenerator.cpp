@@ -9,16 +9,16 @@
 
 namespace Renderer
 {
-	const Dictionary<IRenderer::DrawMode, const GeometryGenerator::GeneratorFunction> GeometryGenerator::table
+	const Dictionary<Mesh::DrawMode, const GeometryGenerator::GeneratorFunction> GeometryGenerator::table
 	{
-		{ IRenderer::DrawMode::Points,		PointGenerator::Default },
-		{ IRenderer::DrawMode::Lines,		LineGenerator::Default },
-		{ IRenderer::DrawMode::LineStrip,	LineGenerator::Strip },
-		{ IRenderer::DrawMode::LineLoop,	LineGenerator::Loop },
-		{ IRenderer::DrawMode::Triangles,	TriangleGenerator::Default },
-		{ IRenderer::DrawMode::TriangleStrip, TriangleGenerator::Strip },
-		{ IRenderer::DrawMode::TriangleFan, TriangleGenerator::Fan },
-		{ IRenderer::DrawMode::Quads,		QuadGenerator::Quads },
+		{ Mesh::DrawMode::Points,		PointGenerator::Default },
+		{ Mesh::DrawMode::Lines,		LineGenerator::Default },
+		{ Mesh::DrawMode::LineStrip,	LineGenerator::Strip },
+		{ Mesh::DrawMode::LineLoop,	LineGenerator::Loop },
+		{ Mesh::DrawMode::Triangles,	TriangleGenerator::Default },
+		{ Mesh::DrawMode::TriangleStrip, TriangleGenerator::Strip },
+		{ Mesh::DrawMode::TriangleFan, TriangleGenerator::Fan },
+		{ Mesh::DrawMode::Quads,		QuadGenerator::Quads },
 	};
 
 	GeometryGenerator::GeometryGenerator()
@@ -29,7 +29,7 @@ namespace Renderer
 	{
 	}
 
-	void GeometryGenerator::Begin( IRenderer::DrawMode mode )
+	void GeometryGenerator::Begin( Mesh::DrawMode mode )
 	{
 		generator = table[mode];
 	}

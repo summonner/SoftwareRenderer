@@ -127,16 +127,16 @@ WINGDIAPI void APIENTRY glScalef( GLfloat x, GLfloat y, GLfloat z )
 	renderer->Scale( x, y, z );
 }
 
-static const Dictionary<GLenum, IRenderer::DrawMode> drawModeTable
+static const Dictionary<GLenum, DrawMode> drawModeTable
 {
-	{ GL_POINTS, IRenderer::DrawMode::Points },
-	{ GL_LINES, IRenderer::DrawMode::Lines },
-	{ GL_LINE_STRIP, IRenderer::DrawMode::LineStrip },
-	{ GL_LINE_LOOP, IRenderer::DrawMode::LineLoop },
-	{ GL_TRIANGLES, IRenderer::DrawMode::Triangles },
-	{ GL_TRIANGLE_STRIP, IRenderer::DrawMode::TriangleFan },
-	{ GL_TRIANGLE_FAN, IRenderer::DrawMode::TriangleFan },
-	{ GL_QUADS, IRenderer::DrawMode::Quads },
+	{ GL_POINTS, DrawMode::Points },
+	{ GL_LINES, DrawMode::Lines },
+	{ GL_LINE_STRIP, DrawMode::LineStrip },
+	{ GL_LINE_LOOP, DrawMode::LineLoop },
+	{ GL_TRIANGLES, DrawMode::Triangles },
+	{ GL_TRIANGLE_STRIP, DrawMode::TriangleFan },
+	{ GL_TRIANGLE_FAN, DrawMode::TriangleFan },
+	{ GL_QUADS, DrawMode::Quads },
 };
 
 WINGDIAPI void APIENTRY glBegin( GLenum mode )
@@ -289,7 +289,7 @@ WINGDIAPI void APIENTRY glTexCoordPointer( GLint size, GLenum type, GLsizei stri
 WINGDIAPI void APIENTRY glDrawArrays( GLenum mode, GLint first, GLsizei count )
 {
 	const auto vertices = bufferManager.Build( mode, first, count );
-	renderer->Draw( drawModeTable[mode], vertices );
+	renderer->Draw( Renderer::Mesh( drawModeTable[mode], vertices ) );
 }
 
 WINGDIAPI void APIENTRY glEnableClientState( GLenum array )

@@ -6,6 +6,7 @@
 #include "Blending/BlendComponent.h"
 #include "CullFace/CullFaceComponent.h"
 #include "Lighting/LightingComponent.h"
+#include "Mesh/Mesh.h"
 
 namespace Renderer
 {
@@ -15,18 +16,6 @@ namespace Renderer
 class Degree;
 class IRenderer abstract
 {
-public:
-	enum class DrawMode
-	{
-		Points,
-		Lines,
-		LineStrip,
-		LineLoop,
-		Triangles,
-		TriangleStrip,
-		TriangleFan,
-		Quads,
-	};
 
 public:
 	IRenderer( int width, int height )
@@ -47,7 +36,7 @@ public:
 	virtual void Normal( float x, float y, float z ) abstract;
 	virtual void AddVertex( float x, float y, float z ) abstract;
 
-	virtual void Draw( const DrawMode mode, const std::vector<Renderer::Vertex> vertices ) abstract;
+	virtual void Draw( const Renderer::Mesh& mesh ) abstract;
 
 	virtual void LoadIdentity() abstract;
 	virtual void Translate( float x, float y, float z ) abstract;

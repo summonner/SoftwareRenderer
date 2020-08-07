@@ -11,12 +11,12 @@ namespace Renderer
 		GeometryGenerator();
 		~GeometryGenerator();
 
-		void Begin( IRenderer::DrawMode mode );
+		void Begin( Mesh::DrawMode mode );
 		IGeometryList Generate( const VertexBuffer& vertices );
 
 	private:
 		using GeneratorFunction = std::function<void( const std::vector<Vertex>&, IGeometryList& )>;
-		static const Dictionary<IRenderer::DrawMode, const GeneratorFunction> table;
+		static const Dictionary<Mesh::DrawMode, const GeneratorFunction> table;
 
 		GeneratorFunction generator;
 	};

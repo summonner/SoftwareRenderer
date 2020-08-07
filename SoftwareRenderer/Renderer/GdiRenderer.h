@@ -33,7 +33,7 @@ namespace Renderer
 		void Normal( float x, float y, float z ) override;
 		void AddVertex( float x, float y, float z ) override;
 
-		void Draw( const DrawMode mode, const std::vector<Vertex> vertices ) override;
+		void Draw( const Renderer::Mesh& renderer ) override;
 
 		void LoadIdentity() override;
 		void Translate( float x, float y, float z ) override;

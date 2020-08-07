@@ -96,11 +96,11 @@ namespace Renderer
 		vertices.clear();
 	}
 
-	void GdiRenderer::Draw( const DrawMode mode, const std::vector<Vertex> inputVertices )
+	void GdiRenderer::Draw( const Mesh& mesh )
 	{
-		Begin( mode );
-		vertices.reserve( inputVertices.size() );
-		std::transform( inputVertices.begin(), inputVertices.end(), std::back_inserter( vertices ),
+		Begin( mesh.drawMode );
+		vertices.reserve( mesh.size() );
+		std::transform( mesh.begin(), mesh.end(), std::back_inserter( vertices ),
 			[this]( const Vertex& v ) { return TransformVertex( v ); } );
 //			std::bind( &GdiRenderer::TransformVertex, *this, std::placeholders::_1 ) );
 		End();
