@@ -7,8 +7,8 @@ namespace Renderer
 	class Vertex;
 	class Mesh final
 	{
-		using IndexType = unsigned short;
 	public:
+		using IndexType = unsigned short;
 		enum class DrawMode
 		{
 			Points,

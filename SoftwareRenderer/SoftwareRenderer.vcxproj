@@ -214,6 +214,8 @@
     <ClInclude Include="Scene\gl\AUX_RGBImageRec.h" />
     <ClInclude Include="Scene\gl\glAdapter.h" />
     <ClInclude Include="Scene\gl\glBuffer.hpp" />
+    <ClInclude Include="Scene\gl\glBufferIterator.hpp" />
+    <ClInclude Include="Scene\gl\glIndexBuffer.h" />
     <ClInclude Include="Scene\gl\glVertexBuffer.h" />
     <ClInclude Include="Scene\gl\glLightManager.h" />
     <ClInclude Include="Scene\gl\glBridge.h" />
@@ -289,6 +291,7 @@
     <ClCompile Include="Scene\gl\AUX_RGBImageRec.cpp" />
     <ClCompile Include="Scene\gl\glAdapter.cpp" />
     <ClCompile Include="Scene\gl\glBridge.cpp" />
+    <ClCompile Include="Scene\gl\glIndexBuffer.cpp" />
     <ClCompile Include="Scene\gl\glVertexBuffer.cpp" />
     <ClCompile Include="Scene\gl\glLightManager.cpp" />
     <ClCompile Include="Scene\gl\glMeshBuilder.cpp" />

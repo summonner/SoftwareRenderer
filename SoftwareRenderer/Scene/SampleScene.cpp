@@ -38,7 +38,7 @@ void SampleScene::Init( const std::shared_ptr<IRenderer> renderer )
 		//glEnable( GL_TEXTURE_2D );
 		glBlendFunc( GL_SRC_ALPHA, GL_ONE );
 		glEnable( GL_CULL_FACE );
-		glEnable( GL_LIGHTING );
+//		glEnable( GL_LIGHTING );
 	} );
 	renderer->lighting.Add( light );
 }
@@ -67,7 +67,7 @@ void SampleScene::DrawScene() const
 	//Triangle();
 	//Quad();
 //	Cube();
-	PointerTest();
+	IndexTest();
 
 	glDisable( GL_DEPTH_TEST );
 	glEnable( GL_BLEND );
@@ -181,6 +181,22 @@ void SampleScene::IndexTest() const
 		1, 4, 2,
 	};
 
+	const unsigned short line[]
+	{
+		0, 2,
+		0, 3,
+		0, 4,
+		0, 5,
+		2, 4,
+		4, 3,
+		3, 5,
+		5, 2,
+		1, 2,
+		1, 3,
+		1, 4,
+		1, 5,
+	};
+
 	glLoadIdentity();
 	glTranslatef( 0.0f, 0.0f, -5.f );
 	glRotatef( x * 90.f, 1.0f, 0.0f, 0.0f );
@@ -191,6 +207,7 @@ void SampleScene::IndexTest() const
 	glVertexPointer( 3, GL_FLOAT, stride, v );
 	glColorPointer( 3, GL_FLOAT, stride, v + 3 );
 	glDrawElements( GL_TRIANGLES, 8 * 3, GL_UNSIGNED_SHORT, indices );
+//	glDrawElements( GL_LINES, 12 * 2, GL_UNSIGNED_SHORT, line );
 }
 
 void SampleScene::Floor() const

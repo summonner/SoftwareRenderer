@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "glMeshBuilder.h"
+#include "glIndexBuffer.h"
 using namespace Renderer;
 
 const Dictionary<GLenum, DrawMode> glMeshBuilder::table
@@ -83,48 +84,45 @@ struct glMeshBuilder::VertexType
 	static constexpr Output defaultValue = Vector4( 0, 0, 0, 1 );
 };
 
-struct glMeshBuilder::IndexType
-{
-	using Output = unsigned short;
-	using Subtype = unsigned short;
-	static constexpr Output defaultValue = 0;
-};
-
 void glMeshBuilder::Color( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.colors = glBufferFactory::Create<ColorType>( size, type, stride, pointer );
+	vertexDatas.colors = glBufferFactory::Create<ColorType>( size, type, stride, pointer );
 }
 
 void glMeshBuilder::Texcoord( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.texcoords = glBufferFactory::Create<TexcoordType>( size, type, stride, pointer );
+	vertexDatas.texcoords = glBufferFactory::Create<TexcoordType>( size, type, stride, pointer );
 }
 
 void glMeshBuilder::Normal( GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.normals = glBufferFactory::Create<NormalType>( 3, type, stride, pointer );
+	vertexDatas.normals = glBufferFactory::Create<NormalType>( 3, type, stride, pointer );
 }
 
 void glMeshBuilder::Vertex( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer )
 {
-	buffer.vertices = glBufferFactory::Create<VertexType>( size, type, stride, pointer );
+	vertexDatas.vertices = glBufferFactory::Create<VertexType>( size, type, stride, pointer );
 }
 
 Renderer::Mesh glMeshBuilder::Build( GLenum mode, GLint first, GLsizei count )
 {
-	vertices.clear();
-	vertices.reserve( count );
-	const auto end = first + count;
-	for ( auto i = first; i < end; ++i )
-	{
-		vertices.push_back( buffer[i] );
-	}
-
+	ExtractVertex( first, first + count );
 	return Mesh( table[mode], std::move( vertices ) );
 }
 
 Renderer::Mesh glMeshBuilder::Build( GLenum mode, GLsizei count, GLenum type, const GLvoid* indices )
 {
-	const auto inputs = glBufferFactory::Create<IndexType>( 1, type, 0, indices );
-	return Mesh( table[mode], std::move( vertices ) );
+	const auto indexBuffer = glIndexBuffer( count, type, indices );
+	ExtractVertex( indexBuffer.minmax.first, indexBuffer.minmax.second + 1 );
+	return Mesh( table[mode], std::move( vertices ), indexBuffer.Extract() );
+}
+
+void glMeshBuilder::ExtractVertex( const int start, const int end )
+{
+	vertices.clear();
+	vertices.reserve( end - start );
+	for ( auto i = start; i < end; ++i )
+	{
+		vertices.push_back( vertexDatas[i] );
+	}
 }

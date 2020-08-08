@@ -27,11 +27,14 @@ public:
 	Renderer::Mesh Build( GLenum mode, GLsizei count, GLenum type, const GLvoid* indices );
 
 private:
+	void ExtractVertex( const int first, const int end );
+
+private:
 	DrawMode mode;
 	Renderer::Vertex temp;
 	std::vector<Renderer::Vertex> vertices;
 
-	glVertexBuffer buffer;
+	glVertexBuffer vertexDatas;
 
 private:
 	static const Dictionary<GLenum, DrawMode> table;
@@ -40,6 +43,5 @@ private:
 	struct TexcoordType;
 	struct NormalType;
 	struct VertexType;
-	struct IndexType;
 };
 

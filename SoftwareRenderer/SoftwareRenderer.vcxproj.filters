@@ -303,6 +303,12 @@
     <ClInclude Include="Scene\gl\glBuffer.hpp">
       <Filter>Scene\gl</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\gl\glIndexBuffer.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glBufferIterator.hpp">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -499,6 +505,9 @@
       <Filter>Scene\gl</Filter>
     </ClCompile>
     <ClCompile Include="Scene\gl\glVertexBuffer.cpp">
+      <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glIndexBuffer.cpp">
       <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>
