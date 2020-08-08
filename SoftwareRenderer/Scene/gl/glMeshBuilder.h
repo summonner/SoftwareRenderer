@@ -1,6 +1,6 @@
 #pragma once
 #include "glAdapter.h"
-#include "glVertexBuffer.h"
+#include "Buffer/glVertexBuffer.h"
 #include "Renderer/Vertex.h"
 #include "Renderer/Mesh/Mesh.h"
 

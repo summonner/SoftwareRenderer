@@ -61,6 +61,9 @@
     <Filter Include="Renderer\Mesh">
       <UniqueIdentifier>{ad33fe4f-1b06-4867-8c37-5962e2ac4e42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\gl\Buffer">
+      <UniqueIdentifier>{cf95df72-b66d-4b85-89b0-cba1eb2106ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -140,9 +143,6 @@
     </ClInclude>
     <ClInclude Include="Renderer\Rasterizer\IRasterizer.h">
       <Filter>Renderer\Rasterizer</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\gl\glAdapter.h">
-      <Filter>Scene\gl</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Texturing\Texture2D.h">
       <Filter>Renderer\Texturing</Filter>
@@ -297,16 +297,19 @@
     <ClInclude Include="Scene\gl\glMeshBuilder.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\gl\glVertexBuffer.h">
-      <Filter>Scene\gl</Filter>
+    <ClInclude Include="Scene\gl\Buffer\glIndexBuffer.h">
+      <Filter>Scene\gl\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\gl\glBuffer.hpp">
-      <Filter>Scene\gl</Filter>
+    <ClInclude Include="Scene\gl\Buffer\glVertexBuffer.h">
+      <Filter>Scene\gl\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\gl\glIndexBuffer.h">
-      <Filter>Scene\gl</Filter>
+    <ClInclude Include="Scene\gl\Buffer\glBuffer.hpp">
+      <Filter>Scene\gl\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\gl\glBufferIterator.hpp">
+    <ClInclude Include="Scene\gl\Buffer\glBufferIterator.hpp">
+      <Filter>Scene\gl\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glAdapter.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
   </ItemGroup>
@@ -368,9 +371,6 @@
     </ClCompile>
     <ClCompile Include="Math\Bounds.cpp">
       <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\gl\glAdapter.cpp">
-      <Filter>Scene\gl</Filter>
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson6.cpp">
       <Filter>Scene\NeHeSamples</Filter>
@@ -504,10 +504,13 @@
     <ClCompile Include="Scene\gl\glMeshBuilder.cpp">
       <Filter>Scene\gl</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\gl\glVertexBuffer.cpp">
-      <Filter>Scene\gl</Filter>
+    <ClCompile Include="Scene\gl\Buffer\glVertexBuffer.cpp">
+      <Filter>Scene\gl\Buffer</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\gl\glIndexBuffer.cpp">
+    <ClCompile Include="Scene\gl\Buffer\glIndexBuffer.cpp">
+      <Filter>Scene\gl\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glAdapter.cpp">
       <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>

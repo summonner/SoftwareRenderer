@@ -1,5 +1,5 @@
 #pragma once
-#include "glAdapter.h"
+#include "../glAdapter.h"
 
 template<typename Output>
 class IBuffer abstract

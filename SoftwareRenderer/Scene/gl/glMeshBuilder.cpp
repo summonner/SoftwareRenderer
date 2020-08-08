@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "glMeshBuilder.h"
-#include "glIndexBuffer.h"
+#include "Buffer/glIndexBuffer.h"
 using namespace Renderer;
 
 const Dictionary<GLenum, DrawMode> glMeshBuilder::table
