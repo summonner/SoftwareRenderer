@@ -312,6 +312,9 @@
     <ClInclude Include="Scene\gl\glAdapter.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson18.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -512,6 +515,9 @@
     </ClCompile>
     <ClCompile Include="Scene\gl\glAdapter.cpp">
       <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson18.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

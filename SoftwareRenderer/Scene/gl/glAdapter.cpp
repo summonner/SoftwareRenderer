@@ -329,3 +329,75 @@ void APIENTRY gluPerspective(
 {
 	renderer->Perspective( (float)fovy, (float)aspect, (float)zNear, (float)zFar );
 }
+
+GLUquadric* APIENTRY gluNewQuadric( void )
+{
+	return nullptr;
+}
+
+void APIENTRY gluDeleteQuadric(
+	GLUquadric* state )
+{
+}
+
+void APIENTRY gluQuadricNormals(
+	GLUquadric* quadObject,
+	GLenum              normals )
+{
+}
+
+void APIENTRY gluQuadricTexture(
+	GLUquadric* quadObject,
+	GLboolean           textureCoords )
+{
+}
+
+void APIENTRY gluQuadricOrientation(
+	GLUquadric* quadObject,
+	GLenum              orientation )
+{
+}
+
+void APIENTRY gluQuadricDrawStyle(
+	GLUquadric* quadObject,
+	GLenum              drawStyle )
+{
+}
+
+void APIENTRY gluCylinder(
+	GLUquadric* qobj,
+	GLdouble            baseRadius,
+	GLdouble            topRadius,
+	GLdouble            height,
+	GLint               slices,
+	GLint               stacks )
+{
+}
+
+void APIENTRY gluDisk(
+	GLUquadric* qobj,
+	GLdouble            innerRadius,
+	GLdouble            outerRadius,
+	GLint               slices,
+	GLint               loops )
+{
+}
+
+void APIENTRY gluPartialDisk(
+	GLUquadric* qobj,
+	GLdouble            innerRadius,
+	GLdouble            outerRadius,
+	GLint               slices,
+	GLint               loops,
+	GLdouble            startAngle,
+	GLdouble            sweepAngle )
+{
+}
+
+void APIENTRY gluSphere(
+	GLUquadric* qobj,
+	GLdouble            radius,
+	GLint               slices,
+	GLint               stacks )
+{
+}

@@ -7,13 +7,14 @@
 #include "resource.h"
 
 const UINT SceneFactory::defaultScene = ID_SCENE_DEFAULT;
-const std::pair<UINT, UINT> SceneFactory::sceneRange = { ID_SCENE_NEHE, ID_NEHE_LESSON45 };
+const std::pair<UINT, UINT> SceneFactory::sceneRange = { ID_SCENE_NEHE, ID_NEHE_LESSON18 };
 
 const Dictionary<UINT, SceneFactory::CreateFunc> SceneFactory::table(
 {
 	{ ID_SCENE_DEFAULT, Create<SampleScene> },
 	{ ID_NEHE_LESSON6, NeHeLesson<NeHe::Lesson6> },
 	{ ID_NEHE_LESSON8, NeHeLesson<NeHe::Lesson8> },
+	{ ID_NEHE_LESSON18, NeHeLesson<NeHe::Lesson18> },
 	{ ID_NEHE_LESSON45, NeHeLesson<NeHe::Lesson45> },
 }, ReturnNullPtr );
 
