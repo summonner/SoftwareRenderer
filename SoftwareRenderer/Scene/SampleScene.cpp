@@ -7,7 +7,6 @@
 #include "Renderer/Texturing/TextureComponent.h"
 #include "Renderer/Blending/BlendComponent.h"
 #include "Renderer/Lighting/Light.h"
-#include "Math/Degree.h"
 #include "Renderer/Mesh/SampleMesh.h"
 
 void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> texture )

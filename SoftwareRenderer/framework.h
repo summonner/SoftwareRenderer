@@ -26,6 +26,8 @@
 
 #include "Math/MathExt.h"
 #include "Math/Vector.h"
+#include "Math/Degree.h"
+#include "Math/Radian.h"
 #include "Util/Dictionary.hpp"
 
 #undef max

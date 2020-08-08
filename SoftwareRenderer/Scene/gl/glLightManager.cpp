@@ -1,7 +1,6 @@
 #include "framework.h"
 #include "glLightManager.h"
 #include "Renderer/Lighting/Light.h"
-#include "Math/Radian.h"
 using namespace Renderer;
 
 glLightManager::glLightManager()

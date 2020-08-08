@@ -1,7 +1,6 @@
 #include "framework.h"
 #include "glAdapter.h"
 #include "Math/Vector4.hpp"
-#include "Math/Degree.h"
 #include "glBridge.h"
 
 glBridge* adapter;

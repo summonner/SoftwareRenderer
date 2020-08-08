@@ -6,7 +6,6 @@
 #include "Rasterizer/RasterizedPixel.h"
 #include "Rasterizer/DerivativeTexcoord.h"
 #include "Math/Vector3.hpp"
-#include "Math/Degree.h"
 
 namespace Renderer
 {
