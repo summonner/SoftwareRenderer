@@ -27,6 +27,7 @@ private:
 
 	void PointerTest() const;
 	void IndexTest() const;
+	void Quadric() const;
 
 private:
 	std::shared_ptr<Renderer::Texture2D> texture;

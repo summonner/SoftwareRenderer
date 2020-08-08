@@ -8,6 +8,7 @@
 #include "Renderer/Blending/BlendComponent.h"
 #include "Renderer/Lighting/Light.h"
 #include "Math/Degree.h"
+#include "Renderer/Mesh/SampleMesh.h"
 
 void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> texture )
 {
@@ -37,8 +38,8 @@ void SampleScene::Init( const std::shared_ptr<IRenderer> renderer )
 		glClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
 		//glEnable( GL_TEXTURE_2D );
 		glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-		glEnable( GL_CULL_FACE );
-//		glEnable( GL_LIGHTING );
+//		glEnable( GL_CULL_FACE );
+		glEnable( GL_LIGHTING );
 	} );
 	renderer->lighting.Add( light );
 }
@@ -67,11 +68,26 @@ void SampleScene::DrawScene() const
 	//Triangle();
 	//Quad();
 //	Cube();
-	IndexTest();
+	Quadric();
 
 	glDisable( GL_DEPTH_TEST );
 	glEnable( GL_BLEND );
 	glColor4f( 1, 1, 1, 0.5f );
+}
+
+void SampleScene::Quadric() const
+{
+	glBindTexture( GL_TEXTURE_2D, texture );
+	glLoadIdentity();
+	glTranslatef( 0, 0, -5 );
+	glRotatef( -90.f * x, 0, 1, 0 );
+	glRotatef( -90.f * x, 1, 0, 0 );
+
+	glTranslatef( 0.0f, 0.0f, -1.5f );
+	glColor3f( 1.0f, 1.0f, 1.0f );
+	const auto mesh = Renderer::SampleMesh::SolidCylinder( 1, 1, 3, 32, 32 );
+	adapter->renderer->Draw( mesh );
+	return;
 }
 
 void SampleScene::PointerTest() const

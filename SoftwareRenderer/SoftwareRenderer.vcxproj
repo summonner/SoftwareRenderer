@@ -190,6 +190,7 @@
     <ClInclude Include="Renderer\Lighting\Light.h" />
     <ClInclude Include="Renderer\Lighting\LightingComponent.h" />
     <ClInclude Include="Renderer\Lighting\Material.h" />
+    <ClInclude Include="Renderer\Mesh\SampleMesh.h" />
     <ClInclude Include="Renderer\Mesh\Mesh.h" />
     <ClInclude Include="Renderer\Mesh\VertexIterator.h" />
     <ClInclude Include="Renderer\PixelIterator.h" />
@@ -271,6 +272,7 @@
     <ClCompile Include="Renderer\Lighting\Light.cpp" />
     <ClCompile Include="Renderer\Lighting\LightingComponent.cpp" />
     <ClCompile Include="Renderer\Lighting\Material.cpp" />
+    <ClCompile Include="Renderer\Mesh\SampleMesh.cpp" />
     <ClCompile Include="Renderer\Mesh\Mesh.cpp" />
     <ClCompile Include="Renderer\Mesh\VertexIterator.cpp" />
     <ClCompile Include="Renderer\PixelIterator.cpp" />

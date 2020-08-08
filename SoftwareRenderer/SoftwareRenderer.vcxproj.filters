@@ -315,6 +315,9 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson18.h">
       <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Mesh\SampleMesh.h">
+      <Filter>Renderer\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -518,6 +521,9 @@
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson18.cpp">
       <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Mesh\SampleMesh.cpp">
+      <Filter>Renderer\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
