@@ -1,87 +1,74 @@
 #include "framework.h"
 #include "SampleMesh.h"
+#include "Quadric.h"
 #include "Mesh.h"
-#include "Math/Radian.h"
 
 namespace Renderer
 {
 	Mesh SampleMesh::SolidCylinder( float base, float top, float height, int slices, int stacks )
 	{
-		std::vector<Vertex> vertices;
-		std::vector<Mesh::IndexType> indices;
-
-		vertices.reserve( (slices + 1) * stacks );
-		indices.reserve( slices * (stacks - 1) * 4 );
-
-		Circle( 0.f, 0.f, base, slices, vertices );
-		for ( auto i = 1; i <= stacks; ++i )
-		{
-			const auto t = (float)i / stacks;
-			Circle( height * t, t, ::Lerp( base, top, t ), slices, vertices );
-
-			for ( auto j = 0; j < slices; ++j )
-			{
-				const auto current = j + i * (slices + 1);
-				const auto prev = current - (slices + 1);
-				indices.emplace_back( prev );
-				indices.emplace_back( prev + 1 );
-				indices.emplace_back( current + 1 );
-				indices.emplace_back( current );
-			}
-		}
-
-		return Mesh( DrawMode::Quads, std::move( vertices ), std::move( indices ) );
+		return Cylinder( IQuadric::Solid, base, top, height, slices, stacks );
 	}
 
 	Mesh SampleMesh::WireCylinder( float base, float top, float height, int slices, int stacks )
 	{
-		std::vector<Vertex> vertices;
-		std::vector<Mesh::IndexType> indices;
-
-		vertices.reserve( (slices + 1) * stacks );
-		indices.reserve( slices * (stacks * 2 - 1) * 2 );
-
-		Circle( 0.f, 0.f, base, slices, vertices );
-		for ( auto j = 0; j < slices; ++j )
-		{
-			const auto current = j;
-			indices.emplace_back( current );
-			indices.emplace_back( current + 1 );
-		}
-
-		for ( auto i = 1; i <= stacks; ++i )
-		{
-			const auto t = (float)i / stacks;
-			Circle( height * t, t, ::Lerp( base, top, t ), slices, vertices );
-
-			for ( auto j = 0; j < slices; ++j )
-			{
-				const auto current = j + i * (slices + 1);
-				const auto prev = current - (slices + 1);
-				indices.emplace_back( current );
-				indices.emplace_back( current + 1 );
-
-				indices.emplace_back( prev );
-				indices.emplace_back( current );
-			}
-		}
-
-		return Mesh( DrawMode::Lines, std::move( vertices ), std::move( indices ) );
+		return Cylinder( IQuadric::Wire, base, top, height, slices, stacks );
 	}
 
-	void SampleMesh::Circle( float z, float v, float radius, int slices, std::vector<Vertex>& vertices )
+	Mesh SampleMesh::Cylinder( BuildFunc func, float base, float top, float height, int slices, int stacks )
 	{
-		for ( auto i = 0; i <= slices; ++i )
-		{
-			const auto t = (float)i / slices;
-			const auto theta = Radian( 2 * PI * t );
-			const auto x = sin( theta );
-			const auto y = cos( theta );
-			Vertex vertex;
-			vertex.position = Vector4( x, y, z, 1 );
-			vertex.texcoord = Vector2( t, v );
-			vertex.normal = Vector3( vertex.position ) - Vector3( 0, 0, z );
-			vertices.push_back( vertex );
-		}
+		Renderer::Cylinder quadric( base, top, height );
+		return func( quadric, slices, stacks );
 	}
+
+
+	Mesh SampleMesh::SolidSphere( float radius, int slices, int stacks )
+	{
+		return Sphere( IQuadric::Solid, radius, slices, stacks );
+	}
+
+	Mesh SampleMesh::WireSphere( float radius, int slices, int stacks )
+	{
+		return Sphere( IQuadric::Wire, radius, slices, stacks );
+	}
+
+	Mesh SampleMesh::Sphere( BuildFunc func, float radius, int slices, int stacks )
+	{
+		Renderer::Sphere quadric( radius );
+		return func( quadric, slices, stacks );
+	}
+
+
+	Mesh SampleMesh::SolidDisc( float inner, float outer, int slices, int loops )
+	{
+		return Disc( IQuadric::Solid, inner, outer, slices, loops );
+	}
+
+	Mesh SampleMesh::WireDisc( float inner, float outer, int slices, int loops )
+	{
+		return Disc( IQuadric::Wire, inner, outer, slices, loops );
+	}
+
+	Mesh SampleMesh::Disc( BuildFunc func, float inner, float outer, int slices, int loops )
+	{
+		Renderer::Disc quadric( inner, outer );
+		return func( quadric, slices, loops );
+	}
+
+	Mesh SampleMesh::SolidPartialDisc( float inner, float outer, int slices, int loops, Degree start, Degree sweep )
+	{
+		return PartialDisc( IQuadric::Solid, inner, outer, slices, loops, start, sweep );
+	}
+
+	Mesh SampleMesh::WirePartialDisc( float inner, float outer, int slices, int loops, Degree start, Degree sweep )
+	{
+		return PartialDisc( IQuadric::Wire, inner, outer, slices, loops, start, sweep );
+	}
+	
+	Mesh SampleMesh::PartialDisc( BuildFunc func, float inner, float outer, int slices, int loops, Radian start, Radian sweep )
+	{
+		Renderer::Disc quadric( inner, outer, start, sweep );
+		return func( quadric, slices, loops );
+	}
+	
 }

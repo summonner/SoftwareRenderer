@@ -35,7 +35,7 @@ void SampleScene::Init( const std::shared_ptr<IRenderer> renderer )
 	adapter->Use( renderer.get(), []()
 	{
 		glClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
-		//glEnable( GL_TEXTURE_2D );
+		glEnable( GL_TEXTURE_2D );
 		glBlendFunc( GL_SRC_ALPHA, GL_ONE );
 //		glEnable( GL_CULL_FACE );
 		glEnable( GL_LIGHTING );
@@ -85,6 +85,9 @@ void SampleScene::Quadric() const
 	glTranslatef( 0.0f, 0.0f, -1.5f );
 	glColor3f( 1.0f, 1.0f, 1.0f );
 	const auto mesh = Renderer::SampleMesh::SolidCylinder( 1, 1, 3, 32, 32 );
+	//const auto mesh = Renderer::SampleMesh::SolidSphere( 1, 32, 32 );
+	//const auto mesh = Renderer::SampleMesh::SolidDisc( 0.2f, 1.f, 32, 32 );
+	//const auto mesh = Renderer::SampleMesh::WirePartialDisc( 0.2f, 1.f, 32, 32, 90.f * x, 360.f * x );
 	adapter->renderer->Draw( mesh );
 	return;
 }

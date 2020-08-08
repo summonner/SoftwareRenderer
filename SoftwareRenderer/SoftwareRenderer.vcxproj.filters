@@ -318,6 +318,9 @@
     <ClInclude Include="Renderer\Mesh\SampleMesh.h">
       <Filter>Renderer\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Mesh\Quadric.h">
+      <Filter>Renderer\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -523,6 +526,9 @@
       <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Mesh\SampleMesh.cpp">
+      <Filter>Renderer\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Mesh\Quadric.cpp">
       <Filter>Renderer\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
