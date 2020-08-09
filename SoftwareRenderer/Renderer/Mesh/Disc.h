@@ -12,6 +12,7 @@ namespace Renderer
 
 		float Radius( float t ) const override;
 		float Height( float t ) const override;
+		Vector2 Texcoord( float tSlices, float tStacks ) const override;
 		Vector3 Normal( const Vector3& position ) const override;
 		Radian Theta( float t ) const override;
 

@@ -17,7 +17,13 @@ public:
 	void Draw( IRenderer& renderer, const Renderer::Quadric& quadric, int slices, int stacks ) const;
 
 private:
+	char GetNormalDirection() const;
+
+private:
 	Renderer::Quadric::IndexFunc drawStyle;
+	GLenum normals;
+	bool isReverseNormal;
+	bool useTexture;
 
 private:
 	static const Dictionary<GLenum, Renderer::Quadric::IndexFunc> drawStyleTable;

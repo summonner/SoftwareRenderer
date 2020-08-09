@@ -6,35 +6,39 @@
 
 namespace Renderer
 {
-	void Quadric::Circle( float v, int slices, std::vector<Vertex>& vertices ) const
+	void Quadric::Circle( float tStacks, int slices, bool useTexture, char normalDirection, std::vector<Vertex>& vertices ) const
 	{
-		const float radius = Radius( v );
-		const float z = Height( v );
+		const float radius = Radius( tStacks );
+		const float z = Height( tStacks );
 		for ( auto i = 0; i <= slices; ++i )
 		{
-			const auto u = (float)i / slices;
-			const auto theta = Theta( u );
+			const auto tSlices = (float)i / slices;
+			const auto theta = Theta( tSlices );
 			const auto x = sin( theta ) * radius;
 			const auto y = cos( theta ) * radius;
 			Vertex vertex;
 			vertex.position = Vector4( x, y, z, 1 );
-			vertex.texcoord = Vector2( u, v );
-			vertex.normal = Normal( vertex.position );
+			if ( useTexture == true )
+			{
+				vertex.texcoord = Texcoord( tSlices, tStacks );
+			}
+			if ( normalDirection != 0 )
+			{
+				vertex.normal = Normal( vertex.position ) * normalDirection;
+			}
 			vertices.push_back( vertex );
 		}
 	}
 
-	std::vector<Vertex> Quadric::Vertices( int slices, int stacks ) const
+	std::vector<Vertex> Quadric::Vertices( int slices, int stacks, bool useTexture, char normalDirection ) const
 	{
 		std::vector<Vertex> vertices;
 		vertices.reserve( (slices + 1) * (stacks + 1) );
 
-		auto t = 0.f;
-		Circle( t, slices, vertices );
-		for ( auto i = 1; i <= stacks; ++i )
+		for ( auto i = 0; i <= stacks; ++i )
 		{
-			t = (float)i / stacks;
-			Circle( t, slices, vertices );
+			const auto t = (float)i / stacks;
+			Circle( t, slices, useTexture, normalDirection, vertices );
 		}
 		return vertices;
 	}
@@ -42,7 +46,7 @@ namespace Renderer
 	std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>> Quadric::Solid( int slices, int stacks )
 	{
 		std::vector<Mesh::IndexType> indices;
-		indices.reserve( slices * (stacks * 2 + 1) * 2 );
+		indices.reserve( slices * stacks * 4 );
 
 		for ( auto i = 1; i <= stacks; ++i )
 		{
@@ -87,10 +91,14 @@ namespace Renderer
 
 		return { Mesh::DrawMode::Lines, indices };
 	}
-
 	Mesh Quadric::Build( IndexFunc func, int slices, int stacks ) const
 	{
-		auto vertices = Quadric::Vertices( slices, stacks );
+		return Build( func, slices, stacks, true, 1 );
+	}
+
+	Mesh Quadric::Build( IndexFunc func, int slices, int stacks, bool useTexture, char normalDirection ) const
+	{
+		auto vertices = Quadric::Vertices( slices, stacks, useTexture, normalDirection );
 		if ( func != nullptr )
 		{
 			auto indices = func( slices, stacks );

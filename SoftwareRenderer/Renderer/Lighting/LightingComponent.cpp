@@ -54,6 +54,10 @@ namespace Renderer
 		{
 			return Vector4::one;
 		}
+		if ( normal == Vector3::zero )
+		{
+			return Vector4::one;
+		}
 
 		const auto view = GetView( v );
 		Vector4 result = material.emmisive;

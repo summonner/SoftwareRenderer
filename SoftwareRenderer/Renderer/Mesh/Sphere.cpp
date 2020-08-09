@@ -22,6 +22,12 @@ namespace Renderer
 		return cos( t * PI );
 	}
 
+	Vector2 Sphere::Texcoord( float tSlices, float tStacks ) const
+	{
+		const float v = cos( tStacks * PI );
+		return Vector2( 1 - tSlices, 1 - tStacks );
+	}
+
 	Vector3 Sphere::Normal( const Vector3& position ) const
 	{
 		return position;

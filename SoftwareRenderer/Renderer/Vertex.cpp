@@ -8,7 +8,7 @@ namespace Renderer
 		: position( 0, 0, 0, 0 )
 		, color( 1, 1, 1, 1 )
 		, texcoord( 0, 0 )
-		, normal( 0, 0, 1 )
+		, normal( 0, 0, 0 )
 	{
 	}
 

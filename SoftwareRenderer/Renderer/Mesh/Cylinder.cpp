@@ -21,7 +21,12 @@ namespace Renderer
 
 	float Cylinder::Height( float t ) const
 	{
-		return height * t;
+		return height * (1 - t);
+	}
+
+	Vector2 Cylinder::Texcoord( float tSlices, float tStacks ) const
+	{
+		return Vector2( 1 - tSlices, 1 - tStacks );
 	}
 
 	Vector3 Cylinder::Normal( const Vector3& position ) const

@@ -33,9 +33,18 @@ namespace Renderer
 		return 0.f;
 	}
 
+	Vector2 Disc::Texcoord( float tSlices, float tStacks ) const
+	{
+		const auto theta = Theta( tSlices );
+		const auto radius = Lerp( inner / outer, 1.f, tStacks );
+		const auto u = sin( theta ) * 0.5f * radius + 0.5f;
+		const auto v = cos( theta ) * 0.5f * radius + 0.5f;
+		return Vector2( u, v );
+	}
+
 	Vector3 Disc::Normal( const Vector3& position ) const
 	{
-		return Vector3::up;
+		return Vector3::front;
 	}
 
 	Radian Disc::Theta( float t ) const

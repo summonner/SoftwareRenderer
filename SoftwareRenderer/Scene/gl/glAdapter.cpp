@@ -35,6 +35,13 @@ void glEnable( GLenum cap, bool enable )
 		break;
 
 	case GL_LIGHT0:
+	case GL_LIGHT1:
+	case GL_LIGHT2:
+	case GL_LIGHT3:
+	case GL_LIGHT4:
+	case GL_LIGHT5:
+	case GL_LIGHT6:
+	case GL_LIGHT7:
 		if ( enable == true )
 		{
 			renderer->lighting.Add( lightManager.Get( cap ) );
