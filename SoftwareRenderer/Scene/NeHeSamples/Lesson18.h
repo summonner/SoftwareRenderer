@@ -11,6 +11,7 @@ namespace NeHe
 		LESSON();
 		~LESSON() override;
 
+		void Update( DWORD milliseconds ) override;
 		int DrawGLScene( GLvoid ) override;
 		int InitGL( GLvoid ) override;
 		GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) override;
@@ -40,6 +41,6 @@ namespace NeHe
 
 		GLuint	filter;				// Which Filter To Use
 		GLuint	texture[3];			// Storage For 3 Textures
-		GLuint  object = 0;			// Which Object To Draw (NEW)
+		GLuint  object;			// Which Object To Draw (NEW)
 	};
 }

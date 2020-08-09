@@ -321,6 +321,18 @@
     <ClInclude Include="Renderer\Mesh\Quadric.h">
       <Filter>Renderer\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Mesh\Cylinder.h">
+      <Filter>Renderer\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Mesh\Sphere.h">
+      <Filter>Renderer\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Mesh\Disc.h">
+      <Filter>Renderer\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\GLUquadric.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -530,6 +542,18 @@
     </ClCompile>
     <ClCompile Include="Renderer\Mesh\Quadric.cpp">
       <Filter>Renderer\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Mesh\Cylinder.cpp">
+      <Filter>Renderer\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Mesh\Disc.cpp">
+      <Filter>Renderer\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Mesh\Sphere.cpp">
+      <Filter>Renderer\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\GLUquadric.cpp">
+      <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

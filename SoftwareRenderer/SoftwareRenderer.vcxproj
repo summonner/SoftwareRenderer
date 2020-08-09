@@ -190,9 +190,12 @@
     <ClInclude Include="Renderer\Lighting\Light.h" />
     <ClInclude Include="Renderer\Lighting\LightingComponent.h" />
     <ClInclude Include="Renderer\Lighting\Material.h" />
+    <ClInclude Include="Renderer\Mesh\Cylinder.h" />
+    <ClInclude Include="Renderer\Mesh\Disc.h" />
     <ClInclude Include="Renderer\Mesh\Quadric.h" />
     <ClInclude Include="Renderer\Mesh\SampleMesh.h" />
     <ClInclude Include="Renderer\Mesh\Mesh.h" />
+    <ClInclude Include="Renderer\Mesh\Sphere.h" />
     <ClInclude Include="Renderer\Mesh\VertexIterator.h" />
     <ClInclude Include="Renderer\PixelIterator.h" />
     <ClInclude Include="Renderer\Rasterizer\Bresenham.h" />
@@ -223,6 +226,7 @@
     <ClInclude Include="Scene\gl\glBridge.h" />
     <ClInclude Include="Scene\gl\glMeshBuilder.h" />
     <ClInclude Include="Scene\gl\glTextureManager.h" />
+    <ClInclude Include="Scene\gl\GLUquadric.h" />
     <ClInclude Include="Scene\IScene.h" />
     <ClInclude Include="Scene\NeHeSamples\ILesson.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson18.h" />
@@ -273,9 +277,12 @@
     <ClCompile Include="Renderer\Lighting\Light.cpp" />
     <ClCompile Include="Renderer\Lighting\LightingComponent.cpp" />
     <ClCompile Include="Renderer\Lighting\Material.cpp" />
+    <ClCompile Include="Renderer\Mesh\Cylinder.cpp" />
+    <ClCompile Include="Renderer\Mesh\Disc.cpp" />
     <ClCompile Include="Renderer\Mesh\Quadric.cpp" />
     <ClCompile Include="Renderer\Mesh\SampleMesh.cpp" />
     <ClCompile Include="Renderer\Mesh\Mesh.cpp" />
+    <ClCompile Include="Renderer\Mesh\Sphere.cpp" />
     <ClCompile Include="Renderer\Mesh\VertexIterator.cpp" />
     <ClCompile Include="Renderer\PixelIterator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp" />
@@ -301,6 +308,7 @@
     <ClCompile Include="Scene\gl\glLightManager.cpp" />
     <ClCompile Include="Scene\gl\glMeshBuilder.cpp" />
     <ClCompile Include="Scene\gl\glTextureManager.cpp" />
+    <ClCompile Include="Scene\gl\GLUquadric.cpp" />
     <ClCompile Include="Scene\NeHeSamples\ILesson.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson18.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp" />

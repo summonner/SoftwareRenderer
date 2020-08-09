@@ -2,6 +2,7 @@
 #include "glAdapter.h"
 #include "Math/Vector4.hpp"
 #include "glBridge.h"
+#include "GLUquadric.h"
 
 glBridge* adapter;
 #define renderer adapter->renderer
@@ -329,38 +330,54 @@ void APIENTRY gluPerspective(
 	renderer->Perspective( (float)fovy, (float)aspect, (float)zNear, (float)zFar );
 }
 
+std::vector<std::unique_ptr<GLUquadric>> quadrics;
 GLUquadric* APIENTRY gluNewQuadric( void )
 {
-	return nullptr;
+	quadrics.emplace_back( std::make_unique<GLUquadric>() );
+	return quadrics[quadrics.size() - 1].get();
 }
 
 void APIENTRY gluDeleteQuadric(
 	GLUquadric* state )
 {
+	for ( auto i = quadrics.begin(); i != quadrics.end(); ++i )
+	{
+		if ( i->get() == state )
+		{
+			quadrics.erase( i );
+			return;
+		}
+	}
+	
+	delete state;
 }
 
 void APIENTRY gluQuadricNormals(
 	GLUquadric* quadObject,
 	GLenum              normals )
 {
+	quadObject->SetNormals( normals );
 }
 
 void APIENTRY gluQuadricTexture(
 	GLUquadric* quadObject,
 	GLboolean           textureCoords )
 {
+	quadObject->SetTexture( textureCoords );
 }
 
 void APIENTRY gluQuadricOrientation(
 	GLUquadric* quadObject,
 	GLenum              orientation )
 {
+	quadObject->SetOrientation( orientation );
 }
 
 void APIENTRY gluQuadricDrawStyle(
 	GLUquadric* quadObject,
 	GLenum              drawStyle )
 {
+	quadObject->SetDrawStyle( drawStyle );
 }
 
 void APIENTRY gluCylinder(
@@ -371,6 +388,7 @@ void APIENTRY gluCylinder(
 	GLint               slices,
 	GLint               stacks )
 {
+	qobj->Draw( *renderer, Renderer::Cylinder( (float)baseRadius, (float)topRadius, (float)height ), slices, stacks );
 }
 
 void APIENTRY gluDisk(
@@ -380,6 +398,7 @@ void APIENTRY gluDisk(
 	GLint               slices,
 	GLint               loops )
 {
+	qobj->Draw( *renderer, Renderer::Disc( (float)innerRadius, (float)outerRadius ), slices, loops );
 }
 
 void APIENTRY gluPartialDisk(
@@ -391,6 +410,7 @@ void APIENTRY gluPartialDisk(
 	GLdouble            startAngle,
 	GLdouble            sweepAngle )
 {
+	qobj->Draw( *renderer, Renderer::Disc( (float)innerRadius, (float)outerRadius, Degree( (float)startAngle ), Degree( (float)sweepAngle ) ), slices, loops );
 }
 
 void APIENTRY gluSphere(
@@ -399,4 +419,5 @@ void APIENTRY gluSphere(
 	GLint               slices,
 	GLint               stacks )
 {
+	qobj->Draw( *renderer, Renderer::Sphere( (float)radius ), slices, stacks );
 }

@@ -6,19 +6,30 @@ namespace NeHe
 	LESSON::LESSON()
 		: xrot( 0.f )
 		, yrot( 0.f )
-		, xspeed( 0.f )
-		, yspeed( 0.f )
+		, xspeed( 1.f )
+		, yspeed( 1.f )
 		, filter( 0 )
 		, texture{ 0, }
 		, part1( 0 )
 		, part2( 0 )
 		, quadratic( nullptr )
+		, object( 0 )
 	{
-		assert( "not implemented yet" && false );
 	}
 
 	LESSON::~LESSON()
 	{
+	}
+
+	DWORD timer = 0;
+	void LESSON::Update( DWORD milliseconds ) 
+	{
+		timer += milliseconds;
+		if ( timer > 3000 )
+		{
+			timer = 0;
+			object = (object + 1) % 6;
+		}
 	}
 
 	int LESSON::LoadGLTextures()									// Load Bitmaps And Convert To Textures
