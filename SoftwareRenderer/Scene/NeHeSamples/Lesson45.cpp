@@ -277,6 +277,7 @@ namespace NeHe
 					flX = (float)nX + ((nTri == 1 || nTri == 2 || nTri == 5) ? flResolution : 0.0f);
 					flZ = (float)nZ + ((nTri == 2 || nTri == 4 || nTri == 5) ? flResolution : 0.0f);
 
+#pragma warning ( disable:6386 )
 					// Set The Data, Using PtHeight To Obtain The Y Value
 					m_pVertices[nIndex].x = flX - (m_pTextureImage->sizeX / 2);
 					m_pVertices[nIndex].y = PtHeight( (int)flX, (int)flZ ) *  flHeightScale;
@@ -285,6 +286,7 @@ namespace NeHe
 					// Stretch The Texture Across The Entire Mesh
 					m_pTexCoords[nIndex].u = flX / m_pTextureImage->sizeX;
 					m_pTexCoords[nIndex].v = flZ / m_pTextureImage->sizeY;
+#pragma warning ( default:6386 )
 
 					// Increment Our Index
 					nIndex++;
