@@ -1,5 +1,6 @@
 #pragma once
 #include "IRasterizer.h"
+#include "ShadeModel.h"
 
 class Bounds;
 namespace Renderer
@@ -8,8 +9,8 @@ namespace Renderer
 	class LineRasterizer final : public IRasterizer
 	{
 	public:
-		LineRasterizer( std::vector<Vertex>&& vertices );
-		LineRasterizer( const Vertex& a, const Vertex& b );
+		LineRasterizer( std::vector<Vertex>&& vertices, ShadeModel::ShadeFunc shadeFunc );
+		LineRasterizer( const Vertex& a, const Vertex& b, ShadeModel::ShadeFunc shadeFunc );
 		~LineRasterizer() override;
 
 		float CheckFacet() const override;
@@ -18,5 +19,6 @@ namespace Renderer
 
 	private:
 		const std::vector<Vertex> vertices;
+		const ShadeModel::ShadeFunc shadeFunc;
 	};
 }

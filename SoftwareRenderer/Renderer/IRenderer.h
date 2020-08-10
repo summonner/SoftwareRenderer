@@ -6,6 +6,7 @@
 #include "Blending/BlendComponent.h"
 #include "CullFace/CullFaceComponent.h"
 #include "Lighting/LightingComponent.h"
+#include "Rasterizer/ShadeModel.h"
 #include "Mesh/Mesh.h"
 
 namespace Renderer
@@ -48,6 +49,7 @@ public:
 		cullFace.Reset();
 		lighting.Reset();
 		blender.Reset();
+		Renderer::ShadeModel::type = Renderer::ShadeModel::Type::Smooth;
 	}
 
 public:

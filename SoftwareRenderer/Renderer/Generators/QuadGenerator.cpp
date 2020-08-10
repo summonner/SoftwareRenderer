@@ -17,7 +17,7 @@ namespace Renderer
 	
 	void QuadGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, const Vertex& d, IGeometryList& outRasterizers )
 	{
-		TriangleGenerator::Build( a, b, c, outRasterizers );
-		TriangleGenerator::Build( a, c, d, outRasterizers );
+		TriangleGenerator::Build( a, b, d, outRasterizers );
+		TriangleGenerator::Build( b, c, d, outRasterizers );
 	}
 }

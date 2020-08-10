@@ -5,6 +5,7 @@
 #include "Renderer/Rasterizer/PointRasterizer.h"
 #include "Renderer/Rasterizer/LineRasterizer.h"
 #include "Renderer/Rasterizer/PolygonRasterizer.h"
+#include "Renderer/Rasterizer/ShadeModel.h"
 
 namespace Renderer
 {
@@ -38,14 +39,14 @@ namespace Renderer
 			return std::make_unique<PointRasterizer>( vertices[0] );
 		}
 
+		const auto shadeFunc = ShadeModel::FlatFunc( c.color );
 		const int thirdIndex = SelectThirdVertex( vertices, secondIndex );
 		if ( thirdIndex < 0 )
 		{
-
-			return std::make_unique<LineRasterizer>( vertices[0], vertices[secondIndex] );
+			return std::make_unique<LineRasterizer>( vertices[0], vertices[secondIndex], shadeFunc );
 		}
 
-		return std::make_unique<PolygonRasterizer>( std::move( vertices ), secondIndex, thirdIndex );
+		return std::make_unique<PolygonRasterizer>( std::move( vertices ), secondIndex, thirdIndex, shadeFunc );
 	}
 
 	int Triangle::SelectSecondVertex( const std::vector<Vertex>& vertices )

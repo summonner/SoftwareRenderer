@@ -333,6 +333,9 @@
     <ClInclude Include="Scene\gl\GLUquadric.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\ShadeModel.h">
+      <Filter>Renderer\Rasterizer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -419,9 +422,6 @@
     </ClCompile>
     <ClCompile Include="Renderer\Texturing\Mipmap.cpp">
       <Filter>Renderer\Texturing</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\PixelValues.cpp">
-      <Filter>Renderer\Rasterizer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Geometry\Line.cpp">
       <Filter>Renderer\Geometry</Filter>
@@ -554,6 +554,9 @@
     </ClCompile>
     <ClCompile Include="Scene\gl\GLUquadric.cpp">
       <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\ShadeModel.cpp">
+      <Filter>Renderer\Rasterizer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

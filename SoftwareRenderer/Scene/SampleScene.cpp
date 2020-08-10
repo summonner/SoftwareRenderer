@@ -19,6 +19,8 @@ SampleScene::SampleScene()
 	, light( new Renderer::Light() )
 	, adapter( std::make_unique<glBridge>() )
 {
+	light->position = Vector4( 2, 2, -1, 1 );
+
 	const auto bitmap = Bitmap::Load( _T( "Data/glass.bmp" ) );
 	texture = std::make_shared<Renderer::Texture2D>( *bitmap, true );
 	texture->SetWrapMode( TextureWrapMode::MirroredRepeat, TextureWrapMode::MirroredRepeat );
@@ -167,12 +169,16 @@ void SampleScene::PointerTest() const
 	glRotatef( x * 90.f, 0.0f, 1.0f, 0.0f );
 	glBindTexture( GL_TEXTURE_2D, texture );
 
+	glEnableClientState( GL_VERTEX_ARRAY );
+	glEnableClientState( GL_COLOR_ARRAY );
 	const auto stride = 8 * 4;
 	glVertexPointer( 3, GL_FLOAT, stride, v );
 	glTexCoordPointer( 2, GL_FLOAT, stride, v + 3 );
 //	glNormalPointer( GL_FLOAT, stride, v + 5 );
 	glNormalPointer( GL_BYTE, 0, n );
 	glDrawArrays( GL_QUADS, 0, 6 * 4 );
+	glDisableClientState( GL_COLOR_ARRAY );
+	glDisableClientState( GL_VERTEX_ARRAY );
 }
 
 void SampleScene::IndexTest() const
@@ -221,10 +227,14 @@ void SampleScene::IndexTest() const
 	glRotatef( x * 90.f, 0.0f, 1.0f, 0.0f );
 	glBindTexture( GL_TEXTURE_2D, texture );
 
+	glEnableClientState( GL_VERTEX_ARRAY );
+	glEnableClientState( GL_COLOR_ARRAY );
 	const auto stride = 6 * 4;
 	glVertexPointer( 3, GL_FLOAT, stride, v );
 	glColorPointer( 3, GL_FLOAT, stride, v + 3 );
 	glDrawElements( GL_TRIANGLES, 8 * 3, GL_UNSIGNED_SHORT, indices );
+	glDisableClientState( GL_COLOR_ARRAY );
+	glDisableClientState( GL_VERTEX_ARRAY );
 //	glDrawElements( GL_LINES, 12 * 2, GL_UNSIGNED_SHORT, line );
 }
 

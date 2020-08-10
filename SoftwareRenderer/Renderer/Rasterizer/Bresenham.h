@@ -1,5 +1,6 @@
 #pragma once
 #include "Math/Vector2.hpp"
+#include "ShadeModel.h"
 
 namespace Renderer
 {
@@ -8,8 +9,7 @@ namespace Renderer
 	class Bresenham final
 	{
 	public:
-		Bresenham( const Vertex& a, const Vertex& b );
-		Bresenham( const Vertex* a, const Vertex* b );
+		Bresenham( const Vertex& a, const Vertex& b, ShadeModel::ShadeFunc shadeFunc );
 		Bresenham( const Bresenham& source );
 		~Bresenham();
 
@@ -33,6 +33,7 @@ namespace Renderer
 		const Vector2Int sign;
 		int d;
 
+		const ShadeModel::ShadeFunc shadeFunc;
 		const std::function<float(const Bresenham&)> CalculateT;
 
 		Vector2Int _p;

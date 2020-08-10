@@ -1,5 +1,6 @@
 #pragma once
 #include "IRasterizer.h"
+#include "ShadeModel.h"
 
 namespace Renderer
 {
@@ -8,7 +9,7 @@ namespace Renderer
 	class PolygonRasterizer final : public IRasterizer
 	{
 	public:
-		PolygonRasterizer( std::vector<Vertex>&& vertices, const int secondIndex, const int thirdIndex );
+		PolygonRasterizer( std::vector<Vertex>&& vertices, int secondIndex, int thirdIndex, ShadeModel::ShadeFunc shadeFunc );
 		~PolygonRasterizer() override;
 
 		void Rasterize( const Bounds& bounds, const ProcessPixel process ) override;
@@ -22,9 +23,10 @@ namespace Renderer
 		size_t Backward( size_t i ) const;
 
 		static bool AscendingY( const Vertex& left, const Vertex& right );
-		static void Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, const ProcessPixel process );
+		static void Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, const ProcessPixel process, const ShadeModel::ShadeFunc shadeFunc );
 
 	private:
+		const ShadeModel::ShadeFunc shadeFunc;
 		const std::vector<Vertex> vertices;
 		const Vertex& a;
 		const Vertex& b;

@@ -3,6 +3,7 @@
 #include "Math/Vector4.hpp"
 #include "glBridge.h"
 #include "GLUquadric.h"
+#include "Renderer/Rasterizer/ShadeModel.h"
 
 glBridge* adapter;
 #define renderer adapter->renderer
@@ -258,7 +259,12 @@ WINGDIAPI void APIENTRY glFrontFace( GLenum mode )
 
 WINGDIAPI void APIENTRY glShadeModel( GLenum mode )
 {
-	// TODO
+	static const Dictionary<GLenum, Renderer::ShadeModel::Type> table
+	{
+		{ GL_FLAT, Renderer::ShadeModel::Type::Flat },
+		{ GL_SMOOTH, Renderer::ShadeModel::Type::Smooth },
+	};
+	Renderer::ShadeModel::type = table[mode];
 }
 
 WINGDIAPI void APIENTRY glHint( GLenum target, GLenum mode )

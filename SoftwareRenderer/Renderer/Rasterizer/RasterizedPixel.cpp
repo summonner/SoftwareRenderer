@@ -3,6 +3,7 @@
 #include "Bresenham.h"
 #include "DerivativeTexcoord.h"
 #include "Renderer/Vertex.h"
+#include "ShadeModel.h"
 
 namespace Renderer
 {
@@ -38,7 +39,14 @@ namespace Renderer
 
 	Vector4 RasterizedPixel::GetColor() const
 	{
-		return values.color / values.w;
+		if ( ShadeModel::IsFlat() == true )
+		{
+			return values.color;
+		}
+		else
+		{
+			return values.color / values.w;
+		}
 	}
 
 	Vector2 RasterizedPixel::GetTexcoord() const

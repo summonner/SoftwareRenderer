@@ -5,7 +5,7 @@
 
 namespace Renderer
 {
-	BresenhamList::BresenhamList( const std::vector<const Vertex*>& vertices )
+	BresenhamList::BresenhamList( const std::vector<const Vertex*>& vertices, ShadeModel::ShadeFunc shadeFunc )
 		: currentIndex( 0 )
 		, _x( 0 )
 		, x( _x )
@@ -16,7 +16,7 @@ namespace Renderer
 		{
 			if ( a != nullptr )
 			{
-				edges.emplace_back( *a, *b );
+				edges.emplace_back( *a, *b, shadeFunc );
 			}
 
 			a = b;

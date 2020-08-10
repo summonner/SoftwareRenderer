@@ -10,7 +10,5 @@ namespace Renderer
 		const float depth;
 		const Vector4 color;
 		const Vector2 texcoord;
-
-		static PixelValues Lerp( const PixelValues& left, const PixelValues& right, const float t );
 	};
 }

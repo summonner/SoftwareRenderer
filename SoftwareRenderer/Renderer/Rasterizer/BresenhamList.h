@@ -7,7 +7,7 @@ namespace Renderer
 	class BresenhamList final
 	{
 	public:
-		BresenhamList( const std::vector<const Vertex*>& vertices );
+		BresenhamList( const std::vector<const Vertex*>& vertices, ShadeModel::ShadeFunc shadeFunc );
 		BresenhamList( const BresenhamList& source );
 		~BresenhamList();
 

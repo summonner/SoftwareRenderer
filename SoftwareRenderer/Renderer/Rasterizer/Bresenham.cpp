@@ -2,10 +2,11 @@
 #include "Bresenham.h"
 #include "PixelValues.h"
 #include "Renderer/Vertex.h"
+#include "ShadeModel.h"
 
 namespace Renderer
 {
-	Bresenham::Bresenham( const Vertex& a, const Vertex& b )
+	Bresenham::Bresenham( const Vertex& a, const Vertex& b, ShadeModel::ShadeFunc shadeFunc )
 		: a( a )
 		, b( b )
 		, diff( b.screen - a.screen )
@@ -17,11 +18,7 @@ namespace Renderer
 		, _w( a.position.w )
 		, p( _p )
 		, w( _w )
-	{
-	}
-
-	Bresenham::Bresenham( const Vertex* a, const Vertex* b )
-		: Bresenham( *a, *b )
+		, shadeFunc( shadeFunc != nullptr ? shadeFunc : ShadeModel::SmoothFunc( a.color, b.color ) )
 	{
 	}
 
@@ -37,6 +34,7 @@ namespace Renderer
 		, _w( source._w )
 		, p( _p )
 		, w( _w )
+		, shadeFunc( source.shadeFunc )
 	{
 	}
 
@@ -107,7 +105,7 @@ namespace Renderer
 
 	Vector4 Bresenham::GetColor() const
 	{
-		return Vector4::Lerp( a.color, b.color, t );
+		return shadeFunc( t );
 	}
 
 	float Bresenham::GetDepth() const

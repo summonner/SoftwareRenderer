@@ -5,6 +5,7 @@
 #include "Renderer/Rasterizer/DerivativeTexcoord.h"
 #include "Renderer/Rasterizer/LineRasterizer.h"
 #include "Renderer/Rasterizer/PointRasterizer.h"
+#include "Renderer/Rasterizer/ShadeModel.h"
 
 namespace Renderer
 {
@@ -37,6 +38,6 @@ namespace Renderer
 			return std::make_unique<PointRasterizer>( vertices[0] );
 		}
 
-		return std::make_unique<LineRasterizer>( std::move( vertices ) );
+		return std::make_unique<LineRasterizer>( std::move( vertices ), ShadeModel::FlatFunc( b.color ) );
 	}
 }

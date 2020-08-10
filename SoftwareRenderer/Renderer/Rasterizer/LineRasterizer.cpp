@@ -9,14 +9,16 @@
 
 namespace Renderer
 {
-	LineRasterizer::LineRasterizer( std::vector<Vertex>&& vertices )
+	LineRasterizer::LineRasterizer( std::vector<Vertex>&& vertices, ShadeModel::ShadeFunc shadeFunc )
 		: vertices( std::move( vertices ) )
+		, shadeFunc( shadeFunc )
 	{
 		assert( this->vertices.size() == 2 );
 	}
 
-	LineRasterizer::LineRasterizer( const Vertex& a, const Vertex& b )
+	LineRasterizer::LineRasterizer( const Vertex& a, const Vertex& b, ShadeModel::ShadeFunc shadeFunc )
 		: vertices( { a, b } )
+		, shadeFunc( shadeFunc )
 	{
 	}
 
@@ -26,7 +28,7 @@ namespace Renderer
 
 	void LineRasterizer::Rasterize( const Bounds& bounds, const ProcessPixel process )
 	{
-		auto e = Bresenham( vertices[0], vertices[1] );
+		auto e = Bresenham( vertices[0], vertices[1], shadeFunc );
 		do {
 			if ( bounds.Contains( e.p ) == false )
 			{

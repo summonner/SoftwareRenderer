@@ -9,11 +9,12 @@
 
 namespace Renderer
 {
-	PolygonRasterizer::PolygonRasterizer( std::vector<Vertex>&& vertices, const int secondIndex, const int thirdIndex  )
+	PolygonRasterizer::PolygonRasterizer( std::vector<Vertex>&& vertices, int secondIndex, int thirdIndex, ShadeModel::ShadeFunc shadeFunc )
 		: vertices( std::move( vertices ) )
 		, a( this->vertices[0] )
 		, b( this->vertices[secondIndex] )
 		, c( this->vertices[thirdIndex] )
+		, shadeFunc( shadeFunc )
 	{
 		assert( this->vertices.size() >= 3 );
 	}
@@ -52,7 +53,7 @@ namespace Renderer
 
 		auto e1 = BuildEdge( minmax, &PolygonRasterizer::Forward );
 		auto e2 = BuildEdge( minmax, &PolygonRasterizer::Backward );
-		Rasterize( adjust, e1, e2, process );
+		Rasterize( adjust, e1, e2, process, shadeFunc );
 	}
 
 	std::pair<size_t, size_t> PolygonRasterizer::FindMinMax() const
@@ -84,7 +85,7 @@ namespace Renderer
 		}
 		v.push_back( &vertices[minmax.second] );
 
-		return BresenhamList( v );
+		return BresenhamList( v, shadeFunc );
 	}
 
 	size_t PolygonRasterizer::Forward( size_t i ) const
@@ -111,7 +112,7 @@ namespace Renderer
 		}
 	}
 
-	void PolygonRasterizer::Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, const ProcessPixel process )
+	void PolygonRasterizer::Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, const ProcessPixel process, const ShadeModel::ShadeFunc shadeFunc )
 	{
 		for ( const auto y : bounds.y )
 		{
@@ -127,12 +128,18 @@ namespace Renderer
 
 			const auto values1 = e1.GetValues();
 			const auto values2 = e2.GetValues();
+			const auto shading = (shadeFunc != nullptr) ? shadeFunc : ShadeModel::SmoothFunc( values1.color, values2.color );
 
 			const auto minmax = std::minmax( e1.x, e2.x );
 			for ( const auto x : bounds.x.Clamp( minmax.first, minmax.second ) )
 			{
 				const auto t = (float)(x - e1.x) / length;
-				const auto values = PixelValues::Lerp( values1, values2, t );
+				const PixelValues values {
+					::Lerp( values1.w, values2.w, t ),
+					::Lerp( values1.depth, values2.depth, t ),
+					shading( t ),
+					Vector2::Lerp( values1.texcoord, values2.texcoord, t )
+				};
 				process( RasterizedPixel( Vector2Int( x, y ), values ) );
 			}
 		}

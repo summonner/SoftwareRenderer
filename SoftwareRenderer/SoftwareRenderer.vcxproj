@@ -207,6 +207,7 @@
     <ClInclude Include="Renderer\Rasterizer\PointRasterizer.h" />
     <ClInclude Include="Renderer\Rasterizer\PolygonRasterizer.h" />
     <ClInclude Include="Renderer\Rasterizer\RasterizedPixel.h" />
+    <ClInclude Include="Renderer\Rasterizer\ShadeModel.h" />
     <ClInclude Include="Renderer\Texturing\ITexture.h" />
     <ClInclude Include="Renderer\Texturing\Mipmap.h" />
     <ClInclude Include="Renderer\Texturing\Texture2D.h" />
@@ -289,10 +290,10 @@
     <ClCompile Include="Renderer\Rasterizer\BresenhamList.cpp" />
     <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp" />
     <ClCompile Include="Renderer\Rasterizer\LineRasterizer.cpp" />
-    <ClCompile Include="Renderer\Rasterizer\PixelValues.cpp" />
     <ClCompile Include="Renderer\Rasterizer\PointRasterizer.cpp" />
     <ClCompile Include="Renderer\Rasterizer\PolygonRasterizer.cpp" />
     <ClCompile Include="Renderer\Rasterizer\RasterizedPixel.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\ShadeModel.cpp" />
     <ClCompile Include="Renderer\Texturing\Mipmap.cpp" />
     <ClCompile Include="Renderer\Texturing\Texture2D.cpp" />
     <ClCompile Include="Renderer\Texturing\TextureFilter.cpp" />
