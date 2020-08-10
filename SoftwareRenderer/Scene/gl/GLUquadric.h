@@ -27,4 +27,14 @@ private:
 
 private:
 	static const Dictionary<GLenum, Renderer::Quadric::IndexFunc> drawStyleTable;
+
+	class ScopedShadeModel
+	{
+	public:
+		ScopedShadeModel( GLenum type );
+		~ScopedShadeModel();
+
+	private:
+		Renderer::ShadeModel::Type oldType;
+	};
 };
