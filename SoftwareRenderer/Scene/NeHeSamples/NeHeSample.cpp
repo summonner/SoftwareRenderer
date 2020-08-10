@@ -7,31 +7,39 @@
 NeHeSample::NeHeSample( std::unique_ptr<NeHe::ILesson> lesson )
 	: lesson( std::move( lesson ) )
 	, adapter( std::make_unique<glBridge>() )
+	, keys{ 0, }
 {
 }
 
 NeHeSample::~NeHeSample()
 {
-	adapter->Use( nullptr, [this]() { lesson->CleanGL(); } );
+	adapter->Use( [this]() { lesson->CleanGL(); } );
+	adapter->renderer = nullptr;
 }
 
 void NeHeSample::Init( const std::shared_ptr<IRenderer> renderer )
 {
-	adapter->Use( renderer.get(), [this]() { this->lesson->InitGL(); } );
+	adapter->renderer = renderer;
+	adapter->Use( [this]() { lesson->InitGL(); } );
 }
 
 void NeHeSample::OnResize( const std::shared_ptr<IRenderer> renderer, const int width, const int height )
 {
-	adapter->Use( renderer.get(), [&]() { lesson->ReSizeGLScene( width, height ); } );
+	adapter->Use( [&]() { lesson->ReSizeGLScene( width, height ); } );
 }
 
 void NeHeSample::Update( const Time& time )
 {
-	lesson->Update( (DWORD)(time.GetDeltaTime() * 1000) );
+	adapter->Use( [&]() { lesson->Update( (DWORD)(time.GetDeltaTime() * 1000), keys ); } );
+}
+
+void NeHeSample::OnKeyboardInput( BYTE keycode, bool isPressed )
+{
+	keys[keycode] = isPressed;
 }
 
 void NeHeSample::Render( const std::shared_ptr<IRenderer> renderer ) const
 {
-	adapter->Use( renderer.get(), [this]() { lesson->DrawGLScene(); } );
+	adapter->Use( [this]() { lesson->DrawGLScene(); } );
 	renderer->Present();
 }

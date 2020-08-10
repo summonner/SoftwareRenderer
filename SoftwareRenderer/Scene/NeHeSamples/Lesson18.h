@@ -11,7 +11,7 @@ namespace NeHe
 		LESSON();
 		~LESSON() override;
 
-		void Update( DWORD milliseconds ) override;
+		void Update( DWORD milliseconds, const bool keys[] ) override;
 		int DrawGLScene( GLvoid ) override;
 		int InitGL( GLvoid ) override;
 		GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) override;
@@ -22,6 +22,11 @@ namespace NeHe
 		void glDrawCube();
 
 	private:
+		bool	light;				// Lighting ON/OFF
+		bool	lp;					// L Pressed? 
+		bool	fp;					// F Pressed? 
+		bool    sp;                 // Spacebar Pressed? ( NEW )
+
 		int		part1;				// Start Of Disc ( NEW )
 		int		part2;				// End Of Disc ( NEW )
 		int		p1 = 0;				// Increase 1 ( NEW )

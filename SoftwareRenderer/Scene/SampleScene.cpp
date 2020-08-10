@@ -18,6 +18,9 @@ SampleScene::SampleScene()
 	: texture( nullptr )
 	, light( new Renderer::Light() )
 	, adapter( std::make_unique<glBridge>() )
+	, enableTexture( true )
+	, enableLight( true )
+	, enableCullFace( true )
 {
 	light->position = Vector4( 2, 2, -1, 1 );
 
@@ -30,17 +33,16 @@ SampleScene::SampleScene()
 
 SampleScene::~SampleScene()
 {
+	adapter->renderer = nullptr;
 }
 
 void SampleScene::Init( const std::shared_ptr<IRenderer> renderer )
 {
-	adapter->Use( renderer.get(), []()
+	adapter->renderer = renderer;
+	adapter->Use( []()
 	{
 		glClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
-		glEnable( GL_TEXTURE_2D );
 		glBlendFunc( GL_SRC_ALPHA, GL_ONE );
-//		glEnable( GL_CULL_FACE );
-		glEnable( GL_LIGHTING );
 	} );
 	renderer->lighting.Add( light );
 }
@@ -57,6 +59,32 @@ void SampleScene::Update( const Time& time )
 	auto t = time.GetTimeFromStart();
 //	t = .152f;
 	x = (sin( t ));// +1.f) * 0.5f;
+//	x = 0;
+}
+
+void SampleScene::OnKeyboardInput( BYTE keyCode, bool isPressed )
+{
+	const Dictionary<BYTE, std::function<void( void )>> toggleFeatures (
+	{
+		{ 'T', [&]() { enableTexture = !enableTexture; } },
+		{ 'L', [&]() { enableLight = !enableLight; } },
+		{ 'C', [&]() { enableCullFace = !enableCullFace; } },
+	}, []() { /* do nothing */ } );
+
+	if ( isPressed == true )
+	{
+		toggleFeatures[keyCode]();
+	}
+}
+
+void SampleScene::Render( const std::shared_ptr<IRenderer> renderer ) const
+{
+	renderer->texture.SetEnable( enableTexture );
+	renderer->lighting.SetEnable( enableLight );
+	renderer->cullFace.SetEnable( enableCullFace );
+
+	adapter->Use( [this]() { SampleScene::DrawScene(); } );
+	renderer->Present();
 }
 
 void SampleScene::DrawScene() const
@@ -346,10 +374,4 @@ void SampleScene::Cube() const
 	glTexCoord2f( 1.0f, 1.0f ); glVertex3f( -1.0f, 1.0f, 1.0f );
 	glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -1.0f, 1.0f, -1.0f );
 	glEnd();
-}
-
-void SampleScene::Render( const std::shared_ptr<IRenderer> renderer ) const
-{
-	adapter->Use( renderer.get(), [this]() { SampleScene::DrawScene(); } );
-	renderer->Present();
 }

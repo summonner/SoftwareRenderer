@@ -16,10 +16,13 @@ public:
 	void Init( const std::shared_ptr<IRenderer> renderer ) override;
 	void OnResize( const std::shared_ptr<IRenderer> renderer, const int width, const int height ) override;
 	void Update( const Time& time ) override;
+	void OnKeyboardInput( BYTE keyCode, bool isPressed ) override;
 	void Render( const std::shared_ptr<IRenderer> renderer ) const override;
 
 private:
 	const std::unique_ptr<NeHe::ILesson> lesson;
 	const std::unique_ptr<glBridge> adapter;
+
+	bool keys[256];
 };
 

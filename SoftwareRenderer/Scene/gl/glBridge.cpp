@@ -11,11 +11,9 @@ glBridge::~glBridge()
 }
 
 
-void glBridge::Use( IRenderer* renderer, std::function<void( void )> process )
+void glBridge::Use( std::function<void( void )> process )
 {
 	::adapter = this;
-	this->renderer = renderer;
 	process();
-	this->renderer = nullptr;
 	::adapter = nullptr;
 }

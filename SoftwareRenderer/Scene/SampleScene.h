@@ -17,6 +17,7 @@ public:
 	void Init( const std::shared_ptr<IRenderer> renderer ) override;
 	void OnResize( const std::shared_ptr<IRenderer> renderer, const int width, const int height ) override;
 	void Update( const Time& time ) override;
+	void OnKeyboardInput( BYTE keyCode, bool isPressed ) override;
 	void Render( const std::shared_ptr<IRenderer> renderer ) const override;
 
 private:
@@ -33,6 +34,10 @@ private:
 	std::shared_ptr<Renderer::Texture2D> texture;
 	std::shared_ptr<Renderer::Light> light;
 	void DrawScene() const;
+
+	bool enableTexture;
+	bool enableLight;
+	bool enableCullFace;
 
 private:
 	std::unique_ptr<glBridge> adapter;

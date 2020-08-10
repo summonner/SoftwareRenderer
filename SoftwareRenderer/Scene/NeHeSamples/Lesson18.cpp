@@ -6,14 +6,18 @@ namespace NeHe
 	LESSON::LESSON()
 		: xrot( 0.f )
 		, yrot( 0.f )
-		, xspeed( 1.f )
-		, yspeed( 1.f )
+		, xspeed( 0.f )
+		, yspeed( 0.f )
 		, filter( 0 )
 		, texture{ 0, }
 		, part1( 0 )
 		, part2( 0 )
 		, quadratic( nullptr )
 		, object( 0 )
+		, light( false )
+		, lp( false )
+		, fp( false )
+		, sp( false )
 	{
 	}
 
@@ -21,14 +25,72 @@ namespace NeHe
 	{
 	}
 
-	DWORD timer = 0;
-	void LESSON::Update( DWORD milliseconds ) 
+	void LESSON::Update( DWORD milliseconds, const bool keys[] ) 
 	{
-		timer += milliseconds;
-		if ( timer > 3000 )
+		if ( keys['L'] && !lp )
 		{
-			timer = 0;
-			object = (object + 1) % 6;
+			lp = TRUE;
+			light = !light;
+			if ( !light )
+			{
+				glDisable( GL_LIGHTING );
+			}
+			else
+			{
+				glEnable( GL_LIGHTING );
+			}
+		}
+		if ( !keys['L'] )
+		{
+			lp = FALSE;
+		}
+		if ( keys['F'] && !fp )
+		{
+			fp = TRUE;
+			filter += 1;
+			if ( filter > 2 )
+			{
+				filter = 0;
+			}
+		}
+		if ( !keys['F'] )
+		{
+			fp = FALSE;
+		}
+		if ( keys[' '] && !sp )
+		{
+			sp = TRUE;
+			object++;
+			if ( object > 5 )
+				object = 0;
+		}
+		if ( !keys[' '] )
+		{
+			sp = FALSE;
+		}
+		if ( keys[VK_PRIOR] )
+		{
+			z -= 0.02f;
+		}
+		if ( keys[VK_NEXT] )
+		{
+			z += 0.02f;
+		}
+		if ( keys[VK_UP] )
+		{
+			xspeed -= 0.01f;
+		}
+		if ( keys[VK_DOWN] )
+		{
+			xspeed += 0.01f;
+		}
+		if ( keys[VK_RIGHT] )
+		{
+			yspeed += 0.01f;
+		}
+		if ( keys[VK_LEFT] )
+		{
+			yspeed -= 0.01f;
 		}
 	}
 

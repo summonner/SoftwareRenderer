@@ -209,6 +209,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			PostQuitMessage(0);
 			break;
 
+        case WM_KEYDOWN:
+        case WM_KEYUP:
+            if ( wParam == VK_ESCAPE )
+            {
+                DestroyWindow( hWnd );
+            }
+            else
+            {
+                scene->OnKeyboardInput( wParam, message == WM_KEYDOWN );
+            }
+
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
     }

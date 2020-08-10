@@ -13,9 +13,9 @@ public:
 	glBridge();
 	~glBridge();
 
-	void Use( IRenderer* renderer, std::function<void( void )> process );
+	void Use( std::function<void( void )> process );
 
-	IRenderer* renderer;
+	std::shared_ptr<IRenderer> renderer;
 	glTextureManager textureManager;
 	glLightManager lightManager;
 	glMeshBuilder meshBuilder;

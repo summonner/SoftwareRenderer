@@ -12,7 +12,7 @@ namespace NeHe
 		virtual GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) abstract;
 		virtual int DrawGLScene( GLvoid ) abstract;
 		virtual int InitGL( GLvoid ) abstract;
-		virtual void Update( DWORD milliseconds ) {};
+		virtual void Update( DWORD milliseconds, const bool keys[] ) {};
 	};
 
 	AUX_RGBImageRec* LoadBMP( LPCSTR filePath );

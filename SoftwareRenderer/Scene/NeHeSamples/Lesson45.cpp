@@ -149,19 +149,9 @@ namespace NeHe
 		return TRUE;
 	}
 
-	void LESSON::Update( DWORD milliseconds )								// Perform Motion Updates Here
+	void LESSON::Update( DWORD milliseconds, const bool keys[] )	// Perform Motion Updates Here
 	{
 		g_flYRot += (float)(milliseconds) / 1000.0f * 25.0f;		// Consistantly Rotate The Scenery
-
-		//if (g_keys->keyDown [VK_ESCAPE] == TRUE)					// Is ESC Being Pressed?
-		//{
-		//	TerminateApplication (g_window);						// Terminate The Program
-		//}
-
-		//if (g_keys->keyDown [VK_F1] == TRUE)						// Is F1 Being Pressed?
-		//{
-		//	ToggleFullscreen (g_window);							// Toggle Fullscreen Mode
-		//}
 	}
 
 	int LESSON::DrawGLScene( void )
