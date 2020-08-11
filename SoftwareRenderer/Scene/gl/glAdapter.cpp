@@ -70,7 +70,7 @@ WINGDIAPI void APIENTRY glClear( GLbitfield mask )
 {
 	if ( mask & GL_COLOR_BUFFER_BIT )
 	{
-		renderer->Clear();
+		renderer->backBuffer->Clear();
 	}
 
 	if ( mask & GL_DEPTH_BUFFER_BIT )
@@ -81,7 +81,7 @@ WINGDIAPI void APIENTRY glClear( GLbitfield mask )
 
 WINGDIAPI void APIENTRY glClearColor( GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha )
 {
-	renderer->SetClearColor( red, green, blue, alpha );
+	renderer->backBuffer->SetClearValue( Vector4( red, green, blue, alpha ) );
 }
 
 WINGDIAPI void APIENTRY glClearDepth( GLclampd depth )

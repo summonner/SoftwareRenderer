@@ -75,9 +75,6 @@
     <ClInclude Include="SoftwareRenderer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\GdiRenderer.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\IRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -86,9 +83,6 @@
     </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\FrameBuffer.h">
-      <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Util\IBaseIterator.h">
       <Filter>Util</Filter>
@@ -339,6 +333,12 @@
     <ClInclude Include="Matrix.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\IFrameBuffer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\FrameBuffer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -357,17 +357,11 @@
     <ClCompile Include="WinMain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\GdiRenderer.cpp">
-      <Filter>Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="framework.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\FrameBuffer.cpp">
-      <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Math\RangeInt.cpp">
       <Filter>Math</Filter>
@@ -562,6 +556,12 @@
       <Filter>Renderer\Rasterizer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Matrix.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\IRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\FrameBuffer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>

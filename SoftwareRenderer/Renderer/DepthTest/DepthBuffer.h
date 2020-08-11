@@ -2,12 +2,14 @@
 #include "DepthFunc.h"
 #include "Renderer/IComponent.h"
 
+class Bounds;
 namespace Renderer
 {
 	class RasterizedPixel;
 	class DepthBuffer final : public BaseComponent
 	{
 	public:
+		DepthBuffer( const Bounds& bounds );
 		DepthBuffer( int width, int height );
 		~DepthBuffer();
 

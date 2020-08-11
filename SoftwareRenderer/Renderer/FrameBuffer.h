@@ -1,32 +1,25 @@
 #pragma once
 #include "PixelIterator.h"
 #include "Math/Vector4.hpp"
+#include "IFrameBuffer.h"
 
 namespace Renderer
 {
-	class FrameBuffer final
+	class FrameBuffer final : public IFrameBuffer
 	{
 	public:
+		static std::unique_ptr<FrameBuffer> Create( HWND hWnd );
 		FrameBuffer( const HDC dc, const int width, const int height );
-		~FrameBuffer();
+		~FrameBuffer() override;
 
-		void Reset();
-		void Clear();
-		void SetClearValue( const Vector4& value );
+		Bounds GetBounds() const override;
+		void Reset() override;
+		void Clear() override;
+		void SetClearValue( const Vector4& value ) override;
+		void SetPixel( const Vector2Int& p, const Vector4& color ) override;
+		void SetPixel( const Vector2Int& p, const Vector4& srcColor, std::function<Vector4( const Vector4&, const Vector4& )> blender ) override;
+
 		void BitBlt( const HDC dc );
-		void SetPixel( const Vector2Int& p, const Vector4& color );
-		void SetPixel( const Vector2Int& p, const Vector4& srcColor, std::function<Vector4( const Vector4&, const Vector4& )> blender );
-
-		inline PixelIterator begin() const
-		{
-			return PixelIterator( info.biWidth, info.biHeight, 0, 0 );
-		}
-
-		inline const PixelIterator end() const
-		{
-			return PixelIterator( info.biWidth, info.biHeight, info.biWidth - 1, info.biHeight - 1 );
-		}
-
 	private:
 		inline int GetIndex( const Vector2Int& p )
 		{
@@ -55,6 +48,7 @@ namespace Renderer
 		const HDC dc;
 		const HBITMAP buffer;
 		const BITMAPINFOHEADER info;
+
 		std::unique_ptr<BYTE[]> pixels;
 		RGBQUAD clearValue;
 

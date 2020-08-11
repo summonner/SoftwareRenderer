@@ -2,10 +2,16 @@
 #include "framework.h"
 #include "DepthBuffer.h"
 #include "Math/Vector2.hpp"
+#include "Math/Bounds.h"
 #include "Renderer/Rasterizer/RasterizedPixel.h"
 
 namespace Renderer 
 {
+	DepthBuffer::DepthBuffer( const Bounds& bounds )
+		: DepthBuffer( bounds.x.Length(), bounds.y.Length() )
+	{
+	}
+
 	DepthBuffer::DepthBuffer( int width, int height )
 		: width( width )
 		, height( height )

@@ -41,5 +41,4 @@ void NeHeSample::OnKeyboardInput( BYTE keycode, bool isPressed )
 void NeHeSample::Render( const std::shared_ptr<IRenderer> renderer ) const
 {
 	adapter->Use( [this]() { lesson->DrawGLScene(); } );
-	renderer->Present();
 }

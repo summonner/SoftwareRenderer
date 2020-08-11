@@ -1,7 +1,7 @@
 #pragma once
-#include "Renderer/IRenderer.h"
 #include "Types.h"
 #include "Util/Dictionary.hpp"
+#include "Renderer/Mesh/Mesh.h"
 
 namespace Renderer
 {

@@ -174,7 +174,6 @@
     <ClInclude Include="Renderer\DepthTest\DepthBuffer.h" />
     <ClInclude Include="Renderer\DepthTest\DepthFunc.h" />
     <ClInclude Include="Renderer\FrameBuffer.h" />
-    <ClInclude Include="Renderer\GdiRenderer.h" />
     <ClInclude Include="Renderer\Generators\GeometryGenerator.h" />
     <ClInclude Include="Renderer\Generators\LineGenerator.h" />
     <ClInclude Include="Renderer\Generators\PointGenerator.h" />
@@ -187,6 +186,7 @@
     <ClInclude Include="Renderer\Geometry\SutherlanHodgman.h" />
     <ClInclude Include="Renderer\Geometry\Triangle.h" />
     <ClInclude Include="Renderer\IComponent.h" />
+    <ClInclude Include="Renderer\IFrameBuffer.h" />
     <ClInclude Include="Renderer\IRenderer.h" />
     <ClInclude Include="Renderer\Lighting\Light.h" />
     <ClInclude Include="Renderer\Lighting\LightingComponent.h" />
@@ -266,7 +266,7 @@
     <ClCompile Include="Renderer\DepthTest\DepthBuffer.cpp" />
     <ClCompile Include="Renderer\DepthTest\DepthFunc.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />
-    <ClCompile Include="Renderer\GdiRenderer.cpp" />
+    <ClCompile Include="Renderer\IRenderer.cpp" />
     <ClCompile Include="Renderer\Generators\GeometryGenerator.cpp" />
     <ClCompile Include="Renderer\Generators\LineGenerator.cpp" />
     <ClCompile Include="Renderer\Generators\PointGenerator.cpp" />

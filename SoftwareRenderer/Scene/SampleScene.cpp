@@ -85,7 +85,6 @@ void SampleScene::Render( const std::shared_ptr<IRenderer> renderer ) const
 	renderer->cullFace.SetEnable( enableCullFace );
 
 	adapter->Use( [this]() { SampleScene::DrawScene(); } );
-	renderer->Present();
 }
 
 void SampleScene::DrawScene() const

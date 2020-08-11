@@ -1,4 +1,5 @@
 #pragma once
+#include "Generators/GeometryGenerator.h"
 #include "Texturing/TextureComponent.h"
 #include "DepthTest/DepthBuffer.h"
 #include "Blending/BlendComponent.h"
@@ -7,35 +8,33 @@
 #include "Rasterizer/ShadeModel.h"
 #include "Mesh/Mesh.h"
 #include "Matrix.h"
+#include "IFrameBuffer.h"
 
-class IRenderer abstract
+namespace Renderer
 {
+	class Vertex;
+}
+
+class IRenderer
+{
+public:
+	IRenderer( std::unique_ptr<IFrameBuffer> frameBuffer );
+	~IRenderer();
+
+	void Draw( const Renderer::Mesh& mesh );
+
+	void Reset();
+
+private:
+	Renderer::Vertex TransformVertex( Renderer::Vertex v ) const;
+	void Render();
+
+	Renderer::GeometryGenerator generator;
+	std::vector<Renderer::Vertex> vertices;
 
 public:
-	IRenderer( int width, int height )
-		: depthBuffer( width, height )
-	{
-	}
+	const std::unique_ptr<IFrameBuffer> backBuffer;
 
-	virtual ~IRenderer() {}
-
-	virtual void Clear() abstract;
-	virtual void SetClearColor( float r, float g, float b, float a ) abstract;
-	virtual void Present() abstract;
-
-	virtual void Draw( const Renderer::Mesh& mesh ) abstract;
-
-	virtual void Reset()
-	{
-		depthBuffer.Reset();
-		texture.Reset();
-		cullFace.Reset();
-		lighting.Reset();
-		blender.Reset();
-		Renderer::ShadeModel::type = Renderer::ShadeModel::Type::Smooth;
-	}
-
-public:
 	Renderer::TextureComponent texture;
 	Renderer::DepthBuffer depthBuffer;
 	Renderer::BlendComponent blender;

@@ -3,7 +3,8 @@
 
 #include "framework.h"
 #include "SoftwareRenderer.h"
-#include "Renderer/GdiRenderer.h"
+#include "Renderer/IRenderer.h"
+#include "Renderer/FrameBuffer.h"
 #include "Time.h"
 #include "Scene/IScene.h"
 #include "SceneMenu.h"
@@ -60,6 +61,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			time.Tick();
 			scene->Update( time );
 			scene->Render( renderer );
+
+            InvalidateRect( msg.hwnd, nullptr, false );
 			Sleep( 0 );
 			continue;
 		}
@@ -152,7 +155,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case WM_CREATE:
 			RECT rect;
 			GetClientRect( hWnd, &rect );
-			renderer.reset( new Renderer::GdiRenderer( hWnd, rect.right, rect.bottom ) );
+           
+			renderer.reset( new IRenderer( Renderer::FrameBuffer::Create( hWnd ) ) );
             scene = SceneMenu::Select( hWnd );
 			scene->Init( renderer );
 			scene->OnResize( renderer, rect.right, rect.bottom );
@@ -196,10 +200,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				PAINTSTRUCT ps;
 				HDC hdc = BeginPaint( hWnd, &ps );
-				auto gdi = dynamic_cast<Renderer::GdiRenderer*>( renderer.get() );
+				auto gdi = dynamic_cast<Renderer::FrameBuffer*>( renderer->backBuffer.get() );
 				if ( gdi != nullptr )
 				{
-					gdi->Present( hdc );
+					gdi->BitBlt( hdc );
 				}
 				EndPaint( hWnd, &ps );
 			}

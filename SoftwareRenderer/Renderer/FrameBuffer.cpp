@@ -1,9 +1,21 @@
 #include "framework.h"
 #include "FrameBuffer.h"
+#include "Math/Bounds.h"
 
 namespace Renderer
 {
 	const BYTE FrameBuffer::colorBytes = 4;
+	std::unique_ptr<FrameBuffer> FrameBuffer::Create( const HWND hWnd )
+	{
+		RECT rect;
+		GetClientRect( hWnd, &rect );
+
+		auto dc = GetDC( hWnd );
+		auto backBuffer = std::make_unique<FrameBuffer>( dc, rect.right, rect.bottom );
+		ReleaseDC( hWnd, dc );
+
+		return backBuffer;
+	}
 
 	FrameBuffer::FrameBuffer( const HDC source, const int width, const int height )
 		: dc( CreateCompatibleDC( source ) )
@@ -16,11 +28,15 @@ namespace Renderer
 		GetDIBits( dc, buffer, 0, info.biHeight, (LPVOID)pixels.get(), (LPBITMAPINFO)&info, DIB_RGB_COLORS );
 	}
 
-
 	FrameBuffer::~FrameBuffer()
 	{
 		DeleteObject( buffer );
 		DeleteDC( dc );
+	}
+
+	Bounds FrameBuffer::GetBounds() const
+	{
+		return Bounds( (int)info.biWidth, (int)info.biHeight );
 	}
 
 	void FrameBuffer::Reset()
