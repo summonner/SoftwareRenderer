@@ -37,8 +37,12 @@ namespace Renderer
 			return value * vector;
 		}
 
+		void Push();
+		void Pop();
+
 	private:
 		Matrix4x4 value;
 		Matrix4x4 inverse;
+		std::stack<std::pair<Matrix4x4, Matrix4x4>> stack;
 	};
 }

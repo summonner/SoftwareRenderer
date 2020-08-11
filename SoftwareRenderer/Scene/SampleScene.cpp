@@ -91,25 +91,26 @@ void SampleScene::Render( const std::shared_ptr<IRenderer> renderer ) const
 void SampleScene::DrawScene() const
 {
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+	glMatrixMode( GL_MODELVIEW );
+	glLoadIdentity();
+	glTranslatef( 0, 0, -5 );
+	glPushMatrix();
 
-	glEnable( GL_DEPTH_TEST );
-	glDisable( GL_BLEND );
-	//Floor();
-	//Triangle();
-	//Quad();
+	Floor();
+	glPopMatrix();
+	glPushMatrix();
+	Triangle();
+	glPopMatrix();
+	Quad();
 //	Cube();
-	Quadric();
-
-	glDisable( GL_DEPTH_TEST );
-	glEnable( GL_BLEND );
-	glColor4f( 1, 1, 1, 0.5f );
+//	Quadric();
 }
 
 void SampleScene::Quadric() const
 {
 	glBindTexture( GL_TEXTURE_2D, texture );
 	glLoadIdentity();
-	glTranslatef( 0, 0, -5 );
+	glTranslatef( 0, 0, -6 );
 	glRotatef( -90.f * x, 0, 1, 0 );
 	glRotatef( -90.f * x, 1, 0, 0 );
 
@@ -269,10 +270,9 @@ void SampleScene::IndexTest() const
 
 void SampleScene::Floor() const
 {
-	glLoadIdentity();
 	glBegin( GL_QUADS );
 	glBindTexture( GL_TEXTURE_2D, texture );
-	glTranslatef( 0, -2, 15 * x - 10 );
+	glTranslatef( 0, -2, 15 * x - 4 );
 	glColor3f( 1, 1, 1 );
 	glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -10, 0, -10 );
 	glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -10, 0, 10 );
@@ -283,9 +283,8 @@ void SampleScene::Floor() const
 
 void SampleScene::Triangle() const
 {
-	glLoadIdentity();
 	glBindTexture( GL_TEXTURE_2D, 0 );
-	glTranslatef( -1.5f * 1, 0.0f, -6.0f + 6 * 0 );
+	glTranslatef( -1.5f * 1, 0.0f, 6 * 0 );
 	glRotatef( x * -90.f, 0.f, 1.f, 0.f );
 	glBegin( GL_TRIANGLES );
 	glColor4f( 1.f, 0.f, 0.f, 0.5f );
@@ -304,9 +303,8 @@ void SampleScene::Triangle() const
 
 void SampleScene::Quad() const
 {
-	glLoadIdentity();
 	glBindTexture( GL_TEXTURE_2D, texture );
-	glTranslatef( 1.5f * (1 - x), 0.0f, -6.0f + 5.5f * 0 );
+	glTranslatef( 1.5f * (1 - x), 0.0f, 5.5f * 0 );
 	glScalef( x, x, 1 );
 //	glRotatef( x * 90.f, 1.f, 0.f, 0.f );
 	glBegin( GL_QUADS );

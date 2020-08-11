@@ -150,6 +150,16 @@ WINGDIAPI void APIENTRY glScalef( GLfloat x, GLfloat y, GLfloat z )
 	matrix->Scale( x, y, z );
 }
 
+WINGDIAPI void APIENTRY glPushMatrix( void )
+{
+	matrix->Push();
+}
+
+WINGDIAPI void APIENTRY glPopMatrix( void )
+{
+	matrix->Pop();
+}
+
 WINGDIAPI void APIENTRY glBegin( GLenum mode )
 {
 	meshBuilder.Begin( mode );

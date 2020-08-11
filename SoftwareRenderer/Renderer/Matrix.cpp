@@ -101,4 +101,19 @@ namespace Renderer
 			0, 0, 0, 1
 		) * inverse;
 	}
+
+	void Matrix::Push()
+	{
+		stack.emplace( value, inverse );
+	}
+
+	void Matrix::Pop()
+	{
+		assert( stack.size() > 0 );
+
+		const auto popped = stack.top();
+		value = popped.first;
+		inverse = popped.second;
+		stack.pop();
+	}
 }
