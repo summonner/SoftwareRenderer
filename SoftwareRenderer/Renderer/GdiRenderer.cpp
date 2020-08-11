@@ -102,88 +102,19 @@ namespace Renderer
 
 	Vertex GdiRenderer::TransformVertex( Vertex v ) const
 	{
-		v.position = transform * v.position;
-		v.normal = Vector4( v.normal, 0 ) * invTransform;
+		v.position = modelView * v.position;
+		v.normal = Vector4( v.normal, 0 ) * modelView.Inverse();
 		return v;
 	}
 
-	void GdiRenderer::LoadIdentity()
-	{
-		transform = Matrix4x4::identity;
-		invTransform = Matrix4x4::identity;
-	}
-
-	void GdiRenderer::Translate( float x, float y, float z )
-	{
-		transform = transform * Matrix4x4::Translate( Vector3( x, y, z ) );
-		invTransform = Matrix4x4::Translate( Vector3( x, y, z ) * -1 ) * invTransform;
-	}
-
-	void GdiRenderer::Rotate( Degree angle, float x, float y, float z )
-	{
-		const auto rotate = Matrix4x4::Rotate( angle, Vector3( x, y, z ) );
-		transform = transform * rotate;
-		invTransform = rotate.Transpose() * invTransform;
-	}
-
-	void GdiRenderer::Scale( float x, float y, float z )
-	{
-		transform = transform * Matrix4x4::Scale( Vector3( x, y, z ) );
-		invTransform = Matrix4x4::Scale( Vector3( 1 / x, 1 / y, 1 / z ) ) * invTransform;
-	}
-
-	void GdiRenderer::Viewport( int left, int bottom, int width, int height )
-	{
-		auto halfWidth = width * 0.5f;
-		auto halfHeight = height * 0.5f;
-		viewport = Matrix4x4(
-			halfWidth, 0, 0, halfWidth + left + 0.5f,
-			0, halfHeight, 0, halfHeight + bottom + 0.5f,
-			0, 0, 1.0f, 0,
-			0, 0, 0, 1
-		);
-	}
-
-	void GdiRenderer::Frustum( float l, float r, float t, float b, float n, float f )
-	{
-		projection = Matrix4x4(
-			2 * n / (r - l), 0, (r + l) / (r - l), 0,
-			0, 2 * n / (t - b), (t + b) / (t - b), 0,
-			0, 0, -(f + n) / (f - n), -2 * f * n / (f - n),
-			0, 0, -1, 0
-		);
-	}
-
-	void GdiRenderer::Perspective( Degree fovY, float aspect, float near, float far )
-	{
-		auto halfHeight = near * tanf( fovY * PI / 180 / 2 );
-		auto halfWidth = halfHeight * aspect;
-		projection = Matrix4x4(
-			near / halfWidth, 0, 0, 0,
-			0, near / halfHeight, 0, 0,
-			0, 0, -(far + near) / (far - near), -2 * far * near / (far - near),
-			0, 0, -1, 0
-		);
-	}
-
-	void GdiRenderer::Ortho( float l, float r, float t, float b, float n, float f )
-	{
-		projection = Matrix4x4(
-			2 / (r - l), 0, 0, -(r + l) / (r - l),
-			0, 2 / (t - b), 0, -(t + b) / (t - b),
-			0, 0, 2 / (f - n), -(f + n) / (f - n),
-			0, 0, 0, 1
-		);
-	}
 
 	void GdiRenderer::Reset()
 	{
 		IRenderer::Reset();
 
-		transform = Matrix4x4::identity;
-		invTransform = Matrix4x4::identity;
-		projection = Matrix4x4::identity;
-		viewport = Matrix4x4::identity;
+		modelView.Reset();
+		projection.Reset();
+		viewport.Reset();
 
 		vertices.clear();
 		backBuffer->Reset();

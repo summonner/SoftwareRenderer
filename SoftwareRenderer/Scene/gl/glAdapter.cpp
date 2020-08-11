@@ -10,6 +10,7 @@ glBridge* adapter;
 #define textureManager adapter->textureManager
 #define lightManager adapter->lightManager
 #define meshBuilder adapter->meshBuilder
+#define matrix adapter->matrix
 
 void glEnable( GLenum cap, bool enable )
 {
@@ -107,32 +108,46 @@ WINGDIAPI void APIENTRY glDepthFunc( GLenum func )
 
 WINGDIAPI void APIENTRY glMatrixMode( GLenum mode )
 {
-	// TODO
+	switch ( mode )
+	{
+	case GL_MODELVIEW:
+		matrix = &(renderer->modelView);
+		return;
+
+	case GL_PROJECTION:
+		matrix = &(renderer->projection);
+		return;
+
+	default:
+	case GL_TEXTURE:
+		// not implement
+		return;
+	}
 }
 
 WINGDIAPI void APIENTRY glViewport( GLint x, GLint y, GLsizei width, GLsizei height )
 {
-	renderer->Viewport( x, y, width, height );
+	renderer->viewport.Viewport( x, y, width, height );
 }
 
 WINGDIAPI void APIENTRY glLoadIdentity( void )
 {
-	renderer->LoadIdentity();
+	matrix->Reset();
 }
 
 WINGDIAPI void APIENTRY glTranslatef( GLfloat x, GLfloat y, GLfloat z )
 {
-	renderer->Translate( x, y, z );
+	matrix->Translate( x, y, z );
 }
 
 WINGDIAPI void APIENTRY glRotatef( GLfloat angle, GLfloat x, GLfloat y, GLfloat z )
 {
-	renderer->Rotate( angle, x, y, z );
+	matrix->Rotate( angle, x, y, z );
 }
 
 WINGDIAPI void APIENTRY glScalef( GLfloat x, GLfloat y, GLfloat z )
 {
-	renderer->Scale( x, y, z );
+	matrix->Scale( x, y, z );
 }
 
 WINGDIAPI void APIENTRY glBegin( GLenum mode )
@@ -340,7 +355,7 @@ void APIENTRY gluPerspective(
 	GLdouble zNear,
 	GLdouble zFar )
 {
-	renderer->Perspective( (float)fovy, (float)aspect, (float)zNear, (float)zFar );
+	matrix->Perspective( (float)fovy, (float)aspect, (float)zNear, (float)zFar );
 }
 
 std::vector<std::unique_ptr<GLUquadric>> quadrics;

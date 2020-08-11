@@ -13,10 +13,13 @@ public:
 	glBridge();
 	~glBridge();
 
+	void Init( std::shared_ptr<IRenderer> renderer );
 	void Use( std::function<void( void )> process );
 
 	std::shared_ptr<IRenderer> renderer;
 	glTextureManager textureManager;
 	glLightManager lightManager;
 	glMeshBuilder meshBuilder;
+
+	Renderer::Matrix* matrix;
 };

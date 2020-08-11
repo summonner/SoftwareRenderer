@@ -38,7 +38,7 @@ SampleScene::~SampleScene()
 
 void SampleScene::Init( const std::shared_ptr<IRenderer> renderer )
 {
-	adapter->renderer = renderer;
+	adapter->Init( renderer );
 	adapter->Use( []()
 	{
 		glClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
@@ -49,8 +49,9 @@ void SampleScene::Init( const std::shared_ptr<IRenderer> renderer )
 
 void SampleScene::OnResize( const std::shared_ptr<IRenderer> renderer, const int width, const int height )
 {
-	renderer->Viewport( 0, 0, width, height );
-	renderer->Perspective( 45.f, (float)width / (float)height, 0.1f, 100.f );
+	renderer->viewport.Viewport( 0, 0, width, height );
+	renderer->projection.Reset();
+	renderer->projection.Perspective( 45.f, (float)width / (float)height, 0.1f, 100.f );
 }
 
 float x = 0;

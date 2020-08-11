@@ -336,6 +336,9 @@
     <ClInclude Include="Renderer\Rasterizer\ShadeModel.h">
       <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -557,6 +560,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\Rasterizer\ShadeModel.cpp">
       <Filter>Renderer\Rasterizer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Matrix.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

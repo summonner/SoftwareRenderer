@@ -1,6 +1,4 @@
 #pragma once
-#undef near
-#undef far
 #include "Texturing/TextureComponent.h"
 #include "DepthTest/DepthBuffer.h"
 #include "Blending/BlendComponent.h"
@@ -8,13 +6,8 @@
 #include "Lighting/LightingComponent.h"
 #include "Rasterizer/ShadeModel.h"
 #include "Mesh/Mesh.h"
+#include "Matrix.h"
 
-namespace Renderer
-{
-	class Vertex;
-}
-
-class Degree;
 class IRenderer abstract
 {
 
@@ -32,16 +25,6 @@ public:
 
 	virtual void Draw( const Renderer::Mesh& mesh ) abstract;
 
-	virtual void LoadIdentity() abstract;
-	virtual void Translate( float x, float y, float z ) abstract;
-	virtual void Rotate( Degree angle, float x, float y, float z ) abstract;
-	virtual void Scale( float x, float y, float z ) abstract;
-
-	virtual void Viewport( int left, int top, int width, int height ) abstract;
-	virtual void Frustum( float left, float right, float top, float bottom, float near, float far ) abstract;
-	virtual void Perspective( Degree fovY, float aspect, float near, float far ) abstract;
-	virtual void Ortho( float left, float right, float top, float bottom, float near, float far ) abstract;
-
 	virtual void Reset()
 	{
 		depthBuffer.Reset();
@@ -58,5 +41,9 @@ public:
 	Renderer::BlendComponent blender;
 	Renderer::CullFaceComponent cullFace;
 	Renderer::LightingComponent lighting;
+
+	Renderer::Matrix modelView;
+	Renderer::Matrix projection;
+	Renderer::Matrix viewport;
 };
 

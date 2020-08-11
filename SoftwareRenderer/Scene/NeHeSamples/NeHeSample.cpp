@@ -19,7 +19,7 @@ NeHeSample::~NeHeSample()
 
 void NeHeSample::Init( const std::shared_ptr<IRenderer> renderer )
 {
-	adapter->renderer = renderer;
+	adapter->Init( renderer );
 	adapter->Use( [this]() { lesson->InitGL(); } );
 }
 

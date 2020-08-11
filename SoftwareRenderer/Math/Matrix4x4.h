@@ -50,6 +50,11 @@ public:
 		);
 	}
 
+	inline void operator *=( const Matrix4x4& m )
+	{
+		*this = *this * m;
+	}
+
 	inline Matrix4x4 Transpose() const
 	{
 		return Matrix4x4(

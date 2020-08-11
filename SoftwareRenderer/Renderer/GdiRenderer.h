@@ -28,16 +28,6 @@ namespace Renderer
 
 		void Draw( const Renderer::Mesh& renderer ) override;
 
-		void LoadIdentity() override;
-		void Translate( float x, float y, float z ) override;
-		void Rotate( Degree angle, float x, float y, float z ) override;
-		void Scale( float x, float y, float z ) override;
-
-		void Viewport( int left, int bottom, int width, int height ) override;
-		void Frustum( float left, float right, float top, float bottom, float near, float far ) override;
-		void Perspective( Degree fovY, float aspect, float near, float far ) override;
-		void Ortho( float left, float right, float top, float bottom, float near, float far ) override;
-
 		void Reset() override;
 
 	private:
@@ -54,11 +44,6 @@ namespace Renderer
 
 		Vertex temp;
 		std::vector<Vertex> vertices;
-
-		Matrix4x4 transform;
-		Matrix4x4 invTransform;
-		Matrix4x4 projection;
-		Matrix4x4 viewport;
 	};
 
 }

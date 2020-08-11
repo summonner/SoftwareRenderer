@@ -167,6 +167,7 @@
     <ClInclude Include="Math\Vector2.hpp" />
     <ClInclude Include="Math\Vector3.hpp" />
     <ClInclude Include="Math\Vector4.hpp" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Renderer\Blending\BlendComponent.h" />
     <ClInclude Include="Renderer\Blending\BlendFunc.h" />
     <ClInclude Include="Renderer\CullFace\CullFaceComponent.h" />
@@ -278,6 +279,7 @@
     <ClCompile Include="Renderer\Lighting\Light.cpp" />
     <ClCompile Include="Renderer\Lighting\LightingComponent.cpp" />
     <ClCompile Include="Renderer\Lighting\Material.cpp" />
+    <ClCompile Include="Renderer\Matrix.cpp" />
     <ClCompile Include="Renderer\Mesh\Cylinder.cpp" />
     <ClCompile Include="Renderer\Mesh\Disc.cpp" />
     <ClCompile Include="Renderer\Mesh\Quadric.cpp" />
