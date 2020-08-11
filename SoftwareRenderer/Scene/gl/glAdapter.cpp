@@ -66,11 +66,6 @@ WINGDIAPI void APIENTRY glDisable( GLenum cap )
 	glEnable( cap, false );
 }
 
-WINGDIAPI void APIENTRY glFlush( void )
-{
-
-}
-
 WINGDIAPI void APIENTRY glClear( GLbitfield mask )
 {
 	if ( mask & GL_COLOR_BUFFER_BIT )
@@ -200,6 +195,11 @@ WINGDIAPI void APIENTRY glNormal3f( GLfloat nx, GLfloat ny, GLfloat nz )
 	meshBuilder.Normal( nx, ny, nz );
 }
 
+WINGDIAPI void APIENTRY glFlush( void )
+{
+	meshBuilder.Flush();
+}
+
 WINGDIAPI void APIENTRY glEnd( void )
 {
 	const auto mesh = meshBuilder.End();
@@ -314,7 +314,14 @@ WINGDIAPI void APIENTRY glHint( GLenum target, GLenum mode )
 
 WINGDIAPI void APIENTRY glLightModelfv( GLenum pname, const GLfloat* params )
 {
+	switch ( pname )
+	{
+	case GL_LIGHT_MODEL_AMBIENT:
+		renderer->lighting.SetGlobalAmbient( Vector4( params[0], params[1], params[2], params[3] ) );
 
+	case GL_LIGHT_MODEL_TWO_SIDE:
+		return;
+	}
 }
 
 WINGDIAPI void APIENTRY glLightfv( GLenum light, GLenum pname, const GLfloat *params )
@@ -322,14 +329,76 @@ WINGDIAPI void APIENTRY glLightfv( GLenum light, GLenum pname, const GLfloat *pa
 	lightManager.Set( light, pname, params );
 }
 
+Renderer::Material& GetMaterial( GLenum face )
+{
+	switch ( face )
+	{
+	case GL_FRONT:
+		return renderer->lighting.front;
+
+	case GL_BACK:
+		return renderer->lighting.back;
+
+	default:
+		assert( "Invalide material face." && false );
+		return renderer->lighting.front;
+	}
+}
+
 WINGDIAPI void APIENTRY glMaterialfv( GLenum face, GLenum pname, const GLfloat* params )
 {
+	if ( face == GL_FRONT_AND_BACK )
+	{
+		glMaterialfv( GL_FRONT, pname, params );
+		glMaterialfv( GL_BACK, pname, params );
+		return;
+	}
 
+	auto& material = GetMaterial( face );
+	switch ( pname )
+	{
+	case GL_AMBIENT:
+		material.ambient = Vector4( params );
+		return;
+
+	case GL_DIFFUSE:
+		material.diffuse = Vector4( params );
+		return;
+
+	case GL_SPECULAR:
+		material.specular = Vector4( params );
+		return;
+
+	case GL_EMISSION:
+		material.emissive = Vector4( params );
+		return;
+
+	case GL_SHININESS:
+		material.SetShininess( params[0] );
+		return;
+
+	case GL_AMBIENT_AND_DIFFUSE:
+		{
+			Vector4 value( params );
+			material.ambient = value;
+			material.diffuse = value;
+			return;
+		}
+
+	case GL_COLOR_INDEX:
+		return;
+	}
 }
 
 WINGDIAPI void APIENTRY glMateriali( GLenum face, GLenum pname, GLint param )
 {
+	if ( pname != GL_SHININESS )
+	{
+		return;
+	}
 
+	GLfloat value[1] = { (float)param };
+	glMaterialfv( face, pname, value );
 }
 
 WINGDIAPI void APIENTRY glVertexPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
@@ -413,7 +482,10 @@ void APIENTRY gluLookAt(
 	GLdouble upy,
 	GLdouble upz )
 {
-
+	const Vector3 eye( (float)eyex, (float)eyey, (float)eyez );
+	const Vector3 center( (float)centerx, (float)centery, (float)centerz );
+	const Vector3 up( (float)upx, (float)upy, (float)upz );
+	matrix->LookAt( eye, center, up );
 }
 
 std::vector<std::unique_ptr<GLUquadric>> quadrics;

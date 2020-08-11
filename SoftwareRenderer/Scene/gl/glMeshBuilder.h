@@ -22,6 +22,8 @@ public:
 	void Texcoord( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer );
 	void Normal( GLenum type, GLsizei stride, const GLvoid* pointer );
 	void Vertex( GLint size, GLenum type, GLsizei stride, const GLvoid* pointer );
+
+	void Flush();
 	
 	Renderer::Mesh Build( GLenum mode, GLint first, GLsizei count );
 	Renderer::Mesh Build( GLenum mode, GLsizei count, GLenum type, const GLvoid* indices );

@@ -21,8 +21,13 @@ namespace Renderer
 
 	void Matrix::Translate( float x, float y, float z )
 	{
-		value *= Matrix4x4::Translate( Vector3( x, y, z ) );
-		inverse = Matrix4x4::Translate( Vector3( x, y, z ) * -1 ) * inverse;
+		Translate( Vector3( x, y, z ) );
+	}
+
+	void Matrix::Translate( const Vector3& v )
+	{
+		value *= Matrix4x4::Translate( v );
+		inverse = Matrix4x4::Translate( -v ) * inverse;
 	}
 
 	void Matrix::Rotate( Degree angle, float x, float y, float z )
@@ -36,6 +41,24 @@ namespace Renderer
 	{
 		value *= Matrix4x4::Scale( Vector3( x, y, z ) );
 		inverse = Matrix4x4::Scale( Vector3( 1 / x, 1 / y, 1 / z ) ) * inverse;
+	}
+
+	void Matrix::LookAt( const Vector3& eye, const Vector3& center, const Vector3& up )
+	{
+		const Vector3 f = (center - eye).Normalize();
+		const Vector3 s = f.Cross( up.Normalize() );
+		const Vector3 u = s.Normalize().Cross( f );
+		const Matrix4x4 m(
+			s.x, s.y, s.z, 0,
+			u.x, u.y, u.z, 0,
+			-f.x, -f.y, -f.z, 0,
+			0, 0, 0, 1
+		);
+
+		value *= m;
+		inverse = m.Transpose() * inverse;
+
+		Translate( -eye );
 	}
 
 	void Matrix::Viewport( int left, int bottom, int width, int height )

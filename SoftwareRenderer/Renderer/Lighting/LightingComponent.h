@@ -1,6 +1,7 @@
 #pragma once
 #include "Renderer/IComponent.h"
 #include "Math/Vector4.hpp"
+#include "Material.h"
 
 namespace Renderer
 {
@@ -13,9 +14,13 @@ namespace Renderer
 		~LightingComponent();
 
 		void Reset() override;
+		void SetGlobalAmbient( const Vector4& ambient );
+
 		void Add( std::shared_ptr<const Light> light );
 		void Remove( std::shared_ptr<const Light> light );
+
 		Vector4 GetColor( const Vector4& position, const Vector3& normal ) const;
+
 	private:
 		Vector3 GetView( const Vector3& position ) const;
 
@@ -26,6 +31,10 @@ namespace Renderer
 		bool localViewer;
 		bool singleColor;
 		bool twoSide;
+
+	public:
+		Material front;
+		Material back;
 
 	private:
 		static Vector4 GetColor( const Light& light, const Material& material, const Vector4& position, const Vector3& normal, const Vector3& view );

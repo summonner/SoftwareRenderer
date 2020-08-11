@@ -104,6 +104,17 @@ void glMeshBuilder::Vertex( GLint size, GLenum type, GLsizei stride, const GLvoi
 	vertexDatas.vertices = glBufferFactory::Create<VertexType>( size, type, stride, pointer );
 }
 
+void glMeshBuilder::Flush()
+{
+	vertexDatas.vertices = nullptr;
+	vertexDatas.normals = nullptr;
+	vertexDatas.texcoords = nullptr;
+	vertexDatas.colors = nullptr;
+
+	temp = Renderer::Vertex();
+	vertices.clear();
+}
+
 Renderer::Mesh glMeshBuilder::Build( GLenum mode, GLint first, GLsizei count )
 {
 	ExtractVertex( first, first + count );

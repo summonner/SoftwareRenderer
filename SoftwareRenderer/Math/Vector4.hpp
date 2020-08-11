@@ -15,6 +15,11 @@ public:
 	{
 	}
 
+	constexpr TVector4( const T values[] )
+		: TVector4( values[0], values[1], values[2], values[3] )
+	{
+	}
+
 	constexpr TVector4( T x, T y, T z, T w )
 		: x( x )
 		, y( y )

@@ -1,11 +1,9 @@
 #include "framework.h"
 #include "LightingComponent.h"
 #include "Light.h"
-#include "Material.h"
 
 namespace Renderer
 {
-	Material material;
 
 	LightingComponent::LightingComponent()
 		: ambient( 0.2f, 0.2f, 0.2f, 1.0f )
@@ -28,6 +26,11 @@ namespace Renderer
 		localViewer = false;
 		singleColor = true;
 		twoSide = false;
+	}
+
+	void LightingComponent::SetGlobalAmbient( const Vector4& ambient )
+	{
+		this->ambient = ambient;
 	}
 
 	void LightingComponent::Add( std::shared_ptr<const Light> light )
@@ -60,11 +63,11 @@ namespace Renderer
 		}
 
 		const auto view = GetView( v );
-		Vector4 result = material.emmisive;
-		result += material.ambient * ambient;
+		Vector4 result = front.emissive;
+		result += front.ambient * ambient;
 		for ( const auto& light : lights )
 		{
-			result += GetColor( *light, material, v, normal, view );
+			result += GetColor( *light, front, v, normal, view );
 		}
 
 		return result;
@@ -80,7 +83,7 @@ namespace Renderer
 		Vector4 result( 0, 0, 0, 1 );
 		result += material.ambient * light.ambient;
 		result += material.diffuse * light.diffuse * Light::Dot( normal, l );
-		result += material.specular * light.specular * pow( Light::Dot( normal, h ), material.shiness );
+		result += material.specular * light.specular * pow( Light::Dot( normal, h ), material.GetShininess() );
 		return result * attenuation * spot;
 	}
 

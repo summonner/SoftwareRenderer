@@ -9,11 +9,14 @@ namespace Renderer
 		Material();
 		~Material();
 
+		void SetShininess( float shininess );
+		float GetShininess() const;
+
 	public:
 		Vector4 ambient;
 		Vector4 diffuse;
 		Vector4 specular;
-		Vector4 emmisive;
-		float shiness;
+		Vector4 emissive;
+		float shininess;
 	};
 }
