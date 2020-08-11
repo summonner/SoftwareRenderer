@@ -12,4 +12,5 @@ public:
 	virtual void SetClearValue( const Vector4& value ) abstract;
 	virtual void SetPixel( const Vector2Int& p, const Vector4& color ) abstract;
 	virtual void SetPixel( const Vector2Int& p, const Vector4& srcColor, std::function<Vector4( const Vector4&, const Vector4& )> blender ) abstract;
+	virtual Vector4 GetPixel( const Vector2Int& p ) const abstract;
 };

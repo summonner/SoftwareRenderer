@@ -16,7 +16,8 @@ namespace Renderer
 		~Texture2D();
 
 		float CalculateMipLevel( Vector2 ddx, Vector2 ddy ) const override;
-		Vector4 GetPixel( const Vector2& uv, const float mipLevel ) const override;
+		Vector4 GetPixel( const Vector2& uv, float mipLevel ) const override;
+		void SetPixel( const Vector2Int& p, int mipLevel, const Vector4& value );
 		void SetWrapMode( WrapMode::Type u, WrapMode::Type v );
 		void SetFilter( TextureFilter::MinType type );
 		void SetFilter( TextureFilter::MagType type );

@@ -18,10 +18,11 @@ namespace Renderer
 		void SetClearValue( const Vector4& value ) override;
 		void SetPixel( const Vector2Int& p, const Vector4& color ) override;
 		void SetPixel( const Vector2Int& p, const Vector4& srcColor, std::function<Vector4( const Vector4&, const Vector4& )> blender ) override;
+		Vector4 GetPixel( const Vector2Int& p ) const override;
 
 		void BitBlt( const HDC dc );
 	private:
-		inline int GetIndex( const Vector2Int& p )
+		inline int GetIndex( const Vector2Int& p ) const
 		{
 			return (p.x + p.y * info.biWidth) * colorBytes;
 		}

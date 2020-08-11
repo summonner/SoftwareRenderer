@@ -88,4 +88,10 @@ namespace Renderer
 
 		SetPixel( i, result );
 	}
+
+	Vector4 FrameBuffer::GetPixel( const Vector2Int& p ) const
+	{
+		const auto i = GetIndex( p );
+		return GetPixel( i );
+	}
 }

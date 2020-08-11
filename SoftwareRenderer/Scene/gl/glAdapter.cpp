@@ -254,7 +254,13 @@ WINGDIAPI void APIENTRY glDeleteTextures( GLsizei n, const GLuint* textures )
 
 WINGDIAPI void APIENTRY glCopyTexImage2D( GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border )
 {
-
+	const Vector2Int min( x + border, y + border );
+	for ( auto j = 0; j < height; ++j )
+	for ( auto i = 0; i < width; ++i )
+	{
+		const auto color = renderer->backBuffer->GetPixel( Vector2Int( i, (height - 1) - j ) + min );
+		textureManager.SetPixel( Vector2Int( i, j ), level, color );
+	}
 }
 
 WINGDIAPI void APIENTRY glBlendFunc( GLenum sfactor, GLenum dfactor )

@@ -67,4 +67,13 @@ namespace Renderer
 		const auto i = ToIndex( p.x, p.y );
 		return data[i];
 	}
+
+	void Mipmap::SetPixel( const Vector2Int& p, const Vector4& value )
+	{
+		const auto i = ToIndex( p.x, p.y );
+		data[i] = Color4( (BYTE)(value.x * 255.f),
+						  (BYTE)(value.y * 255.f),
+						  (BYTE)(value.z * 255.f),
+						  (BYTE)(value.w * 255.f) );
+	}
 }

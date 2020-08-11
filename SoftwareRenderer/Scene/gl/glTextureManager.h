@@ -2,6 +2,7 @@
 #include "glAdapter.h"
 #include "Util/IImageSource.h"
 #include "Util/Dictionary.hpp"
+#include "Renderer/Texturing/WrapMode.h"
 
 namespace Renderer
 {
@@ -28,11 +29,16 @@ public:
 	void SetMinFilter( GLint param );
 	void SetMagFilter( GLint param );
 
+	void SetPixel( const Vector2Int& p, int mipLevel, const Vector4& value );
+
 private:
 	std::shared_ptr<Texture2D> Get2D() const;
 	Dictionary<GLuint, std::shared_ptr<ITexture>> textures;
 	GLuint current;
 
+private:
+	static const Dictionary<GLenum, int> formatTable;
+	static const Dictionary<GLint, TextureWrapMode> wrapModeTable;
 
 	class glImageSource final : public IImageSource
 	{

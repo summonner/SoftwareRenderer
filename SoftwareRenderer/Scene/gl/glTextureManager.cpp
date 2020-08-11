@@ -65,19 +65,31 @@ std::shared_ptr<ITexture> glTextureManager::SetImage( GLint level, GLint interna
 	return textures[current];
 }
 
+const Dictionary<GLint, TextureWrapMode> glTextureManager::wrapModeTable
+{
+	{ GL_CLAMP,  TextureWrapMode::Clamp },
+	{ GL_REPEAT, TextureWrapMode::Repeat },
+};
+
 void glTextureManager::SetWrapModeS( GLint param )
 {
-
+	if ( auto texture = Get2D(); texture != nullptr )
+	{
+		texture->SetWrapMode( wrapModeTable[param], TextureWrapMode::_ );
+	}
 }
 
 void glTextureManager::SetWrapModeT( GLint param )
 {
-
+	if ( auto texture = Get2D(); texture != nullptr )
+	{
+		texture->SetWrapMode( TextureWrapMode::_, wrapModeTable[param] );
+	}
 }
 
 void glTextureManager::SetMinFilter( GLint param )
 {
-	static Dictionary<GLint, TextureMinFilter> table
+	static const Dictionary<GLint, TextureMinFilter> table
 	{
 		{ GL_NEAREST, TextureMinFilter::Nearest },
 		{ GL_LINEAR, TextureMinFilter::Linear },
@@ -95,7 +107,7 @@ void glTextureManager::SetMinFilter( GLint param )
 
 void glTextureManager::SetMagFilter( GLint param )
 {
-	static Dictionary<GLint, TextureMagFilter> table
+	static const Dictionary<GLint, TextureMagFilter> table
 	{
 		{ GL_NEAREST, TextureMagFilter::Nearest },
 		{ GL_LINEAR, TextureMagFilter::Linear },
@@ -107,6 +119,14 @@ void glTextureManager::SetMagFilter( GLint param )
 	}
 }
 
+void glTextureManager::SetPixel( const Vector2Int& p, int mipLevel, const Vector4& value )
+{
+	if ( auto texture = Get2D(); texture != nullptr )
+	{
+		texture->SetPixel( p, mipLevel, value );
+	}
+
+}
 
 std::shared_ptr<Texture2D> glTextureManager::Get2D() const
 {
@@ -118,12 +138,17 @@ std::shared_ptr<Texture2D> glTextureManager::Get2D() const
 	return std::dynamic_pointer_cast<Texture2D>( textures[current] );
 }
 
+const Dictionary<GLenum, int> glTextureManager::formatTable
+{
+	{ GL_RGB, 3 },
+	{ GL_RGBA, 4 },
+};
 
 glTextureManager::glImageSource::glImageSource( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels )
 	: IImageSource( width, height )
 	, pixels( (BYTE*)pixels )
 	, format( format )
-	, pixelSize( 3 )
+	, pixelSize( formatTable[format] )
 {
 }
 
@@ -138,6 +163,12 @@ Color4 glTextureManager::glImageSource::GetPixel( const Vector2Int& p ) const
 						pixels[i + 1],
 						pixels[i + 2],
 						255 );
+	case GL_RGBA:
+		return Color4(  pixels[i + 0],
+						pixels[i + 1],
+						pixels[i + 2],
+						pixels[i + 3] );
+
 	default:
 		assert( "Not implemented yet" && false );
 		return Color4::zero;

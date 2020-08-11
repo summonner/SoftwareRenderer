@@ -49,10 +49,16 @@ namespace Renderer
 		return std::log2f( maxDelta ) * 0.5f;
 	}
 
-	Vector4 Texture2D::GetPixel( const Vector2& uv, const float mipLevel ) const
+	Vector4 Texture2D::GetPixel( const Vector2& uv, float mipLevel ) const
 	{
 		const auto wrapped = wrapMode( uv );
 		return filter( wrapped, mipmaps, mipLevel );
+	}
+
+	void Texture2D::SetPixel( const Vector2Int& p, int mipLevel, const Vector4& value )
+	{
+		mipLevel = std::clamp( mipLevel, 0, (int)mipmaps.size() - 1 );
+		mipmaps[mipLevel]->SetPixel( p, value );
 	}
 
 	void Texture2D::SetFilter( TextureFilter::MinType type )

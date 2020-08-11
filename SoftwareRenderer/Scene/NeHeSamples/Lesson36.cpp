@@ -24,7 +24,6 @@ namespace NeHe
 		, normal{ 0, }
 		, vertexes{ 0, }
 	{
-		assert( "Not Implemented Yet" && false );
 	}
 
 	Lesson36::~Lesson36()

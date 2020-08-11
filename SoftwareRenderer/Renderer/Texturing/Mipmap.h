@@ -12,6 +12,7 @@ namespace Renderer
 		~Mipmap();
 
 		Vector4 GetPixel( int x, int y ) const;
+		void SetPixel( const Vector2Int& p, const Vector4& color );
 
 	private:
 		Color4 GetPixel( const Vector2Int& p ) const override;
@@ -26,7 +27,7 @@ namespace Renderer
 		const Vector2 size;
 
 	private:
-		const std::unique_ptr<Color4[]> data;
+		std::unique_ptr<Color4[]> data;
 	};
 
 }
