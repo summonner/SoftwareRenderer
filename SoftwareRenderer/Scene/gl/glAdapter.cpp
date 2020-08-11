@@ -66,6 +66,11 @@ WINGDIAPI void APIENTRY glDisable( GLenum cap )
 	glEnable( cap, false );
 }
 
+WINGDIAPI void APIENTRY glFlush( void )
+{
+
+}
+
 WINGDIAPI void APIENTRY glClear( GLbitfield mask )
 {
 	if ( mask & GL_COLOR_BUFFER_BIT )
@@ -175,6 +180,11 @@ WINGDIAPI void APIENTRY glColor4f( GLfloat red, GLfloat green, GLfloat blue, GLf
 	meshBuilder.Color( red, green, blue, alpha );
 }
 
+WINGDIAPI void APIENTRY glVertex2f( GLfloat x, GLfloat y )
+{
+	meshBuilder.Vertex( x, y, 0 );
+}
+
 WINGDIAPI void APIENTRY glVertex3f( GLfloat x, GLfloat y, GLfloat z )
 {
 	meshBuilder.Vertex( x, y, z );
@@ -242,6 +252,11 @@ WINGDIAPI void APIENTRY glDeleteTextures( GLsizei n, const GLuint* textures )
 	}
 }
 
+WINGDIAPI void APIENTRY glCopyTexImage2D( GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border )
+{
+
+}
+
 WINGDIAPI void APIENTRY glBlendFunc( GLenum sfactor, GLenum dfactor )
 {
 	static const Dictionary<GLenum, BlendFunc> table
@@ -297,11 +312,25 @@ WINGDIAPI void APIENTRY glHint( GLenum target, GLenum mode )
 	// Not Implement
 }
 
+WINGDIAPI void APIENTRY glLightModelfv( GLenum pname, const GLfloat* params )
+{
+
+}
+
 WINGDIAPI void APIENTRY glLightfv( GLenum light, GLenum pname, const GLfloat *params )
 {
 	lightManager.Set( light, pname, params );
 }
 
+WINGDIAPI void APIENTRY glMaterialfv( GLenum face, GLenum pname, const GLfloat* params )
+{
+
+}
+
+WINGDIAPI void APIENTRY glMateriali( GLenum face, GLenum pname, GLint param )
+{
+
+}
 
 WINGDIAPI void APIENTRY glVertexPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
 {
@@ -345,6 +374,11 @@ WINGDIAPI void APIENTRY glDisableClientState( GLenum array )
 
 }
 
+WINGDIAPI void APIENTRY glOrtho( GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar )
+{
+	renderer->projection.Ortho( (float)left, (float)right, (float)bottom, (float)top, (float)zNear, (float)zFar );
+}
+
 
 int APIENTRY gluBuild2DMipmaps(
 	GLenum      target,
@@ -366,6 +400,20 @@ void APIENTRY gluPerspective(
 	GLdouble zFar )
 {
 	matrix->Perspective( (float)fovy, (float)aspect, (float)zNear, (float)zFar );
+}
+
+void APIENTRY gluLookAt(
+	GLdouble eyex,
+	GLdouble eyey,
+	GLdouble eyez,
+	GLdouble centerx,
+	GLdouble centery,
+	GLdouble centerz,
+	GLdouble upx,
+	GLdouble upy,
+	GLdouble upz )
+{
+
 }
 
 std::vector<std::unique_ptr<GLUquadric>> quadrics;

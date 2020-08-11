@@ -27,7 +27,10 @@
     <ClCompile Include="..\SoftwareRenderer\Scene\gl\AUX_RGBImageRec.cpp">
       <Filter>SoftwareRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="Lesson18.cpp">
+    <ClCompile Include="Lesson36.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="NeHeGL.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

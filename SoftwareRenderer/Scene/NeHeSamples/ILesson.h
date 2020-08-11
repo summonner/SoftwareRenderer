@@ -9,7 +9,7 @@ namespace NeHe
 		virtual ~ILesson() {};
 
 		virtual int CleanGL( GLvoid ) { return TRUE; };
-		virtual GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) abstract;
+		virtual GLvoid ReSizeGLScene( GLsizei width, GLsizei height );
 		virtual int DrawGLScene( GLvoid ) abstract;
 		virtual int InitGL( GLvoid ) abstract;
 		virtual void Update( DWORD milliseconds, const bool keys[] ) {};

@@ -339,6 +339,9 @@
     <ClInclude Include="Renderer\FrameBuffer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson36.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -563,6 +566,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\FrameBuffer.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson36.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
