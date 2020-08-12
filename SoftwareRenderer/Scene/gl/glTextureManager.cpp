@@ -60,7 +60,7 @@ std::shared_ptr<ITexture> glTextureManager::SetImage( GLint level, GLint interna
 	}
 
 	glImageSource source( width, height, format, type, pixels );
-	textures[current].reset( new Renderer::Texture2D( source ) );
+	textures[current].reset( new Renderer::Texture2D( source, level < 0 ) );
 
 	return textures[current];
 }

@@ -68,7 +68,7 @@ namespace Renderer
 		result += front.ambient * ambient;
 		for ( const auto& light : lights )
 		{
-			result += GetColor( *light, front, vertex.position, vertex.normal, view );
+			result += GetColor( *light, front, vertex.position, vertex.normal.Normalize(), view );
 		}
 
 		return result;
@@ -80,11 +80,15 @@ namespace Renderer
 		const Vector3 h = (l + view).Normalize();
 		const auto attenuation = light.Attenuation( v );
 		const auto spot = light.Spot( v );
+		const auto LN = Light::Dot( normal, l );
 
 		Vector4 result( 0, 0, 0, 1 );
 		result += material.ambient * light.ambient;
-		result += material.diffuse * light.diffuse * Light::Dot( normal, l );
-		result += material.specular * light.specular * pow( Light::Dot( normal, h ), material.GetShininess() );
+		result += material.diffuse * light.diffuse * LN;
+		if ( LN != 0 )
+		{
+			result += material.specular * light.specular * pow( Light::Dot( normal, h ), material.GetShininess() );
+		}
 		return result * attenuation * spot;
 	}
 

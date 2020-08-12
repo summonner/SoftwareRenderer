@@ -43,6 +43,7 @@ void SampleScene::Init( const std::shared_ptr<IRenderer> renderer )
 	{
 		glClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
 		glBlendFunc( GL_SRC_ALPHA, GL_ONE );
+		glEnable( GL_DEPTH_TEST );
 	} );
 	renderer->lighting.Add( light );
 }

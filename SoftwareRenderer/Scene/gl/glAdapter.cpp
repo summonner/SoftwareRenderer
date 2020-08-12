@@ -252,13 +252,32 @@ WINGDIAPI void APIENTRY glDeleteTextures( GLsizei n, const GLuint* textures )
 	}
 }
 
+Vector4 Convert( GLenum format, Vector4 rgba )
+{
+	switch ( format )
+	{
+	default:
+	case GL_RGBA:
+		return rgba;
+
+	case GL_LUMINANCE:
+		{
+			// ref : https://en.wikipedia.org/wiki/Grayscale
+			static const Vector3 conversion( 0.299f, 0.587f, 0.114f );
+			const auto l = std::clamp( conversion.Dot( rgba ), 0.f, 1.f );
+			return Vector4( l, l, l, 1 );
+		}
+	}
+}
+
 WINGDIAPI void APIENTRY glCopyTexImage2D( GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border )
 {
 	const Vector2Int min( x + border, y + border );
 	for ( auto j = 0; j < height; ++j )
 	for ( auto i = 0; i < width; ++i )
 	{
-		const auto color = renderer->GetFrameBuffer().GetPixel( Vector2Int( i, (height - 1) - j ) + min );
+		auto color = renderer->GetFrameBuffer().GetPixel( Vector2Int( i, (height - 1) - j ) + min );
+		color = Convert( internalFormat, color );
 		textureManager.SetPixel( Vector2Int( i, j ), level, color );
 	}
 }
@@ -324,6 +343,7 @@ WINGDIAPI void APIENTRY glLightModelfv( GLenum pname, const GLfloat* params )
 	{
 	case GL_LIGHT_MODEL_AMBIENT:
 		renderer->lighting.SetGlobalAmbient( Vector4( params[0], params[1], params[2], params[3] ) );
+		return;
 
 	case GL_LIGHT_MODEL_TWO_SIDE:
 		return;
@@ -464,8 +484,8 @@ int APIENTRY gluBuild2DMipmaps(
 	GLenum      type,
 	const void* data )
 {
-	textureManager.SetImage( 0, components, width, height, format, type, data );
-	return 1;
+	textureManager.SetImage( -1, components, width, height, format, type, data );
+	return 0;
 }
 
 void APIENTRY gluPerspective(

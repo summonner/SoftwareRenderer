@@ -38,10 +38,15 @@ namespace Renderer
 			return 1.f;
 		}
 
+		if ( attenuation.y == 0 && attenuation.z == 0 )
+		{
+			return 1 / attenuation.x;
+		}
+
 		const auto l = Vector3(*this - p);
 		const auto sqDistance = l.Dot( l );
 		const auto v = Vector3( 1, std::sqrt( sqDistance ), sqDistance );
-		return attenuation.Dot( v );
+		return 1 / attenuation.Dot( v );
 	}
 
 	float Light::Spot( const Vector4& p ) const
