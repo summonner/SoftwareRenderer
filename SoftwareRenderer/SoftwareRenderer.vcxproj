@@ -233,6 +233,7 @@
     <ClInclude Include="Scene\IScene.h" />
     <ClInclude Include="Scene\NeHeSamples\ILesson.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson18.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson23.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson36.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson45.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson6.h" />
@@ -317,6 +318,7 @@
     <ClCompile Include="Scene\gl\GLUquadric.cpp" />
     <ClCompile Include="Scene\NeHeSamples\ILesson.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson18.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson23.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson36.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson6.cpp" />

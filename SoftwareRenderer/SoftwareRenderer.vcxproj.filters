@@ -348,6 +348,9 @@
     <ClInclude Include="Util\PixelIterator.h">
       <Filter>Util</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson23.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -578,6 +581,9 @@
     </ClCompile>
     <ClCompile Include="Util\PixelIterator.cpp">
       <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson23.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,6 +8,7 @@
 #include "Lesson18.h"
 #undef LESSON
 
+#include "Lesson23.h"
 #include "Lesson36.h"
 
 #include "Lesson45.h"

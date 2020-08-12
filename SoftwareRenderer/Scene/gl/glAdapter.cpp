@@ -282,6 +282,11 @@ WINGDIAPI void APIENTRY glCopyTexImage2D( GLenum target, GLint level, GLenum int
 	}
 }
 
+WINGDIAPI void APIENTRY glTexGeni( GLenum coord, GLenum pname, GLint param )
+{
+
+}
+
 WINGDIAPI void APIENTRY glBlendFunc( GLenum sfactor, GLenum dfactor )
 {
 	static const Dictionary<GLenum, BlendFunc> table

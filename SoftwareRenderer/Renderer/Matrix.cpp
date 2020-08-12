@@ -113,7 +113,7 @@ namespace Renderer
 	{
 		assert( stack.size() > 0 );
 
-		const auto popped = stack.top();
+		const auto& popped = stack.top();
 		value = popped.first;
 		inverse = popped.second;
 		stack.pop();
