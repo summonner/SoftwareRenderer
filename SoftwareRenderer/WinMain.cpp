@@ -223,6 +223,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
                 scene->OnKeyboardInput( wParam, message == WM_KEYDOWN );
             }
+            break;
 
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
