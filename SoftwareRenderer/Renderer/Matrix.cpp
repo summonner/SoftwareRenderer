@@ -77,7 +77,7 @@ namespace Renderer
 
 	void Matrix::Perspective( Degree fovY, float aspect, float near, float far )
 	{
-		auto halfHeight = near * tanf( Radian( fovY / 2 ) );
+		auto halfHeight = near * tanf( Radian( fovY ) / 2 );
 		auto halfWidth = halfHeight * aspect;
 		Frustum( -halfWidth, halfWidth, halfHeight, -halfHeight, near, far );
 		return;
