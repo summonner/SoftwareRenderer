@@ -24,6 +24,7 @@
 #include <algorithm>
 #include <cmath>
 #include <functional>
+#include <iterator>
 
 #include "Math/MathExt.h"
 #include "Math/Vector.h"
