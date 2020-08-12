@@ -2,6 +2,7 @@
 #include "Vector2.hpp"
 #include "RangeInt.h"
 
+class PixelIterator;
 class Bounds final
 {
 public:
@@ -14,6 +15,9 @@ public:
 			&& y.Contains( p.y );
 	}
 
-	const RangeInt x;
-	const RangeInt y;
+	PixelIterator begin() const;
+	PixelIterator end() const;
+
+	RangeInt x;
+	RangeInt y;
 };

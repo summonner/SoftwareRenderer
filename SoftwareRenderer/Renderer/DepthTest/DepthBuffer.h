@@ -1,22 +1,22 @@
 #pragma once
-#include "DepthFunc.h"
-#include "Renderer/IComponent.h"
+#include "IDepthBufferController.h"
 
 class Bounds;
 namespace Renderer
 {
 	class RasterizedPixel;
-	class DepthBuffer final : public BaseComponent
+	class DepthBuffer final : public IDepthBufferController
 	{
 	public:
 		DepthBuffer( const Bounds& bounds );
 		DepthBuffer( int width, int height );
-		~DepthBuffer();
+		~DepthBuffer() override;
 
 		void Reset() override;
-		void Clear();
-		void SetClearValue( const float value );
-		void SetDepthFunc( const DepthFunc::Type type );
+		void Clear() override;
+		void Clear( const Bounds& bounds );
+		void SetClearValue( const float value ) override;
+		void SetDepthFunc( const DepthFunc::Type type ) override;
 
 		bool Test( const RasterizedPixel& p ) const;
 
@@ -28,6 +28,7 @@ namespace Renderer
 		const int height;
 		std::unique_ptr<float[]> pixels;
 		float clearValue;
+		bool invalidate;
 
 		DepthFunc depthFunc;
 	};

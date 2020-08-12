@@ -61,27 +61,6 @@ namespace Renderer
 		Translate( -eye );
 	}
 
-	void Matrix::Viewport( int left, int bottom, int width, int height )
-	{
-		const auto w = width * 0.5f;
-		const auto h = height * 0.5f;
-		const auto x = w + left + 0.5f;
-		const auto y = h + bottom + 0.5f;
-		value = Matrix4x4(
-			w, 0, 0, x,
-			0, h, 0, y,
-			0, 0, 1, 0,
-			0, 0, 0, 1
-		);
-
-		inverse = Matrix4x4(
-			1 / w, 0, 0, -x / w,
-			0, 1 / h, 0, -y / h,
-			0, 0, 1, 0,
-			0, 0, 0, 1
-		);
-	}
-
 	void Matrix::Frustum( float l, float r, float t, float b, float n, float f )
 	{
 		value *= Matrix4x4(

@@ -200,7 +200,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				PAINTSTRUCT ps;
 				HDC hdc = BeginPaint( hWnd, &ps );
-				auto gdi = dynamic_cast<Renderer::FrameBuffer*>( renderer->backBuffer.get() );
+				auto gdi = dynamic_cast<Renderer::FrameBuffer*>( &renderer->GetFrameBuffer() );
 				if ( gdi != nullptr )
 				{
 					gdi->BitBlt( hdc );

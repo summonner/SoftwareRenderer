@@ -90,9 +90,6 @@
     <ClInclude Include="Math\RangeInt.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\PixelIterator.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Math\Vector2.hpp">
       <Filter>Math</Filter>
     </ClInclude>
@@ -342,6 +339,15 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson36.h">
       <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Viewport.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\DepthTest\IDepthBufferController.h">
+      <Filter>Renderer\DepthTest</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\PixelIterator.h">
+      <Filter>Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -368,9 +374,6 @@
     </ClCompile>
     <ClCompile Include="Math\RangeInt.cpp">
       <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\PixelIterator.cpp">
-      <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Math\Matrix4x4.cpp">
       <Filter>Math</Filter>
@@ -569,6 +572,12 @@
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson36.cpp">
       <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Viewport.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\PixelIterator.cpp">
+      <Filter>Util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

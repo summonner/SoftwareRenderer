@@ -23,6 +23,7 @@ namespace Renderer
 		, info{ sizeof( info ), width, height, 1, colorBytes * 8, BI_RGB, (DWORD)width * height * colorBytes, 0, 0, 0, 0 }
 		, pixels( new BYTE[info.biSizeImage] )
 		, clearValue{ 0, 0, 0, 0 }
+		, invalidate( false )
 	{
 		SelectObject( dc, buffer );
 		GetDIBits( dc, buffer, 0, info.biHeight, (LPVOID)pixels.get(), (LPBITMAPINFO)&info, DIB_RGB_COLORS );
@@ -46,18 +47,31 @@ namespace Renderer
 
 	void FrameBuffer::Clear()
 	{
-		for ( auto i = 0u; i < info.biSizeImage; i += colorBytes )
+		invalidate = true;
+	}
+
+	void FrameBuffer::Clear( const Bounds& viewport )
+	{
+		if ( invalidate == false )
 		{
-			memcpy( pixels.get() + i, &clearValue, sizeof( RGBQUAD ) );
+			return;
 		}
+
+		for ( auto p : viewport )
+		{
+			const auto i = (p.x + p.y * info.biWidth) * colorBytes;
+			memcpy( pixels.get() + i, &clearValue, colorBytes );
+		}
+
+		invalidate = false;
 	}
 
 	void FrameBuffer::SetClearValue( const Vector4& value )
 	{
 		clearValue.rgbRed =  (BYTE)(value.x * 255);
-		clearValue.rgbBlue = (BYTE)(value.y * 255);
 		clearValue.rgbGreen = (BYTE)(value.y * 255);
-		clearValue.rgbReserved = (BYTE)(value.y * 255);
+		clearValue.rgbBlue = (BYTE)(value.z * 255);
+		clearValue.rgbReserved = (BYTE)(value.w * 255);
 	}
 
 	void FrameBuffer::BitBlt( const HDC source )

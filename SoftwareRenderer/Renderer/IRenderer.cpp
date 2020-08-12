@@ -10,6 +10,7 @@ using namespace Renderer;
 IRenderer::IRenderer( std::unique_ptr<IFrameBuffer> frameBuffer )
 	: backBuffer( std::move( frameBuffer ) )
 	, depthBuffer( backBuffer->GetBounds() )
+	, viewport( backBuffer->GetBounds() )
 {
 }
 	
@@ -19,9 +20,12 @@ IRenderer::~IRenderer()
 
 void IRenderer::Render()
 {
+	backBuffer->Clear( viewport );
+	depthBuffer.Clear( viewport );
+
 	for ( auto& vertex : vertices )
 	{
-		vertex.color *= lighting.GetColor( vertex.position, vertex.normal );
+		vertex.color = lighting.GetColor( vertex );
 		vertex.Process( projection );
 	}
 
@@ -89,4 +93,14 @@ void IRenderer::Reset()
 	viewport.Reset();
 
 	vertices.clear();
+}
+
+IDepthBufferController& IRenderer::GetDepthBuffer()
+{
+	return depthBuffer;
+}
+
+IFrameBufferController& IRenderer::GetFrameBuffer()
+{
+	return *backBuffer;
 }

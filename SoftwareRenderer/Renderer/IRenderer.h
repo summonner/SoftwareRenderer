@@ -8,6 +8,7 @@
 #include "Rasterizer/ShadeModel.h"
 #include "Mesh/Mesh.h"
 #include "Matrix.h"
+#include "Viewport.h"
 #include "IFrameBuffer.h"
 
 namespace Renderer
@@ -18,7 +19,7 @@ namespace Renderer
 class IRenderer
 {
 public:
-	IRenderer( std::unique_ptr<IFrameBuffer> frameBuffer );
+	IRenderer( std::unique_ptr<Renderer::IFrameBuffer> frameBuffer );
 	~IRenderer();
 
 	void Draw( const Renderer::Mesh& mesh );
@@ -32,17 +33,21 @@ private:
 	Renderer::GeometryGenerator generator;
 	std::vector<Renderer::Vertex> vertices;
 
+private:
+	const std::unique_ptr<Renderer::IFrameBuffer> backBuffer;
+	Renderer::DepthBuffer depthBuffer;
+
 public:
-	const std::unique_ptr<IFrameBuffer> backBuffer;
+	Renderer::IDepthBufferController& GetDepthBuffer();
+	Renderer::IFrameBufferController& GetFrameBuffer();
 
 	Renderer::TextureComponent texture;
-	Renderer::DepthBuffer depthBuffer;
 	Renderer::BlendComponent blender;
 	Renderer::CullFaceComponent cullFace;
 	Renderer::LightingComponent lighting;
 
 	Renderer::Matrix modelView;
 	Renderer::Matrix projection;
-	Renderer::Matrix viewport;
+	Renderer::Viewport viewport;
 };
 

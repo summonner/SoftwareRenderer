@@ -49,7 +49,7 @@ void SampleScene::Init( const std::shared_ptr<IRenderer> renderer )
 
 void SampleScene::OnResize( const std::shared_ptr<IRenderer> renderer, const int width, const int height )
 {
-	renderer->viewport.Viewport( 0, 0, width, height );
+	renderer->viewport.Set( 0, 0, width, height );
 	renderer->projection.Reset();
 	renderer->projection.Perspective( 45.f, (float)width / (float)height, 0.1f, 100.f );
 }

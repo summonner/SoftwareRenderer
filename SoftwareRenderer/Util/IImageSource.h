@@ -1,6 +1,5 @@
 #pragma once
-#include "Renderer/PixelIterator.h"
-using PixelIterator = Renderer::PixelIterator;
+#include "PixelIterator.h"
 
 class IImageSource abstract
 {

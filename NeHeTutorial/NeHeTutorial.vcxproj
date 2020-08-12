@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\SoftwareRenderer\Renderer\PixelIterator.cpp" />
+    <ClCompile Include="..\SoftwareRenderer\Math\Bounds.cpp" />
+    <ClCompile Include="..\SoftwareRenderer\Math\RangeInt.cpp" />
     <ClCompile Include="..\SoftwareRenderer\Scene\gl\AUX_RGBImageRec.cpp" />
     <ClCompile Include="..\SoftwareRenderer\Util\Bitmap.cpp" />
+    <ClCompile Include="..\SoftwareRenderer\Util\PixelIterator.cpp" />
     <ClCompile Include="Lesson36.cpp" />
     <ClCompile Include="NeHeGL.cpp" />
   </ItemGroup>

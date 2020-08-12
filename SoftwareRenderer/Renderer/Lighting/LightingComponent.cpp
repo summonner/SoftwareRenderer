@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "LightingComponent.h"
 #include "Light.h"
+#include "Renderer/Vertex.h"
 
 namespace Renderer
 {
@@ -51,23 +52,23 @@ namespace Renderer
 		}
 	}
 
-	Vector4 LightingComponent::GetColor( const Vector4& v, const Vector3& normal ) const
+	Vector4 LightingComponent::GetColor( const Vertex& vertex ) const
 	{
 		if ( enabled == false )
 		{
-			return Vector4::one;
+			return vertex.color;
 		}
-		if ( normal == Vector3::zero )
+		if ( vertex.normal == Vector3::zero )
 		{
-			return Vector4::one;
+			return vertex.color;
 		}
 
-		const auto view = GetView( v );
+		const auto view = GetView( vertex.position );
 		Vector4 result = front.emissive;
 		result += front.ambient * ambient;
 		for ( const auto& light : lights )
 		{
-			result += GetColor( *light, front, v, normal, view );
+			result += GetColor( *light, front, vertex.position, vertex.normal, view );
 		}
 
 		return result;

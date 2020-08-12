@@ -7,6 +7,7 @@ namespace Renderer
 {
 	class Light;
 	class Material;
+	class Vertex;
 	class LightingComponent final : public BaseComponent
 	{
 	public:
@@ -19,7 +20,7 @@ namespace Renderer
 		void Add( std::shared_ptr<const Light> light );
 		void Remove( std::shared_ptr<const Light> light );
 
-		Vector4 GetColor( const Vector4& position, const Vector3& normal ) const;
+		Vector4 GetColor( const Vertex& vertex ) const;
 
 	private:
 		Vector3 GetView( const Vector3& position ) const;

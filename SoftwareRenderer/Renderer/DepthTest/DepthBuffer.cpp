@@ -4,6 +4,7 @@
 #include "Math/Vector2.hpp"
 #include "Math/Bounds.h"
 #include "Renderer/Rasterizer/RasterizedPixel.h"
+#include "Util/PixelIterator.h"
 
 namespace Renderer 
 {
@@ -17,6 +18,7 @@ namespace Renderer
 		, height( height )
 		, pixels( new float[width * height] )
 		, clearValue( 1.f )
+		, invalidate( false )
 	{
 	}
 
@@ -33,7 +35,23 @@ namespace Renderer
 
 	void DepthBuffer::Clear()
 	{
-		std::fill( pixels.get(), pixels.get() + width * height, clearValue );
+		invalidate = true;
+	}
+
+	void DepthBuffer::Clear( const Bounds& bounds )
+	{
+		if ( invalidate == false )
+		{
+			return;
+		}
+
+		for ( auto p : bounds )
+		{
+			const auto i = p.x + p.y * width;
+			pixels[i] = clearValue;
+		}
+
+		invalidate = false;
 	}
 
 	void DepthBuffer::SetClearValue( const float value )

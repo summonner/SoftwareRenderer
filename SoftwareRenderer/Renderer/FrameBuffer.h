@@ -1,5 +1,5 @@
 #pragma once
-#include "PixelIterator.h"
+#include "Util/PixelIterator.h"
 #include "Math/Vector4.hpp"
 #include "IFrameBuffer.h"
 
@@ -15,6 +15,7 @@ namespace Renderer
 		Bounds GetBounds() const override;
 		void Reset() override;
 		void Clear() override;
+		void Clear( const Bounds& bounds ) override;
 		void SetClearValue( const Vector4& value ) override;
 		void SetPixel( const Vector2Int& p, const Vector4& color ) override;
 		void SetPixel( const Vector2Int& p, const Vector4& srcColor, std::function<Vector4( const Vector4&, const Vector4& )> blender ) override;
@@ -52,6 +53,7 @@ namespace Renderer
 
 		std::unique_ptr<BYTE[]> pixels;
 		RGBQUAD clearValue;
+		bool invalidate;
 
 		static const BYTE colorBytes;
 	};

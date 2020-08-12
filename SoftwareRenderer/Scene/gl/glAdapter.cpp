@@ -17,7 +17,7 @@ void glEnable( GLenum cap, bool enable )
 	switch ( cap )
 	{
 	case GL_DEPTH_TEST:
-		renderer->depthBuffer.SetEnable( enable );
+		renderer->GetDepthBuffer().SetEnable( enable );
 		break;
 
 	case GL_TEXTURE_2D:
@@ -70,23 +70,23 @@ WINGDIAPI void APIENTRY glClear( GLbitfield mask )
 {
 	if ( mask & GL_COLOR_BUFFER_BIT )
 	{
-		renderer->backBuffer->Clear();
+		renderer->GetFrameBuffer().Clear();
 	}
 
 	if ( mask & GL_DEPTH_BUFFER_BIT )
 	{
-		renderer->depthBuffer.Clear();
+		renderer->GetDepthBuffer().Clear();
 	}
 }
 
 WINGDIAPI void APIENTRY glClearColor( GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha )
 {
-	renderer->backBuffer->SetClearValue( Vector4( red, green, blue, alpha ) );
+	renderer->GetFrameBuffer().SetClearValue( Vector4( red, green, blue, alpha ) );
 }
 
 WINGDIAPI void APIENTRY glClearDepth( GLclampd depth )
 {
-	renderer->depthBuffer.SetClearValue( (float)depth );
+	renderer->GetDepthBuffer().SetClearValue( (float)depth );
 }
 
 WINGDIAPI void APIENTRY glDepthFunc( GLenum func )
@@ -103,7 +103,7 @@ WINGDIAPI void APIENTRY glDepthFunc( GLenum func )
 		{ GL_ALWAYS, DepthFunc::Always },
 	};
 
-	renderer->depthBuffer.SetDepthFunc( table[func] );
+	renderer->GetDepthBuffer().SetDepthFunc( table[func] );
 }
 
 WINGDIAPI void APIENTRY glMatrixMode( GLenum mode )
@@ -127,7 +127,7 @@ WINGDIAPI void APIENTRY glMatrixMode( GLenum mode )
 
 WINGDIAPI void APIENTRY glViewport( GLint x, GLint y, GLsizei width, GLsizei height )
 {
-	renderer->viewport.Viewport( x, y, width, height );
+	renderer->viewport.Set( x, y, width, height );
 }
 
 WINGDIAPI void APIENTRY glLoadIdentity( void )
@@ -258,7 +258,7 @@ WINGDIAPI void APIENTRY glCopyTexImage2D( GLenum target, GLint level, GLenum int
 	for ( auto j = 0; j < height; ++j )
 	for ( auto i = 0; i < width; ++i )
 	{
-		const auto color = renderer->backBuffer->GetPixel( Vector2Int( i, (height - 1) - j ) + min );
+		const auto color = renderer->GetFrameBuffer().GetPixel( Vector2Int( i, (height - 1) - j ) + min );
 		textureManager.SetPixel( Vector2Int( i, j ), level, color );
 	}
 }

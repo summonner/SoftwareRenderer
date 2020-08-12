@@ -172,6 +172,7 @@
     <ClInclude Include="Renderer\Blending\BlendFunc.h" />
     <ClInclude Include="Renderer\CullFace\CullFaceComponent.h" />
     <ClInclude Include="Renderer\DepthTest\DepthBuffer.h" />
+    <ClInclude Include="Renderer\DepthTest\IDepthBufferController.h" />
     <ClInclude Include="Renderer\DepthTest\DepthFunc.h" />
     <ClInclude Include="Renderer\FrameBuffer.h" />
     <ClInclude Include="Renderer\Generators\GeometryGenerator.h" />
@@ -198,7 +199,6 @@
     <ClInclude Include="Renderer\Mesh\Mesh.h" />
     <ClInclude Include="Renderer\Mesh\Sphere.h" />
     <ClInclude Include="Renderer\Mesh\VertexIterator.h" />
-    <ClInclude Include="Renderer\PixelIterator.h" />
     <ClInclude Include="Renderer\Rasterizer\Bresenham.h" />
     <ClInclude Include="Renderer\Rasterizer\BresenhamList.h" />
     <ClInclude Include="Renderer\Rasterizer\DerivativeTexcoord.h" />
@@ -216,6 +216,7 @@
     <ClInclude Include="Renderer\Texturing\TextureComponent.h" />
     <ClInclude Include="Renderer\Texturing\WrapMode.h" />
     <ClInclude Include="Renderer\Vertex.h" />
+    <ClInclude Include="Renderer\Viewport.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="Scene\gl\AUX_RGBImageRec.h" />
@@ -247,6 +248,7 @@
     <ClInclude Include="Util\IBaseIterator.h" />
     <ClInclude Include="Util\IImageSource.h" />
     <ClInclude Include="Util\Dictionary.hpp" />
+    <ClInclude Include="Util\PixelIterator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">
@@ -288,7 +290,6 @@
     <ClCompile Include="Renderer\Mesh\Mesh.cpp" />
     <ClCompile Include="Renderer\Mesh\Sphere.cpp" />
     <ClCompile Include="Renderer\Mesh\VertexIterator.cpp" />
-    <ClCompile Include="Renderer\PixelIterator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp" />
     <ClCompile Include="Renderer\Rasterizer\BresenhamList.cpp" />
     <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp" />
@@ -303,6 +304,7 @@
     <ClCompile Include="Renderer\Texturing\TextureComponent.cpp" />
     <ClCompile Include="Renderer\Texturing\WrapMode.cpp" />
     <ClCompile Include="Renderer\Vertex.cpp" />
+    <ClCompile Include="Renderer\Viewport.cpp" />
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="Scene\gl\AUX_RGBImageRec.cpp" />
     <ClCompile Include="Scene\gl\Buffer\glIndexBuffer.cpp" />
@@ -324,6 +326,7 @@
     <ClCompile Include="Scene\SceneFactory.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Util\Bitmap.cpp" />
+    <ClCompile Include="Util\PixelIterator.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>

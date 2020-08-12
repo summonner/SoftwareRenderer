@@ -19,8 +19,6 @@ namespace Renderer
 		void Scale( float x, float y, float z );
 		void LookAt( const Vector3& eye, const Vector3& center, const Vector3& up );
 
-		void Viewport( int left, int top, int width, int height );
-
 		void Frustum( float left, float right, float top, float bottom, float near, float far );
 		void Perspective( Degree fovY, float aspect, float near, float far );
 		void Ortho( float left, float right, float top, float bottom, float near, float far );
