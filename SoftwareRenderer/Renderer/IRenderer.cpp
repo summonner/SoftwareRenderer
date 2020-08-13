@@ -18,17 +18,20 @@ IRenderer::~IRenderer()
 {
 }
 
-void IRenderer::Render()
+
+void IRenderer::Draw( const Mesh& mesh )
 {
+	vertices.reserve( mesh.size() );
+	std::transform( mesh.begin(), mesh.end(), std::back_inserter( vertices ),
+		[this]( const Vertex& v ) 
+		{ 
+			return ProcessVertex( v ); 
+		} );
+
 	backBuffer->Clear( viewport );
 	depthBuffer.Clear( viewport );
 
-	for ( auto& vertex : vertices )
-	{
-		vertex.color = lighting.GetColor( vertex );
-		vertex.Process( projection );
-	}
-
+	generator.Begin( mesh.drawMode );
 	auto geometries = generator.Generate( vertices );
 	for ( const auto& geometry : geometries )
 	{
@@ -61,19 +64,28 @@ void IRenderer::Render()
 	vertices.clear();
 }
 
-void IRenderer::Draw( const Mesh& mesh )
-{
-	generator.Begin( mesh.drawMode );
-	vertices.reserve( mesh.size() );
-	std::transform( mesh.begin(), mesh.end(), std::back_inserter( vertices ),
-		[this]( const Vertex& v ) { return TransformVertex( v ); } );
-	Render();
-}
-
-Vertex IRenderer::TransformVertex( Vertex v ) const
+Vertex IRenderer::ProcessVertex( Vertex v ) const
 {
 	v.position = modelView * v.position;
 	v.normal = Vector4( v.normal, 0 ) * modelView.Inverse();
+	v.normal = v.normal.Normalize();
+
+	if ( texture.IsEnable() == true )
+	{
+		for ( auto i = 0; i < 2; ++i )
+		{
+			if ( texture.texGen[i].IsEnable() == false )
+			{
+				continue;
+			}
+
+			v.texcoord[i] = texture.texGen[i]( v, modelView );
+		}
+	}
+
+	v.color = lighting.GetColor( v );
+
+	v.position = projection * v.position;
 	return v;
 }
 

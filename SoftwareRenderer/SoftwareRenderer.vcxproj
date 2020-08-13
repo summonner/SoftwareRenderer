@@ -167,7 +167,6 @@
     <ClInclude Include="Math\Vector2.hpp" />
     <ClInclude Include="Math\Vector3.hpp" />
     <ClInclude Include="Math\Vector4.hpp" />
-    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Renderer\Blending\BlendComponent.h" />
     <ClInclude Include="Renderer\Blending\BlendFunc.h" />
     <ClInclude Include="Renderer\CullFace\CullFaceComponent.h" />
@@ -192,6 +191,7 @@
     <ClInclude Include="Renderer\Lighting\Light.h" />
     <ClInclude Include="Renderer\Lighting\LightingComponent.h" />
     <ClInclude Include="Renderer\Lighting\Material.h" />
+    <ClInclude Include="Renderer\Matrix.h" />
     <ClInclude Include="Renderer\Mesh\Cylinder.h" />
     <ClInclude Include="Renderer\Mesh\Disc.h" />
     <ClInclude Include="Renderer\Mesh\Quadric.h" />
@@ -228,6 +228,7 @@
     <ClInclude Include="Scene\gl\glLightManager.h" />
     <ClInclude Include="Scene\gl\glBridge.h" />
     <ClInclude Include="Scene\gl\glMeshBuilder.h" />
+    <ClInclude Include="Scene\gl\glTexcoordGenerator.h" />
     <ClInclude Include="Scene\gl\glTextureManager.h" />
     <ClInclude Include="Scene\gl\GLUquadric.h" />
     <ClInclude Include="Scene\IScene.h" />
@@ -244,6 +245,7 @@
     <ClInclude Include="Scene\SceneFactory.h" />
     <ClInclude Include="SoftwareRenderer.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TexcoordFunc.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Util\Bitmap.h" />
     <ClInclude Include="Util\IBaseIterator.h" />
@@ -314,6 +316,7 @@
     <ClCompile Include="Scene\gl\glBridge.cpp" />
     <ClCompile Include="Scene\gl\glLightManager.cpp" />
     <ClCompile Include="Scene\gl\glMeshBuilder.cpp" />
+    <ClCompile Include="Scene\gl\glTexcoordGenerator.cpp" />
     <ClCompile Include="Scene\gl\glTextureManager.cpp" />
     <ClCompile Include="Scene\gl\GLUquadric.cpp" />
     <ClCompile Include="Scene\NeHeSamples\ILesson.cpp" />
@@ -326,6 +329,7 @@
     <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp" />
     <ClCompile Include="Scene\SampleScene.cpp" />
     <ClCompile Include="Scene\SceneFactory.cpp" />
+    <ClCompile Include="TexcoordFunc.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Util\Bitmap.cpp" />
     <ClCompile Include="Util\PixelIterator.cpp" />

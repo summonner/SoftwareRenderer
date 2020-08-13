@@ -3,6 +3,7 @@
 #include "glTextureManager.h"
 #include "glLightManager.h"
 #include "glMeshBuilder.h"
+#include "glTexcoordGenerator.h"
 
 class glBridge;
 extern glBridge* adapter;
@@ -20,6 +21,7 @@ public:
 	glTextureManager textureManager;
 	glLightManager lightManager;
 	glMeshBuilder meshBuilder;
+	glTexcoordGenerator texcoordGenerator;
 
 	Renderer::Matrix* matrix;
 };

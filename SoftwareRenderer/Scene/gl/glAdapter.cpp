@@ -11,6 +11,7 @@ glBridge* adapter;
 #define lightManager adapter->lightManager
 #define meshBuilder adapter->meshBuilder
 #define matrix adapter->matrix
+#define texcoordGenerator adapter->texcoordGenerator
 
 void glEnable( GLenum cap, bool enable )
 {
@@ -51,6 +52,14 @@ void glEnable( GLenum cap, bool enable )
 		else
 		{
 			renderer->lighting.Remove( lightManager.Get( cap ) );
+		}
+		break;
+
+	case GL_TEXTURE_GEN_S:
+	case GL_TEXTURE_GEN_T:
+		{
+			const auto i = cap - GL_TEXTURE_GEN_S;
+			renderer->texture.texGen[i].SetEnable( enable );
 		}
 		break;
 	}
@@ -284,7 +293,24 @@ WINGDIAPI void APIENTRY glCopyTexImage2D( GLenum target, GLint level, GLenum int
 
 WINGDIAPI void APIENTRY glTexGeni( GLenum coord, GLenum pname, GLint param )
 {
+	if ( pname != GL_TEXTURE_GEN_MODE )
+	{
+		return;
+	}
 
+	texcoordGenerator.SetMode( renderer->texture, coord, param );
+}
+
+WINGDIAPI void APIENTRY glTexGenfv( GLenum coord, GLenum pname, const GLfloat* params )
+{
+	if ( pname == GL_TEXTURE_GEN_MODE )
+	{
+		texcoordGenerator.SetMode( renderer->texture, coord, (GLint)*params );
+	}
+	else
+	{
+		texcoordGenerator.SetPlane( renderer->texture, coord, pname, params );
+	}
 }
 
 WINGDIAPI void APIENTRY glBlendFunc( GLenum sfactor, GLenum dfactor )

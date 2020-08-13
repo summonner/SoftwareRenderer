@@ -58,6 +58,7 @@ namespace Renderer
 		{
 			return vertex.color;
 		}
+
 		if ( vertex.normal == Vector3::zero )
 		{
 			return vertex.color;
@@ -68,7 +69,7 @@ namespace Renderer
 		result += front.ambient * ambient;
 		for ( const auto& light : lights )
 		{
-			result += GetColor( *light, front, vertex.position, vertex.normal.Normalize(), view );
+			result += GetColor( *light, front, vertex.position, vertex.normal, view );
 		}
 
 		return result;

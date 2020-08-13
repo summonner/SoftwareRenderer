@@ -7,6 +7,7 @@
 namespace Renderer
 {
 	TextureComponent::TextureComponent()
+		: texGen{ TexcoordFunc( Vector4( 1, 0, 0, 0 ) ), TexcoordFunc( Vector4( 0, 1, 0, 0 ) ) }
 	{
 	}
 
@@ -37,7 +38,7 @@ namespace Renderer
 			return texture->GetPixel( p.GetTexcoord(), 0 );
 		}
 
-		const auto values = p.GetRawValues();
+		const auto& values = p.GetRawValues();
 		const auto ddx = derivatives.dFdx( values.texcoord, values.w );
 		const auto ddy = derivatives.dFdy( values.texcoord, values.w );
 		const auto mipLevel = texture->CalculateMipLevel( ddx, ddy );

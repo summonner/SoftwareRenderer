@@ -37,7 +37,7 @@ namespace Renderer
 	}
 
 	WrapMode::WrapMode()
-		: current( &Clamp )
+		: current( &Repeat )
 	{
 	}
 

@@ -13,7 +13,6 @@ namespace Renderer
 		Vertex( const Vertex& left, const Vertex& right, const float t );
 		~Vertex();
 
-		void Process( const Matrix4x4& projection );
 		void PerspectiveDivide( const Matrix4x4& viewport );
 		static Vertex Lerp( const Vertex& left, const Vertex& right, const float t );
 

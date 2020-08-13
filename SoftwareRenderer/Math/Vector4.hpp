@@ -28,6 +28,24 @@ public:
 	{
 	}
 
+	inline T& operator[]( int i )
+	{
+		switch ( i )
+		{
+		case 0:
+			return x;
+		case 1:
+			return y;
+		case 2:
+			return z;
+		case 3:
+			return w;
+		default:
+			assert( "invalid range" && false );
+			return x;
+		}
+	}
+
 	inline bool operator ==( const TVector4& other ) const
 	{
 		return x == other.x
@@ -46,9 +64,19 @@ public:
 		return TVector4( x + other.x, y + other.y, z + other.z, w + other.w );
 	}
 
+	inline TVector4 operator +( T scalar ) const
+	{
+		return (*this) + TVector4::one * scalar;
+	}
+
 	inline TVector4 operator -( const TVector4& other ) const
 	{
 		return (*this) + other * -1;
+	}
+
+	inline TVector4 operator -( T scalar ) const
+	{
+		return (*this) + -scalar;
 	}
 
 	inline TVector4 operator -() const
@@ -84,9 +112,19 @@ public:
 		w += other.w;
 	}
 
+	inline void operator +=( T scalar )
+	{
+		(*this) += TVector4::one * scalar;
+	}
+
 	inline void operator -=( const TVector4& other )
 	{
-		*this += -other;
+		(*this) += -other;
+	}
+
+	inline void operator -=( T scalar )
+	{
+		(*this) += -scalar;
 	}
 
 	inline void operator *=( const float scalar )
@@ -99,7 +137,7 @@ public:
 
 	inline void operator /=( const float scalar )
 	{
-		*this *= 1.f / scalar;
+		(*this) *= 1.f / scalar;
 	}
 
 	inline void operator *=( const TVector4& other )
@@ -112,7 +150,7 @@ public:
 
 	inline void operator /=( const TVector4& other )
 	{
-		*this *= 1.f / other;
+		(*this) *= 1.f / other;
 	}
 
 	inline float SquaredDistance( const TVector4& other ) const
@@ -134,9 +172,9 @@ public:
 		return sqrt( this->Dot( *this ) );
 	}
 
-	inline float Normalize() const
+	inline TVector3<T> Normalize3() const
 	{
-		return *this / Length();
+		return TVector3<T>( *this ).Normalize();
 	}
 
 	static TVector4 Lerp( const TVector4& left, const TVector4& right, const float t );

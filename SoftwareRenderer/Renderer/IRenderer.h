@@ -27,8 +27,7 @@ public:
 	void Reset();
 
 private:
-	Renderer::Vertex TransformVertex( Renderer::Vertex v ) const;
-	void Render();
+	Renderer::Vertex ProcessVertex( Renderer::Vertex v ) const;
 
 	Renderer::GeometryGenerator generator;
 	std::vector<Renderer::Vertex> vertices;

@@ -327,9 +327,6 @@
     <ClInclude Include="Renderer\Rasterizer\ShadeModel.h">
       <Filter>Renderer\Rasterizer</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\IFrameBuffer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -350,6 +347,15 @@
     </ClInclude>
     <ClInclude Include="Scene\NeHeSamples\Lesson23.h">
       <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
+    <ClInclude Include="TexcoordFunc.h">
+      <Filter>Renderer\Texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Matrix.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glTexcoordGenerator.h">
+      <Filter>Scene\gl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -584,6 +590,12 @@
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson23.cpp">
       <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="TexcoordFunc.cpp">
+      <Filter>Renderer\Texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glTexcoordGenerator.cpp">
+      <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

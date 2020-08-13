@@ -28,6 +28,22 @@ public:
 	{
 	}
 
+	inline T& operator[]( int i )
+	{
+		switch ( i )
+		{
+		case 0:
+			return x;
+		case 1:
+			return y;
+		case 2:
+			return z;
+		default:
+			assert( "invalid range" && false );
+			return x;
+		}
+	}
+
 	inline bool operator ==( const TVector3& other ) const
 	{
 		return x == other.x
@@ -45,9 +61,19 @@ public:
 		return TVector3( x + other.x, y + other.y, z + other.z );
 	}
 
+	inline TVector3 operator +( T scalar ) const
+	{
+		return (*this) + TVector3::one * scalar;
+	}
+
 	inline TVector3 operator -( const TVector3& other ) const
 	{
 		return (*this) + other * -1;
+	}
+
+	inline TVector3 operator -( T scalar ) const
+	{
+		return (*this) + -scalar;
 	}
 
 	inline TVector3 operator -() const
@@ -77,11 +103,20 @@ public:
 		z += other.z;
 	}
 
-	inline void operator -=( const TVector3& other )
+	inline void operator +=( T scalar )
 	{
-		*this += -other;
+		(*this) += TVector3::one * scalar;
 	}
 
+	inline void operator -=( const TVector3& other )
+	{
+		(*this) += -other;
+	}
+
+	inline void operator -=( T scalar )
+	{
+		(*this) += -scalar;
+	}
 
 	inline void operator *=( const float scalar )
 	{
@@ -127,7 +162,14 @@ public:
 
 	inline TVector3 Normalize() const
 	{
-		return *this / Length();
+		if ( *this == TVector3::zero )
+		{
+			return *this;
+		}
+		else
+		{
+			return *this / Length();
+		}
 	}
 
 	inline TVector3 Cross( const TVector3& other ) const

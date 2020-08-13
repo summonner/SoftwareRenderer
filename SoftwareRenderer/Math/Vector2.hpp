@@ -31,6 +31,20 @@ public:
 	{
 	}
 
+	inline T& operator[]( int i )
+	{
+		switch ( i )
+		{
+		case 0:
+			return x;
+		case 1:
+			return y;
+		default:
+			assert( "invalid range" && false );
+			return x;
+		}
+	}
+
 	inline bool operator !=( const TVector2& other ) const
 	{
 		return x != other.x
@@ -54,7 +68,7 @@ public:
 
 	inline TVector2 operator +( T scalar ) const
 	{
-		return (*this) + TVector2( scalar, scalar );
+		return (*this) + TVector2::one * scalar;
 	}
 
 	inline TVector2 operator -( T scalar ) const
@@ -95,7 +109,7 @@ public:
 
 	inline void operator +=( const T scalar )
 	{
-		(*this) += TVector2( scalar, scalar );
+		(*this) += TVector2::one * scalar;
 	}
 
 	inline void operator -=( const TVector2& other )
