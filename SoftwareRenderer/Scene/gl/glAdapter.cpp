@@ -21,6 +21,10 @@ void glEnable( GLenum cap, bool enable )
 		renderer->GetDepthBuffer().SetEnable( enable );
 		break;
 
+	case GL_STENCIL:
+		renderer->GetStencilBuffer().SetEnable( enable );
+		break;
+
 	case GL_TEXTURE_2D:
 		renderer->texture.SetEnable( enable );
 		break;
@@ -86,11 +90,21 @@ WINGDIAPI void APIENTRY glClear( GLbitfield mask )
 	{
 		renderer->GetDepthBuffer().Clear();
 	}
+
+	if ( mask & GL_STENCIL_BUFFER_BIT )
+	{
+		renderer->GetStencilBuffer().Clear();
+	}
 }
 
 WINGDIAPI void APIENTRY glClearColor( GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha )
 {
 	renderer->GetFrameBuffer().SetClearValue( Vector4( red, green, blue, alpha ) );
+}
+
+WINGDIAPI void APIENTRY glColorMask( GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha )
+{
+	renderer->GetFrameBuffer().SetColorMask( red, green, blue, alpha );
 }
 
 WINGDIAPI void APIENTRY glClearDepth( GLclampd depth )
@@ -117,22 +131,49 @@ WINGDIAPI void APIENTRY glDepthFunc( GLenum func )
 
 WINGDIAPI void APIENTRY glClearStencil( GLint s )
 {
-	
+	renderer->GetStencilBuffer().SetClearValue( s );
 }
 
 WINGDIAPI void APIENTRY glStencilFunc( GLenum func, GLint ref, GLuint mask )
 {
-
+	static const Dictionary<GLenum, Renderer::StencilFunc::Type> table
+	{
+		{ GL_NEVER, Renderer::StencilFunc::Type::Never },
+		{ GL_LESS, Renderer::StencilFunc::Type::Less },
+		{ GL_EQUAL, Renderer::StencilFunc::Type::Equal },
+		{ GL_LEQUAL, Renderer::StencilFunc::Type::LEqual },
+		{ GL_GREATER, Renderer::StencilFunc::Type::Greater },
+		{ GL_NOTEQUAL, Renderer::StencilFunc::Type::NotEqual },
+		{ GL_GEQUAL, Renderer::StencilFunc::Type::GEqual },
+		{ GL_ALWAYS, Renderer::StencilFunc::Type::Always },
+	};
+	auto face = renderer->GetStencilBuffer().front;
+	face.func = Renderer::StencilFunc( table[func], mask );
+	face.ref = ref;
 }
 
 WINGDIAPI void APIENTRY glStencilMask( GLuint mask )
 {
-
+	auto face = renderer->GetStencilBuffer().front;
+	face.mask = mask;
 }
 
 WINGDIAPI void APIENTRY glStencilOp( GLenum fail, GLenum zfail, GLenum zpass )
 {
-
+	static const Dictionary<GLenum, Renderer::StencilOp::Type> table
+	{
+		{ GL_ZERO, StencilOp::Zero },
+		{ GL_KEEP, StencilOp::Keep },
+		{ GL_REPLACE, StencilOp::Replace },
+		{ GL_INCR, StencilOp::Increase },
+		{ GL_DECR, StencilOp::Decrease },
+		{ GL_INVERT, StencilOp::Invert},
+	};
+	
+	auto face = renderer->GetStencilBuffer().front;
+	face.fail = table[fail];
+	face.depthFail = table[zfail];
+	face.pass = table[zpass];
 }
 
 WINGDIAPI void APIENTRY glMatrixMode( GLenum mode )
@@ -526,11 +567,6 @@ WINGDIAPI void APIENTRY glOrtho( GLdouble left, GLdouble right, GLdouble bottom,
 }
 
 WINGDIAPI void APIENTRY glClipPlane( GLenum plane, const GLdouble* equation )
-{
-
-}
-
-WINGDIAPI void APIENTRY glColorMask( GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha )
 {
 
 }

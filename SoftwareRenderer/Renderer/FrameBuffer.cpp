@@ -24,6 +24,7 @@ namespace Renderer
 		, pixels( new BYTE[info.biSizeImage] )
 		, clearValue{ 0, 0, 0, 0 }
 		, invalidate( false )
+		, mask( true, true, true, true )
 	{
 		SelectObject( dc, buffer );
 		GetDIBits( dc, buffer, 0, info.biHeight, (LPVOID)pixels.get(), (LPBITMAPINFO)&info, DIB_RGB_COLORS );
@@ -72,6 +73,11 @@ namespace Renderer
 		clearValue.rgbGreen = (BYTE)(value.y * 255);
 		clearValue.rgbBlue = (BYTE)(value.z * 255);
 		clearValue.rgbReserved = (BYTE)(value.w * 255);
+	}
+
+	void FrameBuffer::SetColorMask( bool r, bool g, bool b, bool a )
+	{
+		mask = TVector4<bool>( r, g, b, a );
 	}
 
 	void FrameBuffer::BitBlt( const HDC source )

@@ -17,6 +17,7 @@ namespace Renderer
 		void Clear() override;
 		void Clear( const Bounds& bounds ) override;
 		void SetClearValue( const Vector4& value ) override;
+		void SetColorMask( bool r, bool g, bool b, bool a ) override;
 		void SetPixel( const Vector2Int& p, const Vector4& color ) override;
 		void SetPixel( const Vector2Int& p, const Vector4& srcColor, std::function<Vector4( const Vector4&, const Vector4& )> blender ) override;
 		Vector4 GetPixel( const Vector2Int& p ) const override;
@@ -40,10 +41,21 @@ namespace Renderer
 		
 		inline void SetPixel( const int i, const Vector4& color )
 		{
-			pixels[i + 0] = (BYTE)(std::clamp( color.z, 0.f, 1.f ) * 255);	// B
-			pixels[i + 1] = (BYTE)(std::clamp( color.y, 0.f, 1.f ) * 255);	// G
-			pixels[i + 2] = (BYTE)(std::clamp( color.x, 0.f, 1.f ) * 255);	// R
-			pixels[i + 3] = (BYTE)(std::clamp( color.w, 0.f, 1.f ) * 255);	// A
+			SetPixel( i, RGBQUAD
+			{
+				(BYTE)(std::clamp( color.z, 0.f, 1.f ) * 255),
+				(BYTE)(std::clamp( color.y, 0.f, 1.f ) * 255),
+				(BYTE)(std::clamp( color.x, 0.f, 1.f ) * 255),
+				(BYTE)(std::clamp( color.w, 0.f, 1.f ) * 255)
+			} );
+		}
+
+		inline void SetPixel( const int i, const RGBQUAD& color )
+		{
+			if ( mask.z ) pixels[i + 0] = color.rgbBlue;
+			if ( mask.y ) pixels[i + 1] = color.rgbGreen;
+			if ( mask.x ) pixels[i + 2] = color.rgbRed;
+			if ( mask.w ) pixels[i + 3] = color.rgbReserved;
 		}
 
 	private:
@@ -54,6 +66,7 @@ namespace Renderer
 		std::unique_ptr<BYTE[]> pixels;
 		RGBQUAD clearValue;
 		bool invalidate;
+		TVector4<bool> mask;
 
 		static const BYTE colorBytes;
 	};

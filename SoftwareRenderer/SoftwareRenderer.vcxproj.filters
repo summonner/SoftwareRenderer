@@ -64,6 +64,9 @@
     <Filter Include="Scene\gl\Buffer">
       <UniqueIdentifier>{cf95df72-b66d-4b85-89b0-cba1eb2106ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\StencilTest">
+      <UniqueIdentifier>{53d4094e-fdaf-4d53-a055-f7699a943734}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -360,6 +363,21 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson26.h">
       <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\StencilTest\StencilBuffer.h">
+      <Filter>Renderer\StencilTest</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\StencilTest\StencilFunc.h">
+      <Filter>Renderer\StencilTest</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\StencilTest\StencilOp.h">
+      <Filter>Renderer\StencilTest</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\StencilTest\StencilValue.h">
+      <Filter>Renderer\StencilTest</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\StencilTest\IStencilBufferController.h">
+      <Filter>Renderer\StencilTest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -602,6 +620,15 @@
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson26.cpp">
       <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\StencilTest\StencilBuffer.cpp">
+      <Filter>Renderer\StencilTest</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\StencilTest\StencilFunc.cpp">
+      <Filter>Renderer\StencilTest</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\StencilTest\StencilOp.cpp">
+      <Filter>Renderer\StencilTest</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -209,6 +209,11 @@
     <ClInclude Include="Renderer\Rasterizer\PolygonRasterizer.h" />
     <ClInclude Include="Renderer\Rasterizer\RasterizedPixel.h" />
     <ClInclude Include="Renderer\Rasterizer\ShadeModel.h" />
+    <ClInclude Include="Renderer\StencilTest\IStencilBufferController.h" />
+    <ClInclude Include="Renderer\StencilTest\StencilValue.h" />
+    <ClInclude Include="Renderer\StencilTest\StencilBuffer.h" />
+    <ClInclude Include="Renderer\StencilTest\StencilFunc.h" />
+    <ClInclude Include="Renderer\StencilTest\StencilOp.h" />
     <ClInclude Include="Renderer\Texturing\ITexture.h" />
     <ClInclude Include="Renderer\Texturing\Mipmap.h" />
     <ClInclude Include="Renderer\Texturing\Texture2D.h" />
@@ -302,6 +307,9 @@
     <ClCompile Include="Renderer\Rasterizer\PolygonRasterizer.cpp" />
     <ClCompile Include="Renderer\Rasterizer\RasterizedPixel.cpp" />
     <ClCompile Include="Renderer\Rasterizer\ShadeModel.cpp" />
+    <ClCompile Include="Renderer\StencilTest\StencilBuffer.cpp" />
+    <ClCompile Include="Renderer\StencilTest\StencilFunc.cpp" />
+    <ClCompile Include="Renderer\StencilTest\StencilOp.cpp" />
     <ClCompile Include="Renderer\Texturing\Mipmap.cpp" />
     <ClCompile Include="Renderer\Texturing\Texture2D.cpp" />
     <ClCompile Include="Renderer\Texturing\TextureFilter.cpp" />

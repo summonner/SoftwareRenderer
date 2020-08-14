@@ -12,6 +12,7 @@ namespace Renderer
 		virtual void Clear() abstract;
 
 		virtual void SetClearValue( const Vector4& value ) abstract;
+		virtual void SetColorMask( bool r, bool g, bool b, bool a ) abstract;
 		virtual Vector4 GetPixel( const Vector2Int& p ) const abstract;
 	};
 

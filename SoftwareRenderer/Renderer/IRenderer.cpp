@@ -10,6 +10,7 @@ using namespace Renderer;
 IRenderer::IRenderer( std::unique_ptr<IFrameBuffer> frameBuffer )
 	: backBuffer( std::move( frameBuffer ) )
 	, depthBuffer( backBuffer->GetBounds() )
+	, stencilBuffer( backBuffer->GetBounds() )
 	, viewport( backBuffer->GetBounds() )
 {
 }
@@ -49,7 +50,8 @@ void IRenderer::Draw( const Mesh& mesh )
 		const auto derivatives = rasterizer->Derivative( texture.IsEnable() );
 		rasterizer->Rasterize( backBuffer->GetBounds(), [&]( const RasterizedPixel& p )
 		{
-			if ( depthBuffer.Test( p ) == false )
+			auto depthTest = [this, p]() { return depthBuffer.Test( p ); };
+			if ( stencilBuffer.Test( p, depthTest ) == false )
 			{
 				return;
 			}
@@ -115,4 +117,9 @@ IDepthBufferController& IRenderer::GetDepthBuffer()
 IFrameBufferController& IRenderer::GetFrameBuffer()
 {
 	return *backBuffer;
+}
+
+IStencilBufferController& IRenderer::GetStencilBuffer()
+{
+	return stencilBuffer;
 }

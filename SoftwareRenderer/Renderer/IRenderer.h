@@ -7,6 +7,7 @@
 #include "Lighting/LightingComponent.h"
 #include "Rasterizer/ShadeModel.h"
 #include "Mesh/Mesh.h"
+#include "StencilTest/StencilBuffer.h"
 #include "Matrix.h"
 #include "Viewport.h"
 #include "IFrameBuffer.h"
@@ -35,10 +36,12 @@ private:
 private:
 	const std::unique_ptr<Renderer::IFrameBuffer> backBuffer;
 	Renderer::DepthBuffer depthBuffer;
+	Renderer::StencilBuffer stencilBuffer;
 
 public:
 	Renderer::IDepthBufferController& GetDepthBuffer();
 	Renderer::IFrameBufferController& GetFrameBuffer();
+	Renderer::IStencilBufferController& GetStencilBuffer();
 
 	Renderer::TextureComponent texture;
 	Renderer::BlendComponent blender;
