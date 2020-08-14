@@ -72,7 +72,7 @@ namespace Renderer
 			result += GetColor( *light, front, vertex.position, vertex.normal, view );
 		}
 
-		return result;
+		return Clamp( result );
 	}
 
 	Vector4 LightingComponent::GetColor( const Light& light, const Material& material, const Vector4& v, const Vector3& normal, const Vector3& view )

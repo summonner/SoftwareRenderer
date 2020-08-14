@@ -202,3 +202,13 @@ const TVector4<T> TVector4<T>::zero = TVector4<T>( T( 0 ), T( 0 ), T( 0 ), T( 0 
 
 template<typename T>
 const TVector4<T> TVector4<T>::one = TVector4<T>( T( 1 ), T( 1 ), T( 1 ), T( 1 ) );
+
+inline Vector4 Clamp( const Vector4& v )
+{
+	return Vector4(
+		std::clamp( v.x, 0.f, 1.f ),
+		std::clamp( v.y, 0.f, 1.f ),
+		std::clamp( v.z, 0.f, 1.f ),
+		std::clamp( v.w, 0.f, 1.f )
+	);
+}
