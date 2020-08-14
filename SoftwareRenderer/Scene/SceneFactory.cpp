@@ -7,7 +7,7 @@
 #include "resource.h"
 
 const UINT SceneFactory::defaultScene = ID_SCENE_DEFAULT;
-const std::pair<UINT, UINT> SceneFactory::sceneRange = { ID_SCENE_NEHE, ID_NEHE_LESSON23 };
+const std::pair<UINT, UINT> SceneFactory::sceneRange = { ID_SCENE_NEHE, ID_NEHE_LESSON26 };
 
 #define NEHE( n )\
 	{ ID_NEHE_LESSON##n, NeHeLesson<NeHe::Lesson##n> }
@@ -19,6 +19,7 @@ const Dictionary<UINT, SceneFactory::CreateFunc> SceneFactory::table(
 	NEHE(  8 ),
 	NEHE( 18 ),
 	NEHE( 23 ),
+	NEHE( 26 ),
 	NEHE( 36 ),
 	NEHE( 45 ),
 }, ReturnNullPtr );

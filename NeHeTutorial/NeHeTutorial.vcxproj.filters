@@ -33,7 +33,7 @@
     <ClCompile Include="..\SoftwareRenderer\Util\PixelIterator.cpp">
       <Filter>SoftwareRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="Lesson23.cpp">
+    <ClCompile Include="Lesson26.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

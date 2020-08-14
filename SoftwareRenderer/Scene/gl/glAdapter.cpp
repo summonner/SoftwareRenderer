@@ -115,6 +115,26 @@ WINGDIAPI void APIENTRY glDepthFunc( GLenum func )
 	renderer->GetDepthBuffer().SetDepthFunc( table[func] );
 }
 
+WINGDIAPI void APIENTRY glClearStencil( GLint s )
+{
+	
+}
+
+WINGDIAPI void APIENTRY glStencilFunc( GLenum func, GLint ref, GLuint mask )
+{
+
+}
+
+WINGDIAPI void APIENTRY glStencilMask( GLuint mask )
+{
+
+}
+
+WINGDIAPI void APIENTRY glStencilOp( GLenum fail, GLenum zfail, GLenum zpass )
+{
+
+}
+
 WINGDIAPI void APIENTRY glMatrixMode( GLenum mode )
 {
 	switch ( mode )
@@ -505,6 +525,15 @@ WINGDIAPI void APIENTRY glOrtho( GLdouble left, GLdouble right, GLdouble bottom,
 	renderer->projection.Ortho( (float)left, (float)right, (float)bottom, (float)top, (float)zNear, (float)zFar );
 }
 
+WINGDIAPI void APIENTRY glClipPlane( GLenum plane, const GLdouble* equation )
+{
+
+}
+
+WINGDIAPI void APIENTRY glColorMask( GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha )
+{
+
+}
 
 int APIENTRY gluBuild2DMipmaps(
 	GLenum      target,
