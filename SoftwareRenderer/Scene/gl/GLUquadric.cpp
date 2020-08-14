@@ -24,6 +24,11 @@ GLUquadric::~GLUquadric()
 
 void GLUquadric::SetNormals( GLenum normals )
 {
+	if ( normals == GL_SMOOTH )
+	{
+		normals = GLU_SMOOTH;
+	}
+
 	this->normals = normals;
 }
 
@@ -73,7 +78,7 @@ GLUquadric::ScopedShadeModel::ScopedShadeModel( GLenum type )
 {
 	oldType = Renderer::ShadeModel::type;
 	const auto useSmooth = (oldType == Renderer::ShadeModel::Type::Smooth)
-						&& (type == GLU_SMOOTH );
+						&& (type == GLU_SMOOTH);
 	if ( useSmooth == true )
 	{
 		Renderer::ShadeModel::type = Renderer::ShadeModel::Type::Smooth;
