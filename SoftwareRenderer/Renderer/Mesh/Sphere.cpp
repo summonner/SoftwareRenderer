@@ -14,12 +14,12 @@ namespace Renderer
 
 	float Sphere::Radius( float t ) const
 	{
-		return sin( t * PI );
+		return sin( t * PI ) * radius;
 	}
 
 	float Sphere::Height( float t ) const
 	{
-		return cos( t * PI );
+		return cos( t * PI ) * radius;
 	}
 
 	Vector2 Sphere::Texcoord( float tSlices, float tStacks ) const
