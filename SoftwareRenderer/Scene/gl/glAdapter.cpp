@@ -21,7 +21,7 @@ void glEnable( GLenum cap, bool enable )
 		renderer->GetDepthBuffer().SetEnable( enable );
 		break;
 
-	case GL_STENCIL:
+	case GL_STENCIL_TEST:
 		renderer->GetStencilBuffer().SetEnable( enable );
 		break;
 
@@ -147,14 +147,14 @@ WINGDIAPI void APIENTRY glStencilFunc( GLenum func, GLint ref, GLuint mask )
 		{ GL_GEQUAL, Renderer::StencilFunc::Type::GEqual },
 		{ GL_ALWAYS, Renderer::StencilFunc::Type::Always },
 	};
-	auto face = renderer->GetStencilBuffer().front;
+	auto& face = renderer->GetStencilBuffer().front;
 	face.func = Renderer::StencilFunc( table[func], mask );
 	face.ref = ref;
 }
 
 WINGDIAPI void APIENTRY glStencilMask( GLuint mask )
 {
-	auto face = renderer->GetStencilBuffer().front;
+	auto& face = renderer->GetStencilBuffer().front;
 	face.mask = mask;
 }
 
@@ -170,7 +170,7 @@ WINGDIAPI void APIENTRY glStencilOp( GLenum fail, GLenum zfail, GLenum zpass )
 		{ GL_INVERT, StencilOp::Invert},
 	};
 	
-	auto face = renderer->GetStencilBuffer().front;
+	auto& face = renderer->GetStencilBuffer().front;
 	face.fail = table[fail];
 	face.depthFail = table[zfail];
 	face.pass = table[zpass];
