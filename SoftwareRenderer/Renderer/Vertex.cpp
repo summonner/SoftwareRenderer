@@ -9,6 +9,7 @@ namespace Renderer
 		, color( 1, 1, 1, 1 )
 		, texcoord( 0, 0 )
 		, normal( 0, 0, 0 )
+		, view( 0, 0, 0, 0 )
 	{
 	}
 
@@ -18,6 +19,7 @@ namespace Renderer
 		, texcoord( Vector2::Lerp( left.texcoord, right.texcoord, t ) )
 		, screen( Vector2Int::Lerp( left.screen, right.screen, t ) )
 		, normal( Vector3::Lerp( left.normal, right.normal, t ) )
+		, view( Vector4::Lerp( left.view, right.view, t ) )
 	{
 	}
 

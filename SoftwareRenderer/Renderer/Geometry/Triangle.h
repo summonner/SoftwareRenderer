@@ -11,7 +11,7 @@ namespace Renderer
 		Triangle( const Vertex& a, const Vertex& b, const Vertex& c );
 		~Triangle() override;
 
-		std::unique_ptr<IRasterizer> Clip( const Matrix4x4& viewport ) const override;
+		std::unique_ptr<IRasterizer> Clip( const Matrix4x4& viewport, const PlaneIterator& planes ) const override;
 
 	private:
 		static int SelectSecondVertex( const std::vector<Vertex>& vertices );

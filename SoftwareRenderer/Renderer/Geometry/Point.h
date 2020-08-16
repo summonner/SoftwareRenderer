@@ -10,7 +10,7 @@ namespace Renderer
 		Point( const Vertex& v );
 		~Point() override;
 
-		std::unique_ptr<IRasterizer> Clip( const Matrix4x4& viewport ) const override;
+		std::unique_ptr<IRasterizer> Clip( const Matrix4x4& viewport, const PlaneIterator& planes ) const override;
 
 	private:
 		const Vertex& v;

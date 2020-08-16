@@ -11,7 +11,7 @@ namespace Renderer
 		Line( const Vertex& a, const Vertex& b );
 		~Line() override;
 
-		std::unique_ptr<IRasterizer> Clip( const Matrix4x4& viewport ) const;
+		std::unique_ptr<IRasterizer> Clip( const Matrix4x4& viewport, const PlaneIterator& planes ) const;
 
 	private:
 		const Vertex& a;

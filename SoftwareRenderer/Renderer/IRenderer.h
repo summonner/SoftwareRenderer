@@ -8,6 +8,7 @@
 #include "Rasterizer/ShadeModel.h"
 #include "Mesh/Mesh.h"
 #include "StencilTest/StencilBuffer.h"
+#include "Clipping/CustomClipPlanes.h"
 #include "Matrix.h"
 #include "Viewport.h"
 #include "IFrameBuffer.h"
@@ -47,6 +48,7 @@ public:
 	Renderer::BlendComponent blender;
 	Renderer::CullFaceComponent cullFace;
 	Renderer::LightingComponent lighting;
+	Renderer::CustomClipPlanes planes;
 
 	Renderer::Matrix modelView;
 	Renderer::Matrix projection;

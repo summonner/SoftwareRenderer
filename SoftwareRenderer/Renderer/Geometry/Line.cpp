@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "Line.h"
-#include "SutherlanHodgman.h"
 #include "Renderer/Vertex.h"
+#include "Renderer/Clipping/SutherlandHodgman.h"
 #include "Renderer/Rasterizer/DerivativeTexcoord.h"
 #include "Renderer/Rasterizer/LineRasterizer.h"
 #include "Renderer/Rasterizer/PointRasterizer.h"
@@ -19,9 +19,9 @@ namespace Renderer
 	{
 	}
 
-	std::unique_ptr<IRasterizer> Line::Clip( const Matrix4x4& viewport ) const
+	std::unique_ptr<IRasterizer> Line::Clip( const Matrix4x4& viewport, const PlaneIterator& planes ) const
 	{
-		auto vertices = SutherlandHodgman::ClipLine( { a, b } );
+		auto vertices = SutherlandHodgman::ClipLine( { a, b }, planes );
 		if ( vertices.size() <= 0 )
 		{
 			return nullptr;

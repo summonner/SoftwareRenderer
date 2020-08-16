@@ -169,6 +169,12 @@
     <ClInclude Include="Math\Vector4.hpp" />
     <ClInclude Include="Renderer\Blending\BlendComponent.h" />
     <ClInclude Include="Renderer\Blending\BlendFunc.h" />
+    <ClInclude Include="Renderer\Clipping\CustomClipPlanes.h" />
+    <ClInclude Include="Renderer\Clipping\IPlane.h" />
+    <ClInclude Include="Renderer\Clipping\PlaneInClip.h" />
+    <ClInclude Include="Renderer\Clipping\PlaneInView.h" />
+    <ClInclude Include="Renderer\Clipping\PlaneIterator.h" />
+    <ClInclude Include="Renderer\Clipping\SutherlandHodgman.h" />
     <ClInclude Include="Renderer\CullFace\CullFaceComponent.h" />
     <ClInclude Include="Renderer\DepthTest\DepthBuffer.h" />
     <ClInclude Include="Renderer\DepthTest\IDepthBufferController.h" />
@@ -183,7 +189,6 @@
     <ClInclude Include="Renderer\Geometry\IGeometry.h" />
     <ClInclude Include="Renderer\Geometry\Line.h" />
     <ClInclude Include="Renderer\Geometry\Point.h" />
-    <ClInclude Include="Renderer\Geometry\SutherlanHodgman.h" />
     <ClInclude Include="Renderer\Geometry\Triangle.h" />
     <ClInclude Include="Renderer\IComponent.h" />
     <ClInclude Include="Renderer\IFrameBuffer.h" />
@@ -230,6 +235,7 @@
     <ClInclude Include="Scene\gl\Buffer\glIndexBuffer.h" />
     <ClInclude Include="Scene\gl\Buffer\glVertexBuffer.h" />
     <ClInclude Include="Scene\gl\glAdapter.h" />
+    <ClInclude Include="Scene\gl\glClipPlaneManager.h" />
     <ClInclude Include="Scene\gl\glLightManager.h" />
     <ClInclude Include="Scene\gl\glBridge.h" />
     <ClInclude Include="Scene\gl\glMeshBuilder.h" />
@@ -274,6 +280,12 @@
     <ClCompile Include="Math\RangeIterator.cpp" />
     <ClCompile Include="Renderer\Blending\BlendComponent.cpp" />
     <ClCompile Include="Renderer\Blending\BlendFunc.cpp" />
+    <ClCompile Include="Renderer\Clipping\CustomClipPlanes.cpp" />
+    <ClCompile Include="Renderer\Clipping\IPlane.cpp" />
+    <ClCompile Include="Renderer\Clipping\PlaneInClip.cpp" />
+    <ClCompile Include="Renderer\Clipping\PlaneInView.cpp" />
+    <ClCompile Include="Renderer\Clipping\PlaneIterator.cpp" />
+    <ClCompile Include="Renderer\Clipping\SutherlandHodgman.cpp" />
     <ClCompile Include="Renderer\CullFace\CullFaceComponent.cpp" />
     <ClCompile Include="Renderer\DepthTest\DepthBuffer.cpp" />
     <ClCompile Include="Renderer\DepthTest\DepthFunc.cpp" />
@@ -286,7 +298,6 @@
     <ClCompile Include="Renderer\Generators\TriangleGenerator.cpp" />
     <ClCompile Include="Renderer\Geometry\Line.cpp" />
     <ClCompile Include="Renderer\Geometry\Point.cpp" />
-    <ClCompile Include="Renderer\Geometry\SutherlanHodgman.cpp" />
     <ClCompile Include="Renderer\Geometry\Triangle.cpp" />
     <ClCompile Include="Renderer\Lighting\Light.cpp" />
     <ClCompile Include="Renderer\Lighting\LightingComponent.cpp" />
@@ -323,6 +334,7 @@
     <ClCompile Include="Scene\gl\Buffer\glVertexBuffer.cpp" />
     <ClCompile Include="Scene\gl\glAdapter.cpp" />
     <ClCompile Include="Scene\gl\glBridge.cpp" />
+    <ClCompile Include="Scene\gl\glClipPlaneManager.cpp" />
     <ClCompile Include="Scene\gl\glLightManager.cpp" />
     <ClCompile Include="Scene\gl\glMeshBuilder.cpp" />
     <ClCompile Include="Scene\gl\glTexcoordGenerator.cpp" />

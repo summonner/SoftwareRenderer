@@ -12,6 +12,7 @@ glBridge* adapter;
 #define meshBuilder adapter->meshBuilder
 #define matrix adapter->matrix
 #define texcoordGenerator adapter->texcoordGenerator
+#define clipPlaneManager adapter->clipPlaneManager
 
 void glEnable( GLenum cap, bool enable )
 {
@@ -66,6 +67,21 @@ void glEnable( GLenum cap, bool enable )
 			renderer->texture.texGen[i].SetEnable( enable );
 		}
 		break;
+
+	case GL_CLIP_PLANE0:
+	case GL_CLIP_PLANE1:
+	case GL_CLIP_PLANE2:
+	case GL_CLIP_PLANE3:
+	case GL_CLIP_PLANE4:
+	case GL_CLIP_PLANE5:
+		if ( enable == true )
+		{
+			renderer->planes.Add( clipPlaneManager.Get( cap ) );
+		}
+		else
+		{
+			renderer->planes.Remove( clipPlaneManager.Get( cap ) );
+		}
 	}
 }
 
@@ -568,7 +584,7 @@ WINGDIAPI void APIENTRY glOrtho( GLdouble left, GLdouble right, GLdouble bottom,
 
 WINGDIAPI void APIENTRY glClipPlane( GLenum plane, const GLdouble* equation )
 {
-
+	clipPlaneManager.Set( plane, equation, renderer->modelView );
 }
 
 int APIENTRY gluBuild2DMipmaps(

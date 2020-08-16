@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "Point.h"
 #include "Renderer/Rasterizer/PointRasterizer.h"
-#include "SutherlanHodgman.h"
+#include "Renderer/Clipping/SutherlandHodgman.h"
 
 namespace Renderer
 {
@@ -14,9 +14,9 @@ namespace Renderer
 	{
 	}
 
-	std::unique_ptr<IRasterizer> Point::Clip( const Matrix4x4& viewport ) const
+	std::unique_ptr<IRasterizer> Point::Clip( const Matrix4x4& viewport, const PlaneIterator& planes ) const
 	{
-		if ( SutherlandHodgman::ClipPoint( v ) == false )
+		if ( SutherlandHodgman::ClipPoint( v, planes ) == false )
 		{
 			return nullptr;
 		}

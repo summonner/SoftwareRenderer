@@ -4,6 +4,7 @@
 #include "Rasterizer/IRasterizer.h"
 #include "Rasterizer/RasterizedPixel.h"
 #include "Rasterizer/DerivativeTexcoord.h"
+#include "Clipping/PlaneIterator.h"
 #include "Math/Bounds.h"
 using namespace Renderer;
 
@@ -36,7 +37,7 @@ void IRenderer::Draw( const Mesh& mesh )
 	auto geometries = generator.Generate( vertices );
 	for ( const auto& geometry : geometries )
 	{
-		auto rasterizer = geometry->Clip( viewport );
+		auto rasterizer = geometry->Clip( viewport, planes );
 		if ( rasterizer == nullptr )
 		{
 			continue;
@@ -87,6 +88,7 @@ Vertex IRenderer::ProcessVertex( Vertex v ) const
 
 	v.color = lighting.GetColor( v );
 
+	v.view = v.position;
 	v.position = projection * v.position;
 	return v;
 }

@@ -22,6 +22,7 @@ namespace Renderer
 		Vector2 texcoord;
 		Vector3 normal;
 
+		Vector4 view;
 		Vector2Int screen;
 	};
 }

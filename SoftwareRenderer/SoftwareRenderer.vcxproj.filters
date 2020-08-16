@@ -67,6 +67,9 @@
     <Filter Include="Renderer\StencilTest">
       <UniqueIdentifier>{53d4094e-fdaf-4d53-a055-f7699a943734}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\Clipping">
+      <UniqueIdentifier>{4136db86-9622-4dda-bb66-f948ff055649}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -222,9 +225,6 @@
     <ClInclude Include="Renderer\Rasterizer\DerivativeTexcoord.h">
       <Filter>Renderer\Rasterizer\Algorithm</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Geometry\SutherlanHodgman.h">
-      <Filter>Renderer\Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\NeHeSamples\Lesson6.h">
       <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
@@ -378,6 +378,27 @@
     <ClInclude Include="Renderer\StencilTest\IStencilBufferController.h">
       <Filter>Renderer\StencilTest</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\gl\glClipPlaneManager.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Clipping\IPlane.h">
+      <Filter>Renderer\Clipping</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Clipping\PlaneIterator.h">
+      <Filter>Renderer\Clipping</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Clipping\PlaneInView.h">
+      <Filter>Renderer\Clipping</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Clipping\CustomClipPlanes.h">
+      <Filter>Renderer\Clipping</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Clipping\SutherlandHodgman.h">
+      <Filter>Renderer\Clipping</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Clipping\PlaneInClip.h">
+      <Filter>Renderer\Clipping</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -497,9 +518,6 @@
     </ClCompile>
     <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp">
       <Filter>Renderer\Rasterizer\Algorithm</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\Geometry\SutherlanHodgman.cpp">
-      <Filter>Renderer\Geometry</Filter>
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson8.cpp">
       <Filter>Scene\NeHeSamples</Filter>
@@ -629,6 +647,27 @@
     </ClCompile>
     <ClCompile Include="Renderer\StencilTest\StencilOp.cpp">
       <Filter>Renderer\StencilTest</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glClipPlaneManager.cpp">
+      <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Clipping\IPlane.cpp">
+      <Filter>Renderer\Clipping</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Clipping\PlaneIterator.cpp">
+      <Filter>Renderer\Clipping</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Clipping\PlaneInView.cpp">
+      <Filter>Renderer\Clipping</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Clipping\CustomClipPlanes.cpp">
+      <Filter>Renderer\Clipping</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Clipping\SutherlandHodgman.cpp">
+      <Filter>Renderer\Clipping</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Clipping\PlaneInClip.cpp">
+      <Filter>Renderer\Clipping</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

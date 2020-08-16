@@ -4,6 +4,7 @@
 #include "glLightManager.h"
 #include "glMeshBuilder.h"
 #include "glTexcoordGenerator.h"
+#include "glClipPlaneManager.h"
 
 class glBridge;
 extern glBridge* adapter;
@@ -22,6 +23,7 @@ public:
 	glLightManager lightManager;
 	glMeshBuilder meshBuilder;
 	glTexcoordGenerator texcoordGenerator;
+	glClipPlaneManager clipPlaneManager;
 
 	Renderer::Matrix* matrix;
 };
