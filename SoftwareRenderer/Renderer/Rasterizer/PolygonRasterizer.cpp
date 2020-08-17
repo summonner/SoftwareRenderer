@@ -122,7 +122,7 @@ namespace Renderer
 			const float length = (float)(e2.x - e1.x);
 			if ( length == 0.f )
 			{
-				process( RasterizedPixel( e1.GetCurrent() ) );
+				//process( RasterizedPixel( e1.GetCurrent() ) );
 				continue;
 			}
 

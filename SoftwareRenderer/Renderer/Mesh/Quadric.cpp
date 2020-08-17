@@ -37,52 +37,74 @@ namespace Renderer
 
 		for ( auto i = 0; i <= stacks; ++i )
 		{
-			const auto t = (float)i / stacks;
+			const auto t = (float)i / (float)stacks;
 			Circle( t, slices, useTexture, normalDirection, vertices );
 		}
 		return vertices;
 	}
 
-	std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>> Quadric::Solid( int slices, int stacks )
+	std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>> Quadric::Solid( int slices, int stacks ) const
 	{
 		std::vector<Mesh::IndexType> indices;
 		indices.reserve( slices * stacks * 4 );
 
+		auto prevRadius = Radius( 0 );
 		for ( auto i = 1; i <= stacks; ++i )
 		{
+			const auto currentRadius = Radius( (float)i / (float)stacks );
 			for ( auto j = 0; j < slices; ++j )
 			{
 				const auto current = j + i * (slices + 1);
 				const auto prev = current - (slices + 1);
-				indices.emplace_back( prev );
-				indices.emplace_back( prev + 1 );
-				indices.emplace_back( current + 1 );
-				indices.emplace_back( current );
+				if ( prevRadius > FLT_EPSILON )
+				{
+					indices.emplace_back( prev );
+					indices.emplace_back( prev + 1 );
+					indices.emplace_back( current + 1 );
+				}
+
+				if ( currentRadius > FLT_EPSILON )
+				{
+					indices.emplace_back( prev );
+					indices.emplace_back( current + 1 );
+					indices.emplace_back( current );
+				}
 			}
+			prevRadius = currentRadius;
 		}
-		return { Mesh::DrawMode::Quads, indices };
+
+		return { Mesh::DrawMode::Triangles, indices };
 	}
 
-	std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>> Quadric::Wire( int slices, int stacks )
+	std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>> Quadric::Wire( int slices, int stacks ) const
 	{
 		std::vector<Mesh::IndexType> indices;
 		indices.reserve( slices * (stacks * 2 + 1) * 2 );
 
-		for ( auto j = 0; j < slices; ++j )
+		auto currentRadius = Radius( 0 );
+		if ( currentRadius > FLT_EPSILON )
 		{
-			const auto current = j;
-			indices.emplace_back( current );
-			indices.emplace_back( current + 1 );
+			for ( auto j = 0; j < slices; ++j )
+			{
+				const auto current = j;
+				indices.emplace_back( current );
+				indices.emplace_back( current + 1 );
+			}
 		}
 
 		for ( auto i = 1; i <= stacks; ++i )
 		{
+			currentRadius = Radius( (float)i / (float)stacks );
 			for ( auto j = 0; j < slices; ++j )
 			{
 				const auto current = j + i * (slices + 1);
 				const auto prev = current - (slices + 1);
-				indices.emplace_back( current );
-				indices.emplace_back( current + 1 );
+
+				if ( currentRadius > FLT_EPSILON )
+				{
+					indices.emplace_back( current );
+					indices.emplace_back( current + 1 );
+				}
 
 				indices.emplace_back( prev );
 				indices.emplace_back( current );
@@ -101,7 +123,7 @@ namespace Renderer
 		auto vertices = Quadric::Vertices( slices, stacks, useTexture, normalDirection );
 		if ( func != nullptr )
 		{
-			auto indices = func( slices, stacks );
+			auto indices = (this->*func)( slices, stacks );
 			return Mesh( indices.first, std::move( vertices ), std::move( indices.second ) );
 		}
 		else

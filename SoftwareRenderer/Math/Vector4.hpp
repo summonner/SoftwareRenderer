@@ -48,10 +48,10 @@ public:
 
 	inline bool operator ==( const TVector4& other ) const
 	{
-		return x == other.x
-			&& y == other.y
-			&& z == other.z
-			&& w == other.w;
+		return (std::abs(x - other.x) < FLT_EPSILON)
+			&& (std::abs(y - other.y) < FLT_EPSILON)
+			&& (std::abs(z - other.z) < FLT_EPSILON)
+			&& (std::abs(w - other.w) < FLT_EPSILON);
 	}
 
 	inline bool operator !=( const TVector4& other ) const

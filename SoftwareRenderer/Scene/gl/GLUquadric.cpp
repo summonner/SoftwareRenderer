@@ -4,9 +4,9 @@
 
 const Dictionary<GLenum, Renderer::Quadric::IndexFunc> GLUquadric::drawStyleTable
 {
-	{ GLU_FILL, Renderer::Quadric::Solid },
-	{ GLU_LINE, Renderer::Quadric::Wire },
-	{ GLU_SILHOUETTE, Renderer::Quadric::Wire },
+	{ GLU_FILL, &Renderer::Quadric::Solid },
+	{ GLU_LINE, &Renderer::Quadric::Wire },
+	{ GLU_SILHOUETTE, &Renderer::Quadric::Wire },
 	{ GLU_POINT, nullptr },
 };
 

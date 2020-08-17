@@ -15,10 +15,10 @@ namespace Renderer
 		virtual Vector3 Normal( const Vector3& position ) const abstract;
 		virtual Radian Theta( float t ) const { return 2 * PI * t; };
 
-		static std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>> Solid( int slices, int stacks );
-		static std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>> Wire( int slices, int stacks );
+		std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>> Solid( int slices, int stacks ) const;
+		std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>> Wire( int slices, int stacks ) const;
 
-		using IndexFunc = std::function<std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>>( int, int )>;
+		using IndexFunc = std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>> (Quadric::*)( int, int ) const;
 		Mesh Build( IndexFunc indexFunc, int slices, int stacks ) const;
 		Mesh Build( IndexFunc indexFunc, int slices, int stacks, bool useTexture, char normalDirection ) const;
 
