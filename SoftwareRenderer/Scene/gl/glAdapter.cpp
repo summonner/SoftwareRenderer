@@ -684,7 +684,8 @@ void APIENTRY gluCylinder(
 	GLint               slices,
 	GLint               stacks )
 {
-	qobj->Draw( *renderer, Renderer::Cylinder( (float)baseRadius, (float)topRadius, (float)height ), slices, stacks );
+	auto cylinder = Renderer::Cylinder( (float)baseRadius, (float)topRadius, (float)height );
+	qobj->Draw( *renderer, cylinder, slices, stacks, meshBuilder.GetColor() );
 }
 
 void APIENTRY gluDisk(
@@ -694,7 +695,8 @@ void APIENTRY gluDisk(
 	GLint               slices,
 	GLint               loops )
 {
-	qobj->Draw( *renderer, Renderer::Disc( (float)innerRadius, (float)outerRadius ), slices, loops );
+	auto disc = Renderer::Disc( (float)innerRadius, (float)outerRadius );
+	qobj->Draw( *renderer, disc, slices, loops, meshBuilder.GetColor() );
 }
 
 void APIENTRY gluPartialDisk(
@@ -706,7 +708,8 @@ void APIENTRY gluPartialDisk(
 	GLdouble            startAngle,
 	GLdouble            sweepAngle )
 {
-	qobj->Draw( *renderer, Renderer::Disc( (float)innerRadius, (float)outerRadius, Degree( (float)startAngle ), Degree( (float)sweepAngle ) ), slices, loops );
+	auto disc = Renderer::Disc( (float)innerRadius, (float)outerRadius, Degree( (float)startAngle ), Degree( (float)sweepAngle ) );
+	qobj->Draw( *renderer, disc, slices, loops, meshBuilder.GetColor() );
 }
 
 void APIENTRY gluSphere(
@@ -715,5 +718,6 @@ void APIENTRY gluSphere(
 	GLint               slices,
 	GLint               stacks )
 {
-	qobj->Draw( *renderer, Renderer::Sphere( (float)radius ), slices, stacks );
+	auto sphere = Renderer::Sphere( (float)radius );
+	qobj->Draw( *renderer, sphere, slices, stacks, meshBuilder.GetColor() );
 }

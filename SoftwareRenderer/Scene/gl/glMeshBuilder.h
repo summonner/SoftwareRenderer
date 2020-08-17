@@ -28,6 +28,8 @@ public:
 	Renderer::Mesh Build( GLenum mode, GLint first, GLsizei count );
 	Renderer::Mesh Build( GLenum mode, GLsizei count, GLenum type, const GLvoid* indices );
 
+	const Vector4& GetColor() const;
+
 private:
 	void ExtractVertex( const int first, const int end );
 

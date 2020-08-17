@@ -6,7 +6,14 @@
 
 namespace Renderer
 {
-	void Quadric::Circle( float tStacks, int slices, bool useTexture, char normalDirection, std::vector<Vertex>& vertices ) const
+	Quadric::Quadric()
+		: useTexture( true )
+		, normalDirection( 1 )
+		, color( 1, 1, 1, 1 )
+	{
+	}
+
+	void Quadric::Circle( float tStacks, int slices, std::vector<Vertex>& vertices ) const
 	{
 		const float radius = Radius( tStacks );
 		const float z = Height( tStacks );
@@ -17,6 +24,7 @@ namespace Renderer
 			const auto x = sin( theta ) * radius;
 			const auto y = cos( theta ) * radius;
 			Vertex vertex;
+			vertex.color = color;
 			vertex.position = Vector4( x, y, z, 1 );
 			if ( useTexture == true )
 			{
@@ -30,7 +38,7 @@ namespace Renderer
 		}
 	}
 
-	std::vector<Vertex> Quadric::Vertices( int slices, int stacks, bool useTexture, char normalDirection ) const
+	std::vector<Vertex> Quadric::Vertices( int slices, int stacks ) const
 	{
 		std::vector<Vertex> vertices;
 		vertices.reserve( (slices + 1) * (stacks + 1) );
@@ -38,7 +46,7 @@ namespace Renderer
 		for ( auto i = 0; i <= stacks; ++i )
 		{
 			const auto t = (float)i / (float)stacks;
-			Circle( t, slices, useTexture, normalDirection, vertices );
+			Circle( t, slices, vertices );
 		}
 		return vertices;
 	}
@@ -113,14 +121,10 @@ namespace Renderer
 
 		return { Mesh::DrawMode::Lines, indices };
 	}
+
 	Mesh Quadric::Build( IndexFunc func, int slices, int stacks ) const
 	{
-		return Build( func, slices, stacks, true, 1 );
-	}
-
-	Mesh Quadric::Build( IndexFunc func, int slices, int stacks, bool useTexture, char normalDirection ) const
-	{
-		auto vertices = Quadric::Vertices( slices, stacks, useTexture, normalDirection );
+		auto vertices = Quadric::Vertices( slices, stacks );
 		if ( func != nullptr )
 		{
 			auto indices = (this->*func)( slices, stacks );

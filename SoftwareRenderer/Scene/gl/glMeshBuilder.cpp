@@ -128,6 +128,11 @@ Renderer::Mesh glMeshBuilder::Build( GLenum mode, GLsizei count, GLenum type, co
 	return Mesh( table[mode], std::move( vertices ), indexBuffer.Extract() );
 }
 
+const Vector4& glMeshBuilder::GetColor() const
+{
+	return temp.color;
+}
+
 void glMeshBuilder::ExtractVertex( const int start, const int end )
 {
 	vertices.clear();

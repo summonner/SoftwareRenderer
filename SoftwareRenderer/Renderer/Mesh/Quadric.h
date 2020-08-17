@@ -7,6 +7,7 @@ namespace Renderer
 	class Quadric abstract
 	{
 	public:
+		Quadric();
 		virtual ~Quadric() {};
 
 		virtual float Radius( float t ) const abstract;
@@ -20,10 +21,14 @@ namespace Renderer
 
 		using IndexFunc = std::pair<Mesh::DrawMode, std::vector<Mesh::IndexType>> (Quadric::*)( int, int ) const;
 		Mesh Build( IndexFunc indexFunc, int slices, int stacks ) const;
-		Mesh Build( IndexFunc indexFunc, int slices, int stacks, bool useTexture, char normalDirection ) const;
+
+	public:
+		bool useTexture;
+		char normalDirection;
+		Vector4 color;
 
 	private:
-		std::vector<Vertex> Vertices( int slices, int stacks, bool useTexture, char normalDirection ) const;
-		void Circle( float t, int slices, bool useTexture, char normalDirection, std::vector<Vertex>& vertices ) const;
+		std::vector<Vertex> Vertices( int slices, int stacks ) const;
+		void Circle( float t, int slices, std::vector<Vertex>& vertices ) const;
 	};
 }
