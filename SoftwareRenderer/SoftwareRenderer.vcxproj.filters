@@ -399,6 +399,9 @@
     <ClInclude Include="Renderer\Clipping\PlaneInClip.h">
       <Filter>Renderer\Clipping</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson2.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -668,6 +671,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\Clipping\PlaneInClip.cpp">
       <Filter>Renderer\Clipping</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson2.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
