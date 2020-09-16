@@ -48,8 +48,8 @@ namespace Renderer
 		{ MinType::Nearest, MinNearest },
 		{ MinType::Linear, { NoMipmap, Linear } },
 		{ MinType::NearestMipmapNearest, { NearestMipmap, Nearest } },
-		{ MinType::NearestMipmapLinear, { NearestMipmap, Linear } },
-		{ MinType::LinearMipmapNearest, { LinearMipmap, Nearest } },
+		{ MinType::LinearMipmapNearest, { NearestMipmap, Linear } },
+		{ MinType::NearestMipmapLinear, { LinearMipmap, Nearest } },
 		{ MinType::LinearMipmapLinear, { LinearMipmap, Linear } }
 	}, MinNearest );
 

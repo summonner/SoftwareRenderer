@@ -11,10 +11,12 @@ namespace Renderer
 	class Texture2D final : public ITexture
 	{
 	public:
+		Texture2D();
 		Texture2D( const IImageSource& source );
 		Texture2D( const IImageSource& source, const bool buildMipmap );
 		~Texture2D();
 
+		void SetImage( const IImageSource& source, const bool buildMipmap );
 		float CalculateMipLevel( Vector2 ddx, Vector2 ddy ) const override;
 		Vector4 GetPixel( const Vector2& uv, float mipLevel ) const override;
 		void SetPixel( const Vector2Int& p, int mipLevel, const Vector4& value );
@@ -22,8 +24,9 @@ namespace Renderer
 		void SetFilter( TextureFilter::MinType type );
 		void SetFilter( TextureFilter::MagType type );
 
+
 	private:
-		const Vector2 size;
+		Vector2 size;
 
 		struct WrapModes
 		{

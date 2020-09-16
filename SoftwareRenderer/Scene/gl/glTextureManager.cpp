@@ -23,7 +23,7 @@ void glTextureManager::Generate( int num, GLuint* outHandles )
 			continue;
 		}
 
-		textures.Add( i, nullptr );
+		textures.Add( i, std::make_shared<Texture2D>() );
 
 		*outHandles = i;
 		++outHandles;
@@ -54,13 +54,11 @@ std::shared_ptr<ITexture> glTextureManager::Bind( GLuint handle )
 
 std::shared_ptr<ITexture> glTextureManager::SetImage( GLint level, GLint internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels )
 {
-	if ( current == 0 )
+	if ( auto texture = Get2D(); texture != nullptr )
 	{
-		return nullptr;
+		glImageSource source( width, height, format, type, pixels );
+		texture->SetImage( source, level < 0 );
 	}
-
-	glImageSource source( width, height, format, type, pixels );
-	textures[current].reset( new Renderer::Texture2D( source, level < 0 ) );
 
 	return textures[current];
 }

@@ -7,6 +7,11 @@
 
 namespace Renderer
 {
+	Texture2D::Texture2D()
+		: size( 0, 0 )
+	{
+	}
+
 	Texture2D::Texture2D( const IImageSource& source )
 		: Texture2D( source, false )
 	{
@@ -15,6 +20,14 @@ namespace Renderer
 	Texture2D::Texture2D( const IImageSource& source, const bool buildMipmap )
 		: size( (float)source.width, (float)source.height )
 	{
+		SetImage( source, buildMipmap );
+	}
+
+	void Texture2D::SetImage( const IImageSource& source, const bool buildMipmap )
+	{
+		size.x = source.width;
+		size.y = source.height;
+
 		if ( buildMipmap == false )
 		{
 			mipmaps.reserve( 1 );
@@ -30,7 +43,6 @@ namespace Renderer
 		{
 			mipmaps.emplace_back( std::make_unique<Mipmap>( *mipmaps[mipmaps.size() - 1] ) );
 		}
-
 	}
 
 	Texture2D::~Texture2D()
