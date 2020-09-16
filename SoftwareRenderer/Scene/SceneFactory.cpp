@@ -20,6 +20,7 @@ const Dictionary<UINT, SceneFactory::CreateFunc> SceneFactory::table(
 	NEHE(  4 ),
 	NEHE(  5 ),
 	NEHE(  6 ),
+	NEHE(  7 ),
 	NEHE(  8 ),
 	NEHE( 17 ),
 	NEHE( 18 ),

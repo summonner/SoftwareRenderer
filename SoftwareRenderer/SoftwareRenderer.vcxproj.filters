@@ -423,6 +423,9 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson5.h">
       <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson7.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -712,6 +715,9 @@
       <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson5.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson7.cpp">
       <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
   </ItemGroup>
