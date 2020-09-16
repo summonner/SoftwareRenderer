@@ -6,6 +6,7 @@
 #include "Lesson8.h"
 #undef LESSON
 
+#include "Lesson17.h"
 #include "Lesson18.h"
 #undef LESSON
 

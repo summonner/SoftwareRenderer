@@ -4,8 +4,10 @@
 #include "glBridge.h"
 #include "GLUquadric.h"
 #include "Renderer/Rasterizer/ShadeModel.h"
+#include "glDisplayList.h"
 
 glBridge* adapter;
+ICommandBuffer* commandBuffer;
 #define renderer adapter->renderer
 #define textureManager adapter->textureManager
 #define lightManager adapter->lightManager
@@ -13,6 +15,7 @@ glBridge* adapter;
 #define matrix adapter->matrix
 #define texcoordGenerator adapter->texcoordGenerator
 #define clipPlaneManager adapter->clipPlaneManager
+#define displayListManager adapter->displayListManager
 
 void glEnable( GLenum cap, bool enable )
 {
@@ -218,78 +221,158 @@ WINGDIAPI void APIENTRY glViewport( GLint x, GLint y, GLsizei width, GLsizei hei
 
 WINGDIAPI void APIENTRY glLoadIdentity( void )
 {
-	matrix->Reset();
+	auto command = []( glBridge* adapter )
+	{
+		matrix->Reset();
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI void APIENTRY glTranslatef( GLfloat x, GLfloat y, GLfloat z )
 {
-	matrix->Translate( x, y, z );
+	auto command = [x, y, z]( glBridge* adapter )
+	{
+		matrix->Translate( x, y, z );
+	};
+
+	commandBuffer->Push( command );
+}
+
+WINGDIAPI void APIENTRY glTranslated( GLdouble x, GLdouble y, GLdouble z )
+{
+	glTranslatef( (GLfloat)x, (GLfloat)y, (GLfloat)z );
 }
 
 WINGDIAPI void APIENTRY glRotatef( GLfloat angle, GLfloat x, GLfloat y, GLfloat z )
 {
-	matrix->Rotate( angle, x, y, z );
+	auto command = [angle, x, y, z]( glBridge* adapter )
+	{
+		matrix->Rotate( angle, x, y, z );
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI void APIENTRY glScalef( GLfloat x, GLfloat y, GLfloat z )
 {
-	matrix->Scale( x, y, z );
+	auto command = [x, y, z]( glBridge* adapter )
+	{
+		matrix->Scale( x, y, z );
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI void APIENTRY glPushMatrix( void )
 {
-	matrix->Push();
+	auto command = []( glBridge* adapter )
+	{
+		matrix->Push();
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI void APIENTRY glPopMatrix( void )
 {
-	matrix->Pop();
+	auto command = []( glBridge* adapter )
+	{
+		matrix->Pop();
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI void APIENTRY glBegin( GLenum mode )
 {
-	meshBuilder.Begin( mode );
+	auto command = [mode]( glBridge* adapter )
+	{
+		meshBuilder.Begin( mode );
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI void APIENTRY glColor3f( GLfloat red, GLfloat green, GLfloat blue )
 {
-	meshBuilder.Color( red, green, blue, 1.f );
+	glColor4f( red, green, blue, 1.f );
 }
 
 WINGDIAPI void APIENTRY glColor4f( GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha )
 {
-	meshBuilder.Color( red, green, blue, alpha );
+	auto command = [red, green, blue, alpha]( glBridge* adapter )
+	{
+		meshBuilder.Color( red, green, blue, alpha );
+	};
+
+	commandBuffer->Push( command );
+}
+
+WINGDIAPI void APIENTRY glVertex2i( GLint x, GLint y )
+{
+	glVertex2f( (GLfloat)x, (GLfloat)y );
 }
 
 WINGDIAPI void APIENTRY glVertex2f( GLfloat x, GLfloat y )
 {
-	meshBuilder.Vertex( x, y, 0 );
+	glVertex3f( x, y, 0 );
 }
 
 WINGDIAPI void APIENTRY glVertex3f( GLfloat x, GLfloat y, GLfloat z )
 {
-	meshBuilder.Vertex( x, y, z );
+	auto command = [x, y, z]( glBridge* adapter )
+	{
+		meshBuilder.Vertex( x, y, z );
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI void APIENTRY glTexCoord2f( GLfloat s, GLfloat t )
 {
-	meshBuilder.Texcoord( s, t );
+	auto command = [s, t]( glBridge* adapter )
+	{
+		meshBuilder.Texcoord( s, t );
+	};
+
+	commandBuffer->Push( command );
+}
+
+WINGDIAPI void APIENTRY glTexCoord2d( GLdouble s, GLdouble t )
+{
+	glTexCoord2f( (GLfloat)s, (GLfloat)t );
 }
 
 WINGDIAPI void APIENTRY glNormal3f( GLfloat nx, GLfloat ny, GLfloat nz )
 {
-	meshBuilder.Normal( nx, ny, nz );
+	auto command = [nx, ny, nz]( glBridge* adapter )
+	{
+		meshBuilder.Normal( nx, ny, nz );
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI void APIENTRY glFlush( void )
 {
-	meshBuilder.Flush();
+	auto command = []( glBridge* adapter )
+	{
+		meshBuilder.Flush();
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI void APIENTRY glEnd( void )
 {
-	const auto mesh = meshBuilder.End();
-	renderer->Draw( mesh );
+	auto command = []( glBridge* adapter )
+	{
+		const auto mesh = meshBuilder.End();
+		renderer->Draw( mesh );
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI void APIENTRY glGenTextures( GLsizei n, GLuint *textures )
@@ -586,6 +669,47 @@ WINGDIAPI void APIENTRY glClipPlane( GLenum plane, const GLdouble* equation )
 {
 	clipPlaneManager.Set( plane, equation, renderer->modelView );
 }
+
+WINGDIAPI GLuint APIENTRY glGenLists( GLsizei range )
+{
+	return displayListManager.Generate( range );
+}
+
+WINGDIAPI void APIENTRY glDeleteLists( GLuint list, GLsizei range )
+{
+	displayListManager.Delete( list, range );
+}
+
+WINGDIAPI void APIENTRY glNewList( GLuint list, GLenum mode )
+{
+	commandBuffer = displayListManager.Get( list );
+}
+
+WINGDIAPI void APIENTRY glEndList( void )
+{
+	commandBuffer = adapter;
+}
+
+WINGDIAPI void APIENTRY glCallList( GLuint list )
+{
+	auto commands = displayListManager.Get( list );
+	commands->Call( adapter );
+}
+
+WINGDIAPI void APIENTRY glCallLists( GLsizei n, GLenum type, const GLvoid* lists )
+{
+	auto commandsList = displayListManager.Get( n, type, lists );
+	for ( const auto& commands : commandsList )
+	{
+		commands->Call( adapter );
+	}
+}
+
+WINGDIAPI void APIENTRY glListBase( GLuint base )
+{
+	displayListManager.SetBase( base );
+}
+
 
 int APIENTRY gluBuild2DMipmaps(
 	GLenum      target,

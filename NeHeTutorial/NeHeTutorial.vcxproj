@@ -24,7 +24,7 @@
     <ClCompile Include="..\SoftwareRenderer\Scene\gl\AUX_RGBImageRec.cpp" />
     <ClCompile Include="..\SoftwareRenderer\Util\Bitmap.cpp" />
     <ClCompile Include="..\SoftwareRenderer\Util\PixelIterator.cpp" />
-    <ClCompile Include="Lesson26.cpp" />
+    <ClCompile Include="Lesson17.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl\glaux.h" />

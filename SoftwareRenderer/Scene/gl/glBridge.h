@@ -5,11 +5,14 @@
 #include "glMeshBuilder.h"
 #include "glTexcoordGenerator.h"
 #include "glClipPlaneManager.h"
+#include "glDisplayListManager.h"
+#include "ICommandBuffer.h"
 
 class glBridge;
 extern glBridge* adapter;
+extern ICommandBuffer* commandBuffer;
 
-class glBridge final
+class glBridge final : public ICommandBuffer
 {
 public:
 	glBridge();
@@ -17,6 +20,7 @@ public:
 
 	void Init( std::shared_ptr<IRenderer> renderer );
 	void Use( std::function<void( void )> process );
+	void Push( Command command ) override;
 
 	std::shared_ptr<IRenderer> renderer;
 	glTextureManager textureManager;
@@ -24,6 +28,7 @@ public:
 	glMeshBuilder meshBuilder;
 	glTexcoordGenerator texcoordGenerator;
 	glClipPlaneManager clipPlaneManager;
+	glDisplayListManager displayListManager;
 
 	Renderer::Matrix* matrix;
 };

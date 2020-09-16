@@ -402,6 +402,18 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson2.h">
       <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson17.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glDisplayListManager.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glDisplayList.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\ICommandBuffer.h">
+      <Filter>Scene\gl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -674,6 +686,15 @@
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson2.cpp">
       <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson17.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glDisplayListManager.cpp">
+      <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glDisplayList.cpp">
+      <Filter>Scene\gl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

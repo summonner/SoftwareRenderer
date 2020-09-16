@@ -20,6 +20,13 @@ void glBridge::Init( std::shared_ptr<IRenderer> renderer )
 void glBridge::Use( std::function<void( void )> process )
 {
 	::adapter = this;
+	::commandBuffer = this;
 	process();
 	::adapter = nullptr;
+	::commandBuffer = nullptr;
+}
+
+void glBridge::Push( Command command )
+{
+	command( this );
 }

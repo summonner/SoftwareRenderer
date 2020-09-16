@@ -85,8 +85,8 @@ namespace Renderer
 
 	void Matrix::Ortho( float l, float r, float t, float b, float n, float f )
 	{
-		const Vector3 scale( 2 / (r - l), 2 / (t - b), -2 / (f - n) );
-		const Vector3 trans( -(r + l) / (r - l), -(t + b) / (t - b), -(f + n) / (f - n) );
+		const Vector3 scale( 2 / (r - l), -2 / (t - b), -2 / (f - n) );
+		const Vector3 trans( -(r + l) / (r - l), (t + b) / (t - b), -(f + n) / (f - n) );
 
 		value *= Matrix4x4(
 			scale.x, 0, 0, trans.x,
