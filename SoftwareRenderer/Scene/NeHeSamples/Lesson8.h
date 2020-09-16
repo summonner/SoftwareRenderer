@@ -1,24 +1,29 @@
 #pragma once
 #include "ILesson.h"
 
-#define LESSON Lesson8
-
 namespace NeHe
 {
-	class LESSON : public ILesson
+	class Lesson8 : public ILesson
 	{
 	public:
-		LESSON();
-		~LESSON() override;
+		Lesson8();
+		~Lesson8() override;
 
 		int DrawGLScene( GLvoid ) override;
 		int InitGL( GLvoid ) override;
 		GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) override;
+		void Update( DWORD milliseconds, const bool keys[] ) override;
 
 	private:
 		int LoadGLTextures();
 
 	private:
+		bool	light;				// Lighting ON/OFF
+		bool    blend;				// Blending OFF/ON? ( NEW )
+		bool	lp;					// L Pressed?
+		bool	fp;					// F Pressed?
+		bool	bp;					// B Pressed? ( NEW )
+
 		GLfloat	xrot;				// X Rotation
 		GLfloat	yrot;				// Y Rotation
 		GLfloat xspeed;				// X Rotation Speed

@@ -3,7 +3,7 @@
 
 namespace NeHe
 {
-	LESSON::LESSON()
+	Lesson6::Lesson6()
 		: xrot( 0.f )
 		, yrot( 0.f )
 		, zrot( 0.f )
@@ -11,11 +11,11 @@ namespace NeHe
 	{
 	}
 
-	LESSON::~LESSON()
+	Lesson6::~Lesson6()
 	{
 	}
 
-	int LESSON::InitGL( GLvoid )										// All Setup For OpenGL Goes Here
+	int Lesson6::InitGL( GLvoid )										// All Setup For OpenGL Goes Here
 	{
 		if ( !LoadGLTextures() )								// Jump To Texture Loading Routine ( NEW )
 		{
@@ -32,7 +32,7 @@ namespace NeHe
 		return TRUE;										// Initialization Went OK
 	}
 
-	GLvoid LESSON::ReSizeGLScene( GLsizei width, GLsizei height )		// Resize And Initialize The GL Window
+	GLvoid Lesson6::ReSizeGLScene( GLsizei width, GLsizei height )		// Resize And Initialize The GL Window
 	{
 		if ( height == 0 )										// Prevent A Divide By Zero By
 		{
@@ -51,7 +51,7 @@ namespace NeHe
 		glLoadIdentity();									// Reset The Modelview Matrix
 	}
 
-	int LESSON::DrawGLScene( GLvoid )									// Here's Where We Do All The Drawing
+	int Lesson6::DrawGLScene( GLvoid )									// Here's Where We Do All The Drawing
 	{
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );	// Clear The Screen And The Depth Buffer
 		glLoadIdentity();									// Reset The View
@@ -103,7 +103,7 @@ namespace NeHe
 	}
 
 
-	int LESSON::LoadGLTextures()									// Load Bitmaps And Convert To Textures
+	int Lesson6::LoadGLTextures()									// Load Bitmaps And Convert To Textures
 	{
 		int Status = FALSE;									// Status Indicator
 

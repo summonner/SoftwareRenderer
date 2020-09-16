@@ -3,8 +3,13 @@
 
 namespace NeHe
 {
-	LESSON::LESSON()
-		: xrot( 0.f )
+	Lesson8::Lesson8()
+		: light( false )
+		, blend( false )
+		, lp( false )
+		, fp( false )
+		, bp( false )
+		, xrot( 0.f )
 		, yrot( 0.f )
 		, xspeed( 0.f )
 		, yspeed( 0.f )
@@ -13,11 +18,11 @@ namespace NeHe
 	{
 	}
 
-	LESSON::~LESSON()
+	Lesson8::~Lesson8()
 	{
 	}
 	
-	int LESSON::LoadGLTextures()									// Load Bitmaps And Convert To Textures
+	int Lesson8::LoadGLTextures()									// Load Bitmaps And Convert To Textures
 	{
 		int Status = FALSE;									// Status Indicator
 
@@ -64,7 +69,7 @@ namespace NeHe
 		return Status;										// Return The Status
 	}
 
-	GLvoid LESSON::ReSizeGLScene( GLsizei width, GLsizei height )		// Resize And Initialize The GL Window
+	GLvoid Lesson8::ReSizeGLScene( GLsizei width, GLsizei height )		// Resize And Initialize The GL Window
 	{
 		if ( height == 0 )										// Prevent A Divide By Zero By
 		{
@@ -83,7 +88,7 @@ namespace NeHe
 		glLoadIdentity();									// Reset The Modelview Matrix
 	}
 
-	int LESSON::InitGL( GLvoid )										// All Setup For OpenGL Goes Here
+	int Lesson8::InitGL( GLvoid )										// All Setup For OpenGL Goes Here
 	{
 		if ( !LoadGLTextures() )								// Jump To Texture Loading Routine
 		{
@@ -109,7 +114,7 @@ namespace NeHe
 		return TRUE;										// Initialization Went OK
 	}
 
-	int LESSON::DrawGLScene( GLvoid )									// Here's Where We Do All The Drawing
+	int Lesson8::DrawGLScene( GLvoid )									// Here's Where We Do All The Drawing
 	{
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );	// Clear The Screen And The Depth Buffer
 		glLoadIdentity();									// Reset The View
@@ -162,5 +167,84 @@ namespace NeHe
 		xrot += xspeed;
 		yrot += yspeed;
 		return TRUE;										// Keep Going
+	}
+
+	void Lesson8::Update( DWORD milliseconds, const bool keys[] )
+	{
+		if ( keys['L'] && !lp )
+		{
+			lp = TRUE;
+			light = !light;
+			if ( !light )
+			{
+				glDisable( GL_LIGHTING );
+			}
+			else
+			{
+				glEnable( GL_LIGHTING );
+			}
+		}
+		if ( !keys['L'] )
+		{
+			lp = FALSE;
+		}
+		if ( keys['F'] && !fp )
+		{
+			fp = TRUE;
+			filter += 1;
+			if ( filter > 2 )
+			{
+				filter = 0;
+			}
+		}
+		if ( !keys['F'] )
+		{
+			fp = FALSE;
+		}
+		if ( keys[VK_PRIOR] )
+		{
+			z -= 0.02f;
+		}
+		if ( keys[VK_NEXT] )
+		{
+			z += 0.02f;
+		}
+		if ( keys[VK_UP] )
+		{
+			xspeed -= 0.01f;
+		}
+		if ( keys[VK_DOWN] )
+		{
+			xspeed += 0.01f;
+		}
+		if ( keys[VK_RIGHT] )
+		{
+			yspeed += 0.01f;
+		}
+		if ( keys[VK_LEFT] )
+		{
+			yspeed -= 0.01f;
+		}
+		// Blending Code Starts Here
+		if ( keys['B'] && !bp )
+		{
+			bp = TRUE;
+			blend = !blend;
+			if ( blend )
+			{
+				glEnable( GL_BLEND );			// Turn Blending On
+				glDisable( GL_DEPTH_TEST );	// Turn Depth Testing Off
+			}
+			else
+			{
+				glDisable( GL_BLEND );		// Turn Blending Off
+				glEnable( GL_DEPTH_TEST );	// Turn Depth Testing On
+			}
+		}
+		if ( !keys['B'] )
+		{
+			bp = FALSE;
+		}
+		// Blending Code Ends Here
 	}
 }
