@@ -2,6 +2,7 @@
 #include "Lesson2.h"
 #include "Lesson3.h"
 #include "Lesson4.h"
+#include "Lesson5.h"
 #include "Lesson6.h"
 #undef LESSON
 
