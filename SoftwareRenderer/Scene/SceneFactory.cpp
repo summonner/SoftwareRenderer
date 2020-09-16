@@ -17,6 +17,7 @@ const Dictionary<UINT, SceneFactory::CreateFunc> SceneFactory::table(
 	{ ID_SCENE_DEFAULT, Create<SampleScene> },
 	NEHE(  2 ),
 	NEHE(  3 ),
+	NEHE(  4 ),
 	NEHE(  6 ),
 	NEHE(  8 ),
 	NEHE( 17 ),
