@@ -414,6 +414,9 @@
     <ClInclude Include="Scene\gl\ICommandBuffer.h">
       <Filter>Scene\gl</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson3.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -695,6 +698,9 @@
     </ClCompile>
     <ClCompile Include="Scene\gl\glDisplayList.cpp">
       <Filter>Scene\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson3.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

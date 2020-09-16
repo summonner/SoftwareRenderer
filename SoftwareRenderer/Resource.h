@@ -1,6 +1,6 @@
-Ôªø//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ÏóêÏÑú ÏÉùÏÑ±Ìïú Ìè¨Ìï® ÌååÏùºÏûÖÎãàÎã§.
-// SoftwareRenderer.rcÏóêÏÑú ÏÇ¨Ïö©ÎêòÍ≥† ÏûàÏäµÎãàÎã§.
+//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ø°º≠ ª˝º∫«— ∆˜«‘ ∆ƒ¿œ¿‘¥œ¥Ÿ.
+// SoftwareRenderer.rcø°º≠ ªÁøÎµ«∞Ì ¿÷Ω¿¥œ¥Ÿ.
 //
 #define IDC_MYICON                      2
 #define IDD_SOFTWARERENDERER_DIALOG     102
@@ -23,6 +23,44 @@
 #define ID_NEHE_LESSON26                32780
 #define ID_NEHE_LESSON2                 32781
 #define ID_NEHE_LESSON17                32782
+#define ID_NEHE_LESSON3                 32783
+#define ID_NEHE_LESSON4                 32784
+#define ID_NEHE_LESSON5                 32785
+#define ID_NEHE_LESSON7                 32786
+#define ID_NEHE_LESSON9                 32787
+#define ID_NEHE_LESSON10                32788
+#define ID_NEHE_LESSON11                32789
+#define ID_NEHE_LESSON12                32790
+#define ID_NEHE_LESSON13                32791
+#define ID_NEHE_LESSON16                32792
+#define ID_NEHE_LESSON19                32793
+#define ID_NEHE_LESSON20                32794
+#define ID_NEHE_LESSON21                32795
+#define ID_NEHE_LESSON22                32796
+#define ID_NEHE_LESSON24                32797
+#define ID_NEHE_LESSON25                32798
+#define ID_NEHE_22                      32799
+#define ID_NEHE_LESSON27                32800
+#define ID_NEHE_LESSON28                32801
+#define ID_NEHE_LESSON29                32802
+#define ID_NEHE_LESSON30                32803
+#define ID_NEHE_LESSON31                32804
+#define ID_NEHE_LESSON32                32805
+#define ID_NEHE_LESSON33                32806
+#define ID_NEHE_LESSON34                32807
+#define ID_NEHE_LESSON35                32808
+#define ID_NEHE_LESSON37                32809
+#define ID_NEHE_LESSON38                32810
+#define ID_NEHE_LESSON39                32811
+#define ID_NEHE_LESSON40                32812
+#define ID_NEHE_LESSON41                32813
+#define ID_Menu                         32814
+#define ID_NEHE_LESSON43                32815
+#define ID_NEHE_LESSON44                32816
+#define ID_NEHE_42                      32817
+#define ID_NEHE_LESSON42                32818
+#define ID_NEHE_LESSON46                32819
+#define ID_NEHE_LESSON48                32820
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -31,7 +69,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        129
-#define _APS_NEXT_COMMAND_VALUE         32783
+#define _APS_NEXT_COMMAND_VALUE         32821
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           110
 #endif

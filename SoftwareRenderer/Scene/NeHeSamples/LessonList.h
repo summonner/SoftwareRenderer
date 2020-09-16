@@ -1,5 +1,6 @@
 #pragma once
 #include "Lesson2.h"
+#include "Lesson3.h"
 #include "Lesson6.h"
 #undef LESSON
 
