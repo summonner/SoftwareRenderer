@@ -15,6 +15,14 @@ namespace NeHe
 		virtual void Update( DWORD milliseconds, const bool keys[] ) {};
 
 		virtual const char* GetDescription() const { return nullptr; };
+
+	protected:
+		FILE* fopen( const char* filename, const char* mode );
+		template<typename... Args>
+		int sscanf( char const* const buffer, char const* const format, Args... args )
+		{
+			return sscanf_s( buffer, format, args... );
+		}
 	};
 
 	AUX_RGBImageRec* LoadBMP( LPCSTR filePath );

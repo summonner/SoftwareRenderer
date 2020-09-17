@@ -19,7 +19,7 @@ std::unique_ptr<Bitmap> Bitmap::Load( LPCTSTR filePath )
 {
 	FILE* file;
 	auto err = _tfopen_s( &file, filePath, _T( "rb" ) );
-	if ( err != 0 )
+	if ( err != 0 || file == nullptr )
 	{
 		return nullptr;
 	}

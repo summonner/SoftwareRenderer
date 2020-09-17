@@ -438,6 +438,9 @@
     <ClInclude Include="Scene\UI\CommentUI.h">
       <Filter>Scene\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson10.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -740,6 +743,9 @@
     </ClCompile>
     <ClCompile Include="Scene\UI\CommentUI.cpp">
       <Filter>Scene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson10.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

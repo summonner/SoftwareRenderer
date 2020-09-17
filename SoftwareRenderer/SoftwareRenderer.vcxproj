@@ -247,6 +247,7 @@
     <ClInclude Include="Scene\gl\ICommandBuffer.h" />
     <ClInclude Include="Scene\IScene.h" />
     <ClInclude Include="Scene\NeHeSamples\ILesson.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson10.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson17.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson18.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson2.h" />
@@ -355,6 +356,7 @@
     <ClCompile Include="Scene\gl\glTextureManager.cpp" />
     <ClCompile Include="Scene\gl\GLUquadric.cpp" />
     <ClCompile Include="Scene\NeHeSamples\ILesson.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson10.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson17.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson18.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson2.cpp" />

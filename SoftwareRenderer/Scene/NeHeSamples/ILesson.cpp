@@ -18,4 +18,16 @@ namespace NeHe
 		glMatrixMode( GL_MODELVIEW );										// Select The Modelview Matrix
 		glLoadIdentity();													// Reset The Modelview Matrix
 	}
+
+	FILE* ILesson::fopen( const char* filename, const char* mode )
+	{
+		FILE* file;
+		auto err = fopen_s( &file, filename, mode );
+		if ( err != 0 )
+		{
+			return nullptr;
+		}
+
+		return file;
+	}
 }
