@@ -70,6 +70,9 @@
     <Filter Include="Renderer\Clipping">
       <UniqueIdentifier>{4136db86-9622-4dda-bb66-f948ff055649}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\UI">
+      <UniqueIdentifier>{83df8a98-87f4-4939-8fe7-ca97fee48789}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -426,6 +429,15 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson7.h">
       <Filter>Scene\NeHeSamples</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\UI\Font.h">
+      <Filter>Scene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\UI\UI.h">
+      <Filter>Scene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\UI\CommentUI.h">
+      <Filter>Scene\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -719,6 +731,15 @@
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson7.cpp">
       <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\UI\Font.cpp">
+      <Filter>Scene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\UI\UI.cpp">
+      <Filter>Scene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\UI\CommentUI.cpp">
+      <Filter>Scene\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

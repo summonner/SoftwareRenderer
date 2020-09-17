@@ -116,12 +116,22 @@ IDepthBufferController& IRenderer::GetDepthBuffer()
 	return depthBuffer;
 }
 
+const IDepthBufferController& IRenderer::GetDepthBuffer() const
+{
+	return depthBuffer;
+}
+
 IFrameBufferController& IRenderer::GetFrameBuffer()
 {
 	return *backBuffer;
 }
 
 IStencilBufferController& IRenderer::GetStencilBuffer()
+{
+	return stencilBuffer;
+}
+
+const IStencilBufferController& IRenderer::GetStencilBuffer() const
 {
 	return stencilBuffer;
 }

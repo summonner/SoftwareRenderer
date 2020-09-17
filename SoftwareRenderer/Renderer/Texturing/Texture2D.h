@@ -23,7 +23,7 @@ namespace Renderer
 		void SetWrapMode( WrapMode::Type u, WrapMode::Type v );
 		void SetFilter( TextureFilter::MinType type );
 		void SetFilter( TextureFilter::MagType type );
-
+		Vector2 GetSize() const;
 
 	private:
 		Vector2 size;

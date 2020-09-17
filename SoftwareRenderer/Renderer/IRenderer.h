@@ -41,8 +41,10 @@ private:
 
 public:
 	Renderer::IDepthBufferController& GetDepthBuffer();
+	const Renderer::IDepthBufferController& GetDepthBuffer() const;
 	Renderer::IFrameBufferController& GetFrameBuffer();
 	Renderer::IStencilBufferController& GetStencilBuffer();
+	const Renderer::IStencilBufferController& GetStencilBuffer() const;
 
 	Renderer::TextureComponent texture;
 	Renderer::BlendComponent blender;

@@ -220,4 +220,12 @@ namespace NeHe
 			yspeed -= 0.01f;
 		}
 	}
+
+	const char* Lesson7::GetDescription() const
+	{
+		return "L - Toggle light\n\
+				F - Change Texture Filter\n\
+				PgUp/Dn - Zoom\n\
+				Arrow - Rotate";
+	}
 }

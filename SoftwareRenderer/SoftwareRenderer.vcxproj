@@ -264,6 +264,9 @@
     <ClInclude Include="Scene\NeHeSamples\NeHeSample.h" />
     <ClInclude Include="Scene\SampleScene.h" />
     <ClInclude Include="Scene\SceneFactory.h" />
+    <ClInclude Include="Scene\UI\CommentUI.h" />
+    <ClInclude Include="Scene\UI\Font.h" />
+    <ClInclude Include="Scene\UI\UI.h" />
     <ClInclude Include="SoftwareRenderer.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TexcoordFunc.h" />
@@ -368,6 +371,9 @@
     <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp" />
     <ClCompile Include="Scene\SampleScene.cpp" />
     <ClCompile Include="Scene\SceneFactory.cpp" />
+    <ClCompile Include="Scene\UI\CommentUI.cpp" />
+    <ClCompile Include="Scene\UI\Font.cpp" />
+    <ClCompile Include="Scene\UI\UI.cpp" />
     <ClCompile Include="TexcoordFunc.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Util\Bitmap.cpp" />

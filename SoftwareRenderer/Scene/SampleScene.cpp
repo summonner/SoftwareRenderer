@@ -8,6 +8,7 @@
 #include "Renderer/Blending/BlendComponent.h"
 #include "Renderer/Lighting/Light.h"
 #include "Renderer/Mesh/SampleMesh.h"
+#include "UI/CommentUI.h"
 
 void glBindTexture( GLenum target, std::shared_ptr<const Renderer::ITexture> texture )
 {
@@ -62,6 +63,7 @@ void SampleScene::Update( const Time& time )
 //	t = .152f;
 	x = (sin( t ));// +1.f) * 0.5f;
 //	x = 0;
+	fps = std::to_string(1 / time.GetDeltaTime());
 }
 
 void SampleScene::OnKeyboardInput( BYTE keyCode, bool isPressed )
@@ -86,6 +88,8 @@ void SampleScene::Render( const std::shared_ptr<IRenderer> renderer ) const
 	renderer->cullFace.SetEnable( enableCullFace );
 
 	adapter->Use( [this]() { SampleScene::DrawScene(); } );
+
+	CommentUI::Print( *renderer, fps.c_str() );
 }
 
 void SampleScene::DrawScene() const

@@ -25,6 +25,7 @@
 #include <cmath>
 #include <functional>
 #include <iterator>
+#include <string>
 
 #include "Math/MathExt.h"
 #include "Math/Vector.h"

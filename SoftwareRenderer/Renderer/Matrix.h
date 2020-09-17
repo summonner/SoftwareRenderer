@@ -21,7 +21,7 @@ namespace Renderer
 
 		void Frustum( float left, float right, float top, float bottom, float near, float far );
 		void Perspective( Degree fovY, float aspect, float near, float far );
-		void Ortho( float left, float right, float top, float bottom, float near, float far );
+		void Ortho( float left, float right, float bottom, float top, float near, float far );
 
 		inline operator Matrix4x4() const
 		{

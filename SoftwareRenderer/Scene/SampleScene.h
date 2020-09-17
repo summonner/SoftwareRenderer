@@ -38,6 +38,7 @@ private:
 	bool enableTexture;
 	bool enableLight;
 	bool enableCullFace;
+	std::string fps;
 
 private:
 	std::unique_ptr<glBridge> adapter;

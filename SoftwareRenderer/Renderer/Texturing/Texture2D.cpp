@@ -25,8 +25,8 @@ namespace Renderer
 
 	void Texture2D::SetImage( const IImageSource& source, const bool buildMipmap )
 	{
-		size.x = source.width;
-		size.y = source.height;
+		size.x = (float)source.width;
+		size.y = (float)source.height;
 
 		if ( buildMipmap == false )
 		{
@@ -87,6 +87,11 @@ namespace Renderer
 	{
 		wrapMode.u = uMode;
 		wrapMode.v = vMode;
+	}
+
+	Vector2 Texture2D::GetSize() const
+	{
+		return size;
 	}
 
 	Vector2 Texture2D::WrapModes::operator ()( const Vector2& uv ) const

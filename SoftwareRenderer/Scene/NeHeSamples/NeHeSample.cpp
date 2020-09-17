@@ -3,6 +3,7 @@
 #include "ILesson.h"
 #include "../gl/glAdapter.h"
 #include "Time.h"
+#include "Scene/UI/CommentUI.h"
 
 NeHeSample::NeHeSample( std::unique_ptr<NeHe::ILesson> lesson )
 	: lesson( std::move( lesson ) )
@@ -41,4 +42,10 @@ void NeHeSample::OnKeyboardInput( BYTE keycode, bool isPressed )
 void NeHeSample::Render( const std::shared_ptr<IRenderer> renderer ) const
 {
 	adapter->Use( [this]() { lesson->DrawGLScene(); } );
+
+	const auto description = lesson->GetDescription();
+	if ( description != nullptr && description[0] != 0 )
+	{
+		CommentUI::Print( *renderer, description );
+	}
 }

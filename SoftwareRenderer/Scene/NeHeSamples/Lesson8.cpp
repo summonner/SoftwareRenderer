@@ -247,4 +247,13 @@ namespace NeHe
 		}
 		// Blending Code Ends Here
 	}
+
+	const char* Lesson8::GetDescription() const
+	{
+		return "L - Toggle light\n\
+				F - Change Texture Filter\n\
+				B - Toggle Blending\n\
+				PgUp/Dn - Zoom\n\
+				Arrow - Rotate";
+	}
 }
