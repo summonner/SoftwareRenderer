@@ -302,6 +302,6 @@ namespace NeHe
 		return "F - Change Texture Filter\n\
 				B - Toggle Blending\n\
 				PgUp/Dn - Look up/down\n\
-				Arrow - Move";
+				Arrows - Move";
 	}
 }

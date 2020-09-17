@@ -226,6 +226,6 @@ namespace NeHe
 		return "L - Toggle light\n\
 				F - Change Texture Filter\n\
 				PgUp/Dn - Zoom\n\
-				Arrow - Rotate";
+				Arrows - Rotate";
 	}
 }

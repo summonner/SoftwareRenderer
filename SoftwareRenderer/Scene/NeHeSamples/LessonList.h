@@ -6,6 +6,7 @@
 #include "Lesson6.h"
 #include "Lesson7.h"
 #include "Lesson8.h"
+#include "Lesson9.h"
 #include "Lesson10.h"
 
 #include "Lesson17.h"

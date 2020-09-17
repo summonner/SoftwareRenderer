@@ -100,7 +100,7 @@ namespace NeHe
 				F - Change Texture Filter\n\
 				Space - Change Shape\n\
 				PgUp/Dn - Zoom\n\
-				Arrow - Rotate";
+				Arrows - Rotate";
 	}
 
 	int Lesson18::LoadGLTextures()									// Load Bitmaps And Convert To Textures

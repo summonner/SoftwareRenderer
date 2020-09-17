@@ -261,6 +261,7 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson6.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson7.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson8.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson9.h" />
     <ClInclude Include="Scene\NeHeSamples\LessonList.h" />
     <ClInclude Include="Scene\NeHeSamples\NeHeSample.h" />
     <ClInclude Include="Scene\SampleScene.h" />
@@ -370,6 +371,7 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson6.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson7.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson8.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson9.cpp" />
     <ClCompile Include="Scene\NeHeSamples\NeHeSample.cpp" />
     <ClCompile Include="Scene\SampleScene.cpp" />
     <ClCompile Include="Scene\SceneFactory.cpp" />

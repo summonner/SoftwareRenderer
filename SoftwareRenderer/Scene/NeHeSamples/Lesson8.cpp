@@ -254,6 +254,6 @@ namespace NeHe
 				F - Change Texture Filter\n\
 				B - Toggle Blending\n\
 				PgUp/Dn - Zoom\n\
-				Arrow - Rotate";
+				Arrows - Rotate";
 	}
 }

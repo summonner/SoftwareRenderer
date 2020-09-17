@@ -441,6 +441,9 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson10.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson9.h">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -745,6 +748,9 @@
       <Filter>Scene\UI</Filter>
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson10.cpp">
+      <Filter>Scene\NeHeSamples</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson9.cpp">
       <Filter>Scene\NeHeSamples</Filter>
     </ClCompile>
   </ItemGroup>

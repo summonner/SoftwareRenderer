@@ -309,6 +309,11 @@ WINGDIAPI void APIENTRY glColor4f( GLfloat red, GLfloat green, GLfloat blue, GLf
 	commandBuffer->Push( command );
 }
 
+WINGDIAPI void APIENTRY glColor4ub( GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha )
+{
+	glColor4f( red / 255.f, green / 255.f, blue / 255.f, alpha / 255.f );
+}
+
 WINGDIAPI void APIENTRY glVertex2i( GLint x, GLint y )
 {
 	glVertex2f( (GLfloat)x, (GLfloat)y );
