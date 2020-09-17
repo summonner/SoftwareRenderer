@@ -528,6 +528,11 @@ WINGDIAPI void APIENTRY glShadeModel( GLenum mode )
 	Renderer::ShadeModel::type = table[mode];
 }
 
+WINGDIAPI void APIENTRY glPolygonMode( GLenum face, GLenum mode )
+{
+
+}
+
 WINGDIAPI void APIENTRY glHint( GLenum target, GLenum mode )
 {
 	// Not Implement
