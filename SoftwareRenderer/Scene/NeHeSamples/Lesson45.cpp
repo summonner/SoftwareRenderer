@@ -78,15 +78,15 @@ namespace NeHe
 	DWORD		g_dwLastFPS = 0;									// Last FPS Check Time	
 	//~TUTORIAL
 
-	LESSON::LESSON()
+	Lesson45::Lesson45()
 	{
 	}
 
-	LESSON::~LESSON()
+	Lesson45::~Lesson45()
 	{
 	}
 
-	BOOL LESSON::InitGL()					// Any GL Init Code & User Initialiazation Goes Here
+	BOOL Lesson45::InitGL()					// Any GL Init Code & User Initialiazation Goes Here
 	{
 		// TUTORIAL
 		// Load The Mesh Data
@@ -130,7 +130,7 @@ namespace NeHe
 		return TRUE;												// Return TRUE (Initialization Successful)
 	}
 
-	int LESSON::CleanGL( GLvoid )										// Any User DeInitialization Goes Here
+	int Lesson45::CleanGL( GLvoid )										// Any User DeInitialization Goes Here
 	{
 		if ( g_pMesh )												// Deallocate Our Mesh Data
 			delete g_pMesh;											// And Delete VBOs
@@ -138,16 +138,17 @@ namespace NeHe
 		return TRUE;
 	}
 
-	void LESSON::Update( DWORD milliseconds, const bool keys[] )	// Perform Motion Updates Here
+	void Lesson45::Update( DWORD milliseconds, const bool keys[] )	// Perform Motion Updates Here
 	{
 		g_flYRot += (float)(milliseconds) / 1000.0f * 25.0f;		// Consistantly Rotate The Scenery
 	}
 
-	int LESSON::DrawGLScene( void )
+	int Lesson45::DrawGLScene( void )
 	{
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );		// Clear Screen And Depth Buffer
 		glLoadIdentity();											// Reset The Modelview Matrix
 
+#pragma warning ( disable:28159 )
 		// Get FPS
 		if ( GetTickCount() - g_dwLastFPS >= 1000 )					// When A Second Has Passed...
 		{
@@ -163,6 +164,7 @@ namespace NeHe
 			//	strcat( szTitle, ", Not Using VBOs" );
 			//SetWindowText( g_window->hWnd, szTitle );				// Set The Title
 		}
+#pragma warning ( default:28159 )
 		g_nFrames++;												// Increment Our FPS Counter
 
 		// Move The Camera

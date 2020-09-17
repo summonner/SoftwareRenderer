@@ -1,17 +1,17 @@
 #pragma once
 #include "ILesson.h"
 
-#define LESSON Lesson18
-
 namespace NeHe
 {
-	class LESSON : public ILesson
+	class Lesson18 : public ILesson
 	{
 	public:
-		LESSON();
-		~LESSON() override;
+		Lesson18();
+		~Lesson18() override;
 
 		void Update( DWORD milliseconds, const bool keys[] ) override;
+		const char* GetDescription() const override;
+
 		int DrawGLScene( GLvoid ) override;
 		int InitGL( GLvoid ) override;
 		GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) override;

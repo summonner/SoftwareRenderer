@@ -3,7 +3,7 @@
 
 namespace NeHe
 {
-	LESSON::LESSON()
+	Lesson18::Lesson18()
 		: xrot( 0.f )
 		, yrot( 0.f )
 		, xspeed( 0.f )
@@ -21,11 +21,11 @@ namespace NeHe
 	{
 	}
 
-	LESSON::~LESSON()
+	Lesson18::~Lesson18()
 	{
 	}
 
-	void LESSON::Update( DWORD milliseconds, const bool keys[] ) 
+	void Lesson18::Update( DWORD milliseconds, const bool keys[] )
 	{
 		if ( keys['L'] && !lp )
 		{
@@ -94,7 +94,16 @@ namespace NeHe
 		}
 	}
 
-	int LESSON::LoadGLTextures()									// Load Bitmaps And Convert To Textures
+	const char* Lesson18::GetDescription() const
+	{
+		return "L - Toggle light\n\
+				F - Change Texture Filter\n\
+				Space - Change Shape\n\
+				PgUp/Dn - Zoom\n\
+				Arrow - Rotate";
+	}
+
+	int Lesson18::LoadGLTextures()									// Load Bitmaps And Convert To Textures
 	{
 		int Status = FALSE;									// Status Indicator
 
@@ -141,7 +150,7 @@ namespace NeHe
 		return Status;										// Return The Status
 	}
 
-	GLvoid LESSON::ReSizeGLScene( GLsizei width, GLsizei height )		// Resize And Initialize The GL Window
+	GLvoid Lesson18::ReSizeGLScene( GLsizei width, GLsizei height )		// Resize And Initialize The GL Window
 	{
 		if ( height == 0 )										// Prevent A Divide By Zero By
 		{
@@ -160,7 +169,7 @@ namespace NeHe
 		glLoadIdentity();									// Reset The Modelview Matrix
 	}
 
-	int LESSON::InitGL( GLvoid )										// All Setup For OpenGL Goes Here
+	int Lesson18::InitGL( GLvoid )										// All Setup For OpenGL Goes Here
 	{
 		if ( !LoadGLTextures() )								// Jump To Texture Loading Routine
 		{
@@ -187,7 +196,7 @@ namespace NeHe
 		return TRUE;										// Initialization Went OK
 	}
 
-	GLvoid LESSON::glDrawCube()
+	GLvoid Lesson18::glDrawCube()
 	{
 		glBegin( GL_QUADS );
 		// Front Face
@@ -229,7 +238,7 @@ namespace NeHe
 		glEnd();
 	}
 
-	int LESSON::DrawGLScene( GLvoid )									// Here's Where We Do All The Drawing
+	int Lesson18::DrawGLScene( GLvoid )									// Here's Where We Do All The Drawing
 	{
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );	// Clear The Screen And The Depth Buffer
 		glLoadIdentity();									// Reset The View
@@ -284,7 +293,7 @@ namespace NeHe
 		return TRUE;										// Keep Going
 	}
 
-	int LESSON::CleanGL( GLvoid )								// Properly Kill The Window
+	int Lesson18::CleanGL( GLvoid )								// Properly Kill The Window
 	{
 		gluDeleteQuadric( quadratic );						// Delete The Quadratic To Free System Resources
 		return TRUE;
