@@ -445,7 +445,7 @@ WINGDIAPI void APIENTRY glCopyTexImage2D( GLenum target, GLint level, GLenum int
 	for ( auto j = 0; j < height; ++j )
 	for ( auto i = 0; i < width; ++i )
 	{
-		auto color = renderer->GetFrameBuffer().GetPixel( Vector2Int( i, (height - 1) - j ) + min );
+		auto color = renderer->GetFrameBuffer().GetPixel( Vector2Int( i, j ) + min );
 		color = Convert( internalFormat, color );
 		textureManager.SetPixel( Vector2Int( i, j ), level, color );
 	}
