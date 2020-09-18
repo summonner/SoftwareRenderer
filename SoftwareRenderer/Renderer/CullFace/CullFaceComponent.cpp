@@ -32,33 +32,29 @@ namespace Renderer
 		this->frontFace = frontFace;
 	}
 
-	bool CullFaceComponent::Apply( const Vector2Int& a, const Vector2Int& b, const Vector2Int& c ) const
+	CullFaceComponent::Result CullFaceComponent::Apply( float facet ) const
 	{
-		const auto ab = b - a;
-		const auto ac = c - a;
-		const auto facet = ab.Area( ac );
-		return Apply( facet );
-	}
-
-	bool CullFaceComponent::Apply( const float facet ) const
-	{
-		if ( cullFace == Cull::FrontAndBack )
+		if ( enabled == true )
 		{
-			return false;
+			if ( cullFace == Cull::FrontAndBack )
+			{
+				return Result::Cull;
+			}
+
+			facet *= (int)frontFace;
+			if ( facet * (int)cullFace < 0 )
+			{
+				return Result::Cull;
+			}
+		}
+
+		if ( facet >= 0 )
+		{
+			return Result::Front;
 		}
 		else
 		{
-			return facet * (int)cullFace * (int)frontFace >= 0;
+			return Result::Back;
 		}
-	}
-
-	bool CullFaceComponent::Apply( const IRasterizer& rasterizer ) const
-	{
-		if ( enabled == false )
-		{
-			return true;
-		}
-
-		return Apply( rasterizer.CheckFacet() );
 	}
 }

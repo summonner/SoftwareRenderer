@@ -25,7 +25,7 @@ namespace Renderer
 		return DerivativeTexcoord::invalid;
 	}
 
-	void PointRasterizer::Rasterize( const Bounds& bounds, const ProcessPixel process )
+	void PointRasterizer::Rasterize( const Bounds& bounds, PolygonMode::Mode mode, const ProcessPixel process )
 	{
 		if ( bounds.Contains( v.screen ) == false )
 		{

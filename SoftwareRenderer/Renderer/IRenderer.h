@@ -12,6 +12,7 @@
 #include "Matrix.h"
 #include "Viewport.h"
 #include "IFrameBuffer.h"
+#include "Rasterizer/PolygonMode.h"
 
 namespace Renderer
 {
@@ -51,6 +52,7 @@ public:
 	Renderer::CullFaceComponent cullFace;
 	Renderer::LightingComponent lighting;
 	Renderer::CustomClipPlanes planes;
+	Renderer::PolygonMode polygonMode;
 
 	Renderer::Matrix modelView;
 	Renderer::Matrix projection;

@@ -14,10 +14,10 @@ namespace Renderer
 		{ Mesh::DrawMode::Points,		PointGenerator::Default },
 		{ Mesh::DrawMode::Lines,		LineGenerator::Default },
 		{ Mesh::DrawMode::LineStrip,	LineGenerator::Strip },
-		{ Mesh::DrawMode::LineLoop,	LineGenerator::Loop },
+		{ Mesh::DrawMode::LineLoop,		LineGenerator::Loop },
 		{ Mesh::DrawMode::Triangles,	TriangleGenerator::Default },
 		{ Mesh::DrawMode::TriangleStrip, TriangleGenerator::Strip },
-		{ Mesh::DrawMode::TriangleFan, TriangleGenerator::Fan },
+		{ Mesh::DrawMode::TriangleFan,	TriangleGenerator::Fan },
 		{ Mesh::DrawMode::Quads,		QuadGenerator::Quads },
 	};
 

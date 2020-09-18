@@ -43,13 +43,15 @@ void IRenderer::Draw( const Mesh& mesh )
 			continue;
 		}
 
-		if ( cullFace.Apply( *rasterizer ) == false )
+		const auto facet = cullFace.Apply( rasterizer->CheckFacet() );
+		if ( facet == CullFaceComponent::Result::Cull )
 		{
 			continue;
 		}
 
+		const auto mode = polygonMode.Get( facet == CullFaceComponent::Result::Front );
 		const auto derivatives = rasterizer->Derivative( texture.IsEnable() );
-		rasterizer->Rasterize( backBuffer->GetBounds(), [&]( const RasterizedPixel& p )
+		rasterizer->Rasterize( backBuffer->GetBounds(), mode, [&]( const RasterizedPixel& p )
 		{
 			auto depthTest = [this, p]() { return depthBuffer.Test( p ); };
 			if ( stencilBuffer.Test( p, depthTest ) == false )
@@ -103,6 +105,7 @@ void IRenderer::Reset()
 	lighting.Reset();
 	blender.Reset();
 	Renderer::ShadeModel::type = Renderer::ShadeModel::Type::Smooth;
+	polygonMode.Reset();
 
 	modelView.Reset();
 	projection.Reset();

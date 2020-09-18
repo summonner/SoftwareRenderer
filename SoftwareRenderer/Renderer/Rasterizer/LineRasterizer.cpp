@@ -26,7 +26,7 @@ namespace Renderer
 	{
 	}
 
-	void LineRasterizer::Rasterize( const Bounds& bounds, const ProcessPixel process )
+	void LineRasterizer::Rasterize( const Bounds& bounds, PolygonMode::Mode mode, const ProcessPixel process )
 	{
 		auto e = Bresenham( vertices[0], vertices[1], shadeFunc );
 		do {

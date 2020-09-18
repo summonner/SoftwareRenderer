@@ -1,4 +1,5 @@
 #pragma once
+#include "PolygonMode.h"
 
 class Bounds;
 class Matrix4x4;
@@ -16,6 +17,6 @@ namespace Renderer
 		virtual DerivativeTexcoord Derivative( const bool isTextureEnabled ) const abstract;
 
 		using ProcessPixel = std::function<void( const RasterizedPixel& )>;
-		virtual void Rasterize( const Bounds& bounds, const ProcessPixel process ) abstract;
+		virtual void Rasterize( const Bounds& bounds, PolygonMode::Mode mode, const ProcessPixel process ) abstract;
 	};
 }

@@ -20,6 +20,13 @@ namespace Renderer
 			CCW = 1,
 		};
 
+		enum class Result
+		{
+			Cull,
+			Back,
+			Front,
+		};
+
 	public:
 		CullFaceComponent();
 		~CullFaceComponent();
@@ -28,9 +35,7 @@ namespace Renderer
 		void SetCullFace( const Cull cullFace );
 		void SetFrontFace( const Front frontFace );
 
-		bool Apply( const Vector2Int& a, const Vector2Int& b, const Vector2Int& c ) const;
-		bool Apply( const float facet ) const;
-		bool Apply( const IRasterizer& rasterizer ) const;
+		Result Apply( float facet ) const;
 
 	private:
 		Cull cullFace;

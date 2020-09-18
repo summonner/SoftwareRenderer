@@ -530,7 +530,29 @@ WINGDIAPI void APIENTRY glShadeModel( GLenum mode )
 
 WINGDIAPI void APIENTRY glPolygonMode( GLenum face, GLenum mode )
 {
+	static const Dictionary<GLenum, PolygonMode> table
+	{
+		{ GL_FILL, PolygonMode::Fill },
+		{ GL_LINE, PolygonMode::Line },
+		{ GL_POINT, PolygonMode::Point },
+	};
 
+	const auto value = table[mode];
+	switch ( face )
+	{
+		case GL_FRONT:
+			renderer->polygonMode.front = value;
+			return;
+
+		case GL_BACK:
+			renderer->polygonMode.back = value;
+			return;
+
+		case GL_FRONT_AND_BACK:
+			renderer->polygonMode.front = value;
+			renderer->polygonMode.back = value;
+			return;
+	}
 }
 
 WINGDIAPI void APIENTRY glHint( GLenum target, GLenum mode )

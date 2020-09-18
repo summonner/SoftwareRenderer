@@ -12,7 +12,7 @@ namespace Renderer
 		PolygonRasterizer( std::vector<Vertex>&& vertices, int secondIndex, int thirdIndex, ShadeModel::ShadeFunc shadeFunc );
 		~PolygonRasterizer() override;
 
-		void Rasterize( const Bounds& bounds, const ProcessPixel process ) override;
+		void Rasterize( const Bounds& bounds, PolygonMode::Mode mode, const ProcessPixel process ) override;
 		float CheckFacet() const override;
 		DerivativeTexcoord Derivative( const bool isTextureEnabled ) const override;
 
@@ -31,5 +31,12 @@ namespace Renderer
 		const Vertex& a;
 		const Vertex& b;
 		const Vertex& c;
+
+	private:
+		void Fill( const Bounds& bounds, const ProcessPixel process );
+		void Line( const Bounds& bounds, const ProcessPixel process );
+		void Point( const Bounds& bounds, const ProcessPixel process );
+		using PolygonModeFunc = std::function<void( PolygonRasterizer*, const Bounds& bounds, const ProcessPixel process )>;
+		static const Dictionary<PolygonMode::Mode, PolygonModeFunc> polygonModeFunc;
 	};
 }

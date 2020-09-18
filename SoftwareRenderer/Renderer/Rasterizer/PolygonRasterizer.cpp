@@ -1,14 +1,23 @@
 #include "framework.h"
 #include "PolygonRasterizer.h"
+#include "LineRasterizer.h"
 #include "PointRasterizer.h"
 #include "BresenhamList.h"
 #include "RasterizedPixel.h"
 #include "DerivativeTexcoord.h"
 #include "Renderer/Vertex.h"
 #include "Math/Bounds.h"
+#include "PolygonMode.h"
 
 namespace Renderer
 {
+	const Dictionary<PolygonMode::Mode, PolygonRasterizer::PolygonModeFunc> PolygonRasterizer::polygonModeFunc( 
+	{
+		{ PolygonMode::Mode::Fill, &PolygonRasterizer::Fill },
+		{ PolygonMode::Mode::Line, &PolygonRasterizer::Line },
+		{ PolygonMode::Mode::Point, &PolygonRasterizer::Point },
+	}, &PolygonRasterizer::Point );
+
 	PolygonRasterizer::PolygonRasterizer( std::vector<Vertex>&& vertices, int secondIndex, int thirdIndex, ShadeModel::ShadeFunc shadeFunc )
 		: vertices( std::move( vertices ) )
 		, a( this->vertices[0] )
@@ -40,7 +49,12 @@ namespace Renderer
 		return DerivativeTexcoord::Triangle( a, b, c );
 	}
 
-	void PolygonRasterizer::Rasterize( const Bounds& bounds, const ProcessPixel process )
+	void PolygonRasterizer::Rasterize( const Bounds& bounds, PolygonMode::Mode mode, const ProcessPixel process )
+	{
+		polygonModeFunc[mode]( this, bounds, process );
+	}
+
+	void PolygonRasterizer::Fill( const Bounds& bounds, const ProcessPixel process )
 	{
 		const auto minmax = FindMinMax();
 		if ( minmax.first == minmax.second )
@@ -54,6 +68,26 @@ namespace Renderer
 		auto e1 = BuildEdge( minmax, &PolygonRasterizer::Forward );
 		auto e2 = BuildEdge( minmax, &PolygonRasterizer::Backward );
 		Rasterize( adjust, e1, e2, process, shadeFunc );
+	}
+
+	void PolygonRasterizer::Line( const Bounds& bounds, const ProcessPixel process )
+	{
+		auto previous = vertices[vertices.size() - 1];
+		for ( const auto& current : vertices )
+		{
+			LineRasterizer line( previous, current, shadeFunc );
+			line.Rasterize( bounds, PolygonMode::Mode::Line, process );
+			previous = current;
+		}
+	}
+
+	void PolygonRasterizer::Point( const Bounds& bounds, const ProcessPixel process )
+	{
+		for ( const auto& v : vertices )
+		{
+			PointRasterizer point( v );
+			point.Rasterize( bounds, PolygonMode::Mode::Point, process );
+		}
 	}
 
 	std::pair<size_t, size_t> PolygonRasterizer::FindMinMax() const
