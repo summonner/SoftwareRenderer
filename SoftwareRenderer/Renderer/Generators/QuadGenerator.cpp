@@ -1,8 +1,7 @@
 #include "framework.h"
 #include "QuadGenerator.h"
-#include "Renderer/Geometry/Triangle.h"
+#include "Renderer/Geometry/Quad.h"
 #include "Renderer/Vertex.h"
-#include "TriangleGenerator.h"
 
 namespace Renderer
 {
@@ -17,7 +16,6 @@ namespace Renderer
 	
 	void QuadGenerator::Build( const Vertex& a, const Vertex& b, const Vertex& c, const Vertex& d, IGeometryList& outRasterizers )
 	{
-		TriangleGenerator::Build( a, b, d, outRasterizers );
-		TriangleGenerator::Build( b, c, d, outRasterizers );
+		outRasterizers.emplace_back( std::make_unique<Quad>( a, b, c, d ) );
 	}
 }

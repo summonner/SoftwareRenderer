@@ -4,18 +4,18 @@
 namespace Renderer
 {
 	class Vertex;
-	class Triangle final : public IGeometry
+	class Quad final : public IGeometry
 	{
 	public:
-		Triangle( const Vertex& a, const Vertex& b, const Vertex& c );
-		~Triangle() override;
+		Quad( const Vertex& a, const Vertex& b, const Vertex& c, const Vertex& d );
+		~Quad() override;
 
 		std::unique_ptr<IRasterizer> Clip( const Matrix4x4& viewport, const PlaneIterator& planes ) const override;
-
 
 	private:
 		const Vertex& a;
 		const Vertex& b;
 		const Vertex& c;
+		const Vertex& d;
 	};
 }

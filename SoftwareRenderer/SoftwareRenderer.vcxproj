@@ -189,6 +189,7 @@
     <ClInclude Include="Renderer\Geometry\IGeometry.h" />
     <ClInclude Include="Renderer\Geometry\Line.h" />
     <ClInclude Include="Renderer\Geometry\Point.h" />
+    <ClInclude Include="Renderer\Geometry\Quad.h" />
     <ClInclude Include="Renderer\Geometry\Triangle.h" />
     <ClInclude Include="Renderer\IComponent.h" />
     <ClInclude Include="Renderer\IFrameBuffer.h" />
@@ -306,6 +307,7 @@
     <ClCompile Include="Renderer\DepthTest\DepthBuffer.cpp" />
     <ClCompile Include="Renderer\DepthTest\DepthFunc.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />
+    <ClCompile Include="Renderer\Geometry\Quad.cpp" />
     <ClCompile Include="Renderer\IRenderer.cpp" />
     <ClCompile Include="Renderer\Generators\GeometryGenerator.cpp" />
     <ClCompile Include="Renderer\Generators\LineGenerator.cpp" />

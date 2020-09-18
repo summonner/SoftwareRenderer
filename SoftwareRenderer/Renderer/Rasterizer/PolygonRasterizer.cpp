@@ -183,4 +183,51 @@ namespace Renderer
 	{
 		return left.position.y < right.position.y;
 	}
+
+
+	std::unique_ptr<IRasterizer> PolygonRasterizer::Create( std::vector<Vertex>&& vertices, const Vector4& flatColor )
+	{
+		const int secondIndex = SelectSecondVertex( vertices );
+		if ( secondIndex < 0 )
+		{
+			return std::make_unique<PointRasterizer>( vertices[0] );
+		}
+
+		const auto shadeFunc = ShadeModel::FlatFunc( flatColor );
+		const int thirdIndex = SelectThirdVertex( vertices, secondIndex );
+		if ( thirdIndex < 0 )
+		{
+			return std::make_unique<LineRasterizer>( vertices[0], vertices[secondIndex], shadeFunc );
+		}
+
+		return std::unique_ptr<IRasterizer>( new PolygonRasterizer( std::move( vertices ), secondIndex, thirdIndex, shadeFunc ) );
+	}
+
+	int PolygonRasterizer::SelectSecondVertex( const std::vector<Vertex>& vertices )
+	{
+		for ( auto i = 0u; i < vertices.size(); ++i )
+		{
+			if ( vertices[i].screen != vertices[0].screen )
+			{
+				return (int)i;
+			}
+		}
+
+		return -1;
+	}
+
+	int PolygonRasterizer::SelectThirdVertex( const std::vector<Vertex>& vertices, size_t secondIndex )
+	{
+		const auto ab = vertices[secondIndex].screen - vertices[0].screen;
+		for ( auto i = secondIndex + 1; i < vertices.size(); ++i )
+		{
+			const auto ac = vertices[i].screen - vertices[0].screen;
+			if ( ab.Area( ac ) != 0 )
+			{
+				return (int)i;
+			}
+		}
+
+		return -1;
+	}
 }

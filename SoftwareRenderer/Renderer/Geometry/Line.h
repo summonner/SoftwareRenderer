@@ -4,7 +4,6 @@
 namespace Renderer
 {
 	class Vertex;
-	class DerivativeTexcoord;
 	class Line final : public IGeometry
 	{
 	public:
