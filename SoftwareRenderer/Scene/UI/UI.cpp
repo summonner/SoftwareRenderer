@@ -48,7 +48,7 @@ void UI::Text( IRenderer& renderer, const Vector2& position, const char* message
 }
 
 UI::RenderState::RenderState()
-	: texture( false )
+	: texture()
 	, blend()
 	, depthTest( false )
 	, lighting( false )
@@ -64,7 +64,7 @@ UI::RenderState::~RenderState()
 
 void UI::RenderState::Backup( const IRenderer& renderer )
 {
-	texture = renderer.texture.IsEnable();
+	texture = renderer.texture;
 	blend = renderer.blender;
 	depthTest = renderer.GetDepthBuffer().IsEnable();
 	lighting = renderer.lighting.IsEnable();
@@ -75,7 +75,7 @@ void UI::RenderState::Backup( const IRenderer& renderer )
 
 void UI::RenderState::Restore( IRenderer& renderer ) const
 {
-	renderer.texture.SetEnable( texture );
+	renderer.texture = texture;
 	renderer.blender = blend;
 	renderer.GetDepthBuffer().SetEnable( depthTest );
 	renderer.lighting.SetEnable( lighting );

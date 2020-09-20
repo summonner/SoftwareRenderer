@@ -1,6 +1,7 @@
 #pragma once
 #include "Font.h"
 #include "Renderer/Blending/BlendComponent.h"
+#include "Renderer/Texturing/TextureComponent.h"
 
 class UI final
 {
@@ -26,7 +27,7 @@ private:
 		void Restore( IRenderer& renderer ) const;
 
 	private:
-		bool texture;
+		Renderer::TextureComponent texture;
 		Renderer::BlendComponent blend;
 		bool depthTest;
 		bool lighting;

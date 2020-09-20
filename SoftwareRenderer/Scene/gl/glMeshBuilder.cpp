@@ -10,7 +10,7 @@ const Dictionary<GLenum, DrawMode> glMeshBuilder::table
 	{ GL_LINE_STRIP, DrawMode::LineStrip },
 	{ GL_LINE_LOOP, DrawMode::LineLoop },
 	{ GL_TRIANGLES, DrawMode::Triangles },
-	{ GL_TRIANGLE_STRIP, DrawMode::TriangleFan },
+	{ GL_TRIANGLE_STRIP, DrawMode::TriangleStrip },
 	{ GL_TRIANGLE_FAN, DrawMode::TriangleFan },
 	{ GL_QUADS, DrawMode::Quads },
 };
