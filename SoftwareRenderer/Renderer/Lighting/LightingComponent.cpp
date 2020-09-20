@@ -64,12 +64,18 @@ namespace Renderer
 			return vertex.color;
 		}
 
-		const auto view = GetView( vertex.position );
-		Vector4 result = front.emissive;
-		result += front.ambient * ambient;
+		const auto material = colorMaterial.GetFront( front, vertex.color );
+		return GetColor( vertex.position, vertex.normal, material );
+	}
+
+	Vector4 LightingComponent::GetColor( const Vector4& position, const Vector3& normal, const Material& material ) const
+	{
+		const auto view = GetView( position );
+		Vector4 result = material.emissive;
+		result += material.ambient * ambient;
 		for ( const auto& light : lights )
 		{
-			result += GetColor( *light, front, vertex.position, vertex.normal, view );
+			result += GetColor( *light, material, position, normal, view );
 		}
 
 		return Clamp( result );
@@ -88,7 +94,7 @@ namespace Renderer
 		result += material.diffuse * light.diffuse * LN;
 		if ( LN != 0 )
 		{
-			result += material.specular * light.specular * pow( Light::Dot( normal, h ), material.GetShininess() );
+			result += material.specular * light.specular * pow( Light::Dot( normal, h ), material.shininess );
 		}
 		return result * attenuation * spot;
 	}

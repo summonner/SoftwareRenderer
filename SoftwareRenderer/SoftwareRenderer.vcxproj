@@ -197,6 +197,7 @@
     <ClInclude Include="Renderer\Lighting\Light.h" />
     <ClInclude Include="Renderer\Lighting\LightingComponent.h" />
     <ClInclude Include="Renderer\Lighting\Material.h" />
+    <ClInclude Include="Renderer\Lighting\ColorMaterial.h" />
     <ClInclude Include="Renderer\Matrix.h" />
     <ClInclude Include="Renderer\Mesh\Cylinder.h" />
     <ClInclude Include="Renderer\Mesh\Disc.h" />
@@ -251,6 +252,7 @@
     <ClInclude Include="Scene\NeHeSamples\ILesson.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson10.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson11.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson12.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson17.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson18.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson2.h" />
@@ -320,6 +322,7 @@
     <ClCompile Include="Renderer\Lighting\Light.cpp" />
     <ClCompile Include="Renderer\Lighting\LightingComponent.cpp" />
     <ClCompile Include="Renderer\Lighting\Material.cpp" />
+    <ClCompile Include="Renderer\Lighting\ColorMaterial.cpp" />
     <ClCompile Include="Renderer\Matrix.cpp" />
     <ClCompile Include="Renderer\Mesh\Cylinder.cpp" />
     <ClCompile Include="Renderer\Mesh\Disc.cpp" />
@@ -364,6 +367,7 @@
     <ClCompile Include="Scene\NeHeSamples\ILesson.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson10.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson11.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson12.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson17.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson18.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson2.cpp" />

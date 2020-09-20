@@ -85,6 +85,11 @@ void glEnable( GLenum cap, bool enable )
 		{
 			renderer->planes.Remove( clipPlaneManager.Get( cap ) );
 		}
+		break;
+
+	case GL_COLOR_MATERIAL:
+		renderer->lighting.colorMaterial.SetEnable( enable );
+		break;
 	}
 }
 
@@ -297,6 +302,11 @@ WINGDIAPI void APIENTRY glBegin( GLenum mode )
 WINGDIAPI void APIENTRY glColor3f( GLfloat red, GLfloat green, GLfloat blue )
 {
 	glColor4f( red, green, blue, 1.f );
+}
+
+WINGDIAPI void APIENTRY glColor3fv( const GLfloat* v )
+{
+	glColor4f( v[0], v[1], v[2], 1.f );
 }
 
 WINGDIAPI void APIENTRY glColor4f( GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha )
@@ -576,6 +586,35 @@ WINGDIAPI void APIENTRY glLightModelfv( GLenum pname, const GLfloat* params )
 WINGDIAPI void APIENTRY glLightfv( GLenum light, GLenum pname, const GLfloat *params )
 {
 	lightManager.Set( light, pname, params );
+}
+
+WINGDIAPI void APIENTRY glColorMaterial( GLenum face, GLenum mode )
+{
+	static const Dictionary<GLenum, ColorMaterial> table
+	{
+		{ GL_AMBIENT_AND_DIFFUSE, ColorMaterial::AmbientAndDiffuse },
+		{ GL_AMBIENT, ColorMaterial::Ambient },
+		{ GL_DIFFUSE, ColorMaterial::Diffuse },
+		{ GL_SPECULAR, ColorMaterial::Specular },
+		{ GL_EMISSION, ColorMaterial::Emission },
+	};
+
+	const auto value = table[mode];
+	switch ( face )
+	{
+	case GL_FRONT:
+		renderer->lighting.colorMaterial.front = value;
+		break;
+
+	case GL_BACK:
+		renderer->lighting.colorMaterial.back = value;
+		break;
+
+	case GL_FRONT_AND_BACK:
+		renderer->lighting.colorMaterial.front = value;
+		renderer->lighting.colorMaterial.back = value;
+		break;
+	}
 }
 
 Renderer::Material& GetMaterial( GLenum face )

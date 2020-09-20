@@ -6,6 +6,7 @@ using namespace Renderer;
 glLightManager::glLightManager()
 	: lights( maxLights )
 {
+	lights[0] = std::make_shared<Light>();
 }
 
 

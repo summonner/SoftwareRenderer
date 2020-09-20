@@ -9,6 +9,7 @@
 #include "Lesson9.h"
 #include "Lesson10.h"
 #include "Lesson11.h"
+#include "Lesson12.h"
 
 #include "Lesson17.h"
 #include "Lesson18.h"

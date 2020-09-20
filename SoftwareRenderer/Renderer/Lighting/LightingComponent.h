@@ -2,6 +2,7 @@
 #include "Renderer/IComponent.h"
 #include "Math/Vector4.hpp"
 #include "Material.h"
+#include "ColorMaterial.h"
 
 namespace Renderer
 {
@@ -24,6 +25,7 @@ namespace Renderer
 
 	private:
 		Vector3 GetView( const Vector3& position ) const;
+		Vector4 GetColor( const Vector4& position, const Vector3& normal, const Material& front ) const;
 
 	private:
 		std::vector<std::shared_ptr<const Light>> lights;
@@ -36,6 +38,7 @@ namespace Renderer
 	public:
 		Material front;
 		Material back;
+		ColorMaterial colorMaterial;
 
 	private:
 		static Vector4 GetColor( const Light& light, const Material& material, const Vector4& position, const Vector3& normal, const Vector3& view );
