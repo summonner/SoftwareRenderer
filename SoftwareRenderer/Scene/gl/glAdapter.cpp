@@ -99,6 +99,9 @@ void glEnable( GLenum cap, bool enable )
 			renderer->fog.SetMode( fogManager.GetMode() );
 		}
 		break;
+
+	case GL_LINE_SMOOTH:
+		break;
 	}
 }
 
@@ -318,6 +321,11 @@ WINGDIAPI void APIENTRY glColor3fv( const GLfloat* v )
 	glColor4f( v[0], v[1], v[2], 1.f );
 }
 
+WINGDIAPI void APIENTRY glColor3ub( GLubyte red, GLubyte green, GLubyte blue )
+{
+	glColor4f( red / 255.f, green / 255.f, blue / 255.f, 1.f );
+}
+
 WINGDIAPI void APIENTRY glColor4f( GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha )
 {
 	auto command = [red, green, blue, alpha]( glBridge* adapter )
@@ -341,6 +349,11 @@ WINGDIAPI void APIENTRY glVertex2i( GLint x, GLint y )
 WINGDIAPI void APIENTRY glVertex2f( GLfloat x, GLfloat y )
 {
 	glVertex3f( x, y, 0 );
+}
+
+WINGDIAPI void APIENTRY glVertex2d( GLdouble x, GLdouble y )
+{
+	glVertex3f( (GLfloat)x, (GLfloat)y, 0 );
 }
 
 WINGDIAPI void APIENTRY glVertex3f( GLfloat x, GLfloat y, GLfloat z )
@@ -624,6 +637,11 @@ WINGDIAPI void APIENTRY glColorMaterial( GLenum face, GLenum mode )
 		renderer->lighting.colorMaterial.back = value;
 		break;
 	}
+}
+
+WINGDIAPI void APIENTRY glLineWidth( GLfloat width )
+{
+	
 }
 
 Renderer::Material& GetMaterial( GLenum face )
