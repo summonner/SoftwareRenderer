@@ -3,7 +3,7 @@
 
 namespace NeHe
 {
-	class Lesson8 : public ILesson
+	class Lesson8 final : public ILesson
 	{
 	public:
 		Lesson8();
