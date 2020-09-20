@@ -459,6 +459,18 @@
     <ClInclude Include="Renderer\Lighting\ColorMaterial.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson16.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Fog\FogComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Fog\FogFunc.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\gl\glFogManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -781,6 +793,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Lighting\ColorMaterial.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson16.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Fog\FogComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Fog\FogFunc.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glFogManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

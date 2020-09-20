@@ -32,5 +32,6 @@ private:
 		bool lighting;
 		bool cullFace;
 		bool stencil;
+		bool fog;
 	} backup;
 };

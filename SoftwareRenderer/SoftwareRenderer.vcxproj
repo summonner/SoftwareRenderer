@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Renderer\Fog\FogFunc.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Math\Bounds.h" />
     <ClInclude Include="Math\Degree.h" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Renderer\DepthTest\DepthBuffer.h" />
     <ClInclude Include="Renderer\DepthTest\IDepthBufferController.h" />
     <ClInclude Include="Renderer\DepthTest\DepthFunc.h" />
+    <ClInclude Include="Renderer\Fog\FogComponent.h" />
     <ClInclude Include="Renderer\FrameBuffer.h" />
     <ClInclude Include="Renderer\Generators\GeometryGenerator.h" />
     <ClInclude Include="Renderer\Generators\LineGenerator.h" />
@@ -241,6 +243,7 @@
     <ClInclude Include="Scene\gl\glClipPlaneManager.h" />
     <ClInclude Include="Scene\gl\glDisplayList.h" />
     <ClInclude Include="Scene\gl\glDisplayListManager.h" />
+    <ClInclude Include="Scene\gl\glFogManager.h" />
     <ClInclude Include="Scene\gl\glLightManager.h" />
     <ClInclude Include="Scene\gl\glBridge.h" />
     <ClInclude Include="Scene\gl\glMeshBuilder.h" />
@@ -253,6 +256,7 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson10.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson11.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson12.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson16.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson17.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson18.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson2.h" />
@@ -285,6 +289,7 @@
     <ClInclude Include="Util\PixelIterator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Renderer\Fog\FogFunc.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -308,6 +313,7 @@
     <ClCompile Include="Renderer\CullFace\CullFaceComponent.cpp" />
     <ClCompile Include="Renderer\DepthTest\DepthBuffer.cpp" />
     <ClCompile Include="Renderer\DepthTest\DepthFunc.cpp" />
+    <ClCompile Include="Renderer\Fog\FogComponent.cpp" />
     <ClCompile Include="Renderer\FrameBuffer.cpp" />
     <ClCompile Include="Renderer\Geometry\Quad.cpp" />
     <ClCompile Include="Renderer\IRenderer.cpp" />
@@ -359,6 +365,7 @@
     <ClCompile Include="Scene\gl\glClipPlaneManager.cpp" />
     <ClCompile Include="Scene\gl\glDisplayList.cpp" />
     <ClCompile Include="Scene\gl\glDisplayListManager.cpp" />
+    <ClCompile Include="Scene\gl\glFogManager.cpp" />
     <ClCompile Include="Scene\gl\glLightManager.cpp" />
     <ClCompile Include="Scene\gl\glMeshBuilder.cpp" />
     <ClCompile Include="Scene\gl\glTexcoordGenerator.cpp" />
@@ -368,6 +375,7 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson10.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson11.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson12.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson16.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson17.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson18.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson2.cpp" />

@@ -13,6 +13,7 @@
 #include "Viewport.h"
 #include "IFrameBuffer.h"
 #include "Rasterizer/PolygonMode.h"
+#include "Fog/FogComponent.h"
 
 namespace Renderer
 {
@@ -53,6 +54,7 @@ public:
 	Renderer::LightingComponent lighting;
 	Renderer::CustomClipPlanes planes;
 	Renderer::PolygonMode polygonMode;
+	Renderer::FogComponent fog;
 
 	Renderer::Matrix modelView;
 	Renderer::Matrix projection;

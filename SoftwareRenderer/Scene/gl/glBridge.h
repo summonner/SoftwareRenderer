@@ -7,6 +7,7 @@
 #include "glClipPlaneManager.h"
 #include "glDisplayListManager.h"
 #include "ICommandBuffer.h"
+#include "glFogManager.h"
 
 class glBridge;
 extern glBridge* adapter;
@@ -29,6 +30,7 @@ public:
 	glTexcoordGenerator texcoordGenerator;
 	glClipPlaneManager clipPlaneManager;
 	glDisplayListManager displayListManager;
+	glFogManager fogManager;
 
 	Renderer::Matrix* matrix;
 };

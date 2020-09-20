@@ -25,6 +25,8 @@ namespace Renderer
 			return values.depth;
 		}
 
+		float GetEyeDepth() const;
+
 		const PixelValues& GetRawValues() const;
 
 		const static RasterizedPixel discard;

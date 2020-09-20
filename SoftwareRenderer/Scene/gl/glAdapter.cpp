@@ -16,6 +16,7 @@ ICommandBuffer* commandBuffer;
 #define texcoordGenerator adapter->texcoordGenerator
 #define clipPlaneManager adapter->clipPlaneManager
 #define displayListManager adapter->displayListManager
+#define fogManager adapter->fogManager
 
 void glEnable( GLenum cap, bool enable )
 {
@@ -89,6 +90,14 @@ void glEnable( GLenum cap, bool enable )
 
 	case GL_COLOR_MATERIAL:
 		renderer->lighting.colorMaterial.SetEnable( enable );
+		break;
+
+	case GL_FOG:
+		renderer->fog.SetEnable( enable );
+		if ( enable == true )
+		{
+			renderer->fog.SetMode( fogManager.GetMode() );
+		}
 		break;
 	}
 }
@@ -781,6 +790,44 @@ WINGDIAPI void APIENTRY glListBase( GLuint base )
 	displayListManager.SetBase( base );
 }
 
+WINGDIAPI void APIENTRY glFogf( GLenum pname, GLfloat param )
+{
+	switch ( pname )
+	{
+	case GL_FOG_START:
+		fogManager.SetStart( param );
+		break;
+
+	case GL_FOG_END:
+		fogManager.SetEnd( param );
+		break;
+
+	case GL_FOG_DENSITY:
+		fogManager.SetDensity( param );
+		break;
+	}
+}
+
+WINGDIAPI void APIENTRY glFogfv( GLenum pname, const GLfloat* params )
+{
+	switch ( pname )
+	{
+	case GL_FOG_COLOR:
+		renderer->fog.SetColor( params );
+		break;
+	}
+}
+
+WINGDIAPI void APIENTRY glFogi( GLenum pname, GLint param )
+{
+	switch ( pname )
+	{
+	case GL_FOG_MODE:
+		const auto mode = fogManager.SetMode( param );
+		renderer->fog.SetMode( mode );
+		break;
+	}
+}
 
 int APIENTRY gluBuild2DMipmaps(
 	GLenum      target,

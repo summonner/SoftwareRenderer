@@ -54,6 +54,11 @@ namespace Renderer
 		return values.texcoord / values.w;
 	}
 
+	float RasterizedPixel::GetEyeDepth() const
+	{
+		return values.depth / values.w;
+	}
+
 	const PixelValues& RasterizedPixel::GetRawValues() const
 	{
 		return values;

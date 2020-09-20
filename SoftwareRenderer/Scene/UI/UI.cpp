@@ -22,6 +22,7 @@ void UI::Begin( IRenderer& renderer )
 	renderer.GetDepthBuffer().SetEnable( false );
 	renderer.lighting.SetEnable( false );
 	renderer.cullFace.SetEnable( false );
+	renderer.fog.SetEnable( false );
 
 	renderer.projection.Push();
 	renderer.projection.Reset();
@@ -53,6 +54,7 @@ UI::RenderState::RenderState()
 	, lighting( false )
 	, cullFace( false )
 	, stencil( false )
+	, fog( false )
 {
 }
 
@@ -68,6 +70,7 @@ void UI::RenderState::Backup( const IRenderer& renderer )
 	lighting = renderer.lighting.IsEnable();
 	cullFace = renderer.cullFace.IsEnable();
 	stencil = renderer.GetStencilBuffer().IsEnable();
+	fog = renderer.fog.IsEnable();
 }
 
 void UI::RenderState::Restore( IRenderer& renderer ) const
@@ -78,4 +81,5 @@ void UI::RenderState::Restore( IRenderer& renderer ) const
 	renderer.lighting.SetEnable( lighting );
 	renderer.cullFace.SetEnable( cullFace );
 	renderer.GetStencilBuffer().SetEnable( stencil );
+	renderer.fog.SetEnable( fog );
 }

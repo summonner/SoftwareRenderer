@@ -61,6 +61,7 @@ void IRenderer::Draw( const Mesh& mesh )
 
 			Vector4 color = p.GetColor();
 			color *= texture.GetColor( p, derivatives );
+			color = fog.Apply( p.GetEyeDepth(), color );
 
 			backBuffer->SetPixel( p.coordinate, color, blender.AsFunc() );
 		} );
