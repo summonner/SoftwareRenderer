@@ -70,7 +70,11 @@ void Font::Print( IRenderer& renderer, const char* message ) const
 			continue;
 		}
 
-		renderer.Draw( glyphs[index] );
+		if ( glyph != ' ' )
+		{
+			renderer.Draw( glyphs[index] );
+		}
+
 		renderer.modelView.Translate( space.x, 0.f, 0.f );
 		++x;
 	}
