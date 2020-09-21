@@ -79,6 +79,11 @@ void SampleScene::OnKeyboardInput( BYTE keyCode, bool isPressed )
 	{
 		toggleFeatures[keyCode]();
 	}
+
+	if ( keyCode == ' ' )
+	{
+		space = isPressed;
+	}
 }
 
 void SampleScene::Render( const std::shared_ptr<IRenderer> renderer ) const
@@ -97,6 +102,8 @@ void SampleScene::DrawScene() const
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	glMatrixMode( GL_MODELVIEW );
 	glLoadIdentity();
+	WidePoint();
+	return;
 	glTranslatef( 0, 0, -5 );
 	glPushMatrix();
 
@@ -108,6 +115,26 @@ void SampleScene::DrawScene() const
 	Quad();
 //	Cube();
 //	Quadric();
+}
+
+void SampleScene::WidePoint() const
+{
+	glTranslatef( -1.5f, 0.0f, -6.0f );
+	for ( auto i = 0; i < 10; ++i )
+	{
+		if ( space )
+		{
+			glEnable( GL_POINT_SMOOTH );
+		}
+		else
+		{
+			glDisable( GL_POINT_SMOOTH );
+		}
+		glPointSize( 5 * i );
+		glBegin( GL_POINTS );
+		glVertex3f( i * 0.5f - 1.f, 0.0f, 0.0f );
+		glEnd();
+	}
 }
 
 void SampleScene::Quadric() const

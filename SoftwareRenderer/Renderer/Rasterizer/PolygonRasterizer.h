@@ -18,6 +18,7 @@ namespace Renderer
 		float CheckFacet() const override;
 		DerivativeTexcoord Derivative( const bool isTextureEnabled ) const override;
 
+		static void Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, const ProcessPixel process, const ShadeModel::ShadeFunc shadeFunc );
 	private:
 		std::pair<size_t, size_t> FindMinMax() const;
 		BresenhamList BuildEdge( const std::pair<size_t, size_t>& minmax, std::function<size_t( const PolygonRasterizer&, size_t )> Next ) const;
@@ -25,7 +26,6 @@ namespace Renderer
 		size_t Backward( size_t i ) const;
 
 		static bool AscendingY( const Vertex& left, const Vertex& right );
-		static void Rasterize( const Bounds& bounds, BresenhamList& e1, BresenhamList& e2, const ProcessPixel process, const ShadeModel::ShadeFunc shadeFunc );
 
 		static int SelectSecondVertex( const std::vector<Vertex>& vertices );
 		static int SelectThirdVertex( const std::vector<Vertex>& vertices, size_t secondIndex );

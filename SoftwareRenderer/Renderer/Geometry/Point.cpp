@@ -5,6 +5,9 @@
 
 namespace Renderer
 {
+	float Point::size = 1.f;
+	bool Point::smooth = false;
+
 	Point::Point( const Vertex& v )
 		: v( v )
 	{
@@ -24,6 +27,6 @@ namespace Renderer
 		auto vertex = v;
 		vertex.PerspectiveDivide( viewport );
 
-		return std::make_unique<PointRasterizer>( vertex );
+		return std::make_unique<PointRasterizer>( vertex, size, smooth );
 	}
 }

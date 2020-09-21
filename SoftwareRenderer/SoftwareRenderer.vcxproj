@@ -209,6 +209,7 @@
     <ClInclude Include="Renderer\Mesh\Sphere.h" />
     <ClInclude Include="Renderer\Mesh\VertexIterator.h" />
     <ClInclude Include="Renderer\Rasterizer\Bresenham.h" />
+    <ClInclude Include="Renderer\Rasterizer\BresenhamCircle.h" />
     <ClInclude Include="Renderer\Rasterizer\BresenhamList.h" />
     <ClInclude Include="Renderer\Rasterizer\DerivativeTexcoord.h" />
     <ClInclude Include="Renderer\Rasterizer\IRasterizer.h" />
@@ -341,6 +342,7 @@
     <ClCompile Include="Renderer\Mesh\Sphere.cpp" />
     <ClCompile Include="Renderer\Mesh\VertexIterator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\BresenhamCircle.cpp" />
     <ClCompile Include="Renderer\Rasterizer\BresenhamList.cpp" />
     <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp" />
     <ClCompile Include="Renderer\Rasterizer\LineRasterizer.cpp" />

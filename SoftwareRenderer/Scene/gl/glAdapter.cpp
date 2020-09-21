@@ -5,6 +5,8 @@
 #include "GLUquadric.h"
 #include "Renderer/Rasterizer/ShadeModel.h"
 #include "glDisplayList.h"
+#include "Renderer/Generators/PointGenerator.h"
+#include "Renderer/Generators/LineGenerator.h"
 
 glBridge* adapter;
 ICommandBuffer* commandBuffer;
@@ -100,7 +102,12 @@ void glEnable( GLenum cap, bool enable )
 		}
 		break;
 
+	case GL_POINT_SMOOTH:
+		Renderer::PointGenerator::SetSmooth( enable );
+		break;
+
 	case GL_LINE_SMOOTH:
+		Renderer::LineGenerator::SetSmooth( enable );
 		break;
 	}
 }
@@ -639,9 +646,14 @@ WINGDIAPI void APIENTRY glColorMaterial( GLenum face, GLenum mode )
 	}
 }
 
+WINGDIAPI void APIENTRY glPointSize( GLfloat size )
+{
+	Renderer::PointGenerator::SetSize( size );
+}
+
 WINGDIAPI void APIENTRY glLineWidth( GLfloat width )
 {
-	
+	Renderer::LineGenerator::SetWidth( width );
 }
 
 Renderer::Material& GetMaterial( GLenum face )

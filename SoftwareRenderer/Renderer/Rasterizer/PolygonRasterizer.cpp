@@ -156,7 +156,6 @@ namespace Renderer
 			const float length = (float)(e2.x - e1.x);
 			if ( length == 0.f )
 			{
-				//process( RasterizedPixel( e1.GetCurrent() ) );
 				continue;
 			}
 
@@ -183,7 +182,6 @@ namespace Renderer
 	{
 		return left.position.y < right.position.y;
 	}
-
 
 	std::unique_ptr<IRasterizer> PolygonRasterizer::Create( std::vector<Vertex>&& vertices, const Vector4& flatColor )
 	{

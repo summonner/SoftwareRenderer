@@ -44,4 +44,11 @@ namespace Renderer
 
 		return geometries;
 	}
+
+	void GeometryGenerator::Reset()
+	{
+		PointGenerator::SetSize( 1.f );
+		PointGenerator::SetSmooth( false );
+		LineGenerator::SetWidth( 1.f );
+	}
 }

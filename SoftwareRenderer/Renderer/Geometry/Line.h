@@ -15,5 +15,9 @@ namespace Renderer
 	private:
 		const Vertex& a;
 		const Vertex& b;
+
+	public:
+		static float width;
+		static bool smooth;
 	};
 }

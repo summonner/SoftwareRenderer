@@ -34,14 +34,22 @@ namespace Renderer
 		color *= w;
 		texcoord *= w;
 
-		auto p = viewport * position;
-		screen = Vector2Int( (int)p.x, (int)p.y );
-		position.z = p.z;
+		position = viewport * position;
+		screen = Vector2Int( (int)position.x, (int)position.y );
 		position.w = w;
 	}
 
 	Vertex Vertex::Lerp( const Vertex& left, const Vertex& right, const float t )
 	{
 		return Vertex( left, right, t );
+	}
+
+	Vertex Vertex::Offset( float x, float y ) const
+	{
+		auto clone = *this;
+		clone.position.x += x;
+		clone.position.y += y;
+		clone.screen = Vector2Int( (int)clone.position.x, (int)clone.position.y );
+		return clone;
 	}
 }

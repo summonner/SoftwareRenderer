@@ -13,6 +13,7 @@ namespace Renderer
 
 		void Begin( Mesh::DrawMode mode );
 		IGeometryList Generate( const VertexBuffer& vertices );
+		static void Reset();
 
 	private:
 		using GeneratorFunction = std::function<void( const std::vector<Vertex>&, IGeometryList& )>;

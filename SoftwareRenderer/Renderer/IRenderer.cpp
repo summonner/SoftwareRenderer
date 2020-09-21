@@ -113,6 +113,8 @@ void IRenderer::Reset()
 	viewport.Reset();
 
 	vertices.clear();
+
+	generator.Reset();
 }
 
 IDepthBufferController& IRenderer::GetDepthBuffer()

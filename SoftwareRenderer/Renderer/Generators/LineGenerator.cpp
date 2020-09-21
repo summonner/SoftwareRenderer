@@ -36,4 +36,14 @@ namespace Renderer
 			outRasterizers.emplace_back( std::make_unique<Line>( vertices[numVertices], vertices[0] ) );
 		}
 	}
+
+	void LineGenerator::SetWidth( float width )
+	{
+		Line::width = width;
+	}
+
+	void LineGenerator::SetSmooth( bool smooth )
+	{
+		Line::smooth = smooth;
+	}
 }

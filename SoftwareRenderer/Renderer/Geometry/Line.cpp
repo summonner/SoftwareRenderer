@@ -9,6 +9,9 @@
 
 namespace Renderer
 {
+	float Line::width = 1.f;
+	bool Line::smooth = false;
+
 	Line::Line( const Vertex& a, const Vertex& b )
 		: a( a )
 		, b( b )
@@ -35,7 +38,7 @@ namespace Renderer
 
 		if ( vertices[0].screen == vertices[1].screen )
 		{
-			return std::make_unique<PointRasterizer>( vertices[0] );
+			return std::make_unique<PointRasterizer>( vertices[0], width, false );
 		}
 
 		return std::make_unique<LineRasterizer>( std::move( vertices ), ShadeModel::FlatFunc( b.color ) );

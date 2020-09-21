@@ -13,4 +13,14 @@ namespace Renderer
 			outRasterizers.emplace_back( std::make_unique<Point>( vertices[i] ) );
 		}
 	}
+
+	void PointGenerator::SetSize( float size )
+	{
+		Point::size = size;
+	}
+
+	void PointGenerator::SetSmooth( bool smooth )
+	{
+		Point::smooth = smooth;
+	}
 }

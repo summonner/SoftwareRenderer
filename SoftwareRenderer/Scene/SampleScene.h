@@ -21,6 +21,7 @@ public:
 	void Render( const std::shared_ptr<IRenderer> renderer ) const override;
 
 private:
+	void WidePoint() const;
 	void Floor() const;
 	void Triangle() const;
 	void Quad() const;
@@ -39,6 +40,7 @@ private:
 	bool enableLight;
 	bool enableCullFace;
 	std::string fps;
+	bool space;
 
 private:
 	std::unique_ptr<glBridge> adapter;

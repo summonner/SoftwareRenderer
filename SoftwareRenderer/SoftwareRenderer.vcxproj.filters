@@ -480,6 +480,9 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson21.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\BresenhamCircle.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -823,6 +826,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson21.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\BresenhamCircle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
