@@ -169,6 +169,23 @@ public:
 					- y * other.x );
 	}
 
+	inline float Length() const
+	{
+		return sqrt( this->Dot( *this ) );
+	}
+
+	inline TVector2 Normalize() const
+	{
+		if ( *this == TVector2::zero )
+		{
+			return *this;
+		}
+		else
+		{
+			return *this / Length();
+		}
+	}
+
 	static TVector2 Lerp( const TVector2& left, const TVector2& right, const float t );
 	static const TVector2<T> zero;
 	static const TVector2<T> one;

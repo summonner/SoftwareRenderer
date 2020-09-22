@@ -2,7 +2,7 @@
 #include "PolygonRasterizer.h"
 #include "LineRasterizer.h"
 #include "PointRasterizer.h"
-#include "BresenhamList.h"
+#include "Algorithm/BresenhamList.h"
 #include "RasterizedPixel.h"
 #include "DerivativeTexcoord.h"
 #include "Renderer/Vertex.h"

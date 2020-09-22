@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "RasterizedPixel.h"
-#include "Bresenham.h"
+#include "Algorithm/Bresenham.h"
 #include "DerivativeTexcoord.h"
 #include "Renderer/Vertex.h"
 #include "ShadeModel.h"

@@ -41,6 +41,6 @@ namespace Renderer
 			return std::make_unique<PointRasterizer>( vertices[0], width, false );
 		}
 
-		return std::make_unique<LineRasterizer>( std::move( vertices ), ShadeModel::FlatFunc( b.color ) );
+		return std::make_unique<LineRasterizer>( std::move( vertices ), width, smooth, ShadeModel::FlatFunc( b.color ) );
 	}
 }

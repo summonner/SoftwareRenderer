@@ -1,8 +1,7 @@
 #include "framework.h"
 #include "Bresenham.h"
-#include "PixelValues.h"
+#include "../PixelValues.h"
 #include "Renderer/Vertex.h"
-#include "ShadeModel.h"
 
 namespace Renderer
 {
@@ -10,14 +9,12 @@ namespace Renderer
 		: a( a )
 		, b( b )
 		, diff( b.screen - a.screen )
-		, sign( diff.x >= 0 ? 1 : -1, diff.y >= 0 ? 1 : -1 )
-		, d( 2 * diff.y * sign.y - diff.x * sign.x )
+		, next( diff.x >= 0 ? 1 : -1, diff.y >= 0 ? 1 : -1 )
+		, d( 2 * diff.y * next.y - diff.x * next.x )
 		, _p( a.screen )
-		, CalculateT( (diff.x * sign.x) > (diff.y * sign.y) ? &Bresenham::CalculateTx : &Bresenham::CalculateTy )
+		, CalculateT( (diff.x * next.x) > (diff.y * next.y) ? &Bresenham::CalculateTx : &Bresenham::CalculateTy )
 		, t( 0 )
-		, _w( a.position.w )
 		, p( _p )
-		, w( _w )
 		, shadeFunc( shadeFunc != nullptr ? shadeFunc : ShadeModel::SmoothFunc( a.color, b.color ) )
 	{
 	}
@@ -26,14 +23,12 @@ namespace Renderer
 		: a( source.a )
 		, b( source.b )
 		, diff( source.diff )
-		, sign( source.sign )
+		, next( source.next )
 		, d( source.d )
 		, _p( source._p )
 		, CalculateT( source.CalculateT )
 		, t( source.t )
-		, _w( source._w )
 		, p( _p )
-		, w( _w )
 		, shadeFunc( source.shadeFunc )
 	{
 	}
@@ -76,21 +71,20 @@ namespace Renderer
 	{
 		if ( d >= 0 )
 		{
-			_p.y += sign.y;
-			d -= 2 * diff.x * sign.x;
+			_p.y += next.y;
+			d -= 2 * diff.x * next.x;
 		}
 
 		if ( d <= 0 )
 		{
-			_p.x += sign.x;
-			d += 2 * diff.y * sign.y;
+			_p.x += next.x;
+			d += 2 * diff.y * next.y;
 		}
 	}
 
 	void Bresenham::CalculateParams()
 	{
 		t = CalculateT( *this );
-		_w = ::Lerp( a.position.w, b.position.w, t );
 	}
 
 	float Bresenham::CalculateTx() const
@@ -103,29 +97,19 @@ namespace Renderer
 		return (_p.y - a.screen.y) / (float)diff.y;
 	}
 
-	Vector4 Bresenham::GetColor() const
-	{
-		return shadeFunc( t );
-	}
-
-	float Bresenham::GetDepth() const
-	{
-		return ::Lerp( a.position.z, b.position.z, t );
-	}
-
-	Vector2 Bresenham::GetTexcoord() const
-	{
-		return Vector2::Lerp( a.texcoord, b.texcoord, t );
-	}
-
 	PixelValues Bresenham::GetValues() const
 	{
 		return PixelValues
 		{
-			_w,
-			GetDepth(),
-			GetColor(),
-			GetTexcoord()
+			Lerp( a.position.w, b.position.w, t ),
+			Lerp( a.position.z, b.position.z, t ),
+			shadeFunc( t ),
+			Vector2::Lerp( a.texcoord, b.texcoord, t )
 		};
+	}
+
+	bool Bresenham::IsXMajor() const
+	{
+		return abs( diff.x ) > abs( diff.y );
 	}
 }

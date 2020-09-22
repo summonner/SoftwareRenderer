@@ -4,8 +4,8 @@
 #include "RasterizedPixel.h"
 #include "DerivativeTexcoord.h"
 #include "PolygonRasterizer.h"
-#include "BresenhamList.h"
-#include "BresenhamCircle.h"
+#include "Algorithm/BresenhamList.h"
+#include "Algorithm/BresenhamCircle.h"
 
 namespace Renderer
 {

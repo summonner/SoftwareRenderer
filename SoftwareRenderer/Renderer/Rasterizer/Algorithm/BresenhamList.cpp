@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "BresenhamList.h"
-#include "PixelValues.h"
+#include "../PixelValues.h"
 #include "Renderer/Vertex.h"
 
 namespace Renderer
@@ -55,12 +55,7 @@ namespace Renderer
 	PixelValues BresenhamList::GetValues() const
 	{
 		const auto& e = GetCurrent();
-		return PixelValues {
-			e.w,
-			e.GetDepth(),
-			e.GetColor(),
-			e.GetTexcoord()
-		};
+		return e.GetValues();
 	}
 
 	const Bresenham& BresenhamList::GetCurrent() const

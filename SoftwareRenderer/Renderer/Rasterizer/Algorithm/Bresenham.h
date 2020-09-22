@@ -1,6 +1,6 @@
 #pragma once
 #include "Math/Vector2.hpp"
-#include "ShadeModel.h"
+#include "../ShadeModel.h"
 
 namespace Renderer
 {
@@ -15,10 +15,8 @@ namespace Renderer
 
 		bool Next();
 		bool NextY( const int y );
-		Vector4 GetColor() const;
-		float GetDepth() const;
-		Vector2 GetTexcoord() const;
 		PixelValues GetValues() const;
+		bool IsXMajor() const;
 
 	private:
 		void MoveNext();
@@ -30,18 +28,16 @@ namespace Renderer
 		const Vertex& a;
 		const Vertex& b;
 		const Vector2Int diff;
-		const Vector2Int sign;
+		const Vector2Int next;
 		int d;
 
 		const ShadeModel::ShadeFunc shadeFunc;
 		const std::function<float(const Bresenham&)> CalculateT;
 
 		Vector2Int _p;
-		float _w;
 		float t;
 
 	public:
 		const Vector2Int& p;
-		const float& w;
 	};
 }

@@ -44,6 +44,11 @@ namespace Renderer
 		return Vertex( left, right, t );
 	}
 
+	Vertex Vertex::Offset( const Vector2& offset ) const
+	{
+		return Offset( offset.x, offset.y );
+	}
+
 	Vertex Vertex::Offset( float x, float y ) const
 	{
 		auto clone = *this;

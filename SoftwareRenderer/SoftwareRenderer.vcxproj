@@ -208,9 +208,10 @@
     <ClInclude Include="Renderer\Mesh\Mesh.h" />
     <ClInclude Include="Renderer\Mesh\Sphere.h" />
     <ClInclude Include="Renderer\Mesh\VertexIterator.h" />
-    <ClInclude Include="Renderer\Rasterizer\Bresenham.h" />
-    <ClInclude Include="Renderer\Rasterizer\BresenhamCircle.h" />
-    <ClInclude Include="Renderer\Rasterizer\BresenhamList.h" />
+    <ClInclude Include="Renderer\Rasterizer\Algorithm\Bresenham.h" />
+    <ClInclude Include="Renderer\Rasterizer\Algorithm\BresenhamCircle.h" />
+    <ClInclude Include="Renderer\Rasterizer\Algorithm\BresenhamList.h" />
+    <ClInclude Include="Renderer\Rasterizer\Algorithm\VertexInterpolator.h" />
     <ClInclude Include="Renderer\Rasterizer\DerivativeTexcoord.h" />
     <ClInclude Include="Renderer\Rasterizer\IRasterizer.h" />
     <ClInclude Include="Renderer\Rasterizer\LineRasterizer.h" />
@@ -220,6 +221,7 @@
     <ClInclude Include="Renderer\Rasterizer\PolygonRasterizer.h" />
     <ClInclude Include="Renderer\Rasterizer\RasterizedPixel.h" />
     <ClInclude Include="Renderer\Rasterizer\ShadeModel.h" />
+    <ClInclude Include="Renderer\Rasterizer\Algorithm\XiaolinWu.h" />
     <ClInclude Include="Renderer\StencilTest\IStencilBufferController.h" />
     <ClInclude Include="Renderer\StencilTest\StencilValue.h" />
     <ClInclude Include="Renderer\StencilTest\StencilBuffer.h" />
@@ -341,9 +343,10 @@
     <ClCompile Include="Renderer\Mesh\Mesh.cpp" />
     <ClCompile Include="Renderer\Mesh\Sphere.cpp" />
     <ClCompile Include="Renderer\Mesh\VertexIterator.cpp" />
-    <ClCompile Include="Renderer\Rasterizer\Bresenham.cpp" />
-    <ClCompile Include="Renderer\Rasterizer\BresenhamCircle.cpp" />
-    <ClCompile Include="Renderer\Rasterizer\BresenhamList.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\Algorithm\Bresenham.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\Algorithm\BresenhamCircle.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\Algorithm\BresenhamList.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\Algorithm\VertexInterpolator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\DerivativeTexcoord.cpp" />
     <ClCompile Include="Renderer\Rasterizer\LineRasterizer.cpp" />
     <ClCompile Include="Renderer\Rasterizer\PointRasterizer.cpp" />
@@ -351,6 +354,7 @@
     <ClCompile Include="Renderer\Rasterizer\PolygonRasterizer.cpp" />
     <ClCompile Include="Renderer\Rasterizer\RasterizedPixel.cpp" />
     <ClCompile Include="Renderer\Rasterizer\ShadeModel.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\Algorithm\XiaolinWu.cpp" />
     <ClCompile Include="Renderer\StencilTest\StencilBuffer.cpp" />
     <ClCompile Include="Renderer\StencilTest\StencilFunc.cpp" />
     <ClCompile Include="Renderer\StencilTest\StencilOp.cpp" />

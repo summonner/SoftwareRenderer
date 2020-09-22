@@ -9,9 +9,9 @@ namespace Renderer
 	class PolygonRasterizer final : public IRasterizer
 	{
 	private:
-		PolygonRasterizer( std::vector<Vertex>&& vertices, int secondIndex, int thirdIndex, ShadeModel::ShadeFunc shadeFunc );
 	public:
 		static std::unique_ptr<IRasterizer> Create( std::vector<Vertex>&& vertices, const Vector4& flatColor );
+		PolygonRasterizer( std::vector<Vertex>&& vertices, int secondIndex, int thirdIndex, ShadeModel::ShadeFunc shadeFunc );
 		~PolygonRasterizer() override;
 
 		void Rasterize( const Bounds& bounds, PolygonMode::Mode mode, const ProcessPixel process ) override;
