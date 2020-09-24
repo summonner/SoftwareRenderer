@@ -103,10 +103,6 @@ void SampleScene::DrawScene() const
 	glMatrixMode( GL_MODELVIEW );
 	glLoadIdentity();
 
-	glEnable( GL_BLEND );
-	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-	WideLine();
-	return;
 	glTranslatef( 0, 0, -5 );
 	glPushMatrix();
 
@@ -118,49 +114,6 @@ void SampleScene::DrawScene() const
 	Quad();
 //	Cube();
 //	Quadric();
-}
-
-void SampleScene::WidePoint() const
-{
-	glTranslatef( -1.5f, 0.0f, -6.0f );
-	if ( space )
-	{
-		glEnable( GL_POINT_SMOOTH );
-	}
-	else
-	{
-		glDisable( GL_POINT_SMOOTH );
-	}
-
-	for ( auto i = 0; i < 10; ++i )
-	{
-		glPointSize( 5.f * i );
-		glBegin( GL_POINTS );
-		glVertex3f( i * 0.5f - 1.f, 0.0f, 0.0f );
-		glEnd();
-	}
-}
-
-void SampleScene::WideLine() const
-{
-	glTranslatef( 0.0f, 0.0f, -6.0f );
-	if ( !space )
-	{
-		glEnable( GL_LINE_SMOOTH );
-	}
-	else
-	{
-		glDisable( GL_LINE_SMOOTH );
-	}
-
-	for ( auto i = 0; i < 10; ++i )
-	{
-		glLineWidth( 1.f * i );
-		glBegin( GL_LINES );
-		glVertex3f( -2.f, 2.0f - 0.4f * i, 0.0f );
-		glVertex3f( x * 2.f, x * 2 + 1.f - 0.4f * i, 0.0f );
-		glEnd();
-	}
 }
 
 void SampleScene::Quadric() const

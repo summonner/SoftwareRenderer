@@ -6,9 +6,9 @@ namespace Renderer
 {
 	struct PixelValues final
 	{
-		const float w;
-		const float depth;
-		const Vector4 color;
-		const Vector2 texcoord;
+		float w;
+		float depth;
+		Vector4 color;
+		Vector2 texcoord;
 	};
 }

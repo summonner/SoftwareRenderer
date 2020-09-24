@@ -21,8 +21,6 @@ public:
 	void Render( const std::shared_ptr<IRenderer> renderer ) const override;
 
 private:
-	void WidePoint() const;
-	void WideLine() const;
 	void Floor() const;
 	void Triangle() const;
 	void Quad() const;

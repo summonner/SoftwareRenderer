@@ -4,4 +4,6 @@
 RangeInt::RangeInt( int min, int max )
 	: min( min )
 	, max( max )
-{}
+{
+	assert( min <= max );
+}

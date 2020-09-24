@@ -92,21 +92,21 @@ namespace Renderer
 	{
 		auto e = Bresenham( vertices[0], vertices[1], shadeFunc );
 		const auto half = width * 0.5f;
-		const auto xmajor = e.IsXMajor();
-		const auto bound = xmajor ? bounds : Bounds( bounds.y, bounds.x );
+		const auto isXMajor = e.IsXMajor();
+		const auto bound = isXMajor ? bounds : Bounds( bounds.y, bounds.x );
 		do
 		{
-			if ( bound.x.Contains( e.p.x ) == false )
+			const auto p = isXMajor ? e.p : Vector2Int( e.p.y, e.p.x );
+			if ( bound.x.Contains( p.x ) == false )
 			{
 				continue;
 			}
 
-			const auto p = xmajor ? e.p : Vector2Int( e.p.y, e.p.x );
 			const auto values = e.GetValues();
 			const auto range = bound.y.Clamp( (int)(p.y - half), (int)(p.y + half) );
 			for ( auto y : range )
 			{
-				const auto p2 = xmajor ? Vector2Int( p.x, y ) : Vector2Int( y, p.x );
+				const auto p2 = isXMajor ? Vector2Int( p.x, y ) : Vector2Int( y, p.x );
 				process( RasterizedPixel( p2, values ) );
 			}
 		} while ( e.Next() );
@@ -158,7 +158,7 @@ namespace Renderer
 			vertices[1].Offset( -n ),
 		};
 
-		auto square = PolygonRasterizer( std::move( offsets ), 1, 2, shadeFunc );
+		auto square = PolygonRasterizer( std::move( offsets ), 1, 2, shadeFunc, smooth );
 		square.Rasterize( bounds, Renderer::PolygonMode::Mode::Fill, process );
 	}
 

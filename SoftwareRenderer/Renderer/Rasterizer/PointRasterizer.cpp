@@ -3,7 +3,7 @@
 #include "Math/Bounds.h"
 #include "RasterizedPixel.h"
 #include "DerivativeTexcoord.h"
-#include "PolygonRasterizer.h"
+#include "Algorithm/ScanLine.h"
 #include "Algorithm/BresenhamList.h"
 #include "Algorithm/BresenhamCircle.h"
 
@@ -63,24 +63,22 @@ namespace Renderer
 
 	void PointRasterizer::Square( const Bounds& bounds, const ProcessPixel process ) const
 	{
-		Vertex offsets[] =
+		std::vector<Vertex> offsets(
 		{
 			v.Offset( -half, -half ),
 			v.Offset( half, -half ),
 			v.Offset( half,  half ),
 			v.Offset( -half,  half ),
-		};
+		} );
 
-		auto range = bounds.y.Clamp( offsets[0].screen.y, offsets[2].screen.y );
-		Bounds adjust( bounds.x, range );
-		auto color = v.color;
-		ShadeModel::ShadeFunc shadeFunc = [color]( float t )
+		ShadeModel::ShadeFunc shadeFunc = ShadeModel::FlatFunc( v.color );
+		auto scanline = Scanline::Create( offsets, shadeFunc, false );
+		if ( scanline == nullptr )
 		{
-			return color;
-		};
-		BresenhamList e1( { &offsets[0], &offsets[1], &offsets[2] }, shadeFunc );
-		BresenhamList e2( { &offsets[0], &offsets[3], &offsets[2] }, shadeFunc );
-		PolygonRasterizer::Rasterize( adjust, e1, e2, process, shadeFunc );
+			return;
+		}
+
+		scanline->Rasterize( bounds, process );
 	}
 
 	void PointRasterizer::Circle( const Bounds& bounds, const ProcessPixel process ) const

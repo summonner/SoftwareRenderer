@@ -489,6 +489,15 @@
     <ClInclude Include="Renderer\Rasterizer\Algorithm\VertexInterpolator.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\Algorithm\SmoothScanLine.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\Algorithm\ScanLine.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\AntiAliasingScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -841,6 +850,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Rasterizer\Algorithm\VertexInterpolator.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\Algorithm\SmoothScanLine.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\Algorithm\ScanLine.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\AntiAliasingScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

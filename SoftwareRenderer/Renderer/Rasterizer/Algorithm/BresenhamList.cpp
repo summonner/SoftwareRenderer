@@ -5,7 +5,7 @@
 
 namespace Renderer
 {
-	BresenhamList::BresenhamList( const std::vector<const Vertex*>& vertices, ShadeModel::ShadeFunc shadeFunc )
+	BresenhamList::BresenhamList( const std::vector<const Vertex*>& vertices, ShadeModel::ShadeFunc shadeFunc, bool smooth )
 		: currentIndex( 0 )
 		, _x( 0 )
 		, x( _x )
@@ -16,7 +16,14 @@ namespace Renderer
 		{
 			if ( a != nullptr )
 			{
-				edges.emplace_back( *a, *b, shadeFunc );
+				if ( smooth )
+				{
+					edges.emplace_back( a->screen * 2, b->screen * 2 , VertexInterpolator( *a, *b, shadeFunc ) );
+				}
+				else
+				{
+					edges.emplace_back( *a, *b, shadeFunc );
+				}
 			}
 
 			a = b;

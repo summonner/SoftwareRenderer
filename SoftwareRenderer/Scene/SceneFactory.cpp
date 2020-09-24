@@ -4,10 +4,11 @@
 #include "NeHeSamples/NeHeSample.h"
 #include "NeHeSamples/LessonList.h"
 #include "SampleScene.h"
+#include "AntiAliasingScene.h"
 #include "resource.h"
 
 const UINT SceneFactory::defaultScene = ID_SCENE_DEFAULT;
-const std::pair<UINT, UINT> SceneFactory::sceneRange = { ID_SCENE_NEHE, ID_NEHE_LESSON48 };
+const std::pair<UINT, UINT> SceneFactory::sceneRange = { ID_SCENE_NEHE, ID_SCENE_ANTIALIASING };
 
 #define NEHE( n )\
 	{ ID_NEHE_LESSON##n, NeHeLesson<NeHe::Lesson##n> }
@@ -15,6 +16,7 @@ const std::pair<UINT, UINT> SceneFactory::sceneRange = { ID_SCENE_NEHE, ID_NEHE_
 const Dictionary<UINT, SceneFactory::CreateFunc> SceneFactory::table(
 {
 	{ ID_SCENE_DEFAULT, Create<SampleScene> },
+	{ ID_SCENE_ANTIALIASING, Create<AntiAliasingScene> },
 	NEHE(  2 ),
 	NEHE(  3 ),
 	NEHE(  4 ),

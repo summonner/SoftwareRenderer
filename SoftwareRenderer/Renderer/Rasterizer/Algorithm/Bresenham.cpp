@@ -6,16 +6,21 @@
 namespace Renderer
 {
 	Bresenham::Bresenham( const Vertex& a, const Vertex& b, ShadeModel::ShadeFunc shadeFunc )
+		: Bresenham( a.screen, b.screen, VertexInterpolator( a, b, shadeFunc ) )
+	{
+	}
+
+	Bresenham::Bresenham( const Vector2Int& a, const Vector2Int& b, const VertexInterpolator& values )
 		: a( a )
 		, b( b )
-		, diff( b.screen - a.screen )
+		, diff( b - a )
 		, next( diff.x >= 0 ? 1 : -1, diff.y >= 0 ? 1 : -1 )
 		, d( 2 * diff.y * next.y - diff.x * next.x )
-		, _p( a.screen )
-		, CalculateT( (diff.x * next.x) > (diff.y * next.y) ? &Bresenham::CalculateTx : &Bresenham::CalculateTy )
+		, _p( a )
+		, CalculateT( (diff.x* next.x) > (diff.y* next.y) ? &Bresenham::CalculateTx : &Bresenham::CalculateTy )
 		, t( 0 )
 		, p( _p )
-		, shadeFunc( shadeFunc != nullptr ? shadeFunc : ShadeModel::SmoothFunc( a.color, b.color ) )
+		, values( values )
 	{
 	}
 
@@ -30,6 +35,7 @@ namespace Renderer
 		, t( source.t )
 		, p( _p )
 		, shadeFunc( source.shadeFunc )
+		, values( source.values )
 	{
 	}
 
@@ -51,9 +57,9 @@ namespace Renderer
 
 	bool Bresenham::NextY( const int y )
 	{
-		if ( (y - p.y) >= (b.screen.y - p.y) )
+		if ( (y - p.y) >= (b.y - p.y) )
 		{
-			_p = b.screen;
+			_p = b;
 		}
 		else
 		{
@@ -89,23 +95,17 @@ namespace Renderer
 
 	float Bresenham::CalculateTx() const
 	{
-		return (_p.x - a.screen.x) / (float)diff.x;
+		return (_p.x - a.x) / (float)diff.x;
 	}
 
 	float Bresenham::CalculateTy() const
 	{
-		return (_p.y - a.screen.y) / (float)diff.y;
+		return (_p.y - a.y) / (float)diff.y;
 	}
 
 	PixelValues Bresenham::GetValues() const
 	{
-		return PixelValues
-		{
-			Lerp( a.position.w, b.position.w, t ),
-			Lerp( a.position.z, b.position.z, t ),
-			shadeFunc( t ),
-			Vector2::Lerp( a.texcoord, b.texcoord, t )
-		};
+		return values.Get( t );
 	}
 
 	bool Bresenham::IsXMajor() const

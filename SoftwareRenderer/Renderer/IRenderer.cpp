@@ -72,6 +72,8 @@ void IRenderer::Draw( const Mesh& mesh )
 
 Vertex IRenderer::ProcessVertex( Vertex v ) const
 {
+	assert( v.position.w == 1.f );
+
 	v.position = modelView * v.position;
 	v.normal = Vector4( v.normal, 0 ) * modelView.Inverse();
 	v.normal = v.normal.Normalize();
