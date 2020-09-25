@@ -477,9 +477,6 @@
     <ClInclude Include="Renderer\Rasterizer\Algorithm\Bresenham.h">
       <Filter>Renderer\Rasterizer\Algorithm</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Rasterizer\Algorithm\BresenhamCircle.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Rasterizer\Algorithm\BresenhamList.h">
       <Filter>Renderer\Rasterizer\Algorithm</Filter>
     </ClInclude>
@@ -496,6 +493,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Scene\AntiAliasingScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rasterizer\Algorithm\XiaolinWuCircle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -840,9 +840,6 @@
     <ClCompile Include="Renderer\Rasterizer\Algorithm\Bresenham.cpp">
       <Filter>Renderer\Rasterizer\Algorithm</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Rasterizer\Algorithm\BresenhamCircle.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\Rasterizer\Algorithm\BresenhamList.cpp">
       <Filter>Renderer\Rasterizer\Algorithm</Filter>
     </ClCompile>
@@ -859,6 +856,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\AntiAliasingScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rasterizer\Algorithm\XiaolinWuCircle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

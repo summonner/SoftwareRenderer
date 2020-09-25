@@ -5,6 +5,7 @@
 class Bounds;
 namespace Renderer
 {
+	struct PixelValues;
 	class PointRasterizer final : public IRasterizer
 	{
 	public:
@@ -19,6 +20,9 @@ namespace Renderer
 		void Point( const ProcessPixel process ) const;
 		void Square( const Bounds& bounds, const ProcessPixel process ) const;
 		void Circle( const Bounds& bounds, const ProcessPixel process ) const;
+
+	private:
+		RasterizedPixel GetPixel( float x, float y, bool xMajor, const PixelValues& values ) const;
 
 	private:
 		Vertex v;

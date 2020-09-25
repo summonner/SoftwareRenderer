@@ -74,14 +74,16 @@ void AntiAliasingScene::Render( const std::shared_ptr<IRenderer> renderer ) cons
 void AntiAliasingScene::Points( IRenderer& renderer ) const
 {
 	renderer.modelView.Reset();
-	renderer.modelView.Translate( -2.5f, 0, -6 );
+	renderer.modelView.Translate( 0, 0, -6 );
 	Renderer::PointGenerator::SetSmooth( enableAA );
 
 	Vertex v;
+	float r = 2.f;
 	for ( auto i = 0; i < 10; ++i )
 	{
 		Renderer::PointGenerator::SetSize( 5.f * i + 1.f );
-		v.position = Vector4( i * 0.5f, sin( t + i ), 0.f, 1.f );
+		const Radian s = PI * i / 5;
+		v.position = Vector4( sin( s + t ) * r, cos( s + t ) * r, 0.f, 1.f );
 		renderer.Draw( Renderer::Mesh( DrawMode::Points, { v } ) );
 	}
 }

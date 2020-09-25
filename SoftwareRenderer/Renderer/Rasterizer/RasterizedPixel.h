@@ -14,6 +14,7 @@ namespace Renderer
 		RasterizedPixel();
 	public:
 		RasterizedPixel( const Vector2Int& coordinate, const PixelValues& values );
+		RasterizedPixel( int x, int y, const PixelValues& values );
 		RasterizedPixel( const Bresenham& edge );
 		RasterizedPixel( const Vertex& vertex );
 		~RasterizedPixel();
@@ -29,6 +30,7 @@ namespace Renderer
 
 		const PixelValues& GetRawValues() const;
 
+		static RasterizedPixel AdditionalAlpha( int x, int y, PixelValues values, float alpha );
 		const static RasterizedPixel discard;
 
 	public:

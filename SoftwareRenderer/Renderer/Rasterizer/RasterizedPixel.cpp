@@ -21,6 +21,17 @@ namespace Renderer
 	{
 	}
 
+	RasterizedPixel::RasterizedPixel( int x, int y, const PixelValues& values )
+		: RasterizedPixel( Vector2Int( x, y ), values )
+	{
+	}
+
+	RasterizedPixel RasterizedPixel::AdditionalAlpha( int x, int y, PixelValues values, float alpha )
+	{
+		values.color.w *= alpha;
+		return RasterizedPixel( x, y, values );
+	}
+
 	RasterizedPixel::RasterizedPixel( const Bresenham& edge )
 		: RasterizedPixel( edge.p, edge.GetValues() )
 	{

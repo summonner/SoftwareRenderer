@@ -5,7 +5,7 @@
 #include "DerivativeTexcoord.h"
 #include "Algorithm/ScanLine.h"
 #include "Algorithm/BresenhamList.h"
-#include "Algorithm/BresenhamCircle.h"
+#include "Algorithm/XiaolinWuCircle.h"
 
 namespace Renderer
 {
@@ -83,7 +83,7 @@ namespace Renderer
 
 	void PointRasterizer::Circle( const Bounds& bounds, const ProcessPixel process ) const
 	{
-		PixelValues values
+		const PixelValues values
 		{
 			v.position.w,
 			v.position.z,
@@ -91,21 +91,63 @@ namespace Renderer
 			v.texcoord
 		};
 
-		BresenhamCircle e( v.screen, half );
+		XiaolinWuCircle e( half );
+		auto oldY = (int)(v.position.y - half);
+		RangeInt x = bounds.x;
 		do
 		{
-			auto y = e.p.y + v.screen.y;
-			if ( bounds.y.Contains( y ) == false )
+			const auto y = v.position.y + e.p.y;
+			const auto yi = (int)y;
+
+			if ( oldY < yi )
 			{
-				continue;
+				for ( auto xi : x )
+				{
+					process( RasterizedPixel( xi, oldY, values ) );
+				}
+				x = bounds.x;
 			}
 
-			auto range = bounds.x.Clamp( v.screen.x - e.p.x, v.screen.x + e.p.x );
-			for ( auto x : range )
+			const bool xMajor = e.IsXMajor();
+			const auto min = v.position.x - e.p.x;
+			process( GetPixel( min, y, xMajor, values ) );
+
+			if ( e.p.x > 0.5f )
 			{
-				Vector2Int p( x, y );
-				process( RasterizedPixel( p, values ) );
+				const auto max = v.position.x + e.p.x;
+				process( GetPixel( max, y, xMajor, values ) );
+				x = x.Clamp( (int)min + 1, (int)max );
 			}
-		} while ( e.NextY() );
+			else
+			{
+				x = RangeInt( 0, 0 );
+			}
+
+			oldY = yi;
+		} while ( e.Next() );
+	}
+
+	RasterizedPixel PointRasterizer::GetPixel( float x, float y, bool xMajor, const PixelValues& values ) const
+	{
+		Vector2Int p( (int)x, (int)y );
+		auto alpha = 0.f;
+		if ( xMajor )
+		{
+			alpha = x - p.x;
+			if ( x < v.position.x )
+			{
+				alpha = 1 - alpha;
+			}
+		}
+		else
+		{
+			alpha = y - p.y;
+			if ( y < v.position.y )
+			{
+				alpha = 1 - alpha;
+			}
+		}
+
+		return RasterizedPixel::AdditionalAlpha( p.x, p.y, values, alpha );
 	}
 }
