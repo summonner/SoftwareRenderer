@@ -6,6 +6,7 @@
 #include "Algorithm/ScanLine.h"
 #include "Algorithm/BresenhamList.h"
 #include "Algorithm/XiaolinWuCircle.h"
+#include "Algorithm/PixelPair.h"
 
 namespace Renderer
 {
@@ -108,15 +109,20 @@ namespace Renderer
 				x = bounds.x;
 			}
 
-			const bool xMajor = e.IsXMajor();
-			const auto min = v.position.x - e.p.x;
-			process( GetPixel( min, y, xMajor, values ) );
+			if ( bounds.y.Contains( yi ) == false )
+			{
+				x = RangeInt( 0, 0 );
+				oldY = yi;
+				continue;
+			}
+
+			const auto pixels = e.Get( Vector2( v.position ) );
+			pixels.first.Plot( bounds, process, values );
 
 			if ( e.p.x > 0.5f )
 			{
-				const auto max = v.position.x + e.p.x;
-				process( GetPixel( max, y, xMajor, values ) );
-				x = x.Clamp( (int)min + 1, (int)max );
+				pixels.second.Plot( bounds, process, values );
+				x = x.Clamp( pixels.first.coord.x + 1, pixels.second.coord.x );
 			}
 			else
 			{
@@ -125,29 +131,5 @@ namespace Renderer
 
 			oldY = yi;
 		} while ( e.Next() );
-	}
-
-	RasterizedPixel PointRasterizer::GetPixel( float x, float y, bool xMajor, const PixelValues& values ) const
-	{
-		Vector2Int p( (int)x, (int)y );
-		auto alpha = 0.f;
-		if ( xMajor )
-		{
-			alpha = x - p.x;
-			if ( x < v.position.x )
-			{
-				alpha = 1 - alpha;
-			}
-		}
-		else
-		{
-			alpha = y - p.y;
-			if ( y < v.position.y )
-			{
-				alpha = 1 - alpha;
-			}
-		}
-
-		return RasterizedPixel::AdditionalAlpha( p.x, p.y, values, alpha );
 	}
 }

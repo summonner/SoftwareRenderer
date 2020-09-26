@@ -3,6 +3,7 @@
 
 namespace Renderer
 {
+	struct PixelPair;
 	class XiaolinWuCircle
 	{
 	public:
@@ -11,6 +12,7 @@ namespace Renderer
 
 		bool Next();
 		bool IsXMajor() const;
+		PixelPair Get( const Vector2& center ) const;
 
 	private:
 		const float rr;

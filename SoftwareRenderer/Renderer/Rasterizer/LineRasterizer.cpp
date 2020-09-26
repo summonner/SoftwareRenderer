@@ -9,6 +9,7 @@
 #include "Algorithm/XiaolinWu.h"
 #include "Algorithm/BresenhamList.h"
 #include "PolygonRasterizer.h"
+#include "Algorithm/PixelPair.h"
 
 namespace Renderer
 {
@@ -115,33 +116,13 @@ namespace Renderer
 	void LineRasterizer::SmoothThinLine( const Bounds& bounds, const ProcessPixel process ) const
 	{
 		auto e = XiaolinWu( vertices[0], vertices[1], shadeFunc );
-		const auto isXMajor = e.IsXMajor();
-		const auto bound = isXMajor ? bounds : Bounds( bounds.y, bounds.x );
 		do
 		{
-			const auto x = isXMajor ? (int)e.p.x : (int)e.p.y;
-			if ( bound.x.Contains( x ) == false )
-			{
-				continue;
-			}
-
 			const auto values = e.GetValues();
-			const auto y = isXMajor ? e.p.y : e.p.x;
-			auto yi = (int)y;
-			if ( bound.y.Contains( yi ) )
-			{
-				const auto frac = 1 - (y - yi);
-				const auto p = isXMajor ? Vector2Int( x, yi ) : Vector2Int( yi, x );
-				process( RasterizedPixel( p, AddAlpha( values, frac ) ) );
-			}
+			const auto p = e.Get();
+			p.first.Plot( bounds, process, values );
+			p.second.Plot( bounds, process, values );
 
-			yi += 1;
-			if ( bound.y.Contains( yi ) )
-			{
-				const auto frac = 1 - (yi - y);
-				const auto p = isXMajor ? Vector2Int( x, yi ) : Vector2Int( yi, x );
-				process( RasterizedPixel( p, AddAlpha( values, frac ) ) );
-			}
 		} while ( e.Next() );
 	}
 
@@ -160,18 +141,5 @@ namespace Renderer
 
 		auto square = PolygonRasterizer( std::move( offsets ), 1, 2, shadeFunc, smooth );
 		square.Rasterize( bounds, Renderer::PolygonMode::Mode::Fill, process );
-	}
-
-	PixelValues LineRasterizer::AddAlpha( const PixelValues& values, float alpha )
-	{
-		auto color = values.color;
-		color.w *= alpha;
-
-		return PixelValues{
-			values.w,
-			values.depth,
-			color,
-			values.texcoord,
-		};
 	}
 }

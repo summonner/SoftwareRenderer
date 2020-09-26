@@ -1,11 +1,12 @@
 #pragma once
 #include "Renderer/Vertex.h"
 #include "Math/Vector2.hpp"
-#include "../ShadeModel.h"
+#include "Renderer/Rasterizer/ShadeModel.h"
 #include "VertexInterpolator.h"
 
 namespace Renderer
 {
+	struct PixelPair;
 	struct PixelValues;
 	class XiaolinWu final
 	{
@@ -16,6 +17,8 @@ namespace Renderer
 		bool Next();
 		PixelValues GetValues() const;
 		bool IsXMajor() const;
+
+		PixelPair Get() const;
 
 	private:
 		const VertexInterpolator values;

@@ -22,9 +22,6 @@ namespace Renderer
 		void Circle( const Bounds& bounds, const ProcessPixel process ) const;
 
 	private:
-		RasterizedPixel GetPixel( float x, float y, bool xMajor, const PixelValues& values ) const;
-
-	private:
 		Vertex v;
 		const float half;
 		const bool smooth;

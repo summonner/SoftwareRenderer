@@ -24,8 +24,6 @@ namespace Renderer
 		void SmoothThinLine( const Bounds& bounds, const ProcessPixel process ) const;
 		void SmoothWideLine( const Bounds& bounds, const ProcessPixel process ) const;
 
-		static PixelValues AddAlpha( const PixelValues& source, float alpha );
-
 	private:
 		const std::vector<Vertex> vertices;
 		const ShadeModel::ShadeFunc shadeFunc;

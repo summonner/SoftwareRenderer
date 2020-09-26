@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "XiaolinWuCircle.h"
+#include "PixelPair.h"
 
 namespace Renderer
 {
@@ -41,5 +42,36 @@ namespace Renderer
 	bool XiaolinWuCircle::IsXMajor() const
 	{
 		return _p.x >= m;
+	}
+
+	PixelPair XiaolinWuCircle::Get( const Vector2& center ) const
+	{
+		auto y = center.y + p.y;
+		auto yi = (int)y;
+		auto min = center.x - p.x;
+		auto max = center.x + p.x;
+
+		if ( IsXMajor() == false )
+		{
+			auto alpha = y - yi;
+			if ( p.y < 0 )
+			{
+				alpha = 1 - alpha;
+			}
+
+			return
+			{
+				PixelPair::Pixel{ (int)min, yi, alpha },
+				PixelPair::Pixel{ (int)max, yi, alpha }
+			};
+		}
+		else
+		{
+			return
+			{
+				PixelPair::Pixel{ (int)min, yi, 1 - (min - (int)min) },
+				PixelPair::Pixel{ (int)max, yi, max - (int)max },
+			};
+		}
 	}
 }

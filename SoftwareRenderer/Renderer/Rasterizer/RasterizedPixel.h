@@ -30,7 +30,7 @@ namespace Renderer
 
 		const PixelValues& GetRawValues() const;
 
-		static RasterizedPixel AdditionalAlpha( int x, int y, PixelValues values, float alpha );
+		static RasterizedPixel AdditionalAlpha( const Vector2Int& p, PixelValues values, float alpha );
 		const static RasterizedPixel discard;
 
 	public:

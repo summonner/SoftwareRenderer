@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "XiaolinWu.h"
-#include "../PixelValues.h"
+#include "PixelPair.h"
+#include "Renderer/Rasterizer/PixelValues.h"
 
 namespace Renderer
 {
@@ -49,5 +50,29 @@ namespace Renderer
 	bool XiaolinWu::IsXMajor() const
 	{
 		return isXMajor;
+	}
+
+	PixelPair XiaolinWu::Get() const
+	{
+		auto x = (int)p.x;
+		auto y = (int)p.y;
+		if ( isXMajor )
+		{
+			const auto alpha = p.y - (int)p.y;
+			return
+			{
+				PixelPair::Pixel{ x, y, 1 - alpha },
+				PixelPair::Pixel{ x, y + 1, alpha },
+			};
+		}
+		else
+		{
+			const auto alpha = p.x - (int)p.x;
+			return 
+			{
+				PixelPair::Pixel{ x, y, 1 - alpha },
+				PixelPair::Pixel{ x + 1, y, alpha },
+			};
+		}
 	}
 }

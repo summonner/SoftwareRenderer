@@ -210,6 +210,7 @@
     <ClInclude Include="Renderer\Mesh\VertexIterator.h" />
     <ClInclude Include="Renderer\Rasterizer\Algorithm\Bresenham.h" />
     <ClInclude Include="Renderer\Rasterizer\Algorithm\BresenhamList.h" />
+    <ClInclude Include="Renderer\Rasterizer\Algorithm\PixelPair.h" />
     <ClInclude Include="Renderer\Rasterizer\Algorithm\ScanLine.h" />
     <ClInclude Include="Renderer\Rasterizer\Algorithm\VertexInterpolator.h" />
     <ClInclude Include="Renderer\Rasterizer\Algorithm\XiaolinWuCircle.h" />
@@ -348,6 +349,7 @@
     <ClCompile Include="Renderer\Mesh\VertexIterator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Algorithm\Bresenham.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Algorithm\BresenhamList.cpp" />
+    <ClCompile Include="Renderer\Rasterizer\Algorithm\PixelPair.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Algorithm\ScanLine.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Algorithm\VertexInterpolator.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Algorithm\XiaolinWuCircle.cpp" />
