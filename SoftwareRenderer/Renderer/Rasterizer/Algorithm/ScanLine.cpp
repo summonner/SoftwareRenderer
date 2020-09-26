@@ -110,7 +110,7 @@ namespace Renderer
 				continue;
 			}
 
-			const VertexInterpolator values( e1.GetValues(), e2.GetValues(), shadeFunc );
+			const auto values = GetValues();
 			for ( const auto x : bounds.x.Clamp( range ) )
 			{
 				const auto t = (float)(x - range.min) / length;
@@ -132,5 +132,17 @@ namespace Renderer
 	RasterizedPixel Scanline::GetPixel( int x, int y, PixelValues&& values )
 	{
 		return RasterizedPixel( Vector2Int( x, y ), values );
+	}
+
+	VertexInterpolator Scanline::GetValues() const
+	{
+		if ( e1.x <= e2.x )
+		{
+			return VertexInterpolator( e1.GetValues(), e2.GetValues(), shadeFunc );
+		}
+		else
+		{
+			return VertexInterpolator( e2.GetValues(), e1.GetValues(), shadeFunc );
+		}
 	}
 }

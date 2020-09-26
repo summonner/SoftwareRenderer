@@ -24,6 +24,9 @@ namespace Renderer
 		virtual RasterizedPixel GetPixel( int x, int y, PixelValues&& values );
 
 	private:
+		VertexInterpolator GetValues() const;
+
+	private:
 		static std::pair<size_t, size_t> FindMinMax( const std::vector<Vertex>& vertices );
 		static std::vector<const Vertex*> BuildEdge( const std::vector<Vertex>& vertices, const std::pair<size_t, size_t>& minmax, std::function<size_t( size_t, size_t )> Next );
 		static size_t Forward( size_t i, size_t max );
