@@ -104,7 +104,7 @@ namespace Renderer
 		{
 			auto range = Next( y );
 
-			const float length = (float)(range.Length() - 1);
+			const float length = (float)range.Length();
 			if ( length == 0.f )
 			{
 				continue;
