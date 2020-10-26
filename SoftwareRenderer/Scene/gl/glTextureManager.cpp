@@ -56,7 +56,7 @@ std::shared_ptr<ITexture> glTextureManager::SetImage( GLint level, GLint interna
 {
 	if ( auto texture = Get2D(); texture != nullptr )
 	{
-		glImageSource source( width, height, format, type, pixels );
+		glImageSource source( width, height, format, type, pixels, scale );
 		texture->SetImage( source, level < 0 );
 	}
 
@@ -121,7 +121,7 @@ void glTextureManager::SetPixel( const Vector2Int& p, int mipLevel, const Vector
 {
 	if ( auto texture = Get2D(); texture != nullptr )
 	{
-		texture->SetPixel( p, mipLevel, value );
+		texture->SetPixel( p, mipLevel, value * scale );
 	}
 
 }
@@ -142,11 +142,12 @@ const Dictionary<GLenum, int> glTextureManager::formatTable
 	{ GL_RGBA, 4 },
 };
 
-glTextureManager::glImageSource::glImageSource( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels )
+glTextureManager::glImageSource::glImageSource( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels, const Vector4& scale )
 	: IImageSource( width, height )
 	, pixels( (BYTE*)pixels )
 	, format( format )
 	, pixelSize( formatTable[format] )
+	, scale( scale )
 {
 }
 
@@ -157,15 +158,15 @@ Color4 glTextureManager::glImageSource::GetPixel( const Vector2Int& p ) const
 	switch ( format )
 	{
 	case GL_RGB:
-		return Color4(  pixels[i + 0],
-						pixels[i + 1],
-						pixels[i + 2],
+		return Color4(  (BYTE)(pixels[i + 0] * scale.x),
+						(BYTE)(pixels[i + 1] * scale.y),
+						(BYTE)(pixels[i + 2] * scale.z),
 						255 );
 	case GL_RGBA:
-		return Color4(  pixels[i + 0],
-						pixels[i + 1],
-						pixels[i + 2],
-						pixels[i + 3] );
+		return Color4(  (BYTE)(pixels[i + 0] * scale.x),
+						(BYTE)(pixels[i + 1] * scale.y),
+						(BYTE)(pixels[i + 2] * scale.z),
+						(BYTE)(pixels[i + 3] * scale.w) );
 
 	default:
 		assert( "Not implemented yet" && false );

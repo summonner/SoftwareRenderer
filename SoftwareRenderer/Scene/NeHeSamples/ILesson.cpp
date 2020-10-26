@@ -1,11 +1,17 @@
 #include "framework.h"
 #include "ILesson.h"
+#include "../gl/AUX_RGBImageRec.h"
 
 namespace NeHe
 {
 	AUX_RGBImageRec* LoadBMP( LPCSTR filePath )
 	{
 		return auxDIBImageLoad( CA2CT( filePath ) );
+	}
+
+	AUX_RGBImageRec* ILesson::auxDIBImageLoad( LPCSTR filePath )
+	{
+		return ::auxDIBImageLoad( CA2CT( filePath ) );
 	}
 
 	GLvoid ILesson::ReSizeGLScene( GLsizei width, GLsizei height )			// Reshape The Window When It's Moved Or Resized

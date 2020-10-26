@@ -112,7 +112,7 @@ namespace NeHe
 		memset( TextureImage, 0, sizeof( void* ) * 1 );           	// Set The Pointer To NULL
 
 		// Load The Bitmap, Check For Errors, If Bitmap's Not Found Quit
-		if ( TextureImage[0] = auxDIBImageLoad( _T( "Data/NeHe.bmp" ) ) )
+		if ( TextureImage[0] = auxDIBImageLoad( "Data/NeHe.bmp" ) )
 		{
 			Status = TRUE;									// Set The Status To TRUE
 

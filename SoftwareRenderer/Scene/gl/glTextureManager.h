@@ -30,6 +30,7 @@ public:
 	void SetMagFilter( GLint param );
 
 	void SetPixel( const Vector2Int& p, int mipLevel, const Vector4& value );
+	Vector4 scale = Vector4::one;
 
 private:
 	std::shared_ptr<Texture2D> Get2D() const;
@@ -43,13 +44,14 @@ private:
 	class glImageSource final : public IImageSource
 	{
 	public:
-		glImageSource( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels );
+		glImageSource( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels, const Vector4& scale );
 
 		Color4 GetPixel( const Vector2Int& p ) const override;
 
 	private:
-		const BYTE* pixels;
+		const BYTE* const pixels;
 		const GLenum format;
 		const int pixelSize;
+		const Vector4& scale;
 	};
 };

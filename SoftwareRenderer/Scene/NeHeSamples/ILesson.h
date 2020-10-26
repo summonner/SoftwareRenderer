@@ -23,6 +23,8 @@ namespace NeHe
 		{
 			return sscanf_s( buffer, format, args... );
 		}
+
+		AUX_RGBImageRec* auxDIBImageLoad( LPCSTR filePath );
 	};
 
 	AUX_RGBImageRec* LoadBMP( LPCSTR filePath );

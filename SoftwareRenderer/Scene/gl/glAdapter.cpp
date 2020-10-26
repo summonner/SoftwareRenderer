@@ -426,18 +426,33 @@ WINGDIAPI void APIENTRY glGenTextures( GLsizei n, GLuint *textures )
 
 WINGDIAPI void APIENTRY glBindTexture( GLenum target, GLuint texture )
 {
+	if ( target != GL_TEXTURE_2D )
+	{
+		return;
+	}
+
 	auto t = textureManager.Bind( texture );
 	renderer->texture.Bind( t );
 }
 
 WINGDIAPI void APIENTRY glTexImage2D( GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels )
 {
+	if ( target != GL_TEXTURE_2D )
+	{
+		return;
+	}
+
 	auto t = textureManager.SetImage( level, internalformat, width, height, format, type, pixels );
 	renderer->texture.Bind( t );
 }
 
 WINGDIAPI void APIENTRY glTexParameteri( GLenum target, GLenum pname, GLint param )
 {
+	if ( target != GL_TEXTURE_2D )
+	{
+		return;
+	}
+
 	switch ( pname )
 	{
 	case GL_TEXTURE_WRAP_S:
@@ -452,6 +467,32 @@ WINGDIAPI void APIENTRY glTexParameteri( GLenum target, GLenum pname, GLint para
 	case GL_TEXTURE_MIN_FILTER:
 		textureManager.SetMinFilter( param );
 		return;
+	}
+}
+
+WINGDIAPI void APIENTRY glTexParameterfv( GLenum target, GLenum pname, const GLfloat* params )
+{
+	// not Implement
+}
+
+WINGDIAPI void APIENTRY glTexEnvf( GLenum target, GLenum pname, GLfloat param )
+{
+	// not Implement
+}
+
+WINGDIAPI void APIENTRY glPixelTransferf( GLenum pname, GLfloat param )
+{
+	switch ( pname )
+	{
+	case GL_RED_SCALE:
+		textureManager.scale.x = param;
+		break;
+	case GL_GREEN_SCALE:
+		textureManager.scale.y = param;
+		break;
+	case GL_BLUE_SCALE:
+		textureManager.scale.z = param;
+		break;
 	}
 }
 
@@ -762,12 +803,12 @@ WINGDIAPI void APIENTRY glDrawElements( GLenum mode, GLsizei count, GLenum type,
 
 WINGDIAPI void APIENTRY glEnableClientState( GLenum array )
 {
-
+	// TODO
 }
 
 WINGDIAPI void APIENTRY glDisableClientState( GLenum array ) 
 {
-
+	// TODO
 }
 
 WINGDIAPI void APIENTRY glOrtho( GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar )
@@ -855,6 +896,17 @@ WINGDIAPI void APIENTRY glFogi( GLenum pname, GLint param )
 	case GL_FOG_MODE:
 		const auto mode = fogManager.SetMode( param );
 		renderer->fog.SetMode( mode );
+		break;
+	}
+}
+
+WINGDIAPI void APIENTRY glGetFloatv( GLenum pname, GLfloat* params )
+{
+	switch ( pname )
+	{
+	case GL_MODELVIEW_MATRIX:
+		const auto modelView = ((Matrix4x4)renderer->modelView).Transpose();
+		memcpy( params, &modelView, sizeof( float ) * 16 );
 		break;
 	}
 }
