@@ -26,7 +26,8 @@ void SceneMenu::CheckMenuItem( HWND hWnd, UINT resourceId )
 {
     const auto hMenu = GetMenu( hWnd );
     const auto hScene = GetSubMenu( hMenu, 2 );
-    const auto hNeHe = GetSubMenu( hScene, 1 );
+    const auto nehePos = GetMenuItemCount( hScene ) - 1;
+    const auto hNeHe = GetSubMenu( hScene, nehePos );
 
     const auto first = SceneFactory::sceneRange.first;
     const auto last = SceneFactory::sceneRange.second;
