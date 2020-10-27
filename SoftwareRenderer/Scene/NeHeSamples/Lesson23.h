@@ -14,6 +14,7 @@ namespace NeHe
 		int InitGL( GLvoid ) override;
 		GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) override;
 		int CleanGL( GLvoid ) override;
+		const char* GetDescription() const override;
 
 	private:
 		int LoadGLTextures();

@@ -13,7 +13,6 @@ namespace NeHe
 		, part1( 0 )
 		, part2( 0 )
 		, quadratic( nullptr )
-		, object( 0 )
 		, light( false )
 		, lp( false )
 		, fp( false )
@@ -295,5 +294,14 @@ namespace NeHe
 	{
 		gluDeleteQuadric( quadratic );
 		return TRUE;
+	}
+
+	const char* Lesson23::GetDescription() const
+	{
+		return "L - Toggle light\n\
+				F - Change Texture Filter\n\
+				Space - Change Shape\n\
+				PgUp/Dn - Zoom\n\
+				Arrows - Rotate";
 	}
 }
