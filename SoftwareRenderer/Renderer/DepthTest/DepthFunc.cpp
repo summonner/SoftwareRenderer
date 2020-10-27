@@ -46,12 +46,12 @@ namespace Renderer
 
 	bool DepthFunc::Equal( const float incoming, const float stored )
 	{
-		return incoming == stored;
+		return abs( incoming - stored ) <= FLT_EPSILON;
 	}
 
 	bool DepthFunc::LEqual( const float incoming, const float stored )
 	{
-		return incoming <= stored;
+		return incoming - stored <= FLT_EPSILON;
 	}
 
 	bool DepthFunc::Greater( const float incoming, const float stored )
@@ -61,12 +61,12 @@ namespace Renderer
 
 	bool DepthFunc::NotEqual( const float incoming, const float stored )
 	{
-		return incoming != stored;
+		return abs( incoming - stored ) > FLT_EPSILON;
 	}
 
 	bool DepthFunc::GEqual( const float incoming, const float stored )
 	{
-		return incoming >= stored;
+		return incoming - stored >= -FLT_EPSILON;
 	}
 
 	bool DepthFunc::Always( const float incoming, const float stored )
