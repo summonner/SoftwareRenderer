@@ -2,6 +2,7 @@
 #include "StencilBuffer.h"
 #include "Math/Bounds.h"
 #include "Renderer/Rasterizer/RasterizedPixel.h"
+#include "Util/PixelIterator.h"
 
 namespace Renderer
 {
@@ -30,15 +31,23 @@ namespace Renderer
 
 	void StencilBuffer::Clear()
 	{
-		const auto start = pixels.get();
-		const auto end = start + width * height;
-		std::fill( start, end, clearValue );
-		invalidate = false;
+		invalidate = true;
 	}
 
 	void StencilBuffer::Clear( const Bounds& bounds )
 	{
-		invalidate = true;
+		if ( invalidate == false )
+		{
+			return;
+		}
+
+		for ( auto p : bounds )
+		{
+			const auto i = p.x + p.y * width;
+			pixels[i] = clearValue;
+		}
+
+		invalidate = false;
 	}
 
 	void StencilBuffer::SetClearValue( StencilValue value )

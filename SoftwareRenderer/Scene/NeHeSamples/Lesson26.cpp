@@ -210,4 +210,11 @@ namespace NeHe
 		gluDeleteQuadric( q );
 		return TRUE;
 	}
+
+	const char* Lesson26::GetDescription() const
+	{
+		return "Arrows - Rotate\n\
+				A/Z - Zoom\n\
+				PgUp/Dn - Move Up/Down";
+	}
 }
