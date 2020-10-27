@@ -9,6 +9,7 @@ namespace Renderer
 		Material();
 		~Material();
 
+		void Reset();
 		void SetShininess( float shininess );
 		float GetShininess() const;
 

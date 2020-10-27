@@ -27,6 +27,9 @@ namespace Renderer
 		localViewer = false;
 		singleColor = true;
 		twoSide = false;
+
+		front = Material();
+		back = Material();
 	}
 
 	void LightingComponent::SetGlobalAmbient( const Vector4& ambient )

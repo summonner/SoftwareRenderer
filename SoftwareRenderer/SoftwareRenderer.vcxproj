@@ -260,6 +260,7 @@
     <ClInclude Include="Scene\gl\GLUquadric.h" />
     <ClInclude Include="Scene\gl\ICommandBuffer.h" />
     <ClInclude Include="Scene\IScene.h" />
+    <ClInclude Include="Scene\NeHeSamples\3Dobject.h" />
     <ClInclude Include="Scene\NeHeSamples\ILesson.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson10.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson11.h" />
@@ -276,6 +277,7 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson24.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson25.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson26.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson27.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson3.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson36.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson4.h" />
@@ -409,6 +411,7 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson24.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson25.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson26.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson27.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson3.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson36.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson4.cpp" />

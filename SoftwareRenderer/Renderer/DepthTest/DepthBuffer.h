@@ -17,6 +17,7 @@ namespace Renderer
 		void Clear( const Bounds& bounds );
 		void SetClearValue( const float value ) override;
 		void SetDepthFunc( const DepthFunc::Type type ) override;
+		void SetWrite( bool enable ) override;
 
 		bool Test( const RasterizedPixel& p ) const;
 
@@ -31,5 +32,6 @@ namespace Renderer
 		bool invalidate;
 
 		DepthFunc depthFunc;
+		bool write;
 	};
 }

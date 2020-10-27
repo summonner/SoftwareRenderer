@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "glLightManager.h"
 #include "Renderer/Lighting/Light.h"
+#include "Renderer/Matrix.h"
 using namespace Renderer;
 
 glLightManager::glLightManager()
@@ -14,7 +15,7 @@ glLightManager::~glLightManager()
 {
 }
 
-void glLightManager::Set( GLenum light, GLenum pname, const GLfloat* params )
+void glLightManager::Set( GLenum light, GLenum pname, const GLfloat* params, const Renderer::Matrix& modelView )
 {
 	const auto i = AsIndex( light );
 	if ( lights[i] == nullptr )
@@ -34,10 +35,10 @@ void glLightManager::Set( GLenum light, GLenum pname, const GLfloat* params )
 		lights[i]->specular = AsVector4( params );
 		break;
 	case GL_POSITION:
-		lights[i]->position = AsVector4( params );
+		lights[i]->position = modelView * AsVector4( params );
 		break;
 	case GL_SPOT_DIRECTION:
-		lights[i]->direction = AsVector3( params );
+		lights[i]->direction = modelView * Vector4( AsVector3( params ), 0.f );
 		break;
 	case GL_SPOT_EXPONENT:
 		lights[i]->exponent = AsFloat( params );

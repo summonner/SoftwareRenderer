@@ -19,6 +19,7 @@ namespace Renderer
 		, pixels( new float[width * height] )
 		, clearValue( 1.f )
 		, invalidate( false )
+		, write( true )
 	{
 	}
 
@@ -64,6 +65,11 @@ namespace Renderer
 		depthFunc = type;
 	}
 
+	void DepthBuffer::SetWrite( bool enable )
+	{
+		write = enable;
+	}
+
 	bool DepthBuffer::Test( const RasterizedPixel& p ) const
 	{
 		if ( enabled == false )
@@ -79,7 +85,10 @@ namespace Renderer
 		auto p = coordinate.y * width + coordinate.x;
 		if ( depthFunc( depth, pixels[p] ) )
 		{
-			pixels[p] = depth;
+			if ( write == true )
+			{
+				pixels[p] = depth;
+			}
 			return true;
 		}
 		else

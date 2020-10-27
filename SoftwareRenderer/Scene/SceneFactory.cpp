@@ -39,6 +39,7 @@ const Dictionary<UINT, SceneFactory::CreateFunc> SceneFactory::table(
 	NEHE( 24 ),
 	NEHE( 25 ),
 	NEHE( 26 ),
+	NEHE( 27 ),
 	NEHE( 36 ),
 	NEHE( 45 ),
 }, ReturnNullPtr );

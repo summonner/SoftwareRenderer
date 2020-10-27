@@ -12,5 +12,6 @@ namespace Renderer
 		virtual void Clear() abstract;
 		virtual void SetClearValue( const float value ) abstract;
 		virtual void SetDepthFunc( const DepthFunc::Type type ) abstract;
+		virtual void SetWrite( bool enable ) abstract;
 	};
 }

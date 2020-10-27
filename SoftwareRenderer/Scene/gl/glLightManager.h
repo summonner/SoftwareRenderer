@@ -4,6 +4,7 @@
 namespace Renderer
 {
 	class Light;
+	class Matrix;
 }
 
 class glLightManager final
@@ -12,7 +13,7 @@ public:
 	glLightManager();
 	~glLightManager();
 
-	void Set( GLenum light, GLenum pname, const GLfloat* params );
+	void Set( GLenum light, GLenum pname, const GLfloat* params, const Renderer::Matrix& modelView );
 	std::shared_ptr<const Renderer::Light> Get( GLenum light ) const;
 
 private:

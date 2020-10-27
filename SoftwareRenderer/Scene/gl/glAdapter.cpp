@@ -176,6 +176,11 @@ WINGDIAPI void APIENTRY glDepthFunc( GLenum func )
 	renderer->GetDepthBuffer().SetDepthFunc( table[func] );
 }
 
+WINGDIAPI void APIENTRY glDepthMask( GLboolean flag )
+{
+	renderer->GetDepthBuffer().SetWrite( flag == GL_TRUE );
+}
+
 WINGDIAPI void APIENTRY glClearStencil( GLint s )
 {
 	renderer->GetStencilBuffer().SetClearValue( s );
@@ -669,7 +674,7 @@ WINGDIAPI void APIENTRY glLightModelfv( GLenum pname, const GLfloat* params )
 
 WINGDIAPI void APIENTRY glLightfv( GLenum light, GLenum pname, const GLfloat *params )
 {
-	lightManager.Set( light, pname, params );
+	lightManager.Set( light, pname, params, renderer->modelView );
 }
 
 WINGDIAPI void APIENTRY glColorMaterial( GLenum face, GLenum mode )
