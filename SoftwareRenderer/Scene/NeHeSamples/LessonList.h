@@ -19,7 +19,7 @@
 #include "Lesson22.h"
 #include "Lesson23.h"
 #include "Lesson24.h"
-
+#include "Lesson25.h"
 #include "Lesson26.h"
 #include "Lesson36.h"
 

@@ -274,6 +274,7 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson22.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson23.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson24.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson25.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson26.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson3.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson36.h" />
@@ -406,6 +407,7 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson22.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson23.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson24.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson25.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson26.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson3.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson36.cpp" />
