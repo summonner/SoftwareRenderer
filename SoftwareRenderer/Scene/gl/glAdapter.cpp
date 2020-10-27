@@ -109,6 +109,10 @@ void glEnable( GLenum cap, bool enable )
 	case GL_LINE_SMOOTH:
 		Renderer::LineGenerator::SetSmooth( enable );
 		break;
+
+	case GL_SCISSOR_TEST:
+		renderer->viewport.scissor.SetEnable( enable );
+		break;
 	}
 }
 
@@ -241,6 +245,11 @@ WINGDIAPI void APIENTRY glMatrixMode( GLenum mode )
 WINGDIAPI void APIENTRY glViewport( GLint x, GLint y, GLsizei width, GLsizei height )
 {
 	renderer->viewport.Set( x, y, width, height );
+}
+
+WINGDIAPI void APIENTRY glScissor( GLint x, GLint y, GLsizei width, GLsizei height )
+{
+	renderer->viewport.scissor.Set( x, y, width, height );
 }
 
 WINGDIAPI void APIENTRY glLoadIdentity( void )
@@ -468,6 +477,11 @@ WINGDIAPI void APIENTRY glTexParameteri( GLenum target, GLenum pname, GLint para
 		textureManager.SetMinFilter( param );
 		return;
 	}
+}
+
+WINGDIAPI void APIENTRY glTexParameterf( GLenum target, GLenum pname, GLfloat param )
+{
+	glTexParameteri( target, pname, (GLint)param );
 }
 
 WINGDIAPI void APIENTRY glTexParameterfv( GLenum target, GLenum pname, const GLfloat* params )
@@ -909,6 +923,29 @@ WINGDIAPI void APIENTRY glGetFloatv( GLenum pname, GLfloat* params )
 		memcpy( params, &modelView, sizeof( float ) * 16 );
 		break;
 	}
+}
+
+WINGDIAPI const GLubyte* APIENTRY glGetString( GLenum name )
+{
+	static const auto rendererText = "Software Renderer";
+	static const auto versionText = "1.0";
+	static const auto vendorText = "Dark Summoner";
+	static const auto extensionText = "Up/Down - Scroll Texts 1 2 3 4 5 6 7 8 9 10";
+	switch ( name )
+	{
+	case GL_RENDERER:
+		return (const GLubyte*)rendererText;
+	case GL_VERSION:
+		return (const GLubyte*)versionText;
+	case GL_VENDOR:
+		return (const GLubyte*)vendorText;
+	case GL_EXTENSIONS:
+		return (const GLubyte*)extensionText;
+
+	default:
+		return nullptr;
+	}
+
 }
 
 int APIENTRY gluBuild2DMipmaps(

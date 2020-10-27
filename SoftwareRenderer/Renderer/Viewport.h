@@ -1,5 +1,6 @@
 #pragma once
 #include "Math/Bounds.h"
+#include "ScissorBox.h"
 
 class Matrix4x4;
 namespace Renderer
@@ -11,12 +12,13 @@ namespace Renderer
 		~Viewport();
 
 		void Set( int left, int bottom, int width, int height );
-		Bounds Get() const;
+		void Scissor( int left, int bottom, int width, int height );
+		Bounds GetBounds() const;
 		void Reset();
 
 		operator Matrix4x4() const;
-		operator Bounds() const;
 
+		ScissorBox scissor;
 	private:
 		Bounds bounds;
 		const Bounds max;

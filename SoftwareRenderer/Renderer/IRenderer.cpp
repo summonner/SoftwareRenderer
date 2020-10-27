@@ -30,8 +30,10 @@ void IRenderer::Draw( const Mesh& mesh )
 			return ProcessVertex( v ); 
 		} );
 
-	backBuffer->Clear( viewport );
-	depthBuffer.Clear( viewport );
+	auto bounds = viewport.GetBounds();
+	backBuffer->Clear( bounds );
+	depthBuffer.Clear( bounds );
+	stencilBuffer.Clear( bounds );
 
 	generator.Begin( mesh.drawMode );
 	auto geometries = generator.Generate( vertices );
@@ -51,7 +53,7 @@ void IRenderer::Draw( const Mesh& mesh )
 
 		const auto mode = polygonMode.Get( facet == CullFaceComponent::Result::Front );
 		const auto derivatives = rasterizer->Derivative( texture.IsEnable() );
-		rasterizer->Rasterize( backBuffer->GetBounds(), mode, [&]( const RasterizedPixel& p )
+		rasterizer->Rasterize( bounds, mode, [&]( const RasterizedPixel& p )
 		{
 			auto depthTest = [this, p]() { return depthBuffer.Test( p ); };
 			if ( stencilBuffer.Test( p, depthTest ) == false )

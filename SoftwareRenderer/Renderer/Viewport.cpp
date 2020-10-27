@@ -6,6 +6,7 @@ namespace Renderer
 {
 	Viewport::Viewport( const Bounds& max )
 		: bounds( max )
+		, scissor( max )
 		, max( max )
 	{
 	}
@@ -41,8 +42,15 @@ namespace Renderer
 		);
 	}
 
-	Viewport::operator Bounds() const
+	Bounds Viewport::GetBounds() const
 	{
-		return bounds;
+		if ( scissor.IsEnable() == true )
+		{
+			return scissor.Clamp( bounds );
+		}
+		else
+		{
+			return bounds;
+		}
 	}
 }

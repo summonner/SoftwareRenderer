@@ -225,6 +225,7 @@
     <ClInclude Include="Renderer\Rasterizer\ShadeModel.h" />
     <ClInclude Include="Renderer\Rasterizer\Algorithm\XiaolinWu.h" />
     <ClInclude Include="Renderer\Rasterizer\Algorithm\SmoothScanLine.h" />
+    <ClInclude Include="Renderer\ScissorBox.h" />
     <ClInclude Include="Renderer\StencilTest\IStencilBufferController.h" />
     <ClInclude Include="Renderer\StencilTest\StencilValue.h" />
     <ClInclude Include="Renderer\StencilTest\StencilBuffer.h" />
@@ -272,6 +273,7 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson21.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson22.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson23.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson24.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson26.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson3.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson36.h" />
@@ -363,6 +365,7 @@
     <ClCompile Include="Renderer\Rasterizer\ShadeModel.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Algorithm\XiaolinWu.cpp" />
     <ClCompile Include="Renderer\Rasterizer\Algorithm\SmoothScanLine.cpp" />
+    <ClCompile Include="Renderer\ScissorBox.cpp" />
     <ClCompile Include="Renderer\StencilTest\StencilBuffer.cpp" />
     <ClCompile Include="Renderer\StencilTest\StencilFunc.cpp" />
     <ClCompile Include="Renderer\StencilTest\StencilOp.cpp" />
@@ -402,6 +405,7 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson21.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson22.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson23.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson24.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson26.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson3.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson36.cpp" />
