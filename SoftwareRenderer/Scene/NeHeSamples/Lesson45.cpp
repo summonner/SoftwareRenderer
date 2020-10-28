@@ -138,7 +138,7 @@ namespace NeHe
 		return TRUE;
 	}
 
-	void Lesson45::Update( DWORD milliseconds, const bool keys[] )	// Perform Motion Updates Here
+	void Lesson45::Update( DWORD milliseconds, bool keys[] )	// Perform Motion Updates Here
 	{
 		g_flYRot += (float)(milliseconds) / 1000.0f * 25.0f;		// Consistantly Rotate The Scenery
 	}

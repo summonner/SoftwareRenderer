@@ -184,7 +184,7 @@ namespace NeHe
 		return TRUE;											// Everything Went OK
 	}
 
-	void Lesson19::Update( DWORD milliseconds, const bool keys[] )
+	void Lesson19::Update( DWORD milliseconds, bool keys[] )
 	{
 		if ( keys[VK_ADD] && (slowdown > 1.0f) ) slowdown -= 0.01f;		// Speed Up Particles
 		if ( keys[VK_SUBTRACT] && (slowdown < 4.0f) ) slowdown += 0.01f;	// Slow Down Particles

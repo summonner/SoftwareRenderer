@@ -190,7 +190,7 @@ namespace NeHe
 		return TRUE;										// Everything Went OK
 	}
 
-	void Lesson26::Update( DWORD milliseconds, const bool keys[] )							// Process Keyboard Results
+	void Lesson26::Update( DWORD milliseconds, bool keys[] )							// Process Keyboard Results
 	{
 		if ( keys[VK_RIGHT] )		yrotspeed += 0.08f;			// Right Arrow Pressed (Increase yrotspeed)
 		if ( keys[VK_LEFT] )		yrotspeed -= 0.08f;			// Left Arrow Pressed (Decrease yrotspeed)

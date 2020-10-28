@@ -267,7 +267,7 @@ namespace NeHe
 		return TRUE;
 	}
 
-	void Lesson24::Update( DWORD milliseconds, const bool keys[] ) 
+	void Lesson24::Update( DWORD milliseconds, bool keys[] ) 
 	{
 		if ( keys[VK_UP] && (scroll > 0) )					// Is Up Arrow Being Pressed?
 		{

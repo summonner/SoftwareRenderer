@@ -387,6 +387,11 @@ WINGDIAPI void APIENTRY glVertex3f( GLfloat x, GLfloat y, GLfloat z )
 	commandBuffer->Push( command );
 }
 
+WINGDIAPI void APIENTRY glVertex3d( GLdouble x, GLdouble y, GLdouble z )
+{
+	glVertex3f( (GLfloat)x, (GLfloat)y, (GLfloat)z );
+}
+
 WINGDIAPI void APIENTRY glTexCoord2f( GLfloat s, GLfloat t )
 {
 	auto command = [s, t]( glBridge* adapter )

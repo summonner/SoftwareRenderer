@@ -9,7 +9,7 @@ namespace NeHe
 		Lesson18();
 		~Lesson18() override;
 
-		void Update( DWORD milliseconds, const bool keys[] ) override;
+		void Update( DWORD milliseconds, bool keys[] ) override;
 		const char* GetDescription() const override;
 
 		int DrawGLScene( GLvoid ) override;

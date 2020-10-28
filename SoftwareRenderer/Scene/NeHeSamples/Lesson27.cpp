@@ -203,7 +203,7 @@ namespace NeHe
 		return TRUE;										// Everything Went OK
 	}
 
-	void Lesson27::Update( DWORD milliseconds, const bool keys[] )	// Process Key Presses
+	void Lesson27::Update( DWORD milliseconds, bool keys[] )	// Process Key Presses
 	{
 		// Spin Object
 		if ( keys[VK_LEFT] )	yspeed -= 0.1f;					// 'Arrow Left' Decrease yspeed

@@ -14,7 +14,7 @@ namespace NeHe
 		GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) override;
 		int CleanGL( GLvoid ) override;
 
-		void Update( DWORD milliseconds, const bool keys[] ) override;
+		void Update( DWORD milliseconds, bool keys[] ) override;
 		const char* GetDescription() const override;
 
 	private:

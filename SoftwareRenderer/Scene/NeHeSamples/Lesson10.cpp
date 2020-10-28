@@ -197,7 +197,7 @@ namespace NeHe
 	}
 
 
-	void Lesson10::Update( DWORD milliseconds, const bool keys[] )
+	void Lesson10::Update( DWORD milliseconds, bool keys[] )
 	{
 		if ( keys['B'] && !bp )
 		{

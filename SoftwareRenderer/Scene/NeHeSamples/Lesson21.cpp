@@ -402,7 +402,7 @@ namespace NeHe
 	}
 
 	
-	void Lesson21::Update( DWORD milliseconds, const bool keys[] )													// If There Are No Messages
+	void Lesson21::Update( DWORD milliseconds, bool keys[] )													// If There Are No Messages
 	{
 		float start = TimerGetTime();							// Grab Timer Value Before We Draw
 

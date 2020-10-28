@@ -221,7 +221,7 @@ namespace NeHe
 		return TRUE;										// Keep Going
 	}
 
-	void Lesson23::Update( DWORD milliseconds, const bool keys[] )
+	void Lesson23::Update( DWORD milliseconds, bool keys[] )
 	{
 		if ( keys['L'] && !lp )
 		{

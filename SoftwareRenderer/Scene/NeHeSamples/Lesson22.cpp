@@ -817,7 +817,7 @@ PFNGLCLIENTACTIVETEXTUREARBPROC	glClientActiveTextureARB= NULL;
 		else return doMeshNoBumps();
 	}
 
-	void Lesson22::Update( DWORD milliseconds, const bool keys[] )
+	void Lesson22::Update( DWORD milliseconds, bool keys[] )
 	{
 		if (keys['E'] && !ep)
 		{

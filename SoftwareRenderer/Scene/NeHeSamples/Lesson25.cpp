@@ -182,7 +182,7 @@ namespace NeHe
 		return TRUE;
 	}
 
-	void Lesson25::Update( DWORD milliseconds, const bool keys[] )
+	void Lesson25::Update( DWORD milliseconds, bool keys[] )
 	{
 		if ( keys[VK_PRIOR] )								// Is Page Up Being Pressed?
 			zspeed += 0.01f;								// Increase zspeed

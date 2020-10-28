@@ -12,6 +12,6 @@ namespace NeHe
 		int CleanGL( GLvoid ) override;
 		int DrawGLScene( GLvoid ) override;
 		int InitGL( GLvoid ) override;
-		void Update( DWORD milliseconds, const bool keys[] ) override;
+		void Update( DWORD milliseconds, bool keys[] ) override;
 	};
 }

@@ -164,7 +164,7 @@ namespace NeHe
 		return TRUE;										// Everything Went OK
 	}
 
-	void Lesson20::Update( DWORD milliseconds, const bool keys[] )
+	void Lesson20::Update( DWORD milliseconds, bool keys[] )
 	{
 		if ( keys[' '] && !sp )				// Is Space Being Pressed?
 		{

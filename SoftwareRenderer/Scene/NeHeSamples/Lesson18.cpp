@@ -25,7 +25,7 @@ namespace NeHe
 	{
 	}
 
-	void Lesson18::Update( DWORD milliseconds, const bool keys[] )
+	void Lesson18::Update( DWORD milliseconds, bool keys[] )
 	{
 		if ( keys['L'] && !lp )
 		{

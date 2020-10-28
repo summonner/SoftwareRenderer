@@ -12,7 +12,7 @@ namespace NeHe
 		int DrawGLScene( GLvoid ) override;
 		int InitGL( GLvoid ) override;
 		GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) override;
-		void Update( DWORD milliseconds, const bool keys[] ) override;
+		void Update( DWORD milliseconds, bool keys[] ) override;
 		const char* GetDescription() const override;
 
 	private:

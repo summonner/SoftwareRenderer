@@ -308,7 +308,7 @@ namespace NeHe
 		return TRUE;
 	}
 
-	void Lesson36::Update( DWORD milliseconds, const bool keys[] )								// Perform Motion Updates Here
+	void Lesson36::Update( DWORD milliseconds, bool keys[] )								// Perform Motion Updates Here
 	{
 		angle += (float)(milliseconds) / 5.0f;						// Update angle Based On The Clock
 	}

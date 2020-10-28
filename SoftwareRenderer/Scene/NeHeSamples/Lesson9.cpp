@@ -144,7 +144,7 @@ namespace NeHe
 		return TRUE;										// Everything Went OK
 	}
 
-	void Lesson9::Update( DWORD milliseconds, const bool keys[] )
+	void Lesson9::Update( DWORD milliseconds, bool keys[] )
 	{
 		if ( keys['T'] && !tp )
 		{

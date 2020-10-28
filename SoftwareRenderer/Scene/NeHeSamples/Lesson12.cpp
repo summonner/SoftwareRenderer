@@ -182,7 +182,7 @@ namespace NeHe
 		return TRUE;
 	}
 
-	void Lesson12::Update( DWORD milliseconds, const bool keys[] )
+	void Lesson12::Update( DWORD milliseconds, bool keys[] )
 	{
 		if ( keys[VK_LEFT] )
 		{
