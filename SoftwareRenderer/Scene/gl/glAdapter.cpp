@@ -113,6 +113,10 @@ void glEnable( GLenum cap, bool enable )
 	case GL_SCISSOR_TEST:
 		renderer->viewport.scissor.SetEnable( enable );
 		break;
+
+	default:
+		assert( false );
+		break;
 	}
 }
 
@@ -124,6 +128,19 @@ WINGDIAPI void APIENTRY glEnable( GLenum cap )
 WINGDIAPI void APIENTRY glDisable( GLenum cap )
 {
 	glEnable( cap, false );
+}
+
+WINGDIAPI GLboolean APIENTRY glIsEnabled( GLenum cap )
+{
+	switch ( cap )
+	{
+	case GL_TEXTURE_2D:
+		return renderer->texture.IsEnable();
+
+	default:
+		assert( false );
+		return false;
+	}
 }
 
 WINGDIAPI void APIENTRY glClear( GLbitfield mask )
@@ -392,6 +409,11 @@ WINGDIAPI void APIENTRY glVertex3d( GLdouble x, GLdouble y, GLdouble z )
 	glVertex3f( (GLfloat)x, (GLfloat)y, (GLfloat)z );
 }
 
+WINGDIAPI void APIENTRY glVertex3fv( const GLfloat* v )
+{
+	glVertex3f( v[0], v[1], v[2] );
+}
+
 WINGDIAPI void APIENTRY glTexCoord2f( GLfloat s, GLfloat t )
 {
 	auto command = [s, t]( glBridge* adapter )
@@ -415,6 +437,11 @@ WINGDIAPI void APIENTRY glNormal3f( GLfloat nx, GLfloat ny, GLfloat nz )
 	};
 
 	commandBuffer->Push( command );
+}
+
+WINGDIAPI void APIENTRY glNormal3fv( const GLfloat* v )
+{
+	glNormal3f( v[0], v[1], v[2] );
 }
 
 WINGDIAPI void APIENTRY glFlush( void )
@@ -447,6 +474,7 @@ WINGDIAPI void APIENTRY glBindTexture( GLenum target, GLuint texture )
 {
 	if ( target != GL_TEXTURE_2D )
 	{
+		assert( false );
 		return;
 	}
 
@@ -458,6 +486,7 @@ WINGDIAPI void APIENTRY glTexImage2D( GLenum target, GLint level, GLint internal
 {
 	if ( target != GL_TEXTURE_2D )
 	{
+		assert( false );
 		return;
 	}
 
@@ -469,6 +498,7 @@ WINGDIAPI void APIENTRY glTexParameteri( GLenum target, GLenum pname, GLint para
 {
 	if ( target != GL_TEXTURE_2D )
 	{
+		assert( false );
 		return;
 	}
 
@@ -564,6 +594,7 @@ WINGDIAPI void APIENTRY glTexGeni( GLenum coord, GLenum pname, GLint param )
 {
 	if ( pname != GL_TEXTURE_GEN_MODE )
 	{
+		assert( false );
 		return;
 	}
 
@@ -736,6 +767,16 @@ Renderer::Material& GetMaterial( GLenum face )
 		return renderer->lighting.front;
 	}
 }
+WINGDIAPI void APIENTRY glMaterialf( GLenum face, GLenum pname, GLfloat param )
+{
+	if ( pname != GL_SHININESS )
+	{
+		assert( false );
+		return;
+	}
+
+	glMaterialfv( face, pname, &param );
+}
 
 WINGDIAPI void APIENTRY glMaterialfv( GLenum face, GLenum pname, const GLfloat* params )
 {
@@ -786,6 +827,7 @@ WINGDIAPI void APIENTRY glMateriali( GLenum face, GLenum pname, GLint param )
 {
 	if ( pname != GL_SHININESS )
 	{
+		assert( false );
 		return;
 	}
 

@@ -287,6 +287,9 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson30\Tmatrix.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson30\Tray.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson30\Tvector.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson31\Lesson31.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson31\MilkshapeModel.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson31\Model.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson36.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson4.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson45.h" />
@@ -428,6 +431,9 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson30\Tmatrix.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson30\Tray.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson30\Tvector.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson31\Lesson31.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson31\MilkshapeModel.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson31\Model.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson36.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson4.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp" />
