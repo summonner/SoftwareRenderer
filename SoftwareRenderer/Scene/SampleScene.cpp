@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "SampleScene.h"
 #include "gl/glAdapter.h"
-#include "Time.h"
+#include "Timer.h"
 #include "Util/Bitmap.h"
 #include "Renderer/Texturing/Texture2D.h"
 #include "Renderer/Texturing/TextureComponent.h"
@@ -57,7 +57,7 @@ void SampleScene::OnResize( const std::shared_ptr<IRenderer> renderer, const int
 }
 
 float x = 0;
-void SampleScene::Update( const Time& time )
+void SampleScene::Update( const Timer& time )
 {
 	auto t = time.GetTimeFromStart();
 //	t = .152f;

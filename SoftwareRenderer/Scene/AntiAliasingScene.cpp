@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "AntiAliasingScene.h"
 #include "Renderer/IRenderer.h"
-#include "Time.h"
+#include "Timer.h"
 #include "Renderer/Generators/PointGenerator.h"
 #include "Renderer/Generators/LineGenerator.h"
 #include "Scene/UI/CommentUI.h"
@@ -33,7 +33,7 @@ void AntiAliasingScene::OnResize( const std::shared_ptr<IRenderer> renderer, con
 	renderer->projection.Perspective( 45.f, (float)width / (float)height, 0.1f, 100.f );
 }
 
-void AntiAliasingScene::Update( const Time& time )
+void AntiAliasingScene::Update( const Timer& time )
 {
 	t = time.GetTimeFromStart() * 0.1f;
 }

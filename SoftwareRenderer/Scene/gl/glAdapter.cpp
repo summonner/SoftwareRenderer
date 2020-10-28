@@ -971,9 +971,33 @@ WINGDIAPI void APIENTRY glGetFloatv( GLenum pname, GLfloat* params )
 	switch ( pname )
 	{
 	case GL_MODELVIEW_MATRIX:
+	{
 		const auto modelView = ((Matrix4x4)renderer->modelView).Transpose();
 		memcpy( params, &modelView, sizeof( float ) * 16 );
 		break;
+	}
+
+	default:
+		assert( false );
+	}
+}
+
+WINGDIAPI void APIENTRY glGetIntegerv( GLenum pname, GLint* params )
+{
+	switch ( pname )
+	{
+	case GL_VIEWPORT:
+	{
+		const auto viewport = renderer->viewport.GetBounds();
+		params[0] = viewport.x.min;
+		params[1] = viewport.y.min;
+		params[2] = viewport.x.Length();
+		params[3] = viewport.y.Length();
+		break;
+	}
+
+	default:
+		assert( false );
 	}
 }
 
@@ -998,6 +1022,54 @@ WINGDIAPI const GLubyte* APIENTRY glGetString( GLenum name )
 		return nullptr;
 	}
 
+}
+
+WINGDIAPI GLint APIENTRY glRenderMode( GLenum mode )
+{
+	switch ( mode )
+	{
+	case GL_RENDER:
+		return 0;
+
+	case GL_SELECT:
+		return 0;
+
+	default:
+		assert( false );
+		return 0;
+	}
+}
+
+WINGDIAPI void APIENTRY glSelectBuffer( GLsizei size, GLuint* buffer )
+{
+}
+
+WINGDIAPI void APIENTRY glInitNames( void )
+{
+}
+
+WINGDIAPI void APIENTRY glPushName( GLuint name )
+{
+}
+
+WINGDIAPI void APIENTRY glLoadName( GLuint name )
+{
+}
+
+void APIENTRY gluPickMatrix(
+	GLdouble x,
+	GLdouble y,
+	GLdouble width,
+	GLdouble height,
+	GLint    viewport[4] )
+{
+	if ( width <= 0 || height <= 0 )
+	{
+		return;
+	}
+
+	glTranslatef( (GLfloat)((viewport[2] - 2 * (x - viewport[0])) / width), (GLfloat)((viewport[3] - 2 * (y - viewport[1])) / height), 0.f );
+	glScalef( (GLfloat)(viewport[2] / width), (GLfloat)(viewport[3] / height), 1.0f );
 }
 
 int APIENTRY gluBuild2DMipmaps(

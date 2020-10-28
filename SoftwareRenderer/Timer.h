@@ -1,10 +1,10 @@
 #pragma once
 
-class Time final
+class Timer final
 {
 public:
-	Time();
-	~Time();
+	Timer();
+	~Timer();
 
 	void Tick();
 

@@ -2,7 +2,7 @@
 #include "NeHeSample.h"
 #include "ILesson.h"
 #include "../gl/glAdapter.h"
-#include "Time.h"
+#include "Timer.h"
 #include "Scene/UI/CommentUI.h"
 
 NeHeSample::NeHeSample( std::unique_ptr<NeHe::ILesson> lesson )
@@ -29,7 +29,7 @@ void NeHeSample::OnResize( const std::shared_ptr<IRenderer> renderer, const int 
 	adapter->Use( [&]() { lesson->ReSizeGLScene( width, height ); } );
 }
 
-void NeHeSample::Update( const Time& time )
+void NeHeSample::Update( const Timer& time )
 {
 	adapter->Use( [&]() { lesson->Update( (DWORD)(time.GetDeltaTime() * 1000), keys ); } );
 }

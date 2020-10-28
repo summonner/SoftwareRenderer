@@ -1,28 +1,28 @@
 #include "framework.h"
-#include "Time.h"
+#include "Timer.h"
 
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 
-Time::Time()
+Timer::Timer()
 	: startTime( GetCurrentSeconds() )
 {
 	Tick();
 }
 
 
-Time::~Time()
+Timer::~Timer()
 {
 }
 
-void Time::Tick()
+void Timer::Tick()
 {
 	prevTickTime = currentTickTime;
 	currentTickTime = GetCurrentSeconds();
 	deltaTime = currentTickTime - prevTickTime;
 }
 
-float Time::GetCurrentSeconds()
+float Timer::GetCurrentSeconds()
 {
 	return timeGetTime() * 0.001f;
 }

@@ -290,6 +290,7 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson31\Lesson31.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson31\MilkshapeModel.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson31\Model.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson32.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson36.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson4.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson45.h" />
@@ -308,7 +309,7 @@
     <ClInclude Include="SoftwareRenderer.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TexcoordFunc.h" />
-    <ClInclude Include="Time.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Util\Bitmap.h" />
     <ClInclude Include="Util\IBaseIterator.h" />
     <ClInclude Include="Util\IImageSource.h" />
@@ -434,6 +435,7 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson31\Lesson31.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson31\MilkshapeModel.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson31\Model.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson32.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson36.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson4.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp" />
@@ -449,7 +451,7 @@
     <ClCompile Include="Scene\UI\Font.cpp" />
     <ClCompile Include="Scene\UI\UI.cpp" />
     <ClCompile Include="TexcoordFunc.cpp" />
-    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Util\Bitmap.cpp" />
     <ClCompile Include="Util\PixelIterator.cpp" />
     <ClCompile Include="WinMain.cpp" />

@@ -5,7 +5,7 @@
 #include "SoftwareRenderer.h"
 #include "Renderer/IRenderer.h"
 #include "Renderer/FrameBuffer.h"
-#include "Time.h"
+#include "Timer.h"
 #include "Scene/IScene.h"
 #include "SceneMenu.h"
 
@@ -20,7 +20,7 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 
 std::shared_ptr<IRenderer> renderer = nullptr;
 std::unique_ptr<IScene> scene = nullptr;
-Time time;
+Timer time;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
