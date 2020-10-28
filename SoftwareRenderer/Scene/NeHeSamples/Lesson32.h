@@ -1,9 +1,10 @@
 #pragma once
 #include "ILesson.h"
+#include "Scene/IMouseInputListener.h"
 
 namespace NeHe
 {
-	class Lesson32 final : public ILesson
+	class Lesson32 final : public ILesson, public IMouseInputListener
 	{
 	private:
 		struct TextureImage												// Create A Structure
@@ -37,6 +38,9 @@ namespace NeHe
 		GLvoid ReSizeGLScene( GLsizei width, GLsizei height ) override;
 		int InitGL( GLvoid ) override;
 		void Update( DWORD milliseconds, bool keys[] ) override;
+
+		void OnMove( int x, int y ) override;
+		void OnLButton( bool isPressed ) override;
 
 	private:
 		void DrawTargets();												// Declaration

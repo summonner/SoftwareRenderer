@@ -7,6 +7,7 @@
 #include "Renderer/FrameBuffer.h"
 #include "Timer.h"
 #include "Scene/IScene.h"
+#include "Scene/IMouseInputListener.h"
 #include "SceneMenu.h"
 
 #define MAX_LOADSTRING 100
@@ -225,6 +226,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
                 scene->OnKeyboardInput( wParam, message == WM_KEYDOWN );
             }
+            break;
+
+        case WM_MOUSEMOVE:
+        {
+            auto listener = dynamic_cast<IMouseInputListener*>(scene.get());
+            if ( listener != nullptr )
+            {
+                listener->OnMove( LOWORD( lParam ), HIWORD( lParam ) );
+            }
+        }
+            break;
+
+        case WM_LBUTTONDOWN:
+        case WM_LBUTTONUP:
+        {
+            auto listener = dynamic_cast<IMouseInputListener*>(scene.get());
+            if ( listener != nullptr )
+            {
+                listener->OnMove( LOWORD( lParam ), HIWORD( lParam ) );
+                listener->OnLButton( message == WM_LBUTTONDOWN );
+            }
+        }
             break;
 
 		default:

@@ -49,3 +49,25 @@ void NeHeSample::Render( const std::shared_ptr<IRenderer> renderer ) const
 		CommentUI::Print( *renderer, description );
 	}
 }
+
+void NeHeSample::OnMove( int x, int y )
+{
+	auto listener = dynamic_cast<IMouseInputListener*>(lesson.get());
+	if ( listener == nullptr )
+	{
+		return;
+	}
+
+	listener->OnMove( x, y );
+}
+
+void NeHeSample::OnLButton( bool isPressed )
+{
+	auto listener = dynamic_cast<IMouseInputListener*>(lesson.get());
+	if ( listener == nullptr )
+	{
+		return;
+	}
+
+	adapter->Use( [listener, isPressed]() { listener->OnLButton( isPressed ); } );
+}

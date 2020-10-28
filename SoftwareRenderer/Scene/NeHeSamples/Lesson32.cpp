@@ -502,4 +502,18 @@ namespace NeHe
 		glFlush();													// Flush The GL Rendering Pipeline
 		return TRUE;
 	}
+
+	void Lesson32::OnMove( int x, int y )
+	{
+		mouse_x = x;
+		mouse_y = y;
+	}
+
+	void Lesson32::OnLButton( bool isPressed )
+	{
+		if ( isPressed == true )
+		{
+			Selection();
+		}
+	}
 }

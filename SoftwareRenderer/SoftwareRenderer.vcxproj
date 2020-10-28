@@ -259,6 +259,7 @@
     <ClInclude Include="Scene\gl\glTextureManager.h" />
     <ClInclude Include="Scene\gl\GLUquadric.h" />
     <ClInclude Include="Scene\gl\ICommandBuffer.h" />
+    <ClInclude Include="Scene\IMouseInputListener.h" />
     <ClInclude Include="Scene\IScene.h" />
     <ClInclude Include="Scene\NeHeSamples\3Dobject.h" />
     <ClInclude Include="Scene\NeHeSamples\ILesson.h" />
