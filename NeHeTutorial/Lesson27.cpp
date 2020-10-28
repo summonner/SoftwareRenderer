@@ -213,12 +213,12 @@ int DrawGLScene(GLvoid)									// Main Drawing Routine
 	glColor4f(0.7f, 0.4f, 0.0f, 1.0f);					// Set Color To An Orange
 	glLoadIdentity();									// Reset Modelview Matrix
 	glTranslatef(0.0f, 0.0f, -20.0f);					// Zoom Into The Screen 20 Units
-//	DrawGLRoom();										// Draw The Room
+	DrawGLRoom();										// Draw The Room
 	glTranslatef(ObjPos[0], ObjPos[1], ObjPos[2]);		// Position The Object
 	glRotatef(xrot, 1.0f, 0.0f, 0.0f);					// Spin It On The X Axis By xrot
 	glRotatef(yrot, 0.0f, 1.0f, 0.0f);					// Spin It On The Y Axis By yrot
 	DrawGLObject(obj);									// Procedure For Drawing The Loaded Object
-//	CastShadow(&obj, lp);								// Procedure For Casting The Shadow Based On The Silhouette
+	CastShadow(&obj, lp);								// Procedure For Casting The Shadow Based On The Silhouette
 
 	glColor4f(0.7f, 0.4f, 0.0f, 1.0f);					// Set Color To Purplish Blue
 	glDisable(GL_LIGHTING);								// Disable Lighting

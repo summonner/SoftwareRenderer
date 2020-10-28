@@ -25,5 +25,6 @@
 #include "Lesson28.h"
 #include "Lesson29.h"
 #include "Lesson36.h"
+#include "Lesson30/Lesson30.h"
 
 #include "Lesson45.h"

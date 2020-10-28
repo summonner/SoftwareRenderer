@@ -525,6 +525,24 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson29.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson30\Tmatrix.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson30\Tray.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson30\Tvector.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson30\Image.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson30\Mathex.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson30\Lesson30.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -910,6 +928,21 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson29.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson30\Tmatrix.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson30\Tray.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson30\Tvector.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson30\Image.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson30\Lesson30.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
