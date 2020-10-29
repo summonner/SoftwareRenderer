@@ -8,6 +8,7 @@
 #include "glDisplayListManager.h"
 #include "ICommandBuffer.h"
 #include "glFogManager.h"
+#include "glSelectMode.h"
 
 class glBridge;
 extern glBridge* adapter;
@@ -31,6 +32,7 @@ public:
 	glClipPlaneManager clipPlaneManager;
 	glDisplayListManager displayListManager;
 	glFogManager fogManager;
+	glSelectMode selectMode;
 
 	Renderer::Matrix* matrix;
 };

@@ -19,6 +19,7 @@ ICommandBuffer* commandBuffer;
 #define clipPlaneManager adapter->clipPlaneManager
 #define displayListManager adapter->displayListManager
 #define fogManager adapter->fogManager
+#define selectMode adapter->selectMode
 
 void glEnable( GLenum cap, bool enable )
 {
@@ -454,12 +455,28 @@ WINGDIAPI void APIENTRY glFlush( void )
 	commandBuffer->Push( command );
 }
 
+void Draw( const Renderer::Mesh& mesh )
+{
+	if ( selectMode.IsEnabled() == false )
+	{
+		renderer->Draw( mesh );
+	}
+	else
+	{
+		IRenderer::RasterizeFunc func = []( Renderer::IRasterizer& rasterizer, const Bounds& bounds )
+		{
+			selectMode.OnRasterize( rasterizer, bounds );
+		};
+		renderer->Draw( mesh, func );
+	}
+}
+
 WINGDIAPI void APIENTRY glEnd( void )
 {
 	auto command = []( glBridge* adapter )
 	{
 		const auto mesh = meshBuilder.End();
-		renderer->Draw( mesh );
+		Draw( mesh );
 	};
 
 	commandBuffer->Push( command );
@@ -858,13 +875,13 @@ WINGDIAPI void APIENTRY glNormalPointer( GLenum type, GLsizei stride, const GLvo
 WINGDIAPI void APIENTRY glDrawArrays( GLenum mode, GLint first, GLsizei count )
 {
 	const auto mesh = meshBuilder.Build( mode, first, count );
-	renderer->Draw( mesh );
+	Draw( mesh );
 }
 
 WINGDIAPI void APIENTRY glDrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid* indices )
 {
 	const auto mesh = meshBuilder.Build( mode, count, type, indices );
-	renderer->Draw( mesh );
+	Draw( mesh );
 }
 
 WINGDIAPI void APIENTRY glEnableClientState( GLenum array )
@@ -1026,34 +1043,28 @@ WINGDIAPI const GLubyte* APIENTRY glGetString( GLenum name )
 
 WINGDIAPI GLint APIENTRY glRenderMode( GLenum mode )
 {
-	switch ( mode )
-	{
-	case GL_RENDER:
-		return 0;
-
-	case GL_SELECT:
-		return 0;
-
-	default:
-		assert( false );
-		return 0;
-	}
+	assert( mode == GL_RENDER || mode == GL_SELECT );
+	return selectMode.SetEnable( mode == GL_SELECT );
 }
 
 WINGDIAPI void APIENTRY glSelectBuffer( GLsizei size, GLuint* buffer )
 {
+	selectMode.SetBuffer( size, buffer );
 }
 
 WINGDIAPI void APIENTRY glInitNames( void )
 {
+	selectMode.InitNames();
 }
 
 WINGDIAPI void APIENTRY glPushName( GLuint name )
 {
+	selectMode.PushName( name );
 }
 
 WINGDIAPI void APIENTRY glLoadName( GLuint name )
 {
+	selectMode.LoadName( name );
 }
 
 void APIENTRY gluPickMatrix(
@@ -1170,7 +1181,8 @@ void APIENTRY gluCylinder(
 	GLint               stacks )
 {
 	auto cylinder = Renderer::Cylinder( (float)baseRadius, (float)topRadius, (float)height );
-	qobj->Draw( *renderer, cylinder, slices, stacks, meshBuilder.GetColor() );
+	auto mesh = qobj->Build( *renderer, cylinder, slices, stacks, meshBuilder.GetColor() );
+	Draw( mesh );
 }
 
 void APIENTRY gluDisk(
@@ -1181,7 +1193,8 @@ void APIENTRY gluDisk(
 	GLint               loops )
 {
 	auto disc = Renderer::Disc( (float)innerRadius, (float)outerRadius );
-	qobj->Draw( *renderer, disc, slices, loops, meshBuilder.GetColor() );
+	auto mesh = qobj->Build( *renderer, disc, slices, loops, meshBuilder.GetColor() );
+	Draw( mesh );
 }
 
 void APIENTRY gluPartialDisk(
@@ -1194,7 +1207,8 @@ void APIENTRY gluPartialDisk(
 	GLdouble            sweepAngle )
 {
 	auto disc = Renderer::Disc( (float)innerRadius, (float)outerRadius, Degree( (float)startAngle ), Degree( (float)sweepAngle ) );
-	qobj->Draw( *renderer, disc, slices, loops, meshBuilder.GetColor() );
+	auto mesh = qobj->Build( *renderer, disc, slices, loops, meshBuilder.GetColor() );
+	Draw( mesh );
 }
 
 void APIENTRY gluSphere(
@@ -1204,5 +1218,6 @@ void APIENTRY gluSphere(
 	GLint               stacks )
 {
 	auto sphere = Renderer::Sphere( (float)radius );
-	qobj->Draw( *renderer, sphere, slices, stacks, meshBuilder.GetColor() );
+	auto mesh = qobj->Build( *renderer, sphere, slices, stacks, meshBuilder.GetColor() );
+	Draw( mesh );
 }

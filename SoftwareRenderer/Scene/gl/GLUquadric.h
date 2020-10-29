@@ -14,7 +14,7 @@ public:
 	void SetTexture( GLboolean textureCoords );
 	void SetOrientation( GLenum orientation );
 	void SetDrawStyle( GLenum drawStyle );
-	void Draw( IRenderer& renderer, Renderer::Quadric& quadric, int slices, int stacks, const Vector4& color ) const;
+	Renderer::Mesh Build( IRenderer& renderer, Renderer::Quadric& quadric, int slices, int stacks, const Vector4& color ) const;
 
 private:
 	char GetNormalDirection() const;

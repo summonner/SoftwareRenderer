@@ -20,8 +20,16 @@ IRenderer::~IRenderer()
 {
 }
 
-
 void IRenderer::Draw( const Mesh& mesh )
+{
+	RasterizeFunc f = [this]( Renderer::IRasterizer& rasterizer, const Bounds& bounds )
+	{
+		Rasterize( rasterizer, bounds );
+	};
+	Draw( mesh, f );
+}
+
+void IRenderer::Draw( const Mesh& mesh, RasterizeFunc rasterize )
 {
 	vertices.reserve( mesh.size() );
 	std::transform( mesh.begin(), mesh.end(), std::back_inserter( vertices ),
@@ -45,15 +53,23 @@ void IRenderer::Draw( const Mesh& mesh )
 			continue;
 		}
 
-		const auto facet = cullFace.Apply( rasterizer->CheckFacet() );
-		if ( facet == CullFaceComponent::Result::Cull )
-		{
-			continue;
-		}
+		rasterize( *rasterizer, bounds );
+	}
 
-		const auto mode = polygonMode.Get( facet == CullFaceComponent::Result::Front );
-		const auto derivatives = rasterizer->Derivative( texture.IsEnable() );
-		rasterizer->Rasterize( bounds, mode, [&]( const RasterizedPixel& p )
+	vertices.clear();
+}
+
+void IRenderer::Rasterize( Renderer::IRasterizer& rasterizer, const Bounds& bounds )
+{
+	const auto facet = cullFace.Apply( rasterizer.CheckFacet() );
+	if ( facet == CullFaceComponent::Result::Cull )
+	{
+		return;
+	}
+
+	const auto mode = polygonMode.Get( facet == CullFaceComponent::Result::Front );
+	const auto derivatives = rasterizer.Derivative( texture.IsEnable() );
+	rasterizer.Rasterize( bounds, mode, [&]( const RasterizedPixel& p )
 		{
 			auto depthTest = [this, p]() { return depthBuffer.Test( p ); };
 			if ( stencilBuffer.Test( p, depthTest ) == false )
@@ -67,9 +83,6 @@ void IRenderer::Draw( const Mesh& mesh )
 
 			backBuffer->SetPixel( p.coordinate, color, blender.AsFunc() );
 		} );
-	}
-
-	vertices.clear();
 }
 
 Vertex IRenderer::ProcessVertex( Vertex v ) const

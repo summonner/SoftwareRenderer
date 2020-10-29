@@ -142,4 +142,9 @@ namespace Renderer
 		auto square = PolygonRasterizer( std::move( offsets ), 1, 2, shadeFunc, smooth );
 		square.Rasterize( bounds, Renderer::PolygonMode::Mode::Fill, process );
 	}
+
+	IRasterizer::Range LineRasterizer::Selection() const
+	{
+		return std::minmax( vertices[0].position.z, vertices[1].position.z );
+	}
 }

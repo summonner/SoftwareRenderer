@@ -47,7 +47,7 @@ void GLUquadric::SetDrawStyle( GLenum drawStyle )
 	this->drawStyle = drawStyleTable[drawStyle];
 }
 
-void GLUquadric::Draw( IRenderer& renderer, Renderer::Quadric& quadric, int slices, int stacks, const Vector4& color ) const
+Renderer::Mesh GLUquadric::Build( IRenderer& renderer, Renderer::Quadric& quadric, int slices, int stacks, const Vector4& color ) const
 {
 	const ScopedShadeModel applyShadeModel( normals );
 
@@ -55,8 +55,7 @@ void GLUquadric::Draw( IRenderer& renderer, Renderer::Quadric& quadric, int slic
 	quadric.color = color;
 	quadric.useTexture = useTexture;
 	quadric.normalDirection = normalDirection;
-	const auto mesh = quadric.Build( drawStyle, slices, stacks );
-	renderer.Draw( mesh );
+	return quadric.Build( drawStyle, slices, stacks );
 }
 
 char GLUquadric::GetNormalDirection() const

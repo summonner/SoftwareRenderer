@@ -133,4 +133,16 @@ namespace Renderer
 
 		return -1;
 	}
+
+	IRasterizer::Range PolygonRasterizer::Selection() const
+	{
+		Range minmax = { 1.f, -1.f };
+		for ( const auto v : vertices )
+		{
+			minmax.first = std::min( minmax.first, v.position.z );
+			minmax.second = std::max( minmax.second, v.position.z );
+		}
+
+		return minmax;
+	}
 }

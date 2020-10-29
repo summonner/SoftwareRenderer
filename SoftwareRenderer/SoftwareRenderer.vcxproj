@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Scene\gl\glSelectMode.h" />
     <ClInclude Include="Renderer\Fog\FogFunc.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Math\Bounds.h" />
@@ -318,6 +319,7 @@
     <ClInclude Include="Util\PixelIterator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scene\gl\glSelectMode.cpp" />
     <ClCompile Include="Renderer\Fog\FogFunc.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

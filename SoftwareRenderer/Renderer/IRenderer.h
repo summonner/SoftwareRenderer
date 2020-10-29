@@ -28,10 +28,14 @@ public:
 
 	void Draw( const Renderer::Mesh& mesh );
 
+	using RasterizeFunc = std::function<void( Renderer::IRasterizer& rasterizer, const Bounds& bounds)>;
+	void Draw( const Renderer::Mesh& mesh, RasterizeFunc rasterize );
+
 	void Reset();
 
 private:
 	Renderer::Vertex ProcessVertex( Renderer::Vertex v ) const;
+	void Rasterize( Renderer::IRasterizer& rasterizer, const Bounds& bounds );
 
 	Renderer::GeometryGenerator generator;
 	std::vector<Renderer::Vertex> vertices;

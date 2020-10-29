@@ -558,6 +558,9 @@
     <ClInclude Include="Scene\IMouseInputListener.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\gl\glSelectMode.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -970,6 +973,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\gl\glSelectMode.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

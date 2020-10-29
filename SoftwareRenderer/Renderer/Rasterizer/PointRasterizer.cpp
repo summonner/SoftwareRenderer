@@ -132,4 +132,9 @@ namespace Renderer
 			oldY = yi;
 		} while ( e.Next() );
 	}
+
+	IRasterizer::Range PointRasterizer::Selection() const
+	{
+		return { v.position.z, v.position.z };
+	}
 }

@@ -17,6 +17,7 @@ namespace Renderer
 		void Rasterize( const Bounds& bounds, PolygonMode::Mode mode, const ProcessPixel process ) override;
 		float CheckFacet() const override;
 		DerivativeTexcoord Derivative( const bool isTextureEnabled ) const override;
+		Range Selection() const override;
 
 	private:
 		static int SelectSecondVertex( const std::vector<Vertex>& vertices );
