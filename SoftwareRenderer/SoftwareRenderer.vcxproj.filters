@@ -561,6 +561,15 @@
     <ClInclude Include="Scene\gl\glSelectMode.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson33\Texture.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson33\Tga.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson33\Lesson33.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -976,6 +985,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\gl\glSelectMode.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson33\Lesson33.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson33\TGALoader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

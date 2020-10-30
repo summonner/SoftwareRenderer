@@ -293,6 +293,9 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson31\MilkshapeModel.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson31\Model.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson32.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson33\Lesson33.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson33\Texture.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson33\Tga.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson36.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson4.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson45.h" />
@@ -439,6 +442,8 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson31\MilkshapeModel.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson31\Model.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson32.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson33\Lesson33.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson33\TGALoader.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson36.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson4.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp" />
