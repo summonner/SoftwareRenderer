@@ -404,6 +404,10 @@ WINGDIAPI void APIENTRY glVertex3f( GLfloat x, GLfloat y, GLfloat z )
 
 	commandBuffer->Push( command );
 }
+WINGDIAPI void APIENTRY glVertex3i( GLint x, GLint y, GLint z )
+{
+	glVertex3f( (GLfloat)x, (GLfloat)y, (GLfloat)z );
+}
 
 WINGDIAPI void APIENTRY glVertex3d( GLdouble x, GLdouble y, GLdouble z )
 {
