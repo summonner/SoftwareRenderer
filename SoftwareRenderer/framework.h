@@ -9,6 +9,7 @@
 // Windows 헤더 파일
 #include <windows.h>
 #include <mmsystem.h>
+#include <vfw.h>												// Header File For Video For Windows
 // C 런타임 헤더 파일입니다.
 #include <stdlib.h>
 #include <malloc.h>

@@ -515,6 +515,17 @@ WINGDIAPI void APIENTRY glTexImage2D( GLenum target, GLint level, GLint internal
 	renderer->texture.Bind( t );
 }
 
+WINGDIAPI void APIENTRY glTexSubImage2D( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels )
+{
+	if ( target != GL_TEXTURE_2D )
+	{
+		assert( false );
+		return;
+	}
+
+	textureManager.SetSubImage( level, xoffset, yoffset, width, height, format, type, pixels );
+}
+
 WINGDIAPI void APIENTRY glTexParameteri( GLenum target, GLenum pname, GLint param )
 {
 	if ( target != GL_TEXTURE_2D )

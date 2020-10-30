@@ -29,6 +29,7 @@
 #include "Lesson32.h"
 #include "Lesson33/Lesson33.h"
 #include "Lesson34.h"
+#include "Lesson35.h"
 #include "Lesson36.h"
 
 #include "Lesson45.h"

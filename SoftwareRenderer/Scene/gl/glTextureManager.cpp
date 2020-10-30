@@ -6,6 +6,7 @@
 glTextureManager::glTextureManager()
 	: current( 0 )
 {
+	textures.Add( 0, std::make_shared<Texture2D>() );
 }
 
 glTextureManager::~glTextureManager()
@@ -43,11 +44,6 @@ void glTextureManager::Delete( GLuint handle )
 
 std::shared_ptr<ITexture> glTextureManager::Bind( GLuint handle )
 {
-	if ( handle == 0 )
-	{
-		return nullptr;
-	}
-
 	current = handle;
 	return textures[current];
 }
@@ -58,6 +54,26 @@ std::shared_ptr<ITexture> glTextureManager::SetImage( GLint level, GLint interna
 	{
 		glImageSource source( width, height, format, type, pixels, scale );
 		texture->SetImage( source, level < 0 );
+	}
+
+	return textures[current];
+}
+
+std::shared_ptr<ITexture> glTextureManager::SetSubImage( GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels )
+{
+	if ( auto texture = Get2D(); texture != nullptr )
+	{
+		glImageSource source( width, height, format, type, pixels, scale );
+		const Vector2Int offset( xoffset, yoffset );
+
+		for ( auto x = 0; x < width; ++x )
+		for ( auto y = 0; y < height; ++y )
+		{
+			const Vector2Int sourcePos( x, y );
+			const auto p = sourcePos + offset;
+			const auto pixel = source.GetPixel( sourcePos );
+			texture->SetPixel( p, level, Vector4( pixel.x / 255.f, pixel.y / 255.f, pixel.z / 255.f, pixel.w / 255.f ) );
+		}
 	}
 
 	return textures[current];
@@ -123,12 +139,11 @@ void glTextureManager::SetPixel( const Vector2Int& p, int mipLevel, const Vector
 	{
 		texture->SetPixel( p, mipLevel, value * scale );
 	}
-
 }
 
 std::shared_ptr<Texture2D> glTextureManager::Get2D() const
 {
-	if ( current == 0 )
+	if ( current < 0 )
 	{
 		return nullptr;
 	}
