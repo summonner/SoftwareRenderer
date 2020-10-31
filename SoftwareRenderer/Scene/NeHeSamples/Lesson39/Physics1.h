@@ -1,3 +1,4 @@
+#pragma once
 /**************************************************************************
 
   File: Physics1.h  
@@ -6,7 +7,6 @@
 
 **************************************************************************/
 
-#include <math.h>
 
 // class Vector3D		---> An object to represent a 3D vector or a 3D point in space
 class Vector3D
