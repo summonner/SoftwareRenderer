@@ -585,6 +585,12 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson38.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson39\Lesson39.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson39\Physics1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -1030,6 +1036,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson38.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson39\Lesson39.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

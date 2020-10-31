@@ -33,5 +33,6 @@
 #include "Lesson36.h"
 #include "Lesson37.h"
 #include "Lesson38.h"
+#include "Lesson39/Lesson39.h"
 
 #include "Lesson45.h"
