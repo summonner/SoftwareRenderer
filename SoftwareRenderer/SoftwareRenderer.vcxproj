@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Scene\gl\glImageSource.h" />
     <ClInclude Include="Scene\gl\glSelectMode.h" />
     <ClInclude Include="Renderer\Fog\FogFunc.h" />
     <ClInclude Include="framework.h" />
@@ -299,6 +300,7 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson34.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson35.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson36.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson37.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson4.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson45.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson5.h" />
@@ -324,6 +326,7 @@
     <ClInclude Include="Util\PixelIterator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scene\gl\glImageSource.cpp" />
     <ClCompile Include="Scene\gl\glSelectMode.cpp" />
     <ClCompile Include="Renderer\Fog\FogFunc.cpp" />
     <ClCompile Include="framework.cpp">
@@ -449,6 +452,7 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson34.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson35.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson36.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson37.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson4.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson5.cpp" />

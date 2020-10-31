@@ -33,6 +33,7 @@ void glEnable( GLenum cap, bool enable )
 		renderer->GetStencilBuffer().SetEnable( enable );
 		break;
 
+	case GL_TEXTURE_1D:
 	case GL_TEXTURE_2D:
 		renderer->texture.SetEnable( enable );
 		break;
@@ -434,6 +435,11 @@ WINGDIAPI void APIENTRY glTexCoord2d( GLdouble s, GLdouble t )
 	glTexCoord2f( (GLfloat)s, (GLfloat)t );
 }
 
+WINGDIAPI void APIENTRY glTexCoord1f( GLfloat s )
+{
+	glTexCoord2f( s, 0.0f );
+}
+
 WINGDIAPI void APIENTRY glNormal3f( GLfloat nx, GLfloat ny, GLfloat nz )
 {
 	auto command = [nx, ny, nz]( glBridge* adapter )
@@ -493,13 +499,25 @@ WINGDIAPI void APIENTRY glGenTextures( GLsizei n, GLuint *textures )
 
 WINGDIAPI void APIENTRY glBindTexture( GLenum target, GLuint texture )
 {
-	if ( target != GL_TEXTURE_2D )
+	if ( target != GL_TEXTURE_2D && target != GL_TEXTURE_1D )
 	{
 		assert( false );
 		return;
 	}
 
 	auto t = textureManager.Bind( texture );
+	renderer->texture.Bind( t );
+}
+
+WINGDIAPI void APIENTRY glTexImage1D( GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid* pixels )
+{
+	if ( target != GL_TEXTURE_1D )
+	{
+		assert( false );
+		return;
+	}
+
+	auto t = textureManager.SetImage( level, internalformat, width, 1, format, type, pixels );
 	renderer->texture.Bind( t );
 }
 
@@ -528,7 +546,7 @@ WINGDIAPI void APIENTRY glTexSubImage2D( GLenum target, GLint level, GLint xoffs
 
 WINGDIAPI void APIENTRY glTexParameteri( GLenum target, GLenum pname, GLint param )
 {
-	if ( target != GL_TEXTURE_2D )
+	if ( target != GL_TEXTURE_2D && target != GL_TEXTURE_1D )
 	{
 		assert( false );
 		return;

@@ -3,6 +3,7 @@
 #include "Util/IImageSource.h"
 #include "Util/Dictionary.hpp"
 #include "Renderer/Texturing/WrapMode.h"
+#include "Buffer/glBuffer.hpp"
 
 namespace Renderer
 {
@@ -39,20 +40,5 @@ private:
 	GLuint current;
 
 private:
-	static const Dictionary<GLenum, int> formatTable;
 	static const Dictionary<GLint, TextureWrapMode> wrapModeTable;
-
-	class glImageSource final : public IImageSource
-	{
-	public:
-		glImageSource( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels, const Vector4& scale );
-
-		Color4 GetPixel( const Vector2Int& p ) const override;
-
-	private:
-		const BYTE* const pixels;
-		const GLenum format;
-		const int pixelSize;
-		const Vector4& scale;
-	};
 };

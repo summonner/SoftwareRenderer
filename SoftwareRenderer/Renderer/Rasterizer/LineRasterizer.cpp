@@ -10,6 +10,7 @@
 #include "Algorithm/BresenhamList.h"
 #include "PolygonRasterizer.h"
 #include "Algorithm/PixelPair.h"
+#include "Renderer/Geometry/Line.h"
 
 namespace Renderer
 {
@@ -25,8 +26,8 @@ namespace Renderer
 	LineRasterizer::LineRasterizer( const Vertex& a, const Vertex& b, ShadeModel::ShadeFunc shadeFunc )
 		: vertices( { a, b } )
 		, shadeFunc( shadeFunc )
-		, width( 1.f )
-		, smooth( false )
+		, width( Line::width )
+		, smooth( Line::smooth )
 	{
 	}
 

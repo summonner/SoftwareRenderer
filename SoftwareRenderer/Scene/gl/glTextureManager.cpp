@@ -2,6 +2,7 @@
 #include "glTextureManager.h"
 #include "Renderer/Texturing/Texture2D.h"
 #include "Math/Vector4.hpp"
+#include "glImageSource.h"
 
 glTextureManager::glTextureManager()
 	: current( 0 )
@@ -149,42 +150,4 @@ std::shared_ptr<Texture2D> glTextureManager::Get2D() const
 	}
 
 	return std::dynamic_pointer_cast<Texture2D>( textures[current] );
-}
-
-const Dictionary<GLenum, int> glTextureManager::formatTable
-{
-	{ GL_RGB, 3 },
-	{ GL_RGBA, 4 },
-};
-
-glTextureManager::glImageSource::glImageSource( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels, const Vector4& scale )
-	: IImageSource( width, height )
-	, pixels( (BYTE*)pixels )
-	, format( format )
-	, pixelSize( formatTable[format] )
-	, scale( scale )
-{
-}
-
-Color4 glTextureManager::glImageSource::GetPixel( const Vector2Int& p ) const 
-{
-	auto i = (p.y * width + p.x) * pixelSize;
-
-	switch ( format )
-	{
-	case GL_RGB:
-		return Color4(  (BYTE)(pixels[i + 0] * scale.x),
-						(BYTE)(pixels[i + 1] * scale.y),
-						(BYTE)(pixels[i + 2] * scale.z),
-						255 );
-	case GL_RGBA:
-		return Color4(  (BYTE)(pixels[i + 0] * scale.x),
-						(BYTE)(pixels[i + 1] * scale.y),
-						(BYTE)(pixels[i + 2] * scale.z),
-						(BYTE)(pixels[i + 3] * scale.w) );
-
-	default:
-		assert( "Not implemented yet" && false );
-		return Color4::zero;
-	}
 }
