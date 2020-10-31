@@ -38,11 +38,12 @@ void IRenderer::Draw( const Mesh& mesh, RasterizeFunc rasterize )
 			return ProcessVertex( v ); 
 		} );
 
-	auto bounds = viewport.GetBounds();
+	auto bounds = viewport.scissor.Get();
 	backBuffer->Clear( bounds );
 	depthBuffer.Clear( bounds );
 	stencilBuffer.Clear( bounds );
 
+	bounds = viewport.GetBounds();
 	generator.Begin( mesh.drawMode );
 	auto geometries = generator.Generate( vertices );
 	for ( const auto& geometry : geometries )

@@ -29,7 +29,7 @@ public:
 
 	inline static PixelIterator end( Bounds bounds )
 	{
-		return PixelIterator( bounds, 0, bounds.y.max );
+		return PixelIterator( bounds, bounds.x.min, bounds.y.max );
 	}
 
 private:

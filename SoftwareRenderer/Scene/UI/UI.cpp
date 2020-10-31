@@ -16,6 +16,7 @@ void UI::Begin( IRenderer& renderer )
 {
 	backup.Backup( renderer );
 
+	renderer.viewport.Set( 0, 0, (int)size.x, (int)size.y );
 	renderer.texture.SetEnable( true );
 	renderer.blender.SetEnable( true );
 	renderer.blender.SetBlendFunc( BlendFunc::One, BlendFunc::One );
@@ -55,6 +56,7 @@ UI::RenderState::RenderState()
 	, cullFace( false )
 	, stencil( false )
 	, fog( false )
+	, viewport( Bounds( 0, 0 ) )
 {
 }
 
@@ -71,6 +73,7 @@ void UI::RenderState::Backup( const IRenderer& renderer )
 	cullFace = renderer.cullFace.IsEnable();
 	stencil = renderer.GetStencilBuffer().IsEnable();
 	fog = renderer.fog.IsEnable();
+	viewport = renderer.viewport;
 }
 
 void UI::RenderState::Restore( IRenderer& renderer ) const
@@ -82,4 +85,5 @@ void UI::RenderState::Restore( IRenderer& renderer ) const
 	renderer.cullFace.SetEnable( cullFace );
 	renderer.GetStencilBuffer().SetEnable( stencil );
 	renderer.fog.SetEnable( fog );
+	renderer.viewport = viewport;
 }

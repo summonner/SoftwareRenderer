@@ -12,7 +12,6 @@ namespace Renderer
 		~Viewport();
 
 		void Set( int left, int bottom, int width, int height );
-		void Scissor( int left, int bottom, int width, int height );
 		Bounds GetBounds() const;
 		void Reset();
 
@@ -21,6 +20,6 @@ namespace Renderer
 		ScissorBox scissor;
 	private:
 		Bounds bounds;
-		const Bounds max;
+		Bounds max;
 	};
 }

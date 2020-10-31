@@ -11,6 +11,7 @@ namespace Renderer
 		~ScissorBox();
 
 		void Set( int left, int bottom, int width, int height );
+		Bounds Get() const;
 		Bounds Clamp( const Bounds& bounds ) const;
 
 	private:

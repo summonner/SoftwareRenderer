@@ -307,6 +307,7 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson4.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson40\Lesson40.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson40\Physics2.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson42.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson45.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson5.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson6.h" />
@@ -462,6 +463,7 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson39\Lesson39.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson4.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson40\Lesson40.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson42.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson5.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson6.cpp" />

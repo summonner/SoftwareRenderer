@@ -2,6 +2,7 @@
 #include "Font.h"
 #include "Renderer/Blending/BlendComponent.h"
 #include "Renderer/Texturing/TextureComponent.h"
+#include "Renderer/Viewport.h"
 
 class UI final
 {
@@ -34,5 +35,6 @@ private:
 		bool cullFace;
 		bool stencil;
 		bool fog;
+		Renderer::Viewport viewport;
 	} backup;
 };

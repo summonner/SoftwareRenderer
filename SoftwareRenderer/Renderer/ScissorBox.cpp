@@ -17,6 +17,11 @@ namespace Renderer
 		bounds = Bounds( RangeInt( left, left + width ), RangeInt( bottom, bottom + height ) );
 	}
 
+	Bounds ScissorBox::Get() const
+	{
+		return bounds;
+	}
+
 	Bounds ScissorBox::Clamp( const Bounds& viewport ) const
 	{
 		const auto x = viewport.x.Clamp( bounds.x );

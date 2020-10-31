@@ -1146,6 +1146,15 @@ void APIENTRY gluPerspective(
 	matrix->Perspective( (float)fovy, (float)aspect, (float)zNear, (float)zFar );
 }
 
+void APIENTRY gluOrtho2D(
+	GLdouble left,
+	GLdouble right,
+	GLdouble bottom,
+	GLdouble top )
+{
+	matrix->Ortho( (float)left, (float)right, (float)bottom, (float)top, -1.f, 1.f );
+}
+
 void APIENTRY gluLookAt(
 	GLdouble eyex,
 	GLdouble eyey,
