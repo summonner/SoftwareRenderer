@@ -124,12 +124,22 @@ void glEnable( GLenum cap, bool enable )
 
 WINGDIAPI void APIENTRY glEnable( GLenum cap )
 {
-	glEnable( cap, true );
+	auto command = [cap]( glBridge* adapter )
+	{
+		glEnable( cap, true );
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI void APIENTRY glDisable( GLenum cap )
 {
-	glEnable( cap, false );
+	auto command = [cap]( glBridge* adapter )
+	{
+		glEnable( cap, false );
+	};
+
+	commandBuffer->Push( command );
 }
 
 WINGDIAPI GLboolean APIENTRY glIsEnabled( GLenum cap )
@@ -605,6 +615,7 @@ WINGDIAPI void APIENTRY glPixelTransferf( GLenum pname, GLfloat param )
 
 WINGDIAPI void APIENTRY glPixelStorei( GLenum pname, GLint param )
 {
+	assert( pname == GL_UNPACK_ALIGNMENT && param == 4 );
 	// not implement
 }
 
@@ -1035,6 +1046,13 @@ WINGDIAPI void APIENTRY glGetFloatv( GLenum pname, GLfloat* params )
 		break;
 	}
 
+	case GL_PROJECTION_MATRIX:
+	{
+		const auto projection = ((Matrix4x4)renderer->projection).Transpose();
+		memcpy( params, &projection, sizeof( float ) * 16 );
+		break;
+	}
+
 	default:
 		assert( false );
 	}
@@ -1051,6 +1069,28 @@ WINGDIAPI void APIENTRY glGetIntegerv( GLenum pname, GLint* params )
 		params[1] = viewport.y.min;
 		params[2] = viewport.x.Length();
 		params[3] = viewport.y.Length();
+		break;
+	}
+
+	default:
+		assert( false );
+	}
+}
+
+WINGDIAPI void APIENTRY glGetDoublev( GLenum pname, GLdouble* params )
+{
+	switch ( pname )
+	{
+	case GL_MODELVIEW_MATRIX:
+	case GL_PROJECTION_MATRIX:
+	{
+		GLfloat v[16];
+		glGetFloatv( pname, v );
+
+		for ( auto i = 0; i < 16; ++i )
+		{
+			params[i] = (double)v[i];
+		}
 		break;
 	}
 
@@ -1108,6 +1148,29 @@ WINGDIAPI void APIENTRY glLoadName( GLuint name )
 	selectMode.LoadName( name );
 }
 
+WINGDIAPI void APIENTRY glReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid* pixels )
+{
+	switch ( format )
+	{
+	case GL_DEPTH_COMPONENT:
+	{
+		assert( type == GL_FLOAT );
+		Vector2Int p( x, y );
+		for ( auto xi=0; xi < width; ++xi )
+		for ( auto yi=0; yi < height; ++yi )
+		{
+			const auto i = yi * width + xi;
+			const auto depth = renderer->GetDepthBuffer().Get( p + Vector2Int( xi, yi ) );
+			((float*)pixels)[i] = depth;
+		}
+		break;
+	}
+
+	default:
+		assert( false );
+	}
+}
+
 void APIENTRY gluPickMatrix(
 	GLdouble x,
 	GLdouble y,
@@ -1153,6 +1216,35 @@ void APIENTRY gluOrtho2D(
 	GLdouble top )
 {
 	matrix->Ortho( (float)left, (float)right, (float)bottom, (float)top, -1.f, 1.f );
+}
+
+int APIENTRY gluProject(
+	GLdouble        objx,
+	GLdouble        objy,
+	GLdouble        objz,
+	const GLdouble  modelMatrix[16],
+	const GLdouble  projMatrix[16],
+	const GLint     viewport[4],
+	GLdouble* winx,
+	GLdouble* winy,
+	GLdouble* winz )
+{
+	Vector4 v( (float)objx, (float)objy, (float)objz, 1.0f );
+	const Matrix4x4 m( modelMatrix );
+	const Matrix4x4 p( projMatrix );
+	v = p * m * v;
+
+	if ( v.w == 0 )
+	{
+		return FALSE;
+	}
+	
+	v /= v.w;
+
+	*winx = viewport[0] + (viewport[2] * ((GLdouble)v.x + 1.0)) * 0.5;
+	*winy = viewport[1] + (viewport[3] * ((GLdouble)v.y + 1.0)) * 0.5;
+	*winz = ((GLdouble)v.z + 1) * 0.5;
+	return TRUE;
 }
 
 void APIENTRY gluLookAt(
@@ -1230,9 +1322,14 @@ void APIENTRY gluCylinder(
 	GLint               slices,
 	GLint               stacks )
 {
-	auto cylinder = Renderer::Cylinder( (float)baseRadius, (float)topRadius, (float)height );
-	auto mesh = qobj->Build( *renderer, cylinder, slices, stacks, meshBuilder.GetColor() );
-	Draw( mesh );
+	auto command = [=]( glBridge* adapter )
+	{
+		auto cylinder = Renderer::Cylinder( (float)baseRadius, (float)topRadius, (float)height );
+		auto mesh = qobj->Build( *renderer, cylinder, slices, stacks, meshBuilder.GetColor() );
+		Draw( mesh );
+	};
+
+	commandBuffer->Push( command );
 }
 
 void APIENTRY gluDisk(
@@ -1242,9 +1339,14 @@ void APIENTRY gluDisk(
 	GLint               slices,
 	GLint               loops )
 {
-	auto disc = Renderer::Disc( (float)innerRadius, (float)outerRadius );
-	auto mesh = qobj->Build( *renderer, disc, slices, loops, meshBuilder.GetColor() );
-	Draw( mesh );
+	auto command = [=]( glBridge* adapter )
+	{
+		auto disc = Renderer::Disc( (float)innerRadius, (float)outerRadius );
+		auto mesh = qobj->Build( *renderer, disc, slices, loops, meshBuilder.GetColor() );
+		Draw( mesh );
+	};
+
+	commandBuffer->Push( command );
 }
 
 void APIENTRY gluPartialDisk(
@@ -1256,9 +1358,14 @@ void APIENTRY gluPartialDisk(
 	GLdouble            startAngle,
 	GLdouble            sweepAngle )
 {
-	auto disc = Renderer::Disc( (float)innerRadius, (float)outerRadius, Degree( (float)startAngle ), Degree( (float)sweepAngle ) );
-	auto mesh = qobj->Build( *renderer, disc, slices, loops, meshBuilder.GetColor() );
-	Draw( mesh );
+	auto command = [=]( glBridge* adapter )
+	{
+		auto disc = Renderer::Disc( (float)innerRadius, (float)outerRadius, Degree( (float)startAngle ), Degree( (float)sweepAngle ) );
+		auto mesh = qobj->Build( *renderer, disc, slices, loops, meshBuilder.GetColor() );
+		Draw( mesh );
+	};
+
+	commandBuffer->Push( command );
 }
 
 void APIENTRY gluSphere(
@@ -1267,7 +1374,12 @@ void APIENTRY gluSphere(
 	GLint               slices,
 	GLint               stacks )
 {
-	auto sphere = Renderer::Sphere( (float)radius );
-	auto mesh = qobj->Build( *renderer, sphere, slices, stacks, meshBuilder.GetColor() );
-	Draw( mesh );
+	auto command = [=]( glBridge* adapter )
+	{
+		auto sphere = Renderer::Sphere( (float)radius );
+		auto mesh = qobj->Build( *renderer, sphere, slices, stacks, meshBuilder.GetColor() );
+		Draw( mesh );
+	};
+
+	commandBuffer->Push( command );
 }

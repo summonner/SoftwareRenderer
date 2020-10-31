@@ -600,6 +600,21 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson42.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson44\glPoint.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson44\glVector.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson44\glCamera.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson44\glFont.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson44\Lesson44.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -1054,6 +1069,21 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\NeHeSamples\Lesson42.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson44\glPoint.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson44\glVector.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson44\Lesson44.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson44\glCamera.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson44\glFont.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

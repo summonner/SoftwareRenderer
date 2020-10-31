@@ -18,10 +18,12 @@ namespace Renderer
 		void SetClearValue( const float value ) override;
 		void SetDepthFunc( const DepthFunc::Type type ) override;
 		void SetWrite( bool enable ) override;
+		float Get( const Vector2Int& coordinate ) const override;
 
 		bool Test( const RasterizedPixel& p ) const;
 
 	private:
+		int ToIndex( const Vector2Int& coordinate ) const;
 		bool Test( const Vector2Int& coordinate, float depth ) const;
 
 	private:

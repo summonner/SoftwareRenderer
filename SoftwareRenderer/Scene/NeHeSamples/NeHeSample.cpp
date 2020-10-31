@@ -14,7 +14,10 @@ NeHeSample::NeHeSample( std::unique_ptr<NeHe::ILesson> lesson )
 
 NeHeSample::~NeHeSample()
 {
-	adapter->Use( [this]() { lesson->CleanGL(); } );
+	adapter->Use( [this]() { 
+		lesson->CleanGL();
+		lesson.reset(); 
+	} );
 	adapter->renderer = nullptr;
 }
 

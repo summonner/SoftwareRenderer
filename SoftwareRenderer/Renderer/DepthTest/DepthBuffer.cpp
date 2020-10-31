@@ -70,6 +70,17 @@ namespace Renderer
 		write = enable;
 	}
 
+	float DepthBuffer::Get( const Vector2Int& coordinate ) const
+	{
+		auto p = ToIndex( coordinate );
+		return (pixels[p] + 1) * 0.5f;
+	}
+
+	int DepthBuffer::ToIndex( const Vector2Int& coordinate ) const
+	{
+		return coordinate.y * width + coordinate.x;
+	}
+
 	bool DepthBuffer::Test( const RasterizedPixel& p ) const
 	{
 		if ( enabled == false )
@@ -82,7 +93,7 @@ namespace Renderer
 
 	bool DepthBuffer::Test( const Vector2Int& coordinate, float depth ) const
 	{
-		auto p = coordinate.y * width + coordinate.x;
+		auto p = ToIndex( coordinate );
 		if ( depthFunc( depth, pixels[p] ) )
 		{
 			if ( write == true )

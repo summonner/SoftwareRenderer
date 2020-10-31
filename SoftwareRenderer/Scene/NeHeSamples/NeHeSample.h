@@ -24,8 +24,8 @@ public:
 	void OnLButton( bool isPressed ) override;
 
 private:
-	const std::unique_ptr<NeHe::ILesson> lesson;
 	const std::unique_ptr<glBridge> adapter;
+	std::unique_ptr<NeHe::ILesson> lesson;
 
 	bool keys[256];
 };

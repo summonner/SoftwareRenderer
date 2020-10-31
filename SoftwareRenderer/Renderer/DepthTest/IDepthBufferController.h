@@ -13,5 +13,6 @@ namespace Renderer
 		virtual void SetClearValue( const float value ) abstract;
 		virtual void SetDepthFunc( const DepthFunc::Type type ) abstract;
 		virtual void SetWrite( bool enable ) abstract;
+		virtual float Get( const Vector2Int& coordinate ) const abstract;
 	};
 }
