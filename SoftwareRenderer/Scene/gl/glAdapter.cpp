@@ -597,7 +597,15 @@ WINGDIAPI void APIENTRY glPixelTransferf( GLenum pname, GLfloat param )
 	case GL_BLUE_SCALE:
 		textureManager.scale.z = param;
 		break;
+	case GL_ALPHA_SCALE:
+		textureManager.scale.w = param;
+		break;
 	}
+}
+
+WINGDIAPI void APIENTRY glPixelStorei( GLenum pname, GLint param )
+{
+	// not implement
 }
 
 WINGDIAPI void APIENTRY glDeleteTextures( GLsizei n, const GLuint* textures )

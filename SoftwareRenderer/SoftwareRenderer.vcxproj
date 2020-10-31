@@ -301,6 +301,7 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson35.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson36.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson37.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson38.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson4.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson45.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson5.h" />
@@ -453,6 +454,7 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson35.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson36.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson37.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson38.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson4.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson5.cpp" />
@@ -476,6 +478,9 @@
     <ResourceCompile Include="SoftwareRenderer.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\Data\Butterfly1.bmp" />
+    <Image Include="..\Data\Butterfly2.bmp" />
+    <Image Include="..\Data\Butterfly3.bmp" />
     <Image Include="small.ico" />
     <Image Include="SoftwareRenderer.ico" />
   </ItemGroup>

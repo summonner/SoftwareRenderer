@@ -12,6 +12,9 @@
 #define IDI_SMALL                       108
 #define IDC_SOFTWARERENDERER            109
 #define IDR_MAINFRAME                   128
+#define IDB_BUTTERFLY1                  129
+#define IDB_BUTTERFLY2                  130
+#define IDB_BUTTERFLY3                  131
 #define ID_SCENE_NEHE                   32771
 #define ID_SCENE_DEFAULT                32772
 #define ID_NEHE_LESSON6                 32774
@@ -69,7 +72,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        129
+#define _APS_NEXT_RESOURCE_VALUE        132
 #define _APS_NEXT_COMMAND_VALUE         32822
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           110

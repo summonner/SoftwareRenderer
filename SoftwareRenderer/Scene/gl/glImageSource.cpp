@@ -40,6 +40,16 @@ Color4 IntegerConverter( const GLvoid* buffer, GLenum format, int i )
 						(BYTE)(pixels[i + 1]),
 						(BYTE)(pixels[i + 2]),
 						(BYTE)(pixels[i + 3]) );
+	case GL_BGR_EXT:
+		return Color4(	(BYTE)(pixels[i + 2]),
+						(BYTE)(pixels[i + 1]),
+						(BYTE)(pixels[i + 0]),
+						255 );
+	case GL_BGRA_EXT:
+		return Color4(	(BYTE)(pixels[i + 2]),
+						(BYTE)(pixels[i + 1]),
+						(BYTE)(pixels[i + 0]),
+						(BYTE)(pixels[i + 3]) );
 
 	default:
 		assert( "Not implemented yet" && false );
@@ -63,7 +73,16 @@ Color4 FloatConverter( const GLvoid* buffer, GLenum format, int i )
 						(BYTE)(pixels[i + 1] * 255),
 						(BYTE)(pixels[i + 2] * 255),
 						(BYTE)(pixels[i + 3] * 255) );
-
+	case GL_BGR_EXT:
+		return Color4(	(BYTE)(pixels[i + 2] * 255),
+						(BYTE)(pixels[i + 1] * 255),
+						(BYTE)(pixels[i + 0] * 255),
+						255 );
+	case GL_BGRA_EXT:
+		return Color4(	(BYTE)(pixels[i + 2] * 255),
+						(BYTE)(pixels[i + 1] * 255),
+						(BYTE)(pixels[i + 0] * 255),
+						(BYTE)(pixels[i + 3] * 255) );
 	default:
 		assert( "Not implemented yet" && false );
 		return Color4::zero;
@@ -74,6 +93,8 @@ const Dictionary<GLenum, int> glImageSource::formatTable
 {
 	{ GL_RGB, 3 },
 	{ GL_RGBA, 4 },
+	{ GL_BGR_EXT, 3 },
+	{ GL_BGRA_EXT, 4 },
 };
 
 const Dictionary<GLenum, glImageSource::ConvertFunc> glImageSource::conversionTable

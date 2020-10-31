@@ -582,6 +582,9 @@
     <ClInclude Include="Scene\gl\glImageSource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\NeHeSamples\Lesson38.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoftwareRenderer.rc">
@@ -593,6 +596,15 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="SoftwareRenderer.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="..\Data\Butterfly1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="..\Data\Butterfly2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="..\Data\Butterfly3.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -1015,6 +1027,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\gl\glImageSource.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\NeHeSamples\Lesson38.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
