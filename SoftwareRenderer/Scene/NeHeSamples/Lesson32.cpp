@@ -509,9 +509,9 @@ namespace NeHe
 		mouse_y = y;
 	}
 
-	void Lesson32::OnLButton( bool isPressed )
+	void Lesson32::OnButton( UINT message )
 	{
-		if ( isPressed == true )
+		if ( message == WM_LBUTTONDOWN )
 		{
 			Selection();
 		}

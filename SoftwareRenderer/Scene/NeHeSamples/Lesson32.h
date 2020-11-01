@@ -40,7 +40,7 @@ namespace NeHe
 		void Update( DWORD milliseconds, bool keys[] ) override;
 
 		void OnMove( int x, int y ) override;
-		void OnLButton( bool isPressed ) override;
+		void OnButton( UINT message ) override;
 
 	private:
 		void DrawTargets();												// Declaration

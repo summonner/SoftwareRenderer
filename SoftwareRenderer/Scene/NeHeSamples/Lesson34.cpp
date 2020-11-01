@@ -190,9 +190,9 @@ namespace NeHe
 		// do nothing
 	}
 
-	void Lesson34::OnLButton( bool isPressed )
+	void Lesson34::OnButton( UINT message )
 	{
-		if ( isPressed == false )
+		if ( message != WM_LBUTTONDOWN )
 		{
 			return;
 		}

@@ -64,7 +64,7 @@ void NeHeSample::OnMove( int x, int y )
 	listener->OnMove( x, y );
 }
 
-void NeHeSample::OnLButton( bool isPressed )
+void NeHeSample::OnButton( UINT message )
 {
 	auto listener = dynamic_cast<IMouseInputListener*>(lesson.get());
 	if ( listener == nullptr )
@@ -72,5 +72,5 @@ void NeHeSample::OnLButton( bool isPressed )
 		return;
 	}
 
-	adapter->Use( [listener, isPressed]() { listener->OnLButton( isPressed ); } );
+	adapter->Use( [listener, message]() { listener->OnButton( message ); } );
 }

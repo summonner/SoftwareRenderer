@@ -56,6 +56,7 @@ const Dictionary<UINT, SceneFactory::CreateFunc> SceneFactory::table(
 	NEHE( 42 ),
 	NEHE( 44 ),
 	NEHE( 45 ),
+	NEHE( 48 ),
 }, ReturnNullPtr );
 
 std::unique_ptr<IScene> SceneFactory::Create( UINT resourceId )

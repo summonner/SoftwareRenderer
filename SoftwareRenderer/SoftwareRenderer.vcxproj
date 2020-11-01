@@ -314,6 +314,8 @@
     <ClInclude Include="Scene\NeHeSamples\Lesson44\glVector.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson44\Lesson44.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson45.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson48\ArcBall.h" />
+    <ClInclude Include="Scene\NeHeSamples\Lesson48\Lesson48.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson5.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson6.h" />
     <ClInclude Include="Scene\NeHeSamples\Lesson7.h" />
@@ -475,6 +477,8 @@
     <ClCompile Include="Scene\NeHeSamples\Lesson44\glVector.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson44\Lesson44.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson45.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson48\ArcBall.cpp" />
+    <ClCompile Include="Scene\NeHeSamples\Lesson48\Lesson48.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson5.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson6.cpp" />
     <ClCompile Include="Scene\NeHeSamples\Lesson7.cpp" />

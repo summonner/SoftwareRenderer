@@ -86,7 +86,7 @@ namespace NeHe
 	{
 	}
 
-	BOOL Lesson45::InitGL()					// Any GL Init Code & User Initialiazation Goes Here
+	BOOL Lesson45::InitGL( GLvoid )					// Any GL Init Code & User Initialiazation Goes Here
 	{
 		// TUTORIAL
 		// Load The Mesh Data
@@ -143,7 +143,7 @@ namespace NeHe
 		g_flYRot += (float)(milliseconds) / 1000.0f * 25.0f;		// Consistantly Rotate The Scenery
 	}
 
-	int Lesson45::DrawGLScene( void )
+	int Lesson45::DrawGLScene( GLvoid )
 	{
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );		// Clear Screen And Depth Buffer
 		glLoadIdentity();											// Reset The Modelview Matrix

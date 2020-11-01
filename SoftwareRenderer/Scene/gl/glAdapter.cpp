@@ -286,6 +286,11 @@ WINGDIAPI void APIENTRY glScissor( GLint x, GLint y, GLsizei width, GLsizei heig
 	renderer->viewport.scissor.Set( x, y, width, height );
 }
 
+WINGDIAPI void APIENTRY glMultMatrixf( const GLfloat* m )
+{
+	matrix->Mult( m );
+}
+
 WINGDIAPI void APIENTRY glLoadIdentity( void )
 {
 	auto command = []( glBridge* adapter )

@@ -38,3 +38,4 @@
 #include "Lesson42.h"
 #include "Lesson44/Lesson44.h"
 #include "Lesson45.h"
+#include "Lesson48/Lesson48.h"

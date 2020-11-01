@@ -39,6 +39,14 @@ public:
 	{
 	}
 
+	Matrix4x4( const float values[16] )
+		: Matrix4x4( values[0], values[4], values[8], values[12],
+					values[1], values[5], values[9], values[13],
+					values[2], values[6], values[10], values[14],
+					values[3], values[7], values[11], values[15] )
+	{
+	}
+
 	inline Vector4 operator *( const Vector4& v ) const
 	{
 		return Vector4( v.Dot( Row0() ), v.Dot( Row1() ), v.Dot( Row2() ), v.Dot( Row3() ) );
@@ -73,7 +81,15 @@ public:
 		);
 	}
 
+	inline float operator()( int r, int c ) const
+	{
+		assert( r >= 1 && r <= 4 );
+		assert( c >= 1 && c <= 4 );
+		return *(((float*)this) + (r - 1) * 4 + (c - 1));
+	}
+
 	static const Matrix4x4 identity;
+	static const Matrix4x4 invalid;
 
 	inline static Matrix4x4 Translate( const Vector3& displacement )
 	{

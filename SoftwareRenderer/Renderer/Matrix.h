@@ -30,6 +30,7 @@ namespace Renderer
 
 		inline Matrix4x4 Inverse() const
 		{
+			assert( inverse( 1, 1 ) != INFINITY );
 			return inverse;
 		}
 
@@ -37,6 +38,8 @@ namespace Renderer
 		{
 			return value * vector;
 		}
+
+		Matrix Mult( const float m[16] );
 
 		void Push();
 		void Pop();

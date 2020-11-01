@@ -235,20 +235,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
                 listener->OnMove( LOWORD( lParam ), HIWORD( lParam ) );
             }
-        }
             break;
+        }
 
         case WM_LBUTTONDOWN:
         case WM_LBUTTONUP:
+        case WM_RBUTTONDOWN:
+        case WM_RBUTTONUP:
         {
             auto listener = dynamic_cast<IMouseInputListener*>(scene.get());
             if ( listener != nullptr )
             {
                 listener->OnMove( LOWORD( lParam ), HIWORD( lParam ) );
-                listener->OnLButton( message == WM_LBUTTONDOWN );
+                listener->OnButton( message );
             }
-        }
             break;
+        }
+
 
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);

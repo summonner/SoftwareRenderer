@@ -70,9 +70,7 @@ namespace Renderer
 			0, 0, -1, 0
 		);
 
-		inverse = Matrix4x4(
-			// TODO
-		) * inverse;
+		inverse = Matrix4x4::invalid;	// temp
 	}
 
 	void Matrix::Perspective( Degree fovY, float aspect, float near, float far )
@@ -117,5 +115,12 @@ namespace Renderer
 		value = popped.first;
 		inverse = popped.second;
 		stack.pop();
+	}
+
+	Matrix Matrix::Mult( const float m[16] )
+	{
+		value *= m;
+		inverse = Matrix4x4::invalid;	// temp
+		return *this;
 	}
 }
