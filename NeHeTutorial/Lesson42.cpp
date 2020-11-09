@@ -40,8 +40,8 @@ Keys*		g_keys;														// Keyboard
 // User Defined Variables
 int	mx,my;																// General Loops (Used For Seeking)
 
-const	width	= 128;													// Maze Width  (Must Be A Power Of 2)
-const	height	= 128;													// Maze Height (Must Be A Power Of 2)
+const	int width	= 128;													// Maze Width  (Must Be A Power Of 2)
+const	int height	= 128;													// Maze Height (Must Be A Power Of 2)
 
 BOOL	done;															// Flag To Let Us Know When It's Done
 BOOL	sp;																// Spacebar Pressed?
@@ -117,7 +117,7 @@ void Deinitialize (void)												// Any User DeInitialization Goes Here
 	delete [] tex_data;													// Delete Our Texture Data (Freeing Up Memory)
 }
 
-void Update (float milliseconds)										// Perform Motion Updates Here
+void Update (DWORD milliseconds)										// Perform Motion Updates Here
 {
 	int		dir;														// Will Hold Current Direction
 
