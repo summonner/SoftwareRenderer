@@ -61,6 +61,13 @@ namespace Renderer
 		return std::log2f( maxDelta ) * 0.5f;
 	}
 
+	bool Texture2D::IsValid() const
+	{
+		return mipmaps.size() > 0
+			&& size.x > 0
+			&& size.y > 0;
+	}
+
 	Vector4 Texture2D::GetPixel( const Vector2& uv, float mipLevel ) const
 	{
 		const auto wrapped = wrapMode( uv );

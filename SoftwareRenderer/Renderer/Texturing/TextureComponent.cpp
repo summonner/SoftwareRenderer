@@ -28,7 +28,7 @@ namespace Renderer
 
 	Vector4 TextureComponent::GetColor( const RasterizedPixel& p, const DerivativeTexcoord& derivatives ) const
 	{
-		if ( texture == nullptr || enabled == false )
+		if ( texture == nullptr || enabled == false || texture->IsValid() == false )
 		{
 			return Vector4::one;
 		}

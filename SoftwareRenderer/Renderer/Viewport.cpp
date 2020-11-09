@@ -25,6 +25,8 @@ namespace Renderer
 	void Viewport::Reset()
 	{
 		bounds = max;
+		scissor.Set( max.x.min, max.y.min, max.x.max, max.y.max );
+		scissor.Reset();
 	}
 
 	Viewport::operator Matrix4x4() const
